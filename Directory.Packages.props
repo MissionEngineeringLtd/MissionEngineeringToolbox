@@ -1,12 +1,12 @@
 <Project>
-
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageVersion  Include="CommunityToolkit.Diagnostics" Version="8.4.2" />
-    <PackageVersion  Include="MathNet.Numerics" Version="5.0.0" />
+    <PackageVersion Include="CommunityToolkit.Diagnostics" Version="8.4.2" />
+    <PackageVersion Include="CsvHelper" Version="33.1.0" />
+    <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
-
 </Project>

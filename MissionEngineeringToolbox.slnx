@@ -2,6 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path="Directory.Packages.props" />
   </Folder>
+  <Project Path="MissionEngineering.Core/MissionEngineering.Core.csproj" Id="34c1eab6-f58d-4a0d-97d3-68bf87e01aaa" />
   <Project Path="MissionEngineering.MathLibrary/MissionEngineering.MathLibrary.csproj" />
   <Project Path="MissionEngineering.Platform/MissionEngineering.Platform.csproj" />
 </Solution>
