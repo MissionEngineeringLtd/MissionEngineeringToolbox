@@ -1,4 +1,5 @@
-﻿using static MissionEngineering.MathLibrary.PhysicalConstants;
+﻿using System.Drawing;
+using static MissionEngineering.MathLibrary.PhysicalConstants;
 using static MissionEngineering.MathLibrary.UnitConversions;
 using static System.Math;
 
@@ -6,213 +7,216 @@ namespace MissionEngineering.MathLibrary;
 
 public static class DoubleExtensionMethods
 {
-    public static double PowerToDecibels(this double x)
+    extension(double x)
     {
-        var result = 10.0 * Log10(x);
+        public double PowerToDecibels()
+        {
+            var result = 10.0 * Log10(x);
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double DecibelsToPower(this double x)
-    {
-        var result = Pow(10.0, x / 10.0);
+        public double DecibelsToPower()
+        {
+            var result = Pow(10.0, x / 10.0);
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double RadiansToDegrees(this double x)
-    {
-        var result = x * RadianToDegrees;
+        public double RadiansToDegrees()
+        {
+            var result = x * RadianToDegrees;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double DegreesToRadians(this double x)
-    {
-        var result = x * DegreesToRadian;
+        public double DegreesToRadians()
+        {
+            var result = x * DegreesToRadian;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double MetersToFeet(this double x)
-    {
-        var result = x * MeterToFoot;
+        public double MetersToFeet()
+        {
+            var result = x * MeterToFoot;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double FeetToMeters(this double x)
-    {
-        var result = x * FootToMeter;
+        public double FeetToMeters()
+        {
+            var result = x * FootToMeter;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double MetersToKilometers(this double x)
-    {
-        var result = x * MeterToKilometer;
+        public double MetersToKilometers()
+        {
+            var result = x * MeterToKilometer;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double KilometersToMeters(this double x)
-    {
-        var result = x * KilometerToMeter;
+        public double KilometersToMeters()
+        {
+            var result = x * KilometerToMeter;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double MetersToNauticalMiles(this double x)
-    {
-        var result = x * MeterToNauticalMile;
+        public double MetersToNauticalMiles()
+        {
+            var result = x * MeterToNauticalMile;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double NauticalMilesToMeters(this double x)
-    {
-        var result = x * NauticalMileToMeter;
+        public double NauticalMilesToMeters()
+        {
+            var result = x * NauticalMileToMeter;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double MetersPerSecondToKnots(this double x)
-    {
-        var result = x * MeterPerSecondToKnot;
+        public double MetersPerSecondToKnots()
+        {
+            var result = x * MeterPerSecondToKnot;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double KnotsToMetersPerSecond(this double x)
-    {
-        var result = x * KnotToMeterPerSecond;
+        public double KnotsToMetersPerSecond()
+        {
+            var result = x * KnotToMeterPerSecond;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double FrequencyToWavelength(this double x)
-    {
-        var result = SpeedOfLight / x;
+        public double FrequencyToWavelength()
+        {
+            var result = SpeedOfLight / x;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double WavelengthToFrequency(this double x)
-    {
-        var result = SpeedOfLight / x;
+        public double WavelengthToFrequency()
+        {
+            var result = SpeedOfLight / x;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double MetersPerSecondSquaredToG(this double x)
-    {
-        var result = x * MeterPerSecondSquaredToG;
+        public double MetersPerSecondSquaredToG()
+        {
+            var result = x * MeterPerSecondSquaredToG;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double GToMetersPerSecondSquared(this double x)
-    {
-        var result = x * GToMeterPerSecondSquared;
+        public double GToMetersPerSecondSquared()
+        {
+            var result = x * GToMeterPerSecondSquared;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double RpmToDegrees(this double x)
-    {
-        var result = x * UnitConversions.RpmToDegrees;
+        public double RpmToDegrees()
+        {
+            var result = x * UnitConversions.RpmToDegrees;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double DegreesToRpm(this double x)
-    {
-        var result = x * UnitConversions.DegreesToRpm;
+        public double DegreesToRpm()
+        {
+            var result = x * UnitConversions.DegreesToRpm;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double RadiansToRpm(this double angleRate)
-    {
-        var angleRateRpm = angleRate.RadiansToDegrees().DegreesToRpm();
+        public double RadiansToRpm()
+        {
+            var result = x.RadiansToDegrees().DegreesToRpm();
 
-        return angleRateRpm;
-    }
+            return result;
+        }
 
-    public static double RpmToRadians(this double angleRateRpm)
-    {
-        var angleRateRad = angleRateRpm.RpmToDegrees().DegreesToRadians();
+        public double RpmToRadians()
+        {
+            var result = x.RpmToDegrees().DegreesToRadians();
 
-        return angleRateRad;
-    }
+            return result;
+        }
 
-    public static double SecondsToMilliseconds(this double x)
-    {
-        var result = x * 1.0e3;
+        public double SecondsToMilliseconds()
+        {
+            var result = x * 1.0e3;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double MillisecondsToSeconds(this double x)
-    {
-        var result = x / 1.0e3;
+        public double MillisecondsToSeconds()
+        {
+            var result = x / 1.0e3;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double SecondsToMicroseconds(this double x)
-    {
-        var result = x * 1.0e6;
+        public double SecondsToMicroseconds()
+        {
+            var result = x * 1.0e6;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double MicrosecondsToSeconds(this double x)
-    {
-        var result = x / 1.0e6;
+        public double MicrosecondsToSeconds()
+        {
+            var result = x / 1.0e6;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double SecondsToNanoseconds(this double x)
-    {
-        var result = x * 1.0e9;
+        public double SecondsToNanoseconds()
+        {
+            var result = x * 1.0e9;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double NanosecondsToSeconds(this double x)
-    {
-        var result = x / 1.0e9;
+        public double NanosecondsToSeconds()
+        {
+            var result = x / 1.0e9;
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double ConstrainAngle0To2PI(this double x)
-    {
-        var result = MathFunctions.ConstrainAngle0To2PI(x);
+        public double ConstrainAngle0To2PI()
+        {
+            var result = MathFunctions.ConstrainAngle0To2PI(x);
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double ConstrainAnglePlusMinusPI(this double x)
-    {
-        var result = MathFunctions.ConstrainAnglePlusMinusPI(x);
+        public double ConstrainAnglePlusMinusPI()
+        {
+            var result = MathFunctions.ConstrainAnglePlusMinusPI(x);
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double ConstrainAngle0To360(this double x)
-    {
-        var result = MathFunctions.ConstrainAngle0To360(x);
+        public double ConstrainAngle0To360()
+        {
+            var result = MathFunctions.ConstrainAngle0To360(x);
 
-        return result;
-    }
+            return result;
+        }
 
-    public static double ConstrainAnglePlusMinus180(this double x)
-    {
-        var result = MathFunctions.ConstrainAnglePlusMinus180(x);
+        public double ConstrainAnglePlusMinus180()
+        {
+            var result = MathFunctions.ConstrainAnglePlusMinus180(x);
 
-        return result;
+            return result;
+        }
     }
 }
