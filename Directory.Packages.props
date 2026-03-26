@@ -1,0 +1,12 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion  Include="CommunityToolkit.Diagnostics" Version="8.4.2" />
+    <PackageVersion  Include="MathNet.Numerics" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>
