@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MissionEngineering.MathLibrary/MissionEngineering.MathLibrary.csproj" />
+  <Project Path="MissionEngineering.Platform/MissionEngineering.Platform.csproj" />
+</Solution>
