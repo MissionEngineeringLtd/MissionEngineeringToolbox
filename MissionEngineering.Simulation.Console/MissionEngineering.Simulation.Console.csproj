@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine.DragonFruit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
+    <ProjectReference Include="..\MissionEngineering.DataRecorder\MissionEngineering.DataRecorder.csproj" />
+    <ProjectReference Include="..\MissionEngineering.MathLibrary\MissionEngineering.MathLibrary.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Platform\MissionEngineering.Platform.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Simulation.Data\MissionEngineering.Simulation.Data.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Simulation\MissionEngineering.Simulation.csproj" />
+  </ItemGroup>
+
+</Project>

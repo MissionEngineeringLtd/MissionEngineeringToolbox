@@ -8,9 +8,9 @@ public record PlatformHeader
 
     public required string PlatformName { get; set; }
 
-    public required string PlatformDescription { get; set; }
-
     public required string PlatformCallsign { get; set; }
+
+    public required string PlatformDescription { get; set; }
 
     public PlatformType PlatformType { get; set; }
 
@@ -19,4 +19,22 @@ public record PlatformHeader
     public required string PlatformIcon { get; set; }
 
     public Color PlatformColor { get; set; }
+
+    public bool PlatformInterpolate { get; init; }
+
+    public double PlatformScaleLevel { get; init; }
+
+    public PlatformHeader()
+    {
+        PlatformId = 0;
+        PlatformName = "PLATFORM_NAME";
+        PlatformCallsign = "PLATFORM_CALLSIGN";
+        PlatformDescription = "PLATFORM_DESCRIPTION";
+        PlatformType = PlatformType.Undefined;
+        PlatformAffiliation = PlatformAffiliationType.Undefined;
+        PlatformIcon = "PLATFORM_ICON";
+        PlatformColor = Color.Blue;
+        PlatformInterpolate = true;
+        PlatformScaleLevel = 4.0;
+    }
 }

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
     <ProjectReference Include="..\MissionEngineering.MathLibrary\MissionEngineering.MathLibrary.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Platform\MissionEngineering.Platform.csproj" />
   </ItemGroup>
 
 </Project>

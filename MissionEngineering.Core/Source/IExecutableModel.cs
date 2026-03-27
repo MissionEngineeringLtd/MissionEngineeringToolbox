@@ -2,9 +2,9 @@
 
 public interface IExecutableModel
 {
-    void Initialise(double time);
+    void Initialise(double time_s);
 
-    void Update(double time);
+    void Update(double time_s);
 
-    void Finalise(double time);
+    void Finalise(double time_s);
 }
