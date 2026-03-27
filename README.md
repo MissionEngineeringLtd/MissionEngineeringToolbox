@@ -6,3 +6,5 @@ Using the US DoD Mission Engineering Guide as the framework for use case analysi
 *Mission engineering is an interdisciplinary process encompassing the entire technical effort to analyze, design, and integrate current and emerging operational needs and capabilities to achieve desired mission outcomes.*
 
 Note: all models, algorithms and parameter values are designed for representation of generic systems at UNCLASSIFIED level.
+
+[![Build](https://github.com/MissionEngineeringLtd/MissionEngineeringToolbox/actions/workflows/dotnet.yml/badge.svg)](https://github.com/MissionEngineeringLtd/MissionEngineeringToolbox/actions/workflows/dotnet.yml)
