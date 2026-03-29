@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Diagnostics;
 using static System.Math;
 
-namespace MissionEngineering.MathLibrary;
+namespace MissionEngineering.Math;
 
 public static class MathFunctions
 {

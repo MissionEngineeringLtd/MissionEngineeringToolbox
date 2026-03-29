@@ -1,4 +1,4 @@
-﻿using MissionEngineering.MathLibrary;
+﻿using MissionEngineering.Math;
 using System.Drawing;
 
 namespace MissionEngineering.Platform;

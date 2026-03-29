@@ -1,6 +1,6 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.DataRecorder;
-using MissionEngineering.MathLibrary;
+using MissionEngineering.Math;
 
 namespace MissionEngineering.Simulation;
 

@@ -1,5 +1,5 @@
 ﻿using MissionEngineering.Core;
-using MissionEngineering.MathLibrary;
+using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 

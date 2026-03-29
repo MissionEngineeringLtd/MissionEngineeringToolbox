@@ -2,7 +2,7 @@
 
 using static System.Math;
 
-namespace MissionEngineering.MathLibrary;
+namespace MissionEngineering.Math;
 
 public record VelocityNED
 {

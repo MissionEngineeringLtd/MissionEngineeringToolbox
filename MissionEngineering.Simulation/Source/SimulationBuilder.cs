@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MissionEngineering.Core;
 using MissionEngineering.DataRecorder;
-using MissionEngineering.MathLibrary;
+using MissionEngineering.Math;
 using MissionEngineering.Simdis;
 
 namespace MissionEngineering.Simulation;

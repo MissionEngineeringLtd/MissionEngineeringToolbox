@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Diagnostics;
 
-namespace MissionEngineering.MathLibrary;
+namespace MissionEngineering.Math;
 
 public record PositionNED
 {

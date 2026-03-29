@@ -14,7 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
     <ProjectReference Include="..\MissionEngineering.DataRecorder\MissionEngineering.DataRecorder.csproj" />
-    <ProjectReference Include="..\MissionEngineering.MathLibrary\MissionEngineering.MathLibrary.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Math\MissionEngineering.Math.csproj" />
     <ProjectReference Include="..\MissionEngineering.Platform\MissionEngineering.Platform.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation.Data\MissionEngineering.Simulation.Data.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation\MissionEngineering.Simulation.csproj" />

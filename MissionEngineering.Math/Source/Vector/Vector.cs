@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace MissionEngineering.MathLibrary;
+namespace MissionEngineering.Math;
 
 public partial class Vector
 {

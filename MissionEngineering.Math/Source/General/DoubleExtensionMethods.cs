@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
-using static MissionEngineering.MathLibrary.PhysicalConstants;
-using static MissionEngineering.MathLibrary.UnitConversions;
+using static MissionEngineering.Math.PhysicalConstants;
+using static MissionEngineering.Math.UnitConversions;
 using static System.Math;
 
-namespace MissionEngineering.MathLibrary;
+namespace MissionEngineering.Math;
 
 public static class DoubleExtensionMethods
 {

@@ -1,7 +1,7 @@
-﻿using static MissionEngineering.MathLibrary.PhysicalConstants;
+﻿using static MissionEngineering.Math.PhysicalConstants;
 using static System.Math;
 
-namespace MissionEngineering.MathLibrary;
+namespace MissionEngineering.Math;
 
 public static class UnitConversions
 {

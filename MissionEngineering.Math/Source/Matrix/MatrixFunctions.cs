@@ -1,4 +1,4 @@
-﻿namespace MissionEngineering.MathLibrary;
+﻿namespace MissionEngineering.Math;
 
 using static System.Math;
 
