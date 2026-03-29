@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
-    <ProjectReference Include="..\MissionEngineering.MathLibrary\MissionEngineering.MathLibrary.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Math\MissionEngineering.Math.csproj" />
   </ItemGroup>
 
 </Project>
