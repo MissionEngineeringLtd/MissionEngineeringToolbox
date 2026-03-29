@@ -2,6 +2,7 @@
 using MissionEngineering.Core;
 using MissionEngineering.DataRecorder;
 using MissionEngineering.MathLibrary;
+using MissionEngineering.Simdis;
 
 namespace MissionEngineering.Simulation;
 
@@ -21,6 +22,7 @@ public static class SimulationBuilder
         services.AddScoped<IDataRecorder, DataRecorder.DataRecorder>();
         services.AddScoped<SimulationSettings, SimulationSettings>();
         services.AddScoped<SimulationData, SimulationData>();
+        services.AddScoped<ISimdisExporter, SimdisExporter>();
 
         using var serviceProvider = services.BuildServiceProvider();
 
@@ -41,6 +43,7 @@ public static class SimulationBuilder
         services.AddScoped<IDataRecorder, DataRecorder.DataRecorder>();
         services.AddScoped<SimulationSettings, SimulationSettings>();
         services.AddScoped<SimulationData, SimulationData>();
+        services.AddScoped<ISimdisExporter, SimdisExporter>();
 
         using var serviceProvider = services.BuildServiceProvider();
 

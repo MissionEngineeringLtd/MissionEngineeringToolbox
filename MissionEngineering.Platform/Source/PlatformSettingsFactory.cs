@@ -11,7 +11,7 @@ public static class PlatformSettingsFactory
         {
             PlatformHeader = new PlatformHeader
             {
-                PlatformId = 0,
+                PlatformId = 1,
                 PlatformName = "AC_1",
                 PlatformCallsign = "PLATFORM_CALLSIGN",
                 PlatformDescription = "PLATFORM_DESCRIPTION",
@@ -38,7 +38,7 @@ public static class PlatformSettingsFactory
         {
             PlatformHeader = new PlatformHeader
             {
-                PlatformId = 0,
+                PlatformId = 2,
                 PlatformName = "AC_2",
                 PlatformCallsign = "PLATFORM_CALLSIGN",
                 PlatformDescription = "PLATFORM_DESCRIPTION",

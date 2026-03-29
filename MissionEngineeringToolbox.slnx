@@ -6,6 +6,7 @@
   <Project Path="MissionEngineering.DataRecorder/MissionEngineering.DataRecorder.csproj" Id="7e4dc448-99c1-4f0d-8df7-6bdd15f5de14" />
   <Project Path="MissionEngineering.MathLibrary/MissionEngineering.MathLibrary.csproj" />
   <Project Path="MissionEngineering.Platform/MissionEngineering.Platform.csproj" />
+  <Project Path="MissionEngineering.Simdis/MissionEngineering.Simdis.csproj" Id="072d857f-8e15-4a77-a7d3-72e00e33b0b9" />
   <Project Path="MissionEngineering.Simulation.Console/MissionEngineering.Simulation.Console.csproj" Id="c8664854-2cfe-4408-9da0-71d30e8e65d3" />
   <Project Path="MissionEngineering.Simulation.Data/MissionEngineering.Simulation.Data.csproj" Id="7ec65002-9f7a-42db-9e7d-1ecc8a6ddfed" />
   <Project Path="MissionEngineering.Simulation/MissionEngineering.Simulation.csproj" Id="a3bb62a5-98d3-4012-9b55-0ed5cec29c4f" />

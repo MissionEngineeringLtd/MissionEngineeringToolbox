@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Core;
+using MissionEngineering.Simdis;
 using MissionEngineering.Simulation;
 
 namespace MissionEngineering.DataRecorder;
@@ -7,9 +8,12 @@ public class DataRecorder : IDataRecorder
 {
     public SimulationData SimulationData { get; set; }
 
-    public DataRecorder(SimulationData simulationData)
+    public ISimdisExporter SimdisExporter { get; set; }
+
+    public DataRecorder(SimulationData simulationData, ISimdisExporter simdisExporter)
     {
         SimulationData = simulationData;
+        SimdisExporter = simdisExporter;
     }
 
     public void Initialise(double time)
@@ -34,6 +38,7 @@ public class DataRecorder : IDataRecorder
 
         WriteJsonData();
         WriteCsvData();
+        WriteSimdisData();
     }
 
     public void CreateOutputFolder()
@@ -70,6 +75,12 @@ public class DataRecorder : IDataRecorder
     {
         WritePlatformDataAllToCsv();
         WritePlatformDataPerPlatformToCsv();
+    }
+
+    public void WriteSimdisData()
+    {
+        SimdisExporter.GenerateSimdisData();
+        SimdisExporter.WriteSimdisData();
     }
 
     public void WriteSimulationSettingsToJson()
