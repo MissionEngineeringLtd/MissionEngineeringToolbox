@@ -105,7 +105,7 @@ public static class MathFunctions
 
         var bankAngle_deg = CalculateBankAngleFromLoadFactor(loadFactor_g);
 
-        bankAngle_deg = bankAngle_deg * Sign(lateralAcceleration_g);
+        bankAngle_deg *= Sign(lateralAcceleration_g);
 
         return bankAngle_deg;
     }

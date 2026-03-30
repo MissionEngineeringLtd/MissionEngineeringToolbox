@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MissionEngineering.Platform;
+﻿namespace MissionEngineering.Platform;
 
 public class PlatformSettings
 {
-    public required PlatformHeader PlatformHeader { get; set; }
+    public PlatformHeader PlatformHeader { get; set; }
 
-    public required PlatformHeaderSimdis PlatformHeaderSimdis { get; set; }
+    public PlatformHeaderSimdis PlatformHeaderSimdis { get; set; }
 
-    public required PlatformStateInitial PlatformStateInitial { get; set; }
+    public PlatformStateInitial PlatformStateInitial { get; set; }
 }

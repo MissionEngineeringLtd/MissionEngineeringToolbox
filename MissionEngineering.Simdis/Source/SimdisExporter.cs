@@ -108,7 +108,6 @@ public class SimdisExporter : ISimdisExporter
             var ps = pd.PlatformState;
 
             var time = ps.Time_s;
-            var lla = ps.PositionLLA;
             var pos = ps.PositionNED;
             var vel = ps.VelocityNED;
             var att = ps.Attitude;

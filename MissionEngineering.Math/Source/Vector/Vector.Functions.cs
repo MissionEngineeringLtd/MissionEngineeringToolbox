@@ -6,7 +6,7 @@ public partial class Vector
 {
     public static Vector operator +(Vector left, Vector right)
     {
-        Vector result = new Vector(left.NumberOfElements);
+        Vector result = new(left.NumberOfElements);
 
         for (int i = 0; i < left.NumberOfElements; i++)
         {
@@ -18,7 +18,7 @@ public partial class Vector
 
     public static Vector operator -(Vector left, Vector right)
     {
-        Vector result = new Vector(left.NumberOfElements);
+        Vector result = new(left.NumberOfElements);
 
         for (int i = 0; i < left.NumberOfElements; i++)
         {

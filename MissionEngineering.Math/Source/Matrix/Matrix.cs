@@ -120,13 +120,11 @@ public partial class Matrix
             return false;
         }
 
-        var deltaX = 0.0;
-
         for (int i = 0; i < NumberOfRows; i++)
         {
             for (int j = 0; j < NumberOfColumns; j++)
             {
-                deltaX = Abs(x.Data[i, j] - Data[i, j]);
+                var deltaX = Abs(x.Data[i, j] - Data[i, j]);
 
                 if (deltaX > tolerance)
                 {

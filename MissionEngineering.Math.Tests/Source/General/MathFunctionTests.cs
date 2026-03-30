@@ -3,7 +3,7 @@
     [TestClass]
     public class MathFunctionTests
     {
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(5.7, 1.0, 6.0)]
         [DataRow(5.2, 1.0, 5.0)]
         [DataRow(5.5, 0.5, 5.5)]
@@ -17,7 +17,7 @@
             Assert.AreEqual(expected, result, 10e-10);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(1.0, 0.0)]
         [DataRow(1.0, -1.0)]
         public void RoundToStepSize_InvalidStepSize_Throws(double value, double stepSize)

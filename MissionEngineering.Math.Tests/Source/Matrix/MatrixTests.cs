@@ -29,7 +29,7 @@ public class MatrixTests
         a[[1, 3], [1, 4]] = b;
 
         // Assert
-        Assert.AreEqual(a[3, 4], 4.0);
+        Assert.AreEqual(4.0, a[3, 4]);
     }
 
     [TestMethod]

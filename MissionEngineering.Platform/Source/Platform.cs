@@ -23,7 +23,7 @@ public class Platform : IExecutableModel
 
         LLAOrigin = llaOrigin;
 
-        PlatformDataList = new List<PlatformData>();
+        PlatformDataList = [];
     }
 
     public void Initialise(double time_s)
@@ -63,7 +63,6 @@ public class Platform : IExecutableModel
             VelocityNED = velocityNED,
             Attitude = attitude,
         };
-
     }
 
     public void Update(double time_s)

@@ -7,19 +7,19 @@ namespace MissionEngineering.Simulation;
 /// </summary>
 public class Program
 {
-    public static string SimulationSettingsFileName { get; set; }
+    private static string SimulationSettingsFileName { get; set; }
 
-    public static string ScenarioSettingsFileName { get; set; }
+    private static string ScenarioSettingsFileName { get; set; }
 
-    public static string FlightpathDemandFileName { get; set; }
+    private static string FlightpathDemandFileName { get; set; }
 
-    public static int NumberOfRuns { get; set; }
+    private static int NumberOfRuns { get; set; }
 
-    public static SimulationSettings SimulationSettings { get; set; }
+    private static SimulationSettings SimulationSettings { get; set; }
 
-    public static ScenarioSettings ScenarioSettings { get; set; }
+    private static ScenarioSettings ScenarioSettings { get; set; }
 
-    public static ISimulationHarness SimulationHarness { get; set; }
+    private static ISimulationHarness SimulationHarness { get; set; }
 
     /// <summary>
     /// Simulation Console Runner.

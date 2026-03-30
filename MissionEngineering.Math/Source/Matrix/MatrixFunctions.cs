@@ -6,7 +6,7 @@ public partial class Matrix
 {
     public static Matrix IdentityMatrix(int numberOfRows, int numberOfColumns)
     {
-        Matrix x = new Matrix(numberOfRows, numberOfColumns);
+        Matrix x = new(numberOfRows, numberOfColumns);
 
         var numberOElements = Min(numberOfRows, numberOfColumns);
 
@@ -22,9 +22,9 @@ public partial class Matrix
     {
         var numberOfElements = Min(NumberOfRows, NumberOfColumns);
 
-        var diagonal = new Vector(NumberOfRows);
+        var diagonal = new Vector(numberOfElements);
 
-        for (int i = 0; i < NumberOfRows; i++)
+        for (int i = 0; i < numberOfElements; i++)
         {
             diagonal[i] = this[i, i];
         }

@@ -11,7 +11,7 @@ public partial class Vector
 
     public Vector()
     {
-        Data = Array.Empty<double>();
+        Data = [];
     }
 
     public Vector(int numberOfElements)
@@ -100,11 +100,9 @@ public partial class Vector
             return false;
         }
 
-        var deltaX = 0.0;
-
         for (int i = 0; i < Data.Length; i++)
         {
-            deltaX = Abs(x.Data[i] - Data[i]);
+            var deltaX = Abs(x.Data[i] - Data[i]);
 
             if (deltaX > tolerance)
             {

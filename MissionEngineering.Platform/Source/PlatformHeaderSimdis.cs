@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace MissionEngineering.Platform;
+﻿namespace MissionEngineering.Platform;
 
 public record PlatformHeaderSimdis
 {

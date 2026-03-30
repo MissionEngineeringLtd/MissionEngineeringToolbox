@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using static System.Math;
+﻿using static System.Math;
 
 namespace MissionEngineering.Math;
 
@@ -22,7 +21,7 @@ public record Attitude
         BankAngle_deg = bankAngle_deg;
     }
 
-    public static Attitude operator+(Attitude x, Attitude y)
+    public static Attitude operator +(Attitude x, Attitude y)
     {
         var headingAngle_deg = x.HeadingAngle_deg + y.HeadingAngle_deg;
         var pitchAngle_deg = x.PitchAngle_deg + y.PitchAngle_deg;

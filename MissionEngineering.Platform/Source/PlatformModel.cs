@@ -1,5 +1,4 @@
-﻿using MissionEngineering.Core;
-using MissionEngineering.Math;
+﻿using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 
@@ -69,9 +68,9 @@ public class PlatformModel
     {
         var attitude = new Attitude
         {
-             HeadingAngle_deg = 0.0,
-             BankAngle_deg = 0.0,
-             PitchAngle_deg = 0.0,
+            HeadingAngle_deg = 0.0,
+            BankAngle_deg = 0.0,
+            PitchAngle_deg = 0.0,
         };
 
         return attitude;

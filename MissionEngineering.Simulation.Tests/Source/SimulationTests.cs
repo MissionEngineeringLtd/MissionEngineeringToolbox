@@ -20,7 +20,7 @@
             simulationHarness.Run();
 
             // Assert
-            Assert.AreEqual(simulationHarness.Simulation.SimulationModels.Count, 2);
+            Assert.HasCount(2, simulationHarness.Simulation.SimulationModels);
         }
     }
 }

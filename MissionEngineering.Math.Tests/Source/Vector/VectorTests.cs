@@ -27,7 +27,7 @@ public class VectorTests
     [TestMethod]
     public void Constructor_WithDataArray_InitializesData()
     {
-        double[] data = { 1.1, 2.2, 3.3 };
+        double[] data = [1.1, 2.2, 3.3];
         var vector = new Vector(data);
         Assert.AreEqual(data.Length, vector.NumberOfElements);
         CollectionAssert.AreEqual(data, vector.Data);
@@ -49,7 +49,7 @@ public class VectorTests
     [TestMethod]
     public void Indexer_Index_GetAndSet_WorksCorrectly()
     {
-        var vector = new Vector(new double[] { 5.5, 6.6, 7.7 });
+        var vector = new Vector([5.5, 6.6, 7.7]);
         vector[new Index(1)] = 99.9;
         Assert.AreEqual(99.9, vector[new Index(1)]);
         Assert.AreEqual(5.5, vector[new Index(0)]);

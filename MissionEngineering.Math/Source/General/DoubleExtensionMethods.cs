@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using static MissionEngineering.Math.PhysicalConstants;
+﻿using static MissionEngineering.Math.PhysicalConstants;
 using static MissionEngineering.Math.UnitConversions;
 using static System.Math;
 

@@ -31,6 +31,6 @@ public sealed class TaskTests
         };
 
         // Assert
-        Assert.AreEqual(task.TaskHeader.TaskQualityStatus, TaskQualityStatusType.AboveQMin);
+        Assert.AreEqual(TaskQualityStatusType.AboveQMin, task.TaskHeader.TaskQualityStatus);
     }
 }
