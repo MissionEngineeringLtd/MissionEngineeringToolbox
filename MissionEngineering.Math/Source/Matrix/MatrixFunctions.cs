@@ -1,6 +1,6 @@
-﻿namespace MissionEngineering.Math;
+﻿using static System.Math;
 
-using static System.Math;
+namespace MissionEngineering.Math;
 
 public partial class Matrix
 {
@@ -8,7 +8,7 @@ public partial class Matrix
     {
         Matrix x = new Matrix(numberOfRows, numberOfColumns);
 
-        var numberOElements = Math.Min(numberOfRows, numberOfColumns);
+        var numberOElements = Min(numberOfRows, numberOfColumns);
 
         for (int i = 0; i < numberOElements; i++)
         {

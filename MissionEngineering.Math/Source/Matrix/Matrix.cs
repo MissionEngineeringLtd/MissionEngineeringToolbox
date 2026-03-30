@@ -1,4 +1,6 @@
-﻿namespace MissionEngineering.Math;
+﻿using static System.Math;
+
+namespace MissionEngineering.Math;
 
 public partial class Matrix
 {
@@ -124,7 +126,7 @@ public partial class Matrix
         {
             for (int j = 0; j < NumberOfColumns; j++)
             {
-                deltaX = Math.Abs(x.Data[i, j] - Data[i, j]);
+                deltaX = Abs(x.Data[i, j] - Data[i, j]);
 
                 if (deltaX > tolerance)
                 {

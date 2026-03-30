@@ -1,5 +1,4 @@
 ﻿using MissionEngineering.Simulation;
-using System.Text;
 
 namespace MissionEngineering.Simdis;
 

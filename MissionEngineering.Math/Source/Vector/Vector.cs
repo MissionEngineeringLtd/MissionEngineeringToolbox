@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using static System.Math;
 
 namespace MissionEngineering.Math;
 
@@ -103,7 +104,7 @@ public partial class Vector
 
         for (int i = 0; i < Data.Length; i++)
         {
-            deltaX = Math.Abs(x.Data[i] - Data[i]);
+            deltaX = Abs(x.Data[i] - Data[i]);
 
             if (deltaX > tolerance)
             {

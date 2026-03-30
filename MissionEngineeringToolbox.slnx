@@ -4,6 +4,7 @@
   </Folder>
   <Project Path="MissionEngineering.Core/MissionEngineering.Core.csproj" Id="34c1eab6-f58d-4a0d-97d3-68bf87e01aaa" />
   <Project Path="MissionEngineering.DataRecorder/MissionEngineering.DataRecorder.csproj" Id="7e4dc448-99c1-4f0d-8df7-6bdd15f5de14" />
+  <Project Path="MissionEngineering.Math.Tests/MissionEngineering.Math.Tests.csproj" Id="c0b19818-3259-4e4d-b7aa-8230d17f4d3c" />
   <Project Path="MissionEngineering.Math/MissionEngineering.Math.csproj" />
   <Project Path="MissionEngineering.Platform/MissionEngineering.Platform.csproj" />
   <Project Path="MissionEngineering.Simdis/MissionEngineering.Simdis.csproj" Id="072d857f-8e15-4a77-a7d3-72e00e33b0b9" />

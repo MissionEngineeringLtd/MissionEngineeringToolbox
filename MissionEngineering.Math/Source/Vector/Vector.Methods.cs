@@ -11,7 +11,7 @@ public partial class Vector
             sum += Data[i] * Data[i];
         }
 
-        return Math.Sqrt(sum);
+        return System.Math.Sqrt(sum);
     }
 
     public Vector Sqrt()
@@ -20,7 +20,7 @@ public partial class Vector
 
         for (int i = 0; i < NumberOfElements; i++)
         {
-            result[i] = Math.Sqrt(Data[i]);
+            result[i] = System.Math.Sqrt(Data[i]);
         }
 
         return result;

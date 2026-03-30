@@ -1,4 +1,6 @@
-﻿namespace MissionEngineering.Math;
+﻿using static System.Math;
+
+namespace MissionEngineering.Math;
 
 public partial class Vector
 {
@@ -28,7 +30,7 @@ public partial class Vector
 
     public static Vector LinearlySpacedVector(double start, double end, double step)
     {
-        int numberOfElements = (int)Math.Ceiling((end - start) / step) + 1;
+        int numberOfElements = (int)Ceiling((end - start) / step) + 1;
 
         var data = new double[numberOfElements];
 
