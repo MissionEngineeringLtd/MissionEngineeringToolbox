@@ -9,4 +9,4 @@ Note: all models, algorithms and parameter values are designed for representatio
 
 [![Build](https://github.com/MissionEngineeringLtd/MissionEngineeringToolbox/actions/workflows/dotnet.yml/badge.svg)](https://github.com/MissionEngineeringLtd/MissionEngineeringToolbox/actions/workflows/dotnet.yml)
 
-[![Coverage Status](https://coveralls.io/repos/github/MissionEngineeringLtd/MissionEngineeringToolbox/badge.svg?branch=main)](https://coveralls.io/github/MissionEngineeringLtd/MissionEngineeringToolbox?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/MissionEngineeringLtd/MissionEngineeringToolbox/badge.svg?branch=main)](https://coveralls.io/github/MissionEngineeringLtd/MissionEngineeringToolbox?branch=main) 
