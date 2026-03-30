@@ -32,3 +32,10 @@ jobs:
       
     - name: Test
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
+
+    - name: Publish Coverage   
+      uses: coverallsapp/github-action@v2.3.4   
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Math.Tests/coverage.info
+
