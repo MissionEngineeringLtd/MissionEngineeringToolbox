@@ -8,3 +8,5 @@ Using the US DoD Mission Engineering Guide as the framework for use case analysi
 Note: all models, algorithms and parameter values are designed for representation of generic systems at UNCLASSIFIED level.
 
 [![Build](https://github.com/MissionEngineeringLtd/MissionEngineeringToolbox/actions/workflows/dotnet.yml/badge.svg)](https://github.com/MissionEngineeringLtd/MissionEngineeringToolbox/actions/workflows/dotnet.yml)
+
+[![Coverage Status](https://coveralls.io/repos/github/MissionEngineeringLtd/MissionEngineeringToolbox/badge.svg?branch=main)](https://coveralls.io/github/MissionEngineeringLtd/MissionEngineeringToolbox?branch=main)
