@@ -3,6 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Bogus" Version="35.6.5" />
     <PackageVersion Include="CommunityToolkit.Diagnostics" Version="8.4.2" />
     <PackageVersion Include="coverlet.msbuild" Version="8.0.1" />
     <PackageVersion Include="CsvHelper" Version="33.1.0" />
