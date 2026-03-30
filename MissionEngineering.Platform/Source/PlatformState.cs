@@ -4,9 +4,13 @@ namespace MissionEngineering.Platform;
 
 public record PlatformState
 {
+    public DateTime DateTime { get; set; }
+
     public double Time_s { get; set; }
 
     public int PlatformId { get; set; }
+
+    public string PlatformName { get; set; }
 
     public PositionLLA PositionLLA { get; set; }
 

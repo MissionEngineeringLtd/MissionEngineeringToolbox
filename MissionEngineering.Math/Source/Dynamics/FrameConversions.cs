@@ -30,4 +30,18 @@ public static class FrameConversions
 
         return attitude;
     }
+
+    public static VelocityNED GetVelocityVectorFromAttitude(double totalSpeed_ms, Attitude atittude)
+    {
+        var headingAngle_rad = atittude.HeadingAngle_deg.DegreesToRadians();
+        var pitchAngle_rad = atittude.PitchAngle_deg.DegreesToRadians();
+
+        var velocityNorth_ms = totalSpeed_ms * Cos(headingAngle_rad) * Cos(pitchAngle_rad);
+        var velocityEast_ms = totalSpeed_ms * Sin(headingAngle_rad) * Cos(pitchAngle_rad);
+        var velocityDown_ms = -totalSpeed_ms * Sin(pitchAngle_rad);
+
+        var velocityNED = new VelocityNED(velocityNorth_ms, velocityEast_ms, velocityDown_ms);
+
+        return velocityNED;
+    }
 }

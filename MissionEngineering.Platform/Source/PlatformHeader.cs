@@ -16,14 +16,6 @@ public record PlatformHeader
 
     public PlatformAffiliationType PlatformAffiliation { get; set; }
 
-    public required string PlatformIcon { get; set; }
-
-    public Color PlatformColor { get; set; }
-
-    public bool PlatformInterpolate { get; init; }
-
-    public double PlatformScaleLevel { get; init; }
-
     public PlatformHeader()
     {
         PlatformId = 0;
@@ -32,9 +24,5 @@ public record PlatformHeader
         PlatformDescription = "PLATFORM_DESCRIPTION";
         PlatformType = PlatformType.Undefined;
         PlatformAffiliation = PlatformAffiliationType.Undefined;
-        PlatformIcon = "PLATFORM_ICON";
-        PlatformColor = Color.Blue;
-        PlatformInterpolate = true;
-        PlatformScaleLevel = 4.0;
     }
 }

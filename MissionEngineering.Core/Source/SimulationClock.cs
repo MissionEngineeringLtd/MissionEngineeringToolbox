@@ -11,7 +11,7 @@ public class SimulationClock : ISimulationClock
 
     public SimulationModelTimeStamp GetTimeStamp(double time)
     {
-        var dateTime = DateTimeOrigin.DateTime.AddSeconds(time);
+        var dateTime = DateTimeOrigin.DateTimeStart.AddSeconds(time);
 
         var timeStamp = new SimulationModelTimeStamp(dateTime, time);
 

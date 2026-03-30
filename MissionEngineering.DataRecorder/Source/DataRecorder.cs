@@ -103,13 +103,15 @@ public class DataRecorder : IDataRecorder
 
     public void WritePlatformDataAllToCsv()
     {
-        var platformDataAll = SimulationData.PlatformDataAll;
+        var platformData = SimulationData.PlatformDataAll;
+
+        var platformStateData = platformData.Select(s => s.PlatformState).ToList();
 
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformData_All.csv";
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        platformDataAll.WriteToCsvFile(fileNameFull);
+        platformStateData.WriteToCsvFile(fileNameFull);
     }
 
     public void WritePlatformDataPerPlatformToCsv()
@@ -118,13 +120,15 @@ public class DataRecorder : IDataRecorder
 
         foreach (var platformSettings in SimulationData.ScenarioSettings.PlatformSettingsList)
         {
-            var platformDataList = SimulationData.PlatformDataPerPlatform[index];
+            var platformData = SimulationData.PlatformDataPerPlatform[index];
+
+            var platformStateData = platformData.Select(s => s.PlatformState).ToList();
 
             var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformData_{platformSettings.PlatformHeader.PlatformName}.csv";
 
             var fileNameFull = GetFileNameFull(fileName);
 
-            platformDataList.WriteToCsvFile(fileNameFull);
+            platformStateData.WriteToCsvFile(fileNameFull);
 
             index++;
         }

@@ -1,4 +1,5 @@
-﻿using MissionEngineering.Math;
+﻿using MissionEngineering.Core;
+using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 
@@ -11,7 +12,7 @@ public class PlatformModel
         LLAOrigin = llaOrigin;
     }
 
-    public PlatformState Update(double time_s, PlatformState platformState)
+    public PlatformState Update(DateTime dateTime, double time_s, PlatformState platformState)
     {
         var deltaTime = time_s - platformState.Time_s;
 
@@ -19,23 +20,25 @@ public class PlatformModel
 
         var accelerationTBA = GetAccelerationTBA();
 
-        var accelerationNED = GetAccelerationNED();
+        var accelerationNED = GetAccelerationNED(accelerationTBA, platformState.Attitude);
 
         var velocityNED = platformState.VelocityNED + accelerationNED * dt;
         var positionNED = platformState.PositionNED + velocityNED * dt;
 
         var positionLLA = MappingConversions.ConvertPositionNEDToPositionLLA(positionNED, LLAOrigin.PositionLLA);
 
-        var attitude = GetAttitude();
+        var attitude = FrameConversions.GetAttitudeFromVelocityVector(platformState.VelocityNED);
+        var attitudeRate = GetAttitudeRate(platformState.Attitude, attitude, dt);
 
-        var attitudeRate = GetAttitudeRate();
-
-        var ps = new PlatformState
+        var ps = platformState with
         {
+            DateTime = dateTime,
             Time_s = time_s,
             PositionLLA = positionLLA,
             PositionNED = positionNED,
             VelocityNED = velocityNED,
+            AccelerationNED = accelerationNED,
+            AccelerationTBA = accelerationTBA,
             Attitude = attitude,
             AttitudeRate = attitudeRate
         };
@@ -55,14 +58,9 @@ public class PlatformModel
         return accelerationTBA;
     }
 
-    public AccelerationNED GetAccelerationNED()
+    public AccelerationNED GetAccelerationNED(AccelerationTBA accelerationTBA, Attitude attitude)
     {
-        var accelerationNED = new AccelerationNED
-        {
-            AccelerationNorth_ms2 = 0.0,
-            AccelerationEast_ms2 = 0.0,
-            AccelerationDown_ms2 = 0.0
-        };
+        var accelerationNED = FrameConversions.GetAccelerationNED(accelerationTBA, attitude);
 
         return accelerationNED;
     }
@@ -79,14 +77,19 @@ public class PlatformModel
         return attitude;
     }
 
-    public AttitudeRate GetAttitudeRate()
+    public AttitudeRate GetAttitudeRate(Attitude attitudePrevious, Attitude attitudeCurrent, DeltaTime deltaTime_s)
     {
-        var attitudeRate = new AttitudeRate
+        if (deltaTime_s.DeltaTime_s == 0.0)
         {
-            HeadingAngleRate_degs = 0.0,
-            BankAngleRate_degs = 0.0,
-            PitchAngleRate_degs = 0.0,
-        };
+            return new AttitudeRate
+            {
+                HeadingAngleRate_degs = 0.0,
+                PitchAngleRate_degs = 0.0,
+                BankAngleRate_degs = 0.0
+            };
+        }
+
+        var attitudeRate = (attitudeCurrent - attitudePrevious) / deltaTime_s;
 
         return attitudeRate;
     }

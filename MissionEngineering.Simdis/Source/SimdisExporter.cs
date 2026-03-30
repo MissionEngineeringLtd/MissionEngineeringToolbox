@@ -86,17 +86,18 @@ public class SimdisExporter : ISimdisExporter
     public void CreatePlatformInitialisation(int platformId, PlatformSettings platformSettings)
     {
         var ph = platformSettings.PlatformHeader;
+        var ps = platformSettings.PlatformHeaderSimdis;
 
         AddLine(@$"PlatformID          {platformId}");
         AddLine(@$"PlatformName        {platformId} ""{ph.PlatformName}""");
-        AddLine(@$"PlatformType        {platformId} ""{ph.PlatformType.ToString()}""");
-        AddLine(@$"PlatformIcon        {platformId} ""{ph.PlatformIcon}""");
-        AddLine(@$"PlatformFHN         {platformId} {ph.PlatformAffiliation.ToString()}");
-        AddLine(@$"PlatformInterpolate {platformId} {ph.PlatformInterpolate}");
+        AddLine(@$"PlatformType        {platformId} ""{ps.PlatformType}""");
+        AddLine(@$"PlatformIcon        {platformId} ""{ps.PlatformIcon}""");
+        AddLine(@$"PlatformFHN         {platformId} {ps.PlatformAffiliationFHN}");
+        AddLine(@$"PlatformInterpolate {platformId} {ps.PlatformInterpolate}");
         AddLine(@$"PlatformCoordSystem {platformId} ""NED""");
         AddLine("");
         AddLine(@$"GenericData         {platformId} ""SIMDIS_DynamicScale"" ""1"" ""0"" ");
-        AddLine(@$"GenericData         {platformId} ""SIMDIS_ScaleLevel"" ""{ph.PlatformScaleLevel}"" ""0"" ");
+        AddLine(@$"GenericData         {platformId} ""SIMDIS_ScaleLevel"" ""{ps.PlatformScaleLevel}"" ""0"" ");
         AddLine("");
     }
 

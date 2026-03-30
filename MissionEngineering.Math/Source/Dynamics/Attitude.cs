@@ -1,4 +1,5 @@
-﻿using static System.Math;
+﻿using System.Numerics;
+using static System.Math;
 
 namespace MissionEngineering.Math;
 
@@ -19,6 +20,75 @@ public record Attitude
         HeadingAngle_deg = headingAngle_deg;
         PitchAngle_deg = pitchAngle_deg;
         BankAngle_deg = bankAngle_deg;
+    }
+
+    public static Attitude operator+(Attitude x, Attitude y)
+    {
+        var headingAngle_deg = x.HeadingAngle_deg + y.HeadingAngle_deg;
+        var pitchAngle_deg = x.PitchAngle_deg + y.PitchAngle_deg;
+        var bankAngle_deg = x.BankAngle_deg + y.BankAngle_deg;
+
+        var attitude = new Attitude(headingAngle_deg, pitchAngle_deg, bankAngle_deg);
+
+        return attitude;
+    }
+
+    public static Attitude operator -(Attitude a1, Attitude a2)
+    {
+        var headingAngle_deg = a1.HeadingAngle_deg - a2.HeadingAngle_deg;
+        var pitchAngle_deg = a1.PitchAngle_deg - a2.PitchAngle_deg;
+        var bankAngle_deg = a1.BankAngle_deg - a2.BankAngle_deg;
+
+        var attitude = new Attitude(headingAngle_deg, pitchAngle_deg, bankAngle_deg);
+
+        return attitude;
+    }
+
+    public static AttitudeRate operator /(Attitude x, DeltaTime dt)
+    {
+        var headingAngleRate_deg = x.HeadingAngle_deg / dt.DeltaTime_s;
+        var pitchAngleRate_deg = x.PitchAngle_deg / dt.DeltaTime_s;
+        var bankAngleRate_deg = x.BankAngle_deg / dt.DeltaTime_s;
+
+        var attitudeRate = new AttitudeRate(headingAngleRate_deg, pitchAngleRate_deg, bankAngleRate_deg);
+
+        return attitudeRate;
+    }
+
+    public static Attitude operator *(Attitude x, double y)
+    {
+        var headingAngle_deg = x.HeadingAngle_deg * y;
+        var pitchAngle_deg = x.PitchAngle_deg * y;
+        var bankAngle_deg = x.BankAngle_deg * y;
+
+        var attitude = new Attitude(headingAngle_deg, pitchAngle_deg, bankAngle_deg);
+
+        return attitude;
+    }
+
+    public static Attitude operator *(double x, Attitude y)
+    {
+        var attitude = y * x;
+
+        return attitude;
+    }
+
+    public static Attitude operator /(Attitude x, double y)
+    {
+        var headingAngle_deg = x.HeadingAngle_deg / y;
+        var pitchAngle_deg = x.PitchAngle_deg / y;
+        var bankAngle_deg = x.BankAngle_deg / y;
+
+        var attitude = new Attitude(headingAngle_deg, pitchAngle_deg, bankAngle_deg);
+
+        return attitude;
+    }
+
+    public static Attitude operator /(double x, Attitude y)
+    {
+        var attitude = y / x;
+
+        return attitude;
     }
 
     public Matrix GetTransformationMatrix()

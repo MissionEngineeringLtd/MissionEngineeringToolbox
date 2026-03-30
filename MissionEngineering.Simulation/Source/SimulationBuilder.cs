@@ -17,7 +17,6 @@ public static class SimulationBuilder
         services.AddScoped<ISimulation, Simulation>();
         services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();
         services.AddScoped<ILLAOrigin, LLAOrigin>();
-        services.AddScoped<ISimulationClock, SimulationClock>();
         services.AddScoped<ScenarioSettings, ScenarioSettings>();
         services.AddScoped<IDataRecorder, DataRecorder.DataRecorder>();
         services.AddScoped<SimulationSettings, SimulationSettings>();
@@ -38,7 +37,6 @@ public static class SimulationBuilder
         services.AddScoped<ISimulation, Simulation>();
         services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();
         services.AddScoped<ILLAOrigin, LLAOrigin>();
-        services.AddScoped<ISimulationClock, SimulationClock>();
         services.AddScoped<ScenarioSettings, ScenarioSettings>();
         services.AddScoped<IDataRecorder, DataRecorder.DataRecorder>();
         services.AddScoped<SimulationSettings, SimulationSettings>();

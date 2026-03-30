@@ -8,5 +8,7 @@ public class PlatformData
 {
     public required PlatformHeader PlatformHeader { get; set; }
 
+    public required PlatformHeaderSimdis PlatformHeaderSimdis { get; set; }
+
     public required PlatformState PlatformState { get; set; }
 }

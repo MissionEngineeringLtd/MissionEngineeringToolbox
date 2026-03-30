@@ -1,5 +1,4 @@
-﻿using MissionEngineering.Math;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace MissionEngineering.Platform;
 
@@ -16,16 +15,25 @@ public static class PlatformSettingsFactory
                 PlatformCallsign = "PLATFORM_CALLSIGN",
                 PlatformDescription = "PLATFORM_DESCRIPTION",
                 PlatformAffiliation = PlatformAffiliationType.Friendly,
-                PlatformType = PlatformType.Aircraft,
+                PlatformType = PlatformType.Aircraft
+            },
+            PlatformHeaderSimdis = new PlatformHeaderSimdis
+            {
+                PlatformType = "Aircraft",
+                PlatformAffiliationFHN = "F",
                 PlatformIcon = "F-35A",
-                PlatformColor = Color.Blue,
-                PlatformInterpolate = true,
+                PlatformColor = "Blue",
+                PlatformInterpolate = "1",
                 PlatformScaleLevel = 2.5
             },
-            PlatformState = new PlatformState
+            PlatformStateInitial = new PlatformStateInitial
             {
-                PositionNED = new PositionNED { PositionNorth_m = 1000.0, PositionEast_m = 2000.0, PositionDown_m = -2000.0 },
-                VelocityNED = new VelocityNED { VelocityNorth_ms = 100.0, VelocityEast_ms = 200.0, VelocityDown_ms = 0.0 },
+                PositionNorth_m = 1000.0,
+                PositionEast_m = 2000.0,
+                Altitude_m = 2000.0,
+                TotalSpeed_ms = 250.0,
+                HeadingAngle_deg = 45.0,
+                PitchAngle_deg = 5.0
             }
         };
 
@@ -44,15 +52,24 @@ public static class PlatformSettingsFactory
                 PlatformDescription = "PLATFORM_DESCRIPTION",
                 PlatformAffiliation = PlatformAffiliationType.Friendly,
                 PlatformType = PlatformType.Aircraft,
+            },
+            PlatformHeaderSimdis = new PlatformHeaderSimdis
+            {
+                PlatformType = "Aircraft",
+                PlatformAffiliationFHN = "F",
                 PlatformIcon = "F-35A",
-                PlatformColor = Color.Green,
-                PlatformInterpolate = true,
+                PlatformColor = "Green",
+                PlatformInterpolate = "1",
                 PlatformScaleLevel = 2.5
             },
-            PlatformState = new PlatformState
+            PlatformStateInitial = new PlatformStateInitial
             {
-                PositionNED = new PositionNED { PositionNorth_m = 10000.0, PositionEast_m = 20000.0, PositionDown_m = -5000.0 },
-                VelocityNED = new VelocityNED { VelocityNorth_ms = -200.0, VelocityEast_ms = -100.0, VelocityDown_ms = 0.0 },
+                PositionNorth_m = 5000.0,
+                PositionEast_m = 1000.0,
+                Altitude_m = 5000.0,
+                TotalSpeed_ms = 250.0,
+                HeadingAngle_deg = -30.0,
+                PitchAngle_deg = -3.0
             }
         };
 

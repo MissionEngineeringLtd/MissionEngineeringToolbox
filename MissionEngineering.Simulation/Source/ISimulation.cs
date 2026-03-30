@@ -8,6 +8,8 @@ public interface ISimulation
 {
     IDataRecorder DataRecorder { get; set; }
 
+    public IDateTimeOrigin DateTimeOrigin { get; set; }
+
     ILLAOrigin LLAOrigin { get; set; }
 
     SimulationSettings SimulationSettings { get; set; }
@@ -15,8 +17,6 @@ public interface ISimulation
     ScenarioSettings ScenarioSettings { get; set; }
 
     List<IExecutableModel> SimulationModels { get; set; }
-
-    ISimulationClock SimulationClock { get; set; }
 
     void Run();
 
