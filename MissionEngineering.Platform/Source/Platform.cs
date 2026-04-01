@@ -81,6 +81,15 @@ public class Platform : IExecutableModel
         PlatformDataList.Add(platformData);
     }
 
+    public PlatformState Predict(double time_s)
+    {
+        var dateTime = DateTimeOrigin.GetDateTimeFromTime(time_s);
+
+        var ps = PlatformModel.Predict(dateTime, time_s, PlatformState);
+
+        return ps;
+    }
+
     public void Finalise(double time_s)
     {
     }

@@ -13,11 +13,34 @@ public class PlatformModel
 
     public PlatformState Update(DateTime dateTime, double time_s, PlatformState platformState)
     {
+        // For update, we  use the actual acceleration in the TBA frame.
+        var accelerationTBA = GetAccelerationTBA();
+
+        var ps = GeneratePlatformState(dateTime, time_s, platformState, accelerationTBA);
+
+        return ps;
+    }
+
+    public PlatformState Predict(DateTime dateTime, double time_s, PlatformState platformState)
+    {
+        // For prediction, we assume zero acceleration in the TBA frame for simplicity.
+        var accelerationTBA = new AccelerationTBA
+        {
+            AccelerationAxial_ms2 = 0.0,
+            AccelerationLateral_ms2 = 0.0,
+            AccelerationVertical_ms2 = 0.0
+        }; 
+
+        var ps = GeneratePlatformState(dateTime, time_s, platformState, accelerationTBA);
+
+        return ps;
+    }
+
+    public PlatformState GeneratePlatformState(DateTime dateTime, double time_s, PlatformState platformState, AccelerationTBA accelerationTBA)
+    {
         var deltaTime = time_s - platformState.Time_s;
 
         var dt = new DeltaTime(deltaTime);
-
-        var accelerationTBA = GetAccelerationTBA();
 
         var accelerationNED = GetAccelerationNED(accelerationTBA, platformState.Attitude);
 

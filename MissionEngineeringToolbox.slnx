@@ -7,6 +7,7 @@
   <Project Path="MissionEngineering.Math.Tests/MissionEngineering.Math.Tests.csproj" Id="c0b19818-3259-4e4d-b7aa-8230d17f4d3c" />
   <Project Path="MissionEngineering.Math/MissionEngineering.Math.csproj" />
   <Project Path="MissionEngineering.Platform/MissionEngineering.Platform.csproj" />
+  <Project Path="MissionEngineering.Sensor/MissionEngineering.Sensor.csproj" Id="fcf3ef9c-3852-4478-aefe-f8c28cc1d882" />
   <Project Path="MissionEngineering.Simdis/MissionEngineering.Simdis.csproj" Id="072d857f-8e15-4a77-a7d3-72e00e33b0b9" />
   <Project Path="MissionEngineering.Simulation.Console/MissionEngineering.Simulation.Console.csproj" Id="c8664854-2cfe-4408-9da0-71d30e8e65d3" />
   <Project Path="MissionEngineering.Simulation.Data/MissionEngineering.Simulation.Data.csproj" Id="7ec65002-9f7a-42db-9e7d-1ecc8a6ddfed" />
