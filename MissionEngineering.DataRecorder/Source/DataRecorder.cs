@@ -89,6 +89,8 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
+        LogUtilities.LogInformation($"Writing     Json File : {fileNameFull}");
+
         SimulationData.SimulationSettings.WriteToJsonFile(fileNameFull);
     }
 
@@ -97,6 +99,8 @@ public class DataRecorder : IDataRecorder
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_ScenarioSettings.json";
 
         var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing     Json File : {fileNameFull}");
 
         SimulationData.ScenarioSettings.WriteToJsonFile(fileNameFull);
     }
@@ -110,6 +114,8 @@ public class DataRecorder : IDataRecorder
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformData_All.csv";
 
         var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
 
         platformStateData.WriteToCsvFile(fileNameFull);
     }
@@ -127,6 +133,8 @@ public class DataRecorder : IDataRecorder
             var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformData_{platformSettings.PlatformHeader.PlatformName}.csv";
 
             var fileNameFull = GetFileNameFull(fileName);
+
+            LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
 
             platformStateData.WriteToCsvFile(fileNameFull);
 

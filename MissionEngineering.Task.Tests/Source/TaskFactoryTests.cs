@@ -18,6 +18,8 @@ public sealed class TaskFactoryTests
 
         var outputFile = Path.Combine(outputFolder, "Tasks.csv");
 
+        LogUtilities.LogInformation($"Writing     Csv  File : {outputFile}");
+
         tasks.WriteToCsvFile(outputFile);
 
         // Assert

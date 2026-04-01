@@ -8,8 +8,6 @@ public static class CsvUtilities
 {
     public static void WriteToCsvFile<T>(this IEnumerable<T> records, string fileName, int padding = 0)
     {
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileName}", padding);
-
         using var writer = new StreamWriter(fileName);
 
         using var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
@@ -22,8 +20,6 @@ public static class CsvUtilities
 
     public static void TransposeCsvFile(string inputFilePath, string outputFilePath, int padding = 0)
     {
-        LogUtilities.LogInformation($"Transposing Csv  File : {outputFilePath}", padding);
-
         // Read all lines from the input CSV file
         var lines = File.ReadAllLines(inputFilePath);
 
