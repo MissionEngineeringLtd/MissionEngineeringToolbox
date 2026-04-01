@@ -8,7 +8,10 @@ public static class ZipUtilities
     {
         var fileFull = Path.Combine(folderPath, zipFileName);
 
-        File.Delete(fileFull);
+        if (File.Exists(fileFull))
+        {
+            File.Delete(fileFull);
+        }
 
         var tempPath = Path.GetTempPath();
 
