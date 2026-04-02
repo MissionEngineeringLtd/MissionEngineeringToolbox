@@ -15,6 +15,7 @@ public static class SimulationBuilder
         services.AddScoped<ISimulationHarness, SimulationHarness>();
         services.AddScoped<SimulationHarnessSettings, SimulationHarnessSettings>();
         services.AddScoped<ISimulation, Simulation>();
+        services.AddScoped<ISimulationClock, SimulationClock>();
         services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();
         services.AddScoped<ILLAOrigin, LLAOrigin>();
         services.AddScoped<ScenarioSettings, ScenarioSettings>();
@@ -35,6 +36,7 @@ public static class SimulationBuilder
         var services = new ServiceCollection();
 
         services.AddScoped<ISimulation, Simulation>();
+        services.AddScoped<ISimulationClock, SimulationClock>();
         services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();
         services.AddScoped<ILLAOrigin, LLAOrigin>();
         services.AddScoped<ScenarioSettings, ScenarioSettings>();

@@ -11,7 +11,7 @@ public class Simulation : ISimulation
 
     public ScenarioSettings ScenarioSettings { get; set; }
 
-    public IDateTimeOrigin DateTimeOrigin { get; set; }
+    public ISimulationClock SimulationClock { get; set; }
 
     public ILLAOrigin LLAOrigin { get; set; }
 
@@ -23,11 +23,11 @@ public class Simulation : ISimulation
 
     private int displayCount;
 
-    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, IDateTimeOrigin dateTimeOrigin, ILLAOrigin llaOrigin, IDataRecorder dataRecorder)
+    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IDataRecorder dataRecorder)
     {
         SimulationSettings = simulationSettings;
         ScenarioSettings = scenarioSettings;
-        DateTimeOrigin = dateTimeOrigin;
+        SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
         DataRecorder = dataRecorder;
     }
@@ -60,7 +60,7 @@ public class Simulation : ISimulation
         LogUtilities.LogInformation("Initialise Started...");
         LogUtilities.LogInformation("");
 
-        DateTimeOrigin.DateTimeStart = ScenarioSettings.SimulationClockSettings.DateTimeOrigin;
+        SimulationClock.DateTimeOrigin.DateTimeStart = ScenarioSettings.SimulationClockSettings.DateTimeOrigin;
 
         LLAOrigin.PositionLLA = ScenarioSettings.LLAOrigin;
 
@@ -70,7 +70,7 @@ public class Simulation : ISimulation
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {
-            var platformModel = new Platform.Platform(DateTimeOrigin, LLAOrigin)
+            var platformModel = new Platform.Platform(SimulationClock, LLAOrigin)
             {
                 PlatformSettings = platformSettings
             };

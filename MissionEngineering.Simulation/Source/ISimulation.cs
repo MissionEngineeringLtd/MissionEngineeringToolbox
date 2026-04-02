@@ -8,7 +8,7 @@ public interface ISimulation
 {
     IDataRecorder DataRecorder { get; set; }
 
-    public IDateTimeOrigin DateTimeOrigin { get; set; }
+    public ISimulationClock SimulationClock { get; set; }
 
     ILLAOrigin LLAOrigin { get; set; }
 

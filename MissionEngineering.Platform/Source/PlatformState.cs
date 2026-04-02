@@ -1,12 +1,15 @@
-﻿using MissionEngineering.Math;
+﻿using MissionEngineering.Core;
+using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 
 public record PlatformState
 {
-    public DateTime DateTime { get; set; }
+    public SimulationTimeStamp TimeStamp { get; set; }
 
-    public double Time_s { get; set; }
+    public bool IsPrediction { get; set; }
+
+    public double PredictionTime_s { get; set; }
 
     public int PlatformId { get; set; }
 

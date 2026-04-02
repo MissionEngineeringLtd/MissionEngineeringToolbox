@@ -1,24 +1,24 @@
 ﻿namespace MissionEngineering.Core;
 
-public record SimulationModelTimeStamp
+public record SimulationTimeStamp
 {
     public DateTime WallClockDateTime { get; set; }
 
     public DateTime SimulationDateTime { get; set; }
 
-    public double SimulationTime { get; set; }
+    public double SimulationTime_s { get; set; }
 
-    public SimulationModelTimeStamp()
+    public SimulationTimeStamp()
     {
         WallClockDateTime = DateTime.Now;
     }
 
-    public SimulationModelTimeStamp(DateTime simulationDateTime, double simulationTime)
+    public SimulationTimeStamp(DateTime simulationDateTime, double simulationTime_s)
     {
         WallClockDateTime = DateTime.Now;
 
         SimulationDateTime = simulationDateTime;
 
-        SimulationTime = simulationTime;
+        SimulationTime_s = simulationTime_s;
     }
 }

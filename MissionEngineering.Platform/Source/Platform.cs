@@ -5,7 +5,7 @@ namespace MissionEngineering.Platform;
 
 public class Platform : IExecutableModel
 {
-    public IDateTimeOrigin DateTimeOrigin { get; set; }
+    public ISimulationClock SimulationClock { get; set; }
 
     public ILLAOrigin LLAOrigin { get; set; }
 
@@ -17,9 +17,9 @@ public class Platform : IExecutableModel
 
     public List<PlatformData> PlatformDataList { get; set; }
 
-    public Platform(IDateTimeOrigin dateTimeOrigin, ILLAOrigin llaOrigin)
+    public Platform(ISimulationClock simulationClock, ILLAOrigin llaOrigin)
     {
-        DateTimeOrigin = dateTimeOrigin;
+        SimulationClock = simulationClock;
 
         LLAOrigin = llaOrigin;
 
@@ -28,7 +28,7 @@ public class Platform : IExecutableModel
 
     public void Initialise(double time_s)
     {
-        var dateTime = DateTimeOrigin.GetDateTimeFromTime(time_s);
+        var timeStamp = SimulationClock.GetTimeStamp(time_s);
 
         var pi = PlatformSettings.PlatformStateInitial;
 
@@ -54,8 +54,9 @@ public class Platform : IExecutableModel
 
         PlatformState = new PlatformState
         {
-            DateTime = dateTime,
-            Time_s = time_s,
+            TimeStamp = timeStamp,
+            IsPrediction = false,
+            PredictionTime_s = 0.0,
             PlatformId = PlatformSettings.PlatformHeader.PlatformId,
             PlatformName = PlatformSettings.PlatformHeader.PlatformName,
             PositionLLA = positionLLA,
@@ -66,10 +67,10 @@ public class Platform : IExecutableModel
     }
 
     public void Update(double time_s)
-    {
-        var dateTime = DateTimeOrigin.GetDateTimeFromTime(time_s);
+    { 
+        var timeStamp = SimulationClock.GetTimeStamp(time_s);
 
-        PlatformState = PlatformModel.Update(dateTime, time_s, PlatformState);
+        PlatformState = PlatformModel.Update(timeStamp, PlatformState);
 
         var platformData = new PlatformData
         {
@@ -83,9 +84,9 @@ public class Platform : IExecutableModel
 
     public PlatformState Predict(double time_s)
     {
-        var dateTime = DateTimeOrigin.GetDateTimeFromTime(time_s);
+        var timeStamp = SimulationClock.GetTimeStamp(time_s);
 
-        var ps = PlatformModel.Predict(dateTime, time_s, PlatformState);
+        var ps = PlatformModel.Predict(timeStamp, PlatformState);
 
         return ps;
     }

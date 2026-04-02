@@ -1,4 +1,5 @@
-﻿using MissionEngineering.Math;
+﻿using MissionEngineering.Core;
+using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 
@@ -11,17 +12,17 @@ public class PlatformModel
         LLAOrigin = llaOrigin;
     }
 
-    public PlatformState Update(DateTime dateTime, double time_s, PlatformState platformState)
+    public PlatformState Update(SimulationTimeStamp timeStamp, PlatformState platformState)
     {
         // For update, we  use the actual acceleration in the TBA frame.
         var accelerationTBA = GetAccelerationTBA();
 
-        var ps = GeneratePlatformState(dateTime, time_s, platformState, accelerationTBA);
+        var ps = GeneratePlatformState(timeStamp, platformState, accelerationTBA, false);
 
         return ps;
     }
 
-    public PlatformState Predict(DateTime dateTime, double time_s, PlatformState platformState)
+    public PlatformState Predict(SimulationTimeStamp timeStamp, PlatformState platformState)
     {
         // For prediction, we assume zero acceleration in the TBA frame for simplicity.
         var accelerationTBA = new AccelerationTBA
@@ -29,18 +30,18 @@ public class PlatformModel
             AccelerationAxial_ms2 = 0.0,
             AccelerationLateral_ms2 = 0.0,
             AccelerationVertical_ms2 = 0.0
-        }; 
+        };
 
-        var ps = GeneratePlatformState(dateTime, time_s, platformState, accelerationTBA);
+        var ps = GeneratePlatformState(timeStamp, platformState, accelerationTBA, true);
 
         return ps;
     }
 
-    public PlatformState GeneratePlatformState(DateTime dateTime, double time_s, PlatformState platformState, AccelerationTBA accelerationTBA)
+    public PlatformState GeneratePlatformState(SimulationTimeStamp timeStamp, PlatformState platformState, AccelerationTBA accelerationTBA, bool isPredict)
     {
-        var deltaTime = time_s - platformState.Time_s;
+        var deltaTime_s = timeStamp.SimulationTime_s - platformState.TimeStamp.SimulationTime_s;
 
-        var dt = new DeltaTime(deltaTime);
+        var dt = new DeltaTime(deltaTime_s);
 
         var accelerationNED = GetAccelerationNED(accelerationTBA, platformState.Attitude);
 
@@ -52,10 +53,13 @@ public class PlatformModel
         var attitude = FrameConversions.GetAttitudeFromVelocityVector(platformState.VelocityNED);
         var attitudeRate = GetAttitudeRate(platformState.Attitude, attitude, dt);
 
+        var predictionTime_s = isPredict ? deltaTime_s : 0.0;
+
         var ps = platformState with
         {
-            DateTime = dateTime,
-            Time_s = time_s,
+            TimeStamp = timeStamp,
+            IsPrediction = isPredict,
+            PredictionTime_s = predictionTime_s,
             PositionLLA = positionLLA,
             PositionNED = positionNED,
             VelocityNED = velocityNED,

@@ -1,9 +1,8 @@
-﻿namespace MissionEngineering.Core
-{
-    public interface ISimulationClock
-    {
-        IDateTimeOrigin DateTimeOrigin { get; set; }
+﻿namespace MissionEngineering.Core;
 
-        SimulationModelTimeStamp GetTimeStamp(double time);
-    }
+public interface ISimulationClock
+{
+    IDateTimeOrigin DateTimeOrigin { get; set; }
+
+    SimulationTimeStamp GetTimeStamp(double time);
 }
