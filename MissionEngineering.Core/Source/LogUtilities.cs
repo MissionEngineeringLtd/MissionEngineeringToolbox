@@ -25,4 +25,13 @@ public class LogUtilities
 
         Log.Information(messageFull, propertyValues);
     }
+
+    public static void LogError(string message, int padding = 0, params object?[]? propertyValues)
+    {
+        var paddingString = new string(' ', padding);
+
+        var messageFull = paddingString + message;
+
+        Log.Error(messageFull, propertyValues);
+    }
 }

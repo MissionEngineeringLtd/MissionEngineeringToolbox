@@ -22,6 +22,34 @@ public static class DoubleExtensionMethods
             return result;
         }
 
+        public double PowerToDecibelsm()
+        {
+            var result = x.PowerToDecibels().DecibelsToDecibelsm();
+
+            return result;
+        }
+
+        public double DecibelsmToPower()
+        {
+            var result = x.DecibelsmToDecibels().DecibelsToPower();
+
+            return result;
+        }
+
+        public double DecibelsToDecibelsm()
+        {
+            var result = x + 30.0;
+        
+            return result;
+        }
+
+        public double DecibelsmToDecibels()
+        {
+            var result = x - 30.0;
+
+            return result;
+        }
+
         public double RadiansToDegrees()
         {
             var result = x * RadianToDegrees;
