@@ -12,11 +12,16 @@ public class SimulationData
 
     public List<PlatformData> PlatformDataAll { get; set; }
 
+    public List<PlatformStateRelative> PlatformDataRelativeAll { get; set; }
+
     public List<List<PlatformData>> PlatformDataPerPlatform { get; set; }
+
+    public List<List<PlatformStateRelative>> PlatformDataRelativePerPlatform { get; set; }
 
     public SimulationData(SimulationSettings simulationSettings)
     {
         SimulationSettings = simulationSettings;
         PlatformDataAll = new List<PlatformData>();
+        PlatformDataRelativeAll = new List<PlatformStateRelative>();
     }
 }

@@ -17,6 +17,10 @@ public class Simulation : ISimulation
 
     public List<IExecutableModel> SimulationModels { get; set; }
 
+    public List<Platform.Platform> Platforms { get; set; }
+
+    public List<PlatformRelative> RelativePlatforms { get; set; }
+
     public IDataRecorder DataRecorder { get; set; }
 
     private double nextDisplayTime;
@@ -66,16 +70,27 @@ public class Simulation : ISimulation
 
         DataRecorder.SimulationData.ScenarioSettings = ScenarioSettings;
 
+        Platforms = [];
+        RelativePlatforms = [];
         SimulationModels = [];
-
+        
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {
-            var platformModel = new Platform.Platform(SimulationClock, LLAOrigin)
+            var platform = new Platform.Platform(SimulationClock, LLAOrigin)
             {
                 PlatformSettings = platformSettings
             };
 
-            SimulationModels.Add(platformModel);
+            Platforms.Add(platform);
+            SimulationModels.Add(platform);
+        }
+
+        for (int i = 1; i < Platforms.Count; i++)
+        {
+            var relativePlatform = new PlatformRelative(Platforms[0], Platforms[i]);
+
+            RelativePlatforms.Add(relativePlatform);
+            SimulationModels.Add(relativePlatform);
         }
 
         InitialiseModels(time);
@@ -128,8 +143,10 @@ public class Simulation : ISimulation
         FinaliseModels(time);
 
         var platformDataAll = GeneratePlatformDataAll();
+        var platformDataRelativeAll = GeneratePlatformDataRelativeAll();
 
         DataRecorder.SimulationData.PlatformDataAll = platformDataAll;
+        DataRecorder.SimulationData.PlatformDataRelativeAll = platformDataRelativeAll;
 
         DataRecorder.Finalise(time);
 
@@ -181,9 +198,21 @@ public class Simulation : ISimulation
     {
         var platformDataAll = new List<PlatformData>();
 
-        foreach (var model in SimulationModels)
+        foreach (var platform in Platforms)
         {
-            platformDataAll.AddRange(((Platform.Platform)model).PlatformDataList);
+            platformDataAll.AddRange(platform.PlatformDataList);
+        }
+
+        return platformDataAll;
+    }
+
+    public List<PlatformStateRelative> GeneratePlatformDataRelativeAll()
+    {
+        var platformDataAll = new List<PlatformStateRelative>();
+
+        foreach (var relativePlatform in RelativePlatforms)
+        {
+            platformDataAll.AddRange(relativePlatform.PlatformStatesRelative);
         }
 
         return platformDataAll;

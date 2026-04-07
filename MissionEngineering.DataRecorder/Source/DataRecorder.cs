@@ -23,6 +23,7 @@ public class DataRecorder : IDataRecorder
     public void Finalise(double time)
     {
         CreatePlatformData();
+        CreatePlatformDataRelative();
 
         WriteData();
     }
@@ -65,6 +66,20 @@ public class DataRecorder : IDataRecorder
         }
     }
 
+    public void CreatePlatformDataRelative()
+    {
+        SimulationData.PlatformDataRelativePerPlatform = [];
+
+        var platformIds = SimulationData.PlatformDataRelativeAll.Select(s => s.PlatformIdTarget).Distinct();
+
+        foreach (var platformId in platformIds)
+        {
+            var platformDataRelative = SimulationData.PlatformDataRelativeAll.Where(s => s.PlatformIdTarget == platformId).ToList();
+
+            SimulationData.PlatformDataRelativePerPlatform.Add(platformDataRelative);
+        }
+    }
+
     public void WriteJsonData()
     {
         WriteSimulationSettingsToJson();
@@ -75,6 +90,9 @@ public class DataRecorder : IDataRecorder
     {
         WritePlatformDataAllToCsv();
         WritePlatformDataPerPlatformToCsv();
+
+        WriteRelativePlatformDataAllToCsv();
+        WriteRelativePlatformDataPerPlatformToCsv();
     }
 
     public void WriteSimdisData()
@@ -139,6 +157,40 @@ public class DataRecorder : IDataRecorder
             platformStateData.WriteToCsvFile(fileNameFull);
 
             index++;
+        }
+    }
+
+    public void WriteRelativePlatformDataAllToCsv()
+    {
+        var platformDataRelative = SimulationData.PlatformDataRelativeAll;
+
+        var platformStateDataRelative = platformDataRelative.ToList();
+
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformDataRelative_All.csv";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+
+        platformDataRelative.WriteToCsvFile(fileNameFull);
+    }
+
+    public void WriteRelativePlatformDataPerPlatformToCsv()
+    {
+        foreach (var platformDataRelative in SimulationData.PlatformDataRelativePerPlatform)
+        {
+            var first = platformDataRelative.First();
+
+            var originName = first.PlatformNameOrigin;
+            var targetName = first.PlatformNameTarget;
+
+            var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformDataRelative_O_{originName}_T_{targetName}.csv";
+
+            var fileNameFull = GetFileNameFull(fileName);
+
+            LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+
+            platformDataRelative.WriteToCsvFile(fileNameFull);
         }
     }
 
