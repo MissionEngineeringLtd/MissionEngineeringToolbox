@@ -7,6 +7,7 @@
   <Project Path="MissionEngineering.Math.Tests/MissionEngineering.Math.Tests.csproj" Id="c0b19818-3259-4e4d-b7aa-8230d17f4d3c" />
   <Project Path="MissionEngineering.Math/MissionEngineering.Math.csproj" />
   <Project Path="MissionEngineering.Platform/MissionEngineering.Platform.csproj" />
+  <Project Path="MissionEngineering.Radar.DetectionModel.App/MissionEngineering.Radar.DetectionModel.App.csproj" Id="537b73b4-c1d0-4233-a627-fb91d110741a" />
   <Project Path="MissionEngineering.Radar.DetectionModel.Console/MissionEngineering.Radar.DetectionModel.Console.csproj" Id="fb7a0cfb-1ba3-4d44-b404-d6eea610ff30" />
   <Project Path="MissionEngineering.Radar/MissionEngineering.Radar.csproj" Id="0391c2e8-2e59-4874-8f61-4c2c75179c25" />
   <Project Path="MissionEngineering.Sensor/MissionEngineering.Sensor.csproj" Id="fcf3ef9c-3852-4478-aefe-f8c28cc1d882" />

@@ -14,5 +14,8 @@
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageVersion Include="System.CommandLine.DragonFruit" Version="0.4.0-alpha.25306.1" />
+	<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.5" />
+	<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.5" PrivateAssets="all" />
+	<PackageVersion Include="MudBlazor" Version="9.2.0" />
   </ItemGroup>
 </Project>
