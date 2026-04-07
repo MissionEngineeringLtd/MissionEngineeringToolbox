@@ -150,4 +150,22 @@ public record VelocityNED
 
         return result;
     }
+
+    public Vector ToVector()
+    {
+        var result = new Vector(VelocityNorth_ms, VelocityEast_ms, VelocityDown_ms);
+
+        return result;
+    }
+
+    public VelocityNED Rotate(Matrix rotationMatrix)
+    {
+        var x = ToVector();
+
+        var y = rotationMatrix * x;
+
+        var result = new VelocityNED(y);
+
+        return result;
+    }
 }

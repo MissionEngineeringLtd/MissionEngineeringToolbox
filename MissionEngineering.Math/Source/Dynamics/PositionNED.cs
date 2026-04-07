@@ -50,10 +50,39 @@ public record PositionNED
         return result;
     }
 
+    public static PositionNED operator -(PositionNED left, PositionNED right)
+    {
+        var positionNorth_m = left.PositionNorth_m - right.PositionNorth_m;
+        var positionEast_m = left.PositionEast_m - right.PositionEast_m;
+        var positionDown_m = left.PositionDown_m - right.PositionDown_m;
+
+        var result = new PositionNED(positionNorth_m, positionEast_m, positionDown_m);
+
+        return result;
+    }
+
     public PositionLLA ToPositionLLA(PositionLLA positionLLAOrigin)
     {
         var positionLLA = MappingConversions.ConvertPositionNEDToPositionLLA(this, positionLLAOrigin);
 
         return positionLLA;
+    }
+
+    public Vector ToVector()
+    {
+        var result = new Vector(PositionNorth_m, PositionEast_m, PositionDown_m);
+
+        return result;
+    }
+
+    public PositionNED Rotate(Matrix rotationMatrix)
+    {
+        var x = ToVector();
+
+        var y = rotationMatrix * x;
+
+        var result = new PositionNED(y);
+
+        return result;
     }
 }
