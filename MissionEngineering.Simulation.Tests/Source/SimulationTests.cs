@@ -20,6 +20,6 @@ public sealed class SimulationTests
         simulationHarness.Run();
 
         // Assert
-        Assert.HasCount(2, simulationHarness.Simulation.SimulationModels);
+        Assert.HasCount(3, simulationHarness.Simulation.SimulationModels);
     }
 }
