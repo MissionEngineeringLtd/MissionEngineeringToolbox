@@ -15,7 +15,7 @@ namespace MissionEngineering.Platform.Tests
             var dateTimeOrigin = new DateTimeOrigin(startDateTime);
 
             var simulationClock = new SimulationClock(dateTimeOrigin);
-  
+
             var timeStamp = simulationClock.GetTimeStamp(10.0);
 
             var originPositionNED = new PositionNED { PositionNorth_m = 1000.0, PositionEast_m = 0.0, PositionDown_m = 0.0 };

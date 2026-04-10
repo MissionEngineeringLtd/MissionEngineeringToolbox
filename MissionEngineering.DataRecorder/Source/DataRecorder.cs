@@ -1,5 +1,4 @@
-﻿using MathNet.Numerics;
-using MissionEngineering.Core;
+﻿using MissionEngineering.Core;
 using MissionEngineering.Simdis;
 using MissionEngineering.Simulation;
 

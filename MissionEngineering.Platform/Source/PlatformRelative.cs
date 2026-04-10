@@ -1,5 +1,4 @@
 ﻿using MissionEngineering.Core;
-using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 
@@ -19,7 +18,7 @@ public class PlatformRelative : IExecutableModel
 
         PlatformTarget = platformTarget;
 
-       PlatformStatesRelative = [];
+        PlatformStatesRelative = [];
     }
 
     public void Initialise(double time_s)

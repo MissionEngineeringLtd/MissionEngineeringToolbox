@@ -1,6 +1,4 @@
-﻿using System.Security.AccessControl;
-
-namespace MissionEngineering.Math;
+﻿namespace MissionEngineering.Math;
 
 public partial class Vector
 {

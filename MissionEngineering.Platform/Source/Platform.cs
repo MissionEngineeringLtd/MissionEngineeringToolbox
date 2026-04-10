@@ -60,7 +60,7 @@ public class Platform : IExecutableModel
             IsPrediction = false,
             LastUpdateTime_s = time_s,
             PredictionTime_s = time_s,
-            PredictionTimeDelta_s = 0.0, 
+            PredictionTimeDelta_s = 0.0,
             PlatformId = PlatformSettings.PlatformHeader.PlatformId,
             PlatformName = PlatformSettings.PlatformHeader.PlatformName,
             PositionLLA = positionLLA,
@@ -71,7 +71,7 @@ public class Platform : IExecutableModel
     }
 
     public void Update(double time_s)
-    { 
+    {
         var timeStamp = SimulationClock.GetTimeStamp(time_s);
 
         PlatformState = PlatformModel.Update(timeStamp, PlatformState);

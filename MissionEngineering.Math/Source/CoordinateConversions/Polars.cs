@@ -24,7 +24,6 @@ public record Polars
 
     public double ElevationRate_degs => ElevationRate_rads.RadiansToDegrees();
 
-
     public double GroundRange => Range_m * Cos(ElevationAngle_rad);
 
     public Polars()

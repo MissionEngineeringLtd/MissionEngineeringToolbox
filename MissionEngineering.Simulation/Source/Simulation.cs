@@ -2,7 +2,6 @@
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
-using MissionEngineering.Simulation.Messages;
 
 namespace MissionEngineering.Simulation;
 
@@ -74,7 +73,7 @@ public class Simulation : ISimulation
         Platforms = [];
         RelativePlatforms = [];
         SimulationModels = [];
-        
+
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {
             var platform = new Platform.Platform(SimulationClock, LLAOrigin)
@@ -138,7 +137,7 @@ public class Simulation : ISimulation
     }
 
     public void RecordData(double time)
-    { 
+    {
         var sd = DataRecorder.SimulationData;
 
         foreach (var platform in Platforms)

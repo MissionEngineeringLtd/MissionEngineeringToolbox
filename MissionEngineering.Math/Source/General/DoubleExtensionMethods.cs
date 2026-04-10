@@ -39,7 +39,7 @@ public static class DoubleExtensionMethods
         public double DecibelsToDecibelsm()
         {
             var result = x + 30.0;
-        
+
             return result;
         }
 

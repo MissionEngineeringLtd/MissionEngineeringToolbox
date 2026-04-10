@@ -70,7 +70,6 @@ namespace MissionEngineering.Track.Tests
                 PredictionTimeStep = 0.1,
                 PlatformStateSensor = platformStateSensor,
                 PlatformStateTarget = platformStateTarget,
-                 
             };
 
             // Act
