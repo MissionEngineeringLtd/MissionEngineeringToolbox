@@ -2,9 +2,9 @@
 
 namespace MissionEngineering.Sensor;
 
-public class DetectionLocation
+public class SensorTargetLocation
 {
-    public DetectionLocationType LocationType { get; set; }
+    public SensorTargetLocationType TargetLocationType { get; set; }
 
     public bool IsPositionLLAValid { get; set; }
 
@@ -13,6 +13,8 @@ public class DetectionLocation
     public bool IsVelocityNEDValid { get; set; }
 
     public bool IsRangeValid { get; set; }
+
+    public bool IsRangeRateValid { get; set; }
 
     public bool IsAzimuthValid { get; set; }
 
@@ -28,9 +30,9 @@ public class DetectionLocation
 
     public double Range_m { get; set; }
 
-    public double RangeRate_m { get; set; }
+    public double RangeRate_ms { get; set; }
 
-    public double Azimuth_deg { get; set; }
+    public double AzimuthAngle_deg { get; set; }
 
-    public double Elevation_deg { get; set; }
+    public double ElevationAngle_deg { get; set; }
 }

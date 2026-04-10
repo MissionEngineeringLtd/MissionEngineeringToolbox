@@ -1,6 +1,6 @@
 ﻿namespace MissionEngineering.Sensor;
 
-public enum DetectionLocationType
+public enum SensorTargetLocationType
 {
     Undefined = 0,
     Geolocation = 1,

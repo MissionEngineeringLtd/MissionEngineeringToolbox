@@ -16,6 +16,15 @@ public record Polars
 
     public double ElevationRate_rads { get; init; }
 
+    public double AzimuthAngle_deg => AzimuthAngle_rad.RadiansToDegrees();
+
+    public double AzimuthRate_degs => AzimuthRate_rads.RadiansToDegrees();
+
+    public double ElevationAngle_deg => ElevationAngle_rad.RadiansToDegrees();
+
+    public double ElevationRate_degs => ElevationRate_rads.RadiansToDegrees();
+
+
     public double GroundRange => Range_m * Cos(ElevationAngle_rad);
 
     public Polars()

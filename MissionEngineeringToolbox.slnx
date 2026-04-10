@@ -19,4 +19,6 @@
   <Project Path="MissionEngineering.Simulation/MissionEngineering.Simulation.csproj" Id="a3bb62a5-98d3-4012-9b55-0ed5cec29c4f" />
   <Project Path="MissionEngineering.Task.Tests/MissionEngineering.Task.Tests.csproj" Id="503e63c2-f4d2-4979-9d93-9edf17ffc6e7" />
   <Project Path="MissionEngineering.Task/MissionEngineering.Task.csproj" Id="fe0d813e-59ad-4ff7-8e70-84c00eae4da6" />
+  <Project Path="MissionEngineering.Track.Tests/MissionEngineering.Track.Tests.csproj" Id="6ebb69cd-553c-4d0d-aeab-7996f9b07ff3" />
+  <Project Path="MissionEngineering.Track/MissionEngineering.Track.csproj" Id="d2bfbc1d-0819-4be4-837b-0ea2763c10b2" />
 </Solution>

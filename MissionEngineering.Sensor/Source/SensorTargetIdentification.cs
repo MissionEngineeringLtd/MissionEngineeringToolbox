@@ -2,7 +2,7 @@
 
 namespace MissionEngineering.Sensor;
 
-public class DetectionIdentification
+public class SensorTargetIdentification
 {
     public bool IsPositiveId { get; set; }
 
