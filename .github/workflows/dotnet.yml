@@ -41,3 +41,4 @@ jobs:
                /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Platform.Tests/coverage.info
                /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Simulation.Tests/coverage.info
                /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Task.Tests/coverage.info
+               /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Track.Tests/coverage.info
