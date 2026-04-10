@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
     <ProjectReference Include="..\MissionEngineering.Math\MissionEngineering.Math.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Simulation.Messages\MissionEngineering.Simulation.Messages.csproj" />
   </ItemGroup>
 
 </Project>

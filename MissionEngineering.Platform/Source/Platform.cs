@@ -15,6 +15,8 @@ public class Platform : IExecutableModel
 
     public PlatformState PlatformState { get; set; }
 
+    public PlatformData PlatformData { get; set; }
+
     public List<PlatformData> PlatformDataList { get; set; }
 
     public Platform(ISimulationClock simulationClock, ILLAOrigin llaOrigin)
@@ -56,7 +58,9 @@ public class Platform : IExecutableModel
         {
             TimeStamp = timeStamp,
             IsPrediction = false,
-            PredictionTime_s = 0.0,
+            LastUpdateTime_s = time_s,
+            PredictionTime_s = time_s,
+            PredictionTimeDelta_s = 0.0, 
             PlatformId = PlatformSettings.PlatformHeader.PlatformId,
             PlatformName = PlatformSettings.PlatformHeader.PlatformName,
             PositionLLA = positionLLA,
@@ -72,14 +76,14 @@ public class Platform : IExecutableModel
 
         PlatformState = PlatformModel.Update(timeStamp, PlatformState);
 
-        var platformData = new PlatformData
+        PlatformData = new PlatformData
         {
             PlatformHeader = PlatformSettings.PlatformHeader,
             PlatformHeaderSimdis = PlatformSettings.PlatformHeaderSimdis,
             PlatformState = PlatformState
         };
 
-        PlatformDataList.Add(platformData);
+        PlatformDataList.Add(PlatformData);
     }
 
     public PlatformState Predict(double time_s)

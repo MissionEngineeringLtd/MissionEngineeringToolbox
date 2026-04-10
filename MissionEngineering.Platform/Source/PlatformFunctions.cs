@@ -21,13 +21,17 @@ public static class PlatformFunctions
         var attitude = FrameConversions.GetAttitudeFromVelocityVector(platformState.VelocityNED);
         var attitudeRate = GetAttitudeRate(platformState.Attitude, attitude, dt);
 
-        var predictionTime_s = isPredict ? deltaTime_s : 0.0;
+        var lastUpdateTime_s = platformState.TimeStamp.SimulationTime_s;
+        var predictionTime_s = timeStamp.SimulationTime_s;
+        var predictionTimeDelta_s = predictionTime_s - lastUpdateTime_s;
 
         var ps = platformState with
         {
             TimeStamp = timeStamp,
             IsPrediction = isPredict,
+            LastUpdateTime_s = platformState.TimeStamp.SimulationTime_s,
             PredictionTime_s = predictionTime_s,
+            PredictionTimeDelta_s = predictionTimeDelta_s,
             PositionLLA = positionLLA,
             PositionNED = positionNED,
             VelocityNED = velocityNED,
@@ -46,9 +50,9 @@ public static class PlatformFunctions
         {
             return new AttitudeRate
             {
-                HeadingAngleRate_degs = 0.0,
-                PitchAngleRate_degs = 0.0,
-                BankAngleRate_degs = 0.0
+                HeadingRate_degs = 0.0,
+                PitchRate_degs = 0.0,
+                BankRate_degs = 0.0
             };
         }
 
@@ -78,7 +82,7 @@ public static class PlatformFunctions
 
         var relativePolarsLOS = CoordinateConversions.CartesiansToPolars(relativePositionLOS, relativeVelocityLOS);
 
-        var (presentationAngleAzimuth_deg, presentationAngleElevation_deg) = CoordinateConversions.CalculatePresentationAngles(relativeVelocityLOS);
+        var (aspectAngleAzimuth_deg, aspectAngleElevation_deg) = CoordinateConversions.CalculateAspectAngles(relativeVelocityLOS);
 
         var platformStateRelative = new PlatformStateRelative
         {
@@ -93,8 +97,8 @@ public static class PlatformFunctions
             RelativeVelocityLOS = relativeVelocityLOS,
             RelativePolarsNED = relativePolarsNED,
             RelativePolarsLOS = relativePolarsLOS,
-            PresentationAngleAzimuth_deg = presentationAngleAzimuth_deg,
-            PresentationAngleElevation_deg = presentationAngleElevation_deg
+            AspectAngleAzimuth_deg = aspectAngleAzimuth_deg,
+            AspectAngleElevation_deg = aspectAngleElevation_deg
         };
 
         return platformStateRelative;

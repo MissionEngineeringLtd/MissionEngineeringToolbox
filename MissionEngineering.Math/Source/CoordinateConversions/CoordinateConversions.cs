@@ -32,14 +32,14 @@ public static class CoordinateConversions
         return (positionNED, velocityNED);
     }
 
-    public static (double, double) CalculatePresentationAngles(VelocityNED relativeVelocityLOS)
+    public static (double, double) CalculateAspectAngles(VelocityNED relativeVelocityLOS)
     {
         var relativeVelocityLOSAttitude = FrameConversions.GetAttitudeFromVelocityVector(relativeVelocityLOS);
 
-        var presentationAngleAzimuth_deg = (180.0 - relativeVelocityLOSAttitude.HeadingAngle_deg).ConstrainAnglePlusMinus180();
-        var presentationAngleElevation_deg = -relativeVelocityLOSAttitude.PitchAngle_deg;
+        var aspectAngleAzimuth_deg = (180.0 - relativeVelocityLOSAttitude.HeadingAngle_deg).ConstrainAnglePlusMinus180();
+        var aspectAngleElevation_deg = -relativeVelocityLOSAttitude.PitchAngle_deg;
 
-        return (presentationAngleAzimuth_deg, presentationAngleElevation_deg);
+        return (aspectAngleAzimuth_deg, aspectAngleElevation_deg);
     }
 
     public static Polars CartesiansToPolars(Cartesians cartesians)

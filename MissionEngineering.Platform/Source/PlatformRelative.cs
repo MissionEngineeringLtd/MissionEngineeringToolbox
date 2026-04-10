@@ -9,6 +9,8 @@ public class PlatformRelative : IExecutableModel
 
     public Platform PlatformTarget { get; set; }
 
+    public PlatformStateRelative PlatformStateRelative { get; set; }
+
     public List<PlatformStateRelative> PlatformStatesRelative { get; set; }
 
     public PlatformRelative(Platform platformOrigin, Platform platformTarget)
@@ -29,9 +31,9 @@ public class PlatformRelative : IExecutableModel
         var platformStateOrigin = PlatformOrigin.PlatformState;
         var platformStateTarget = PlatformTarget.PlatformState;
 
-        var platformStateRelative = PlatformFunctions.GeneratePlatformStateRelative(platformStateOrigin, platformStateTarget);
+        PlatformStateRelative = PlatformFunctions.GeneratePlatformStateRelative(platformStateOrigin, platformStateTarget);
 
-        PlatformStatesRelative.Add(platformStateRelative);
+        PlatformStatesRelative.Add(PlatformStateRelative);
     }
 
     public void Finalise(double time_s)

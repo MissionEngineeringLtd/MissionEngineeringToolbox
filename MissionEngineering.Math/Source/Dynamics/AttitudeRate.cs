@@ -2,20 +2,20 @@
 
 public record AttitudeRate
 {
-    public double HeadingAngleRate_degs { get; init; }
+    public double HeadingRate_degs { get; init; }
 
-    public double PitchAngleRate_degs { get; init; }
+    public double PitchRate_degs { get; init; }
 
-    public double BankAngleRate_degs { get; init; }
+    public double BankRate_degs { get; init; }
 
     public AttitudeRate()
     {
     }
 
-    public AttitudeRate(double headingAngleRate_degs, double pitchAngleRate_degs, double bankAngleRate_degs)
+    public AttitudeRate(double headingRate_degs, double pitchRate_degs, double bankRate_degs)
     {
-        HeadingAngleRate_degs = headingAngleRate_degs;
-        PitchAngleRate_degs = pitchAngleRate_degs;
-        BankAngleRate_degs = bankAngleRate_degs;
+        HeadingRate_degs = headingRate_degs;
+        PitchRate_degs = pitchRate_degs;
+        BankRate_degs = bankRate_degs;
     }
 }

@@ -2,6 +2,7 @@
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
+using MissionEngineering.Simulation.Messages;
 
 namespace MissionEngineering.Simulation;
 
@@ -133,6 +134,34 @@ public class Simulation : ISimulation
     public void Update(double time)
     {
         UpdateModels(time);
+        RecordData(time);
+    }
+
+    public void RecordData(double time)
+    { 
+        var sd = DataRecorder.SimulationData;
+
+        foreach (var platform in Platforms)
+        {
+            sd.PlatformDataAll.Add(platform.PlatformData);
+
+            var psm = PlatformMessageConversions.ConvertToPlatformStateMessage(platform.PlatformState);
+
+            sd.PlatformStateMessagesAll.Add(psm);
+
+            sd.SimulationMessages.Add(psm);
+        }
+
+        foreach (var relativePlatform in RelativePlatforms)
+        {
+            sd.PlatformDataRelativeAll.Add(relativePlatform.PlatformStateRelative);
+
+            var psrm = PlatformMessageConversions.ConvertToPlatformStateRelativeMessage(relativePlatform.PlatformStateRelative);
+
+            sd.PlatformStateRelativeMessagesAll.Add(psrm);
+
+            sd.SimulationMessages.Add(psrm);
+        }
     }
 
     public void Finalise(double time)
@@ -141,12 +170,6 @@ public class Simulation : ISimulation
         LogUtilities.LogInformation("");
 
         FinaliseModels(time);
-
-        var platformDataAll = GeneratePlatformDataAll();
-        var platformDataRelativeAll = GeneratePlatformDataRelativeAll();
-
-        DataRecorder.SimulationData.PlatformDataAll = platformDataAll;
-        DataRecorder.SimulationData.PlatformDataRelativeAll = platformDataRelativeAll;
 
         DataRecorder.Finalise(time);
 
@@ -192,30 +215,6 @@ public class Simulation : ISimulation
         {
             model.Finalise(time);
         }
-    }
-
-    public List<PlatformData> GeneratePlatformDataAll()
-    {
-        var platformDataAll = new List<PlatformData>();
-
-        foreach (var platform in Platforms)
-        {
-            platformDataAll.AddRange(platform.PlatformDataList);
-        }
-
-        return platformDataAll;
-    }
-
-    public List<PlatformStateRelative> GeneratePlatformDataRelativeAll()
-    {
-        var platformDataAll = new List<PlatformStateRelative>();
-
-        foreach (var relativePlatform in RelativePlatforms)
-        {
-            platformDataAll.AddRange(relativePlatform.PlatformStatesRelative);
-        }
-
-        return platformDataAll;
     }
 
     public void CreateZipFile(bool isWriteToLog, bool isWriteData)

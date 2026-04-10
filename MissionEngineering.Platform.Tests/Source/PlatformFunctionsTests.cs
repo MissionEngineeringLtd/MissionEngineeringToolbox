@@ -52,7 +52,7 @@ namespace MissionEngineering.Platform.Tests
             // Assert:
             var expectedResult = -135.0;
 
-            Assert.AreEqual(expectedResult, relativeState.PresentationAngleAzimuth_deg, 1.0e-8);
+            Assert.AreEqual(expectedResult, relativeState.AspectAngleAzimuth_deg, 1.0e-8);
         }
     }
 }

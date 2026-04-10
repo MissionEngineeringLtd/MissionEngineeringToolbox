@@ -7,13 +7,17 @@ public record PlatformState
 {
     public SimulationTimeStamp TimeStamp { get; set; }
 
-    public bool IsPrediction { get; set; }
-
-    public double PredictionTime_s { get; set; }
-
     public int PlatformId { get; set; }
 
     public string PlatformName { get; set; }
+
+    public bool IsPrediction { get; set; }
+
+    public double LastUpdateTime_s { get; set; }
+     
+    public double PredictionTime_s { get; set; }
+
+    public double PredictionTimeDelta_s { get; set; }
 
     public PositionLLA PositionLLA { get; set; }
 

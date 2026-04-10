@@ -30,7 +30,7 @@ public class PlatformStateRelative
 
     public Polars RelativePolarsLOS { get; set; }
 
-    public double PresentationAngleAzimuth_deg { get; set; }
+    public double AspectAngleAzimuth_deg { get; set; }
 
-    public double PresentationAngleElevation_deg { get; set; }
+    public double AspectAngleElevation_deg { get; set; }
 }
