@@ -21,7 +21,7 @@ public static class RadarRangeEquationFunctions
         var i = inputs;
         var w = inputs.WaveformParameters;
 
-        var noisePower_W = CalculateNoisePower_W(w.PulseBandwidth_Hz, i.ReceiverNoiseFigure);
+        var noisePower_W = CalculateNoisePower_W(w.PulseBandwidth_Hz, i.ReceiverNoiseFigure_dB);
 
         return noisePower_W;
     }

@@ -26,12 +26,12 @@ public static class PlatformSettingsFactory
             },
             PlatformStateInitial = new PlatformStateInitial
             {
-                PositionNorth_m = 1000.0,
-                PositionEast_m = 2000.0,
-                Altitude_m = 2000.0,
+                PositionNorth_m = 0.0,
+                PositionEast_m = 0.0,
+                Altitude_m = 5000.0,
                 TotalSpeed_ms = 250.0,
-                HeadingAngle_deg = 45.0,
-                PitchAngle_deg = 5.0
+                HeadingAngle_deg = 0.0,
+                PitchAngle_deg = 0.0
             }
         };
 
@@ -60,14 +60,15 @@ public static class PlatformSettingsFactory
                 PlatformInterpolate = "1",
                 PlatformScaleLevel = 2.5
             },
+
             PlatformStateInitial = new PlatformStateInitial
             {
-                PositionNorth_m = 5000.0,
-                PositionEast_m = 1000.0,
+                PositionNorth_m = 40000.0,
+                PositionEast_m = -10000.0,
                 Altitude_m = 5000.0,
                 TotalSpeed_ms = 250.0,
-                HeadingAngle_deg = -30.0,
-                PitchAngle_deg = -3.0
+                HeadingAngle_deg = 180.0,
+                PitchAngle_deg = 0.0
             }
         };
 

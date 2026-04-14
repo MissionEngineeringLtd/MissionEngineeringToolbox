@@ -4,30 +4,16 @@ namespace MissionEngineering.Radar;
 
 public class Program
 {
-    public static string InputFileName
-    {
-        get; set;
-    }
+    public static string InputFileName { get; set; }
 
-    public static string OutputFileName
-    {
-        get; set;
-    }
+    public static string OutputFileName { get; set; }
 
-    public static bool IsCreateExampleFiles
-    {
-        get; set;
-    }
+    public static bool IsCreateExampleFiles { get; set; }
 
-    public static RadarDetectionModelHarnessInputs Inputs
-    {
-        get; set;
-    }
+    public static RadarDetectionModelHarnessInputs Inputs { get; set; }
 
-    public static RadarDetectionModelHarness Harness
-    {
-        get; set;
-    }
+    public static RadarDetectionModelHarness Harness { get; set; }
+
 
     /// <summary>
     ///
@@ -66,7 +52,7 @@ public class Program
 
     private static void CreateLogger()
     {
-        var logFileName = @"C:\temp\RadarToolbox\RadarDetectionModel\RadarDetectionModel.log";
+        var logFileName = @"C:\temp\MissionEngineeringToolbox\RadarDetectionModel\RadarDetectionModel.log";
 
         LogUtilities.CreateLogger(logFileName);
     }

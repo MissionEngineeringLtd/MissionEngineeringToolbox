@@ -245,5 +245,12 @@ public static class DoubleExtensionMethods
 
             return result;
         }
+
+        public double ConstrainAnglePlusMinus90()
+        {
+            var result = MathFunctions.ConstrainAnglePlusMinus90(x);
+
+            return result;
+        }
     }
 }

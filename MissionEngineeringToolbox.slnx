@@ -11,6 +11,8 @@
   <Project Path="MissionEngineering.Radar.DetectionModel.App/MissionEngineering.Radar.DetectionModel.App.csproj" Id="537b73b4-c1d0-4233-a627-fb91d110741a" />
   <Project Path="MissionEngineering.Radar.DetectionModel.Console/MissionEngineering.Radar.DetectionModel.Console.csproj" Id="fb7a0cfb-1ba3-4d44-b404-d6eea610ff30" />
   <Project Path="MissionEngineering.Radar/MissionEngineering.Radar.csproj" Id="0391c2e8-2e59-4874-8f61-4c2c75179c25" />
+  <Project Path="MissionEngineering.Scanner.Tests/MissionEngineering.Scanner.Tests.csproj" Id="07e9e63d-bebb-4e3d-9c17-5ca38371497b" />
+  <Project Path="MissionEngineering.Scanner/MissionEngineering.Scanner.csproj" Id="c0a8b0f1-1e5a-4396-b06e-5a8621efeed5" />
   <Project Path="MissionEngineering.Sensor/MissionEngineering.Sensor.csproj" Id="fcf3ef9c-3852-4478-aefe-f8c28cc1d882" />
   <Project Path="MissionEngineering.Simdis/MissionEngineering.Simdis.csproj" Id="072d857f-8e15-4a77-a7d3-72e00e33b0b9" />
   <Project Path="MissionEngineering.Simulation.Console/MissionEngineering.Simulation.Console.csproj" Id="c8664854-2cfe-4408-9da0-71d30e8e65d3" />

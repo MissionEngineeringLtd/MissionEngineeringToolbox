@@ -73,6 +73,23 @@ public static class MathFunctions
         return result;
     }
 
+    public static double ConstrainAnglePlusMinus90(double x)
+    {
+        var result = x;
+
+        if (x > 90.0)
+        {
+            result -= 90.0;
+        }
+
+        if (x < -90.0)
+        {
+            result += 90.0;
+        }
+
+        return result;
+    }
+
     public static double LimitWithinRange(double min, double max, double value)
     {
         if (value < min)
