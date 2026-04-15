@@ -4,7 +4,7 @@ namespace MissionEngineering.Platform;
 
 public static class PlatformMessageConversions
 {
-    public static PlatformStateMessage ConvertToPlatformStateMessage(this PlatformState platformState)
+    public static PlatformStateMessage ConvertToPlatformStateMessage(PlatformState platformState)
     {
         var header = new SimulationMessageHeader
         {
@@ -54,7 +54,7 @@ public static class PlatformMessageConversions
         return platformStateMessage;
     }
 
-    public static PlatformStateRelativeMessage ConvertToPlatformStateRelativeMessage(this PlatformStateRelative platformStateRelative)
+    public static PlatformStateRelativeMessage ConvertToPlatformStateRelativeMessage(PlatformStateRelative platformStateRelative)
     {
         var header = new SimulationMessageHeader
         {

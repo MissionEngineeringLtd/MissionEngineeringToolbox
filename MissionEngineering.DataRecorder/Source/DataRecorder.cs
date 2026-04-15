@@ -119,13 +119,15 @@ public class DataRecorder : IDataRecorder
 
     public void WriteCsvData()
     {
-        WriteSimulationMessagesAllToCsv();
-
         WritePlatformStateAllToCsv();
         WritePlatformStatePerPlatformToCsv();
 
         WritePlatformStateRelativeAllToCsv();
         WritePlatformStateRelativePerPlatformToCsv();
+
+        WriteSensorReportsAllToCsv();
+
+        WriteSimulationMessagesAllToCsv();
 
         WritePlatformStateMessagesAllToCsv();
         WritePlatformStateMessagesPerPlatformToCsv();
@@ -133,7 +135,7 @@ public class DataRecorder : IDataRecorder
         WritePlatformStateRelativeMessagesAllToCsv();
         WritePlatformStateRelativeMessagesPerPlatformToCsv();
 
-        WriteSensorReportsAllToCsv();
+        WriteSensorReportMessagesAllToCsv();
     }
 
     public void WriteSimdisData()
@@ -314,6 +316,19 @@ public class DataRecorder : IDataRecorder
         var data = SimulationData.SensorReportsAll;
 
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SensorReports_All.csv";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+
+        data.WriteToCsvFile(fileNameFull);
+    }
+
+    public void WriteSensorReportMessagesAllToCsv()
+    {
+        var data = SimulationData.SensorReportMessagesAll;
+
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_Messages_SensorReports_All.csv";
 
         var fileNameFull = GetFileNameFull(fileName);
 

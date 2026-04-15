@@ -2,6 +2,7 @@
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
+using MissionEngineering.Sensor;
 using System.Runtime.InteropServices;
 
 namespace MissionEngineering.Simulation;
@@ -184,6 +185,15 @@ public class Simulation : ISimulation
         foreach (var sensor in Sensors)
         {
             sd.SensorReportsAll.AddRange(sensor.SensorReports);
+
+            foreach (var sensorReport in sensor.SensorReports)
+            {
+                var srm = SensorMessageConversions.ConvertToSensorReportMessage(sensorReport);
+
+                sd.SensorReportMessagesAll.Add(srm);
+
+                sd.SimulationMessages.Add(srm);
+            }
         }
     }
 

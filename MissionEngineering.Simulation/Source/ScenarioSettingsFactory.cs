@@ -15,7 +15,7 @@ public static class ScenarioSettingsFactory
             DateTimeOrigin = dateTimeOrigin,
             TimeStart = 10.0,
             TimeEnd = 200.0,
-            TimeStep = 0.1
+            TimeStep = 0.05
         };
 
         var llaOrigin = new PositionLLA()

@@ -32,6 +32,8 @@ public class SimulationData
 
     public List<SensorReport> SensorReportsAll { get; set; }
 
+    public List<SensorReportMessage> SensorReportMessagesAll { get; set; }
+
     public SimulationData(SimulationSettings simulationSettings)
     {
         SimulationSettings = simulationSettings;
@@ -41,5 +43,6 @@ public class SimulationData
         PlatformStateMessagesAll = [];
         PlatformStateRelativeMessagesAll = [];
         SensorReportsAll = [];
+        SensorReportMessagesAll = [];
     }
 }

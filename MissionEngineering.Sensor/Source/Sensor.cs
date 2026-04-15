@@ -114,18 +114,24 @@ public class Sensor : ISensor
 
         var sensorReport = new SensorReport()
         {
-            SensorPlatformState = sensorPlatform.PlatformState,
             SensorReportHeader = new SensorReportHeader()
             {
-                SensorId = SensorSettings.SensorId,
+                TimeStamp = timeStamp,
                 SensorPlatformId = SensorSettings.PlatformId,
-                SensorReportId = SensorReportId,
-                SensorType = SensorSettings.SensorType,
+                SensorPlatformName = sensorPlatform.PlatformState.PlatformName,
                 TargetPlatformId = targetPlatform.PlatformState.PlatformId,
+                TargetPlatformName = targetPlatform.PlatformState.PlatformName,
+                SensorId = SensorSettings.SensorId,
+                SensorName = SensorSettings.SensorName,
+                SensorType = SensorSettings.SensorType,
+                SensorReportId = SensorReportId,
             },
+            SensorPlatformState = sensorPlatform.PlatformState,
             SensorState = SensorState,
+            TargetIdentification = new SensorTargetIdentification(),
             TargetLocation = new SensorTargetLocation()
             {
+                TargetLocationType = SensorTargetLocationType.Geolocation,
                 IsRangeValid = true,
                 IsRangeRateValid = true,
                 IsAzimuthValid = true,
