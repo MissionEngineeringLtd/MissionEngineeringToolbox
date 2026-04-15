@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Platform;
+using MissionEngineering.Sensor;
 using MissionEngineering.Simulation.Messages;
 
 namespace MissionEngineering.Simulation;
@@ -29,6 +30,8 @@ public class SimulationData
 
     public List<List<PlatformStateRelativeMessage>> PlatformStateRelativeMessagesPerPlatform { get; set; }
 
+    public List<SensorReport> SensorReportsAll { get; set; }
+
     public SimulationData(SimulationSettings simulationSettings)
     {
         SimulationSettings = simulationSettings;
@@ -37,5 +40,6 @@ public class SimulationData
         PlatformDataRelativeAll = [];
         PlatformStateMessagesAll = [];
         PlatformStateRelativeMessagesAll = [];
+        SensorReportsAll = [];
     }
 }

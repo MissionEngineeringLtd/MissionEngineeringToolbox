@@ -1,6 +1,10 @@
-﻿namespace MissionEngineering.Sensor;
+﻿using MissionEngineering.Core;
 
-public interface ISensor
+namespace MissionEngineering.Sensor;
+
+public interface ISensor : IExecutableModel
 {
-    List<SensorReport> GenerateSensorReports(double time_s);
+    List<SensorReport> SensorReports { get; set; }
+
+    void GenerateSensorReports(double time_s);
 }

@@ -35,13 +35,13 @@ namespace MissionEngineering.Scanner.Tests
             };
 
             var scannerHarness = new ScannerHarness()
-            { 
+            {
                 SimulationClock = simulationClock,
                 ScanSettings = scanSettings,
                 PlatformState = platformState,
-                 StartTime_s = 10.0,
-                 EndTime_s = 100.0,
-                 TimeStep_s = 0.1
+                StartTime_s = 10.0,
+                EndTime_s = 100.0,
+                TimeStep_s = 0.1
             };
 
             // Act:

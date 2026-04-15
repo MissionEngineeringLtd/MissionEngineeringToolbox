@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MissionEngineering.Math\MissionEngineering.Math.csproj" />
     <ProjectReference Include="..\MissionEngineering.Platform\MissionEngineering.Platform.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Scanner\MissionEngineering.Scanner.csproj" />
   </ItemGroup>
 
 </Project>

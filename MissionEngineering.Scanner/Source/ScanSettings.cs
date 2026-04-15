@@ -8,6 +8,10 @@ public class ScanSettings
 
     public string PlatformName { get; set; }
 
+    public int SensorId { get; set; }
+
+    public string SensorName { get; set; }
+
     public int ScannerId { get; set; }
 
     public string ScannerName { get; set; }

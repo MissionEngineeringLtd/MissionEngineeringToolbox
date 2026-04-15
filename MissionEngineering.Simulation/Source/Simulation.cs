@@ -2,6 +2,7 @@
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
+using System.Runtime.InteropServices;
 
 namespace MissionEngineering.Simulation;
 
@@ -20,6 +21,8 @@ public class Simulation : ISimulation
     public List<Platform.Platform> Platforms { get; set; }
 
     public List<PlatformRelative> RelativePlatforms { get; set; }
+
+    public List<Sensor.Sensor> Sensors { get; set; }
 
     public IDataRecorder DataRecorder { get; set; }
 
@@ -72,6 +75,7 @@ public class Simulation : ISimulation
 
         Platforms = [];
         RelativePlatforms = [];
+        Sensors = [];
         SimulationModels = [];
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
@@ -91,6 +95,21 @@ public class Simulation : ISimulation
 
             RelativePlatforms.Add(relativePlatform);
             SimulationModels.Add(relativePlatform);
+        }
+
+        foreach (var sensorSettings in ScenarioSettings.SensorSettingsList)
+        {
+            var sensorPlatform = Platforms.Where(s => s.PlatformSettings.PlatformHeader.PlatformId == sensorSettings.PlatformId).First();
+
+            var sensor = new Sensor.Sensor(SimulationClock)
+            {
+                SensorSettings = sensorSettings,
+                SensorPlatform = sensorPlatform,
+                TargetPlatforms = Platforms
+            };
+
+            Sensors.Add(sensor);
+            SimulationModels.Add(sensor);
         }
 
         InitialiseModels(time);
@@ -160,6 +179,11 @@ public class Simulation : ISimulation
             sd.PlatformStateRelativeMessagesAll.Add(psrm);
 
             sd.SimulationMessages.Add(psrm);
+        }
+
+        foreach (var sensor in Sensors)
+        {
+            sd.SensorReportsAll.AddRange(sensor.SensorReports);
         }
     }
 

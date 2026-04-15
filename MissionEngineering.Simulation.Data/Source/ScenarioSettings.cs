@@ -1,5 +1,6 @@
 ﻿using MissionEngineering.Math;
 using MissionEngineering.Platform;
+using MissionEngineering.Sensor;
 
 namespace MissionEngineering.Simulation;
 
@@ -12,4 +13,6 @@ public record ScenarioSettings
     public SimulationClockSettings SimulationClockSettings { get; set; }
 
     public List<PlatformSettings> PlatformSettingsList { get; set; }
+
+    public List<SensorSettings> SensorSettingsList { get; set; }
 }
