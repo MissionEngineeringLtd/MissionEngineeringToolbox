@@ -9,7 +9,7 @@ namespace MissionEngineering.Platform.Tests
         [TestMethod]
         public void GeneratePlatformStateRelative_WithValidStates_ExpectSuccess()
         {
-            // Arrange:
+            // Arrange
             var startDateTime = new DateTime(2024, 1, 1, 12, 0, 0);
 
             var dateTimeOrigin = new DateTimeOrigin(startDateTime);
@@ -46,10 +46,10 @@ namespace MissionEngineering.Platform.Tests
                 Attitude = targetAttitude
             };
 
-            // Act:
+            // Act
             var relativeState = PlatformFunctions.GeneratePlatformStateRelative(platformStateOrigin, platformStateTarget);
 
-            // Assert:
+            // Assert
             var expectedResult = -135.0;
 
             Assert.AreEqual(expectedResult, relativeState.AspectAngleAzimuth_deg, 1.0e-8);

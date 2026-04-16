@@ -10,7 +10,7 @@ namespace MissionEngineering.Scanner.Tests
         [TestMethod]
         public void Run_Test_1()
         {
-            // Arrange:
+            // Arrange
             var dateTimeStart = new DateTime(2024, 1, 1, 12, 0, 0);
             var dateTimeOrigin = new DateTimeOrigin(dateTimeStart);
             var simulationClock = new SimulationClock(dateTimeOrigin);
@@ -44,10 +44,10 @@ namespace MissionEngineering.Scanner.Tests
                 TimeStep_s = 0.1
             };
 
-            // Act:
+            // Act
             scannerHarness.Run();
 
-            // Assert:
+            // Assert
             var expectedScanNumber = 73;
             var scanNumber = scannerHarness.Scanner.ScanData.ScanNumber;
 
