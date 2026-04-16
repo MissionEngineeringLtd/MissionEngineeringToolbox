@@ -3,7 +3,8 @@ using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
 using MissionEngineering.Sensor;
-using System.Runtime.InteropServices;
+using MissionEngineering.Track;
+using static System.Math;
 
 namespace MissionEngineering.Simulation;
 
@@ -25,11 +26,16 @@ public class Simulation : ISimulation
 
     public List<Sensor.Sensor> Sensors { get; set; }
 
+    public TrackManager TrackManager { get; set; }
+
     public IDataRecorder DataRecorder { get; set; }
 
     private double nextDisplayTime;
 
     private int displayCount;
+
+    private int trackPredictionCountActual;
+    private int trackPredictionCountMax;
 
     public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IDataRecorder dataRecorder)
     {
@@ -74,6 +80,9 @@ public class Simulation : ISimulation
 
         DataRecorder.SimulationData.ScenarioSettings = ScenarioSettings;
 
+        trackPredictionCountActual = 0;
+        trackPredictionCountMax = (int)Round(ScenarioSettings.SimulationClockSettings.TrackPredictionTimeStep / ScenarioSettings.SimulationClockSettings.TimeStep);
+    
         Platforms = [];
         RelativePlatforms = [];
         Sensors = [];
@@ -112,6 +121,8 @@ public class Simulation : ISimulation
             Sensors.Add(sensor);
             SimulationModels.Add(sensor);
         }
+
+        TrackManager = new TrackManager(LLAOrigin);
 
         InitialiseModels(time);
 
@@ -153,10 +164,51 @@ public class Simulation : ISimulation
     public void Update(double time)
     {
         UpdateModels(time);
-        RecordData(time);
+
+        UpdateTracker(time);
+
+        RecordData();
     }
 
-    public void RecordData(double time)
+    public void UpdateTracker(double time)
+    {
+        var sensorReports = Sensors.SelectMany(s => s.SensorReports).ToList();
+
+        TrackManager.SensorReports = sensorReports;
+
+        TrackManager.ProcessSensorReports();
+
+        var isUpdatePredictedTracks = IsUpdatePredictedTracks();
+
+        if (isUpdatePredictedTracks)
+        {
+            TrackManager.PredictTracks(time);
+            RecordTrackDataPredicted();
+        }
+    }
+
+    public bool IsUpdatePredictedTracks()
+    {
+        var IsUpdatePredictedTracks = trackPredictionCountActual == 0;
+
+        trackPredictionCountActual++;
+
+        if (trackPredictionCountActual == trackPredictionCountMax)
+        {
+            trackPredictionCountActual = 0;
+        }
+
+        return IsUpdatePredictedTracks;
+    }
+
+    public void RecordData()
+    {
+        RecordPlatformData();
+        RecordRelativePlatformData();
+        RecordSensorReports();
+    }
+
+    public void RecordPlatformData()
     {
         var sd = DataRecorder.SimulationData;
 
@@ -170,6 +222,11 @@ public class Simulation : ISimulation
 
             sd.SimulationMessages.Add(psm);
         }
+    }
+
+    public void RecordRelativePlatformData()
+    {
+        var sd = DataRecorder.SimulationData;
 
         foreach (var relativePlatform in RelativePlatforms)
         {
@@ -181,6 +238,11 @@ public class Simulation : ISimulation
 
             sd.SimulationMessages.Add(psrm);
         }
+    }
+
+    public void RecordSensorReports()
+    {
+        var sd = DataRecorder.SimulationData;
 
         foreach (var sensor in Sensors)
         {
@@ -195,6 +257,19 @@ public class Simulation : ISimulation
                 sd.SimulationMessages.Add(srm);
             }
         }
+    }
+
+    public void RecordTrackDataPredicted()
+    {
+        var sd = DataRecorder.SimulationData;
+
+        var trackDataPredicted = TrackManager.TrackList.Tracks.Select(s => s.TrackDataPredicted).ToList();
+
+        sd.TrackDataPredictedAll.AddRange(trackDataPredicted);
+
+        var trackDataPredictedMessages = TrackMessageConversions.ConvertToTrackDataPredictedMessages(trackDataPredicted);
+
+        sd.TrackDataPredictedMessagesAll.AddRange(trackDataPredictedMessages);
     }
 
     public void Finalise(double time)
@@ -268,7 +343,7 @@ public class Simulation : ISimulation
 
         if (isWriteToLog)
         {
-            LogUtilities.LogInformation($"Writing     Zip  File : {zipFileNameFull}");
+            LogUtilities.LogInformation($"Writing File : {zipFileNameFull}");
         }
 
         if (isWriteData)

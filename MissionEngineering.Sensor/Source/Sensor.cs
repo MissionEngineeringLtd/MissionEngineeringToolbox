@@ -17,12 +17,14 @@ public class Sensor : ISensor
     public List<SensorReport> SensorReports { get; set; }
 
     public int SensorReportId { get; set; }
-    
+
     public SensorState SensorState { get; set; }
 
     public ISimulationClock SimulationClock { get; set; }
 
     public Scanner.Scanner Scanner { get; set; }
+
+    public Dictionary<int, bool> IsDetectedThisBarDictionary { get; set; }
 
     public Sensor(ISimulationClock simulationClock)
     {
@@ -39,6 +41,8 @@ public class Sensor : ISensor
 
     public void Initialise(double time_s)
     {
+        IsDetectedThisBarDictionary = [];
+
         CreateScanner();
 
         Scanner.PlatformState = SensorPlatform.PlatformState;
@@ -50,6 +54,11 @@ public class Sensor : ISensor
 
     public void Update(double time_s)
     {
+        if (Scanner.ScanData.IsStartOfScan)
+        {
+            IsDetectedThisBarDictionary.Clear();
+        }
+
         Scanner.PlatformState = SensorPlatform.PlatformState;
 
         Scanner.Update(time_s);
@@ -69,18 +78,29 @@ public class Sensor : ISensor
 
         foreach (var targetPlatform in TargetPlatforms)
         {
+            var sensorPlatformId = SensorPlatform.PlatformState.PlatformId;
+            var targetPlatformId = targetPlatform.PlatformState.PlatformId;
+
             // Skip if the target platform is also the sensor platform.
-            if (targetPlatform.PlatformState.PlatformId == SensorPlatform.PlatformState.PlatformId)
+            if (targetPlatformId == sensorPlatformId)
             {
                 continue;
             }
 
             var sensorReport = GenerateSensorReport(time_s, SensorPlatform, targetPlatform);
 
-            if (sensorReport is not null)
+            if (sensorReport is null)
             {
-                SensorReports.Add(sensorReport);
+                continue;
             }
+
+            if (IsDetectedThisBarDictionary.ContainsKey(targetPlatformId))
+            {
+                continue;
+            }
+
+            SensorReports.Add(sensorReport);
+            IsDetectedThisBarDictionary[targetPlatform.PlatformState.PlatformId] = true;
         }
     }
 
@@ -95,6 +115,7 @@ public class Sensor : ISensor
             PointingElevationNorth_deg = Scanner.ScanData.ScanElevationAngle_NED_deg
         };
     }
+
     public SensorReport GenerateSensorReport(double time_s, Platform.Platform sensorPlatform, Platform.Platform targetPlatform)
     {
         var relativeStates = PlatformFunctions.GeneratePlatformStateRelative(sensorPlatform.PlatformState, targetPlatform.PlatformState);

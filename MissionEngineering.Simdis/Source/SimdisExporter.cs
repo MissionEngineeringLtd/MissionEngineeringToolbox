@@ -36,7 +36,7 @@ public class SimdisExporter : ISimdisExporter
 
         var fileNameFull = SimulationData.SimulationSettings.GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Asi  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         var strings = SimdisData.ToString();
 

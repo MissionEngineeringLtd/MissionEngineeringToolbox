@@ -127,6 +127,8 @@ public class DataRecorder : IDataRecorder
 
         WriteSensorReportsAllToCsv();
 
+        WriteTrackDataPredictedAllToCsv();
+
         WriteSimulationMessagesAllToCsv();
 
         WritePlatformStateMessagesAllToCsv();
@@ -136,6 +138,8 @@ public class DataRecorder : IDataRecorder
         WritePlatformStateRelativeMessagesPerPlatformToCsv();
 
         WriteSensorReportMessagesAllToCsv();
+
+        WriteTrackDataPredictedMessagesAllToCsv();
     }
 
     public void WriteSimdisData()
@@ -150,7 +154,7 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Json File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.SimulationSettings.WriteToJsonFile(fileNameFull);
     }
@@ -161,7 +165,7 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Json File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.ScenarioSettings.WriteToJsonFile(fileNameFull);
     }
@@ -174,7 +178,7 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         data.WriteToCsvFile(fileNameFull);
     }
@@ -189,7 +193,7 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         platformStateData.WriteToCsvFile(fileNameFull);
     }
@@ -208,7 +212,7 @@ public class DataRecorder : IDataRecorder
 
             var fileNameFull = GetFileNameFull(fileName);
 
-            LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+            LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
             platformStateData.WriteToCsvFile(fileNameFull);
         }
@@ -224,7 +228,7 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         platformDataRelative.WriteToCsvFile(fileNameFull);
     }
@@ -242,7 +246,7 @@ public class DataRecorder : IDataRecorder
 
             var fileNameFull = GetFileNameFull(fileName);
 
-            LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+            LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
             platformDataRelative.WriteToCsvFile(fileNameFull);
         }
@@ -256,7 +260,7 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         data.WriteToCsvFile(fileNameFull);
     }
@@ -273,7 +277,7 @@ public class DataRecorder : IDataRecorder
 
             var fileNameFull = GetFileNameFull(fileName);
 
-            LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+            LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
             platformData.WriteToCsvFile(fileNameFull);
         }
@@ -287,7 +291,7 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         data.WriteToCsvFile(fileNameFull);
     }
@@ -305,7 +309,7 @@ public class DataRecorder : IDataRecorder
 
             var fileNameFull = GetFileNameFull(fileName);
 
-            LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+            LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
             psrm.WriteToCsvFile(fileNameFull);
         }
@@ -319,7 +323,20 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
+
+        data.WriteToCsvFile(fileNameFull);
+    }
+
+    public void WriteTrackDataPredictedAllToCsv()
+    {
+        var data = SimulationData.TrackDataPredictedAll;
+
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_TrackDataPredicted_All.csv";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         data.WriteToCsvFile(fileNameFull);
     }
@@ -332,7 +349,20 @@ public class DataRecorder : IDataRecorder
 
         var fileNameFull = GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing     Csv  File : {fileNameFull}");
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
+
+        data.WriteToCsvFile(fileNameFull);
+    }
+
+    public void WriteTrackDataPredictedMessagesAllToCsv()
+    {
+        var data = SimulationData.TrackDataPredictedMessagesAll;
+
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_Messages_TrackDataPredicted_All.csv";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
 
         data.WriteToCsvFile(fileNameFull);
     }

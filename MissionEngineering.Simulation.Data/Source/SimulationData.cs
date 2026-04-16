@@ -1,6 +1,7 @@
 ﻿using MissionEngineering.Platform;
 using MissionEngineering.Sensor;
 using MissionEngineering.Simulation.Messages;
+using MissionEngineering.Track;
 
 namespace MissionEngineering.Simulation;
 
@@ -34,6 +35,10 @@ public class SimulationData
 
     public List<SensorReportMessage> SensorReportMessagesAll { get; set; }
 
+    public List<TrackDataPredicted> TrackDataPredictedAll {  get; set; }
+
+    public List<TrackDataPredictedMessage> TrackDataPredictedMessagesAll { get; set; }
+
     public SimulationData(SimulationSettings simulationSettings)
     {
         SimulationSettings = simulationSettings;
@@ -44,5 +49,7 @@ public class SimulationData
         PlatformStateRelativeMessagesAll = [];
         SensorReportsAll = [];
         SensorReportMessagesAll = [];
+        TrackDataPredictedAll = [];
+        TrackDataPredictedMessagesAll = [];
     }
 }

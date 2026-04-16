@@ -15,7 +15,8 @@ public static class ScenarioSettingsFactory
             DateTimeOrigin = dateTimeOrigin,
             TimeStart = 10.0,
             TimeEnd = 200.0,
-            TimeStep = 0.05
+            TimeStep = 0.01,
+            TrackPredictionTimeStep = 0.1
         };
 
         var llaOrigin = new PositionLLA()
@@ -27,6 +28,7 @@ public static class ScenarioSettingsFactory
 
         var ps1 = PlatformSettingsFactory.PlatformSettings_Aircraft_Friendly_1();
         var ps2 = PlatformSettingsFactory.PlatformSettings_Aircraft_Friendly_2();
+        var ps3 = PlatformSettingsFactory.PlatformSettings_Aircraft_Friendly_3();
 
         var s1 = SensorSettingsFactory.SensorSettings_Radar_1();
 
@@ -35,7 +37,7 @@ public static class ScenarioSettingsFactory
             ScenarioName = "Scenario_Test_1",
             SimulationClockSettings = simulationClockSettings,
             LLAOrigin = llaOrigin,
-            PlatformSettingsList = [ps1, ps2],
+            PlatformSettingsList = [ps1, ps2, ps3],
             SensorSettingsList = [s1]
         };
 

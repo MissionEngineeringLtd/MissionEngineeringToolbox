@@ -6,7 +6,7 @@ public enum SimulationMessageType
     PlatformState = 1,
     PlatformStateRelative = 2,
     SensorReport = 3,
-    TrackUpdate = 4,
-    TrackPredict = 5,
+    TrackDataSmoothed = 4,
+    TrackDataPredicted = 5,
     TrackGroup = 6,
 }

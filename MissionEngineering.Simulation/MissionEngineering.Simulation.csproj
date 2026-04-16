@@ -16,6 +16,7 @@
     <ProjectReference Include="..\MissionEngineering.Math\MissionEngineering.Math.csproj" />
     <ProjectReference Include="..\MissionEngineering.Sensor\MissionEngineering.Sensor.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation.Data\MissionEngineering.Simulation.Data.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Track\MissionEngineering.Track.csproj" />
   </ItemGroup>
 
 </Project>

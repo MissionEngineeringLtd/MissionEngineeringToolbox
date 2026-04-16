@@ -50,6 +50,9 @@ public class Track
         };
 
         TrackDataSmoothed.NumberOfUpdates = 1;
+        TrackDataSmoothed.SensorPlatformId = sensorReport.SensorReportHeader.SensorPlatformId;
+        TrackDataSmoothed.TargetPlatformId = sensorReport.SensorReportHeader.TargetPlatformId;
+        TrackDataSmoothed.SensorId = sensorReport.SensorReportHeader.SensorId;
 
         TrackFilter.Initialise(time, x, p);
 

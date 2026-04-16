@@ -9,4 +9,6 @@ public record SimulationClockSettings
     public double TimeEnd { get; set; }
 
     public double TimeStep { get; set; }
+
+    public double TrackPredictionTimeStep { get; set; }
 }
