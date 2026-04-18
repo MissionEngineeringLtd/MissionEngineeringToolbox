@@ -1,12 +1,7 @@
-﻿using MissionEngineering.Core;
-using MissionEngineering.Math;
+﻿namespace MissionEngineering.Simulation.Messages;
 
-namespace MissionEngineering.Scanner;
-
-public record ScanData
+public record ScanDataMessage : SimulationMessage
 {
-    public SimulationTimeStamp TimeStamp { get; set; }
-
     public int PlatformId { get; set; }
 
     public string PlatformName { get; set; }
@@ -35,5 +30,10 @@ public record ScanData
 
     public double ScanElevationRate_degs { get; set; }
 
-    public double ScanAzimuthRate_RPM => ScanAzimuthRate_degs.DegreesToRpm();
+    public double ScanAzimuthRate_RPM { get; set; }
+
+    public ScanDataMessage()
+    {
+        MessageType = SimulationMessageType.ScanData;
+    }
 }

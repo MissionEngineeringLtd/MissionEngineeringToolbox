@@ -2,8 +2,10 @@
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
+using MissionEngineering.Scanner;
 using MissionEngineering.Sensor;
 using MissionEngineering.Track;
+using System.Runtime.InteropServices.Marshalling;
 using static System.Math;
 
 namespace MissionEngineering.Simulation;
@@ -205,6 +207,7 @@ public class Simulation : ISimulation
     {
         RecordPlatformData();
         RecordRelativePlatformData();
+        RecordSensorScannerData();
         RecordSensorReports();
     }
 
@@ -238,6 +241,19 @@ public class Simulation : ISimulation
 
             sd.SimulationMessages.Add(psrm);
         }
+    }
+
+    public void RecordSensorScannerData()
+    {
+        var sd = DataRecorder.SimulationData;
+
+        var scanDataList = Sensors.Select(s => s.Scanner.ScanData).ToList();
+
+        sd.ScanDataAll.AddRange(scanDataList);
+
+        var scanDataMessages = ScanMessageConversions.ConvertToScanDataMessages(scanDataList);
+
+        sd.ScanDataMessagesAll.AddRange(scanDataMessages);
     }
 
     public void RecordSensorReports()

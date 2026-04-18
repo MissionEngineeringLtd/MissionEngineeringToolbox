@@ -125,6 +125,7 @@ public class DataRecorder : IDataRecorder
         WritePlatformStateRelativeAllToCsv();
         WritePlatformStateRelativePerPlatformToCsv();
 
+        WriteScanDataAllToCsv();
         WriteSensorReportsAllToCsv();
 
         WriteTrackDataPredictedAllToCsv();
@@ -137,6 +138,7 @@ public class DataRecorder : IDataRecorder
         WritePlatformStateRelativeMessagesAllToCsv();
         WritePlatformStateRelativeMessagesPerPlatformToCsv();
 
+        WriteScanDataMessagesAllToCsv();
         WriteSensorReportMessagesAllToCsv();
 
         WriteTrackDataPredictedMessagesAllToCsv();
@@ -315,6 +317,19 @@ public class DataRecorder : IDataRecorder
         }
     }
 
+    public void WriteScanDataAllToCsv()
+    {
+        var data = SimulationData.ScanDataAll;
+
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_ScanData_All.csv";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
+
+        data.WriteToCsvFile(fileNameFull);
+    }
+
     public void WriteSensorReportsAllToCsv()
     {
         var data = SimulationData.SensorReportsAll;
@@ -333,6 +348,19 @@ public class DataRecorder : IDataRecorder
         var data = SimulationData.TrackDataPredictedAll;
 
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_TrackDataPredicted_All.csv";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
+
+        data.WriteToCsvFile(fileNameFull);
+    }
+
+    public void WriteScanDataMessagesAllToCsv()
+    {
+        var data = SimulationData.ScanDataMessagesAll;
+
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_Messages_ScanData_All.csv";
 
         var fileNameFull = GetFileNameFull(fileName);
 

@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Platform;
+using MissionEngineering.Scanner;
 using MissionEngineering.Sensor;
 using MissionEngineering.Simulation.Messages;
 using MissionEngineering.Track;
@@ -31,6 +32,10 @@ public class SimulationData
 
     public List<List<PlatformStateRelativeMessage>> PlatformStateRelativeMessagesPerPlatform { get; set; }
 
+    public List<ScanData> ScanDataAll { get; set; }
+
+    public List<ScanDataMessage> ScanDataMessagesAll { get; set; }
+
     public List<SensorReport> SensorReportsAll { get; set; }
 
     public List<SensorReportMessage> SensorReportMessagesAll { get; set; }
@@ -47,6 +52,8 @@ public class SimulationData
         PlatformDataRelativeAll = [];
         PlatformStateMessagesAll = [];
         PlatformStateRelativeMessagesAll = [];
+        ScanDataAll = [];
+        ScanDataMessagesAll = [];
         SensorReportsAll = [];
         SensorReportMessagesAll = [];
         TrackDataPredictedAll = [];
