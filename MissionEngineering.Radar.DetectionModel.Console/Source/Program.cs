@@ -14,7 +14,6 @@ public class Program
 
     public static RadarDetectionModelHarness Harness { get; set; }
 
-
     /// <summary>
     ///
     /// </summary>

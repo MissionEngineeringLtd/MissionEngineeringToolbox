@@ -11,7 +11,7 @@ public class ScannerHarness
 
     public PlatformState PlatformState { get; set; }
 
-    public double StartTime_s {  get; set; }
+    public double StartTime_s { get; set; }
 
     public double EndTime_s { get; set; }
 

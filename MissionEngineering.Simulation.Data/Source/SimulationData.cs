@@ -40,7 +40,7 @@ public class SimulationData
 
     public List<SensorReportMessage> SensorReportMessagesAll { get; set; }
 
-    public List<TrackDataPredicted> TrackDataPredictedAll {  get; set; }
+    public List<TrackDataPredicted> TrackDataPredictedAll { get; set; }
 
     public List<TrackDataPredictedMessage> TrackDataPredictedMessagesAll { get; set; }
 

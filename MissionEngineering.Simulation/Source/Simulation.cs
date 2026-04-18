@@ -5,7 +5,6 @@ using MissionEngineering.Platform;
 using MissionEngineering.Scanner;
 using MissionEngineering.Sensor;
 using MissionEngineering.Track;
-using System.Runtime.InteropServices.Marshalling;
 using static System.Math;
 
 namespace MissionEngineering.Simulation;
@@ -84,7 +83,7 @@ public class Simulation : ISimulation
 
         trackPredictionCountActual = 0;
         trackPredictionCountMax = (int)Round(ScenarioSettings.SimulationClockSettings.TrackPredictionTimeStep / ScenarioSettings.SimulationClockSettings.TimeStep);
-    
+
         Platforms = [];
         RelativePlatforms = [];
         Sensors = [];

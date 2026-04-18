@@ -1,6 +1,6 @@
 ﻿using MissionEngineering.Core;
-using MissionEngineering.Platform;
 using MissionEngineering.Math;
+using MissionEngineering.Platform;
 
 namespace MissionEngineering.Scanner.Tests
 {

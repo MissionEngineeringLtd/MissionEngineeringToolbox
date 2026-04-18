@@ -26,7 +26,6 @@ public static class ScanMessageConversions
             MessageDescription = "Scan Data"
         };
 
-
         var scanDataMessage = new ScanDataMessage()
         {
             Header = header,

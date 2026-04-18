@@ -1,5 +1,4 @@
-﻿
-using MissionEngineering.Scanner;
+﻿using MissionEngineering.Scanner;
 
 namespace MissionEngineering.Sensor;
 

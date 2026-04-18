@@ -7,7 +7,7 @@ namespace MissionEngineering.Scanner;
 public class Scanner : IScanner
 {
     public ScanSettings ScanSettings { get; set; }
-    
+
     public ScanData ScanData { get; set; }
 
     public ISimulationClock SimulationClock { get; set; }
@@ -77,7 +77,7 @@ public class Scanner : IScanner
             ScanElevationAngle_Body_deg = scanElevationAngle_Body_deg,
             ScanAzimuthAngle_NED_deg = scanAzimuthAngle_NED_deg,
             ScanElevationAngle_NED_deg = scanElevation_NED_deg,
-            ScanNumber = scanNumber 
+            ScanNumber = scanNumber
         };
     }
 
