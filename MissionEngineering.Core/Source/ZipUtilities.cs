@@ -6,16 +6,8 @@ public static class ZipUtilities
 {
     public static void ZipDirectory(string folderPath, string zipFileName)
     {
-        var fileFull = Path.Combine(folderPath, zipFileName);
-
-        if (File.Exists(fileFull))
-        {
-            File.Delete(fileFull);
-        }
-
         var tempPath = Path.GetTempPath();
-
-        var tempFile = Path.GetFileName(zipFileName);
+        var tempFile = Path.GetTempFileName();
 
         var tempFileFull = Path.Combine(tempPath, tempFile);
 

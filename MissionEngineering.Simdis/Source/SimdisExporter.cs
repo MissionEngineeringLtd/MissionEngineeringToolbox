@@ -7,15 +7,19 @@ namespace MissionEngineering.Simdis;
 
 public class SimdisExporter : ISimdisExporter
 {
+    public ILogClass Log { get; set; }
+
     public SimulationData SimulationData { get; set; }
 
     private StringBuilder SimdisData { get; set; }
 
-    public SimdisExporter(SimulationData simulationData)
+    public SimdisExporter(SimulationData simulationData, ILogClass log)
     {
         SimulationData = simulationData;
 
         SimdisData = new StringBuilder();
+
+        Log = log;
     }
 
     public void GenerateSimdisData()
@@ -36,7 +40,7 @@ public class SimdisExporter : ISimdisExporter
 
         var fileNameFull = SimulationData.SimulationSettings.GetFileNameFull(fileName);
 
-        LogUtilities.LogInformation($"Writing File : {fileNameFull}");
+        Log.LogInformation($"Writing File : {fileNameFull}");
 
         var strings = SimdisData.ToString();
 

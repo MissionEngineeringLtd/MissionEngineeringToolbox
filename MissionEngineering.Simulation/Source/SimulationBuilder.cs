@@ -10,28 +10,23 @@ public static class SimulationBuilder
 {
     public static ISimulationHarness CreateSimulationHarness()
     {
-        var services = new ServiceCollection();
+        var simulationHarness = new SimulationHarness();
 
-        services.AddScoped<ISimulationHarness, SimulationHarness>();
-        services.AddScoped<SimulationHarnessSettings, SimulationHarnessSettings>();
-        services.AddScoped<ISimulation, Simulation>();
-        services.AddScoped<ISimulationClock, SimulationClock>();
-        services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();
-        services.AddScoped<ILLAOrigin, LLAOrigin>();
-        services.AddScoped<ScenarioSettings, ScenarioSettings>();
-        services.AddScoped<IDataRecorder, DataRecorder.DataRecorder>();
-        services.AddScoped<SimulationSettings, SimulationSettings>();
-        services.AddScoped<SimulationData, SimulationData>();
-        services.AddScoped<ISimdisExporter, SimdisExporter>();
-
-        using var serviceProvider = services.BuildServiceProvider();
-
-        var simulationHarness = serviceProvider.GetRequiredService<ISimulationHarness>();
+        simulationHarness.SimulationHarnessSettings = new SimulationHarnessSettings();
 
         return simulationHarness;
     }
 
     public static ISimulation CreateSimulation()
+    {
+        var serviceProvider = CreateServices();
+
+        var simulation = serviceProvider.GetRequiredService<ISimulation>();
+
+        return simulation;
+    }
+
+    public static ServiceProvider CreateServices()
     {
         var services = new ServiceCollection();
 
@@ -44,11 +39,10 @@ public static class SimulationBuilder
         services.AddScoped<SimulationSettings, SimulationSettings>();
         services.AddScoped<SimulationData, SimulationData>();
         services.AddScoped<ISimdisExporter, SimdisExporter>();
+        services.AddScoped<ILogClass, LogClass>();
 
-        using var serviceProvider = services.BuildServiceProvider();
+        var serviceProvider = services.BuildServiceProvider();
 
-        var simulation = serviceProvider.GetRequiredService<ISimulation>();
-
-        return simulation;
+        return serviceProvider;
     }
 }

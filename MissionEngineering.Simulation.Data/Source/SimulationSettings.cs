@@ -1,12 +1,14 @@
 ﻿namespace MissionEngineering.Simulation;
 
-public class SimulationSettings
+public record SimulationSettings
 {
     public string SimulationName { get; set; }
 
     public int RunNumber { get; set; }
 
     public DateTime DateTime { get; set; }
+
+    public bool IsAddLogging { get; set; }
 
     public bool IsWriteData { get; set; }
 

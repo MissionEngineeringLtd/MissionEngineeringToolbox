@@ -12,37 +12,79 @@ public class SimulationHarness : ISimulationHarness
 
     public ISimulation Simulation { get; set; }
 
-    public SimulationHarness(SimulationHarnessSettings simulationHarnessSettings, SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulation simulation)
+    public List<ISimulation> SimulationList { get; set; }
+
+    public SimulationHarness()
+    {
+    }
+
+    public SimulationHarness(SimulationHarnessSettings simulationHarnessSettings, ScenarioSettings scenarioSettings)
     {
         SimulationHarnessSettings = simulationHarnessSettings;
-        SimulationSettings = simulationSettings;
         ScenarioSettings = scenarioSettings;
-        Simulation = simulation;
     }
 
     public void Run()
+    {
+        var numberOfRuns = SimulationHarnessSettings.NumberOfRuns;
+
+        SimulationList = new List<ISimulation>(numberOfRuns);
+
+        var isRunParallel = numberOfRuns > 1;
+
+        if (isRunParallel)
+        {
+            RunParallel();
+        }
+        else
+        {
+            RunSequential();
+        }
+    }
+
+    public void RunSequential()
     {
         for (int i = 0; i < SimulationHarnessSettings.NumberOfRuns; i++)
         {
             var runNumber = i + 1;
 
-            RunSingle(runNumber);
+            var simulation = RunSingle(runNumber);
+        
+            SimulationList.Add(simulation);
         }
     }
 
-    public void RunSingle(int runNumber)
+    public void RunParallel()
     {
-        Simulation = SimulationBuilder.CreateSimulation();
+        var numberOfRuns = SimulationHarnessSettings.NumberOfRuns;
 
-        Simulation.SimulationSettings = SimulationSettings;
-        Simulation.ScenarioSettings = ScenarioSettings;
+        var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
 
-        Simulation.SimulationSettings.RunNumber = runNumber;
+        Parallel.For(0, numberOfRuns, parallelOptions, i =>
+        {
+            var runNumber = i + 1;
 
-        Simulation.DataRecorder.SimulationData.SimulationSettings = SimulationSettings;
+            var simulation = RunSingle(runNumber);
 
-        LogUtilities.CreateLogger(SimulationSettings.LogFileName);
+            SimulationList.Add(simulation);
+        });
+    }
 
-        Simulation.Run();
+    public ISimulation RunSingle(int runNumber)
+    {
+        var simulation = SimulationBuilder.CreateSimulation();
+
+        var simulationSettings = SimulationSettings with { RunNumber = runNumber };
+
+        simulation.SimulationSettings = simulationSettings;
+        simulation.ScenarioSettings = ScenarioSettings;
+
+        simulation.DataRecorder.SimulationData.SimulationSettings = simulationSettings;
+
+        simulation.Run();
+
+        Simulation = simulation;
+
+        return simulation;
     }
 }

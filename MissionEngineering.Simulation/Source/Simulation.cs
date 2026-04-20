@@ -1,4 +1,5 @@
-﻿using MissionEngineering.Core;
+﻿using MathNet.Numerics.Optimization.ObjectiveFunctions;
+using MissionEngineering.Core;
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
@@ -11,6 +12,8 @@ namespace MissionEngineering.Simulation;
 
 public class Simulation : ISimulation
 {
+    public ILogClass Log { get; set; }
+
     public SimulationSettings SimulationSettings { get; set; }
 
     public ScenarioSettings ScenarioSettings { get; set; }
@@ -38,20 +41,21 @@ public class Simulation : ISimulation
     private int trackPredictionCountActual;
     private int trackPredictionCountMax;
 
-    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IDataRecorder dataRecorder)
+    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IDataRecorder dataRecorder, ILogClass log)
     {
         SimulationSettings = simulationSettings;
         ScenarioSettings = scenarioSettings;
         SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
         DataRecorder = dataRecorder;
+        Log = log;
     }
 
-    public void Run()
+    public ISimulation Run()
     {
-        LogUtilities.LogInformation("***");
-        LogUtilities.LogInformation($"Run Number {SimulationSettings.RunNumber} Started...");
-        LogUtilities.LogInformation("");
+        Log.LogInformation("***");
+        Log.LogInformation($"Run Number {SimulationSettings.RunNumber} Started...");
+        Log.LogInformation("");
 
         var clockSettings = ScenarioSettings.SimulationClockSettings;
 
@@ -63,17 +67,21 @@ public class Simulation : ISimulation
 
         Finalise(time);
 
-        LogUtilities.LogInformation($"Run Number {SimulationSettings.RunNumber} Finished.");
-        LogUtilities.LogInformation("***");
-        LogUtilities.LogInformation("");
+        Log.LogInformation($"Run Number {SimulationSettings.RunNumber} Finished.");
+        Log.LogInformation("***");
+        Log.LogInformation("");
 
         CreateZipFile(false, true);
+
+        return this;
     }
 
     public void Initialise(double time)
     {
-        LogUtilities.LogInformation("Initialise Started...");
-        LogUtilities.LogInformation("");
+        CreateLogger();
+
+        Log.LogInformation("Initialise Started...");
+        Log.LogInformation("");
 
         SimulationClock.DateTimeOrigin.DateTimeStart = ScenarioSettings.SimulationClockSettings.DateTimeOrigin;
 
@@ -134,19 +142,26 @@ public class Simulation : ISimulation
 
         nextDisplayTime = ScenarioSettings.SimulationClockSettings.TimeStart;
 
-        LogUtilities.LogInformation($"Simulation Settings {Environment.NewLine} {simulationSettingsString}");
-        LogUtilities.LogInformation($"Scenario Settings {Environment.NewLine} {scenarioSettingsString}");
+        Log.LogInformation($"Simulation Settings {Environment.NewLine} {simulationSettingsString}");
+        Log.LogInformation($"Scenario Settings {Environment.NewLine} {scenarioSettingsString}");
 
-        LogUtilities.LogInformation("Initialise Finished.");
-        LogUtilities.LogInformation("");
+        Log.LogInformation("Initialise Finished.");
+        Log.LogInformation("");
+    }
+
+    public void CreateLogger()
+    {
+        Log.CreateLogger(SimulationSettings.LogFileName, SimulationSettings.IsAddLogging);
+
+        Log.RunNumber = SimulationSettings.RunNumber;
     }
 
     public void RunSimulation(double time)
     {
         var clockSettings = ScenarioSettings.SimulationClockSettings;
 
-        LogUtilities.LogInformation("Run Started...");
-        LogUtilities.LogInformation("");
+        Log.LogInformation("Run Started...");
+        Log.LogInformation("");
 
         while (time <= clockSettings.TimeEnd)
         {
@@ -157,9 +172,9 @@ public class Simulation : ISimulation
             time += clockSettings.TimeStep;
         }
 
-        LogUtilities.LogInformation("");
-        LogUtilities.LogInformation("Run Finished.");
-        LogUtilities.LogInformation("");
+        Log.LogInformation("");
+        Log.LogInformation("Run Finished.");
+        Log.LogInformation("");
     }
 
     public void Update(double time)
@@ -289,8 +304,8 @@ public class Simulation : ISimulation
 
     public void Finalise(double time)
     {
-        LogUtilities.LogInformation("Finalise Started...");
-        LogUtilities.LogInformation("");
+        Log.LogInformation("Finalise Started...");
+        Log.LogInformation("");
 
         FinaliseModels(time);
 
@@ -298,9 +313,9 @@ public class Simulation : ISimulation
 
         CreateZipFile(true, false);
 
-        LogUtilities.LogInformation("");
-        LogUtilities.LogInformation("Finalise Finished.");
-        LogUtilities.LogInformation("");
+        Log.LogInformation("");
+        Log.LogInformation("Finalise Finished.");
+        Log.LogInformation("");
     }
 
     public void ShowProgress(double time)
@@ -309,7 +324,7 @@ public class Simulation : ISimulation
 
         if (isDisplayTime)
         {
-            LogUtilities.LogInformation($"Time = {nextDisplayTime:000}s");
+            Log.LogInformation($"Time = {nextDisplayTime:000}s");
 
             displayCount++;
             nextDisplayTime = ScenarioSettings.SimulationClockSettings.TimeStart + displayCount * 5.0;
@@ -358,12 +373,12 @@ public class Simulation : ISimulation
 
         if (isWriteToLog)
         {
-            LogUtilities.LogInformation($"Writing File : {zipFileNameFull}");
+            Log.LogInformation($"Writing File : {zipFileNameFull}");
         }
 
         if (isWriteData)
         {
-            LogUtilities.CloseLog();
+            Log.CloseLog();
 
             ZipUtilities.ZipDirectory(DataRecorder.SimulationData.SimulationSettings.OutputFolder, zipFileNameFull);
         }

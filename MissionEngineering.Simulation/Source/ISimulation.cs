@@ -18,7 +18,7 @@ public interface ISimulation
 
     List<IExecutableModel> SimulationModels { get; set; }
 
-    void Run();
+    ISimulation Run();
 
     void Initialise(double time);
 
