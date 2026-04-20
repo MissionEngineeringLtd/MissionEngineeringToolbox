@@ -1,10 +1,14 @@
 ﻿using MissionEngineering.Math;
 
-namespace MissionEngineering.Track;
+namespace MissionEngineering.Tracker;
 
-public record TrackDataSmoothed
+public record TrackDataPredicted
 {
     public int TrackId { get; set; }
+
+    public double PredictionTime { get; set; }
+
+    public double TimeSinceLastUpdate { get; set; }
 
     public double LastUpdateTime { get; set; }
 
@@ -28,9 +32,9 @@ public record TrackDataSmoothed
 
     public Attitude Attitude { get; set; }
 
-    public PositionNED PositionCovarianceNED { get; set; }
+    public PositionUncertaintyNED PositionUncertaintyNED { get; set; }
 
-    public PositionNED VelocityCovarianceNED { get; set; }
+    public VelocityUncertaintyNED VelocityUncertaintyNED { get; set; }
 
-    public AccelerationNED AccelerationCovarianceNED { get; set; }
+    public AccelerationUncertaintyNED AccelerationUncertaintyNED { get; set; }
 }

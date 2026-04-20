@@ -3,7 +3,7 @@ using MissionEngineering.Math;
 using MissionEngineering.Platform;
 using MissionEngineering.Sensor;
 
-namespace MissionEngineering.Track;
+namespace MissionEngineering.Tracker;
 
 public class TrackHarness : IExecutableModel
 {

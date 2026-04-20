@@ -2,7 +2,7 @@
 
 using static System.Math;
 
-namespace MissionEngineering.Track;
+namespace MissionEngineering.Tracker;
 
 public class KalmanFilterAirTrack_9State_ConstantAccelerationNED : KalmanFilter
 {

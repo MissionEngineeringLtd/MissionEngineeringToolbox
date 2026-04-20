@@ -1,6 +1,6 @@
 ﻿using MissionEngineering.Math;
 
-namespace MissionEngineering.Track;
+namespace MissionEngineering.Tracker;
 
 public abstract class KalmanFilter : IKalmanFilter
 {

@@ -2,7 +2,7 @@
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
 
-namespace MissionEngineering.Track.Tests
+namespace MissionEngineering.Tracker.Tests
 {
     [TestClass]
     public sealed class TrackHarnessTests

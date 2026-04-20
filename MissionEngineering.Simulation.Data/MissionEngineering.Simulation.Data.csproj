@@ -11,7 +11,7 @@
     <ProjectReference Include="..\MissionEngineering.Platform\MissionEngineering.Platform.csproj" />
     <ProjectReference Include="..\MissionEngineering.Sensor\MissionEngineering.Sensor.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation.Messages\MissionEngineering.Simulation.Messages.csproj" />
-    <ProjectReference Include="..\MissionEngineering.Track\MissionEngineering.Track.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Tracker\MissionEngineering.Tracker.csproj" />
   </ItemGroup>
 
 </Project>

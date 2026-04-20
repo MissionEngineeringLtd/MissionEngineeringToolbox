@@ -1,4 +1,4 @@
-﻿namespace MissionEngineering.Track;
+﻿namespace MissionEngineering.Tracker;
 
 public class TrackList
 {

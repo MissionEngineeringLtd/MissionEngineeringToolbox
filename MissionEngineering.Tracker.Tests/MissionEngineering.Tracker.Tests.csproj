@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MissionEngineering.Track\MissionEngineering.Track.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Tracker\MissionEngineering.Tracker.csproj" />
   </ItemGroup>
 
 </Project>

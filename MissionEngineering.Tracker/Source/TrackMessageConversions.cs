@@ -1,6 +1,6 @@
 ﻿using MissionEngineering.Simulation.Messages;
 
-namespace MissionEngineering.Track;
+namespace MissionEngineering.Tracker;
 
 public static class TrackMessageConversions
 {
