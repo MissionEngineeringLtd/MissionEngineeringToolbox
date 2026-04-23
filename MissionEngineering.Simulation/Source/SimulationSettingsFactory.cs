@@ -9,10 +9,11 @@ public static class SimulationSettingsFactory
             SimulationName = "Simulation_1",
             RunNumber = 1,
             DateTime = DateTime.Now,
-            IsAddLogging = true,
+            IsAddConsoleLogging = true,
+            IsAddFileLogging = true,
             IsWriteData = true,
             IsAddTimeStamp = false,
-            IsAddRunNumber = false,
+            IsAddRunNumber = true,
             IsCreateZipFile = true,
             OutputFolderBase = @"C:\Temp\MissionEngineeringToolbox\"
         };
@@ -27,7 +28,8 @@ public static class SimulationSettingsFactory
             SimulationName = "Simulation_1",
             RunNumber = 1,
             DateTime = DateTime.Now,
-            IsAddLogging = true,
+            IsAddConsoleLogging = false,
+            IsAddFileLogging = true,
             IsWriteData = true,
             IsAddTimeStamp = true,
             IsAddRunNumber = true,

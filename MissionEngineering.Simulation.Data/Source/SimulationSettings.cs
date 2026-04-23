@@ -8,7 +8,9 @@ public record SimulationSettings
 
     public DateTime DateTime { get; set; }
 
-    public bool IsAddLogging { get; set; }
+    public bool IsAddConsoleLogging { get; set; }
+
+    public bool IsAddFileLogging { get; set; }
 
     public bool IsWriteData { get; set; }
 
@@ -22,7 +24,7 @@ public record SimulationSettings
 
     public string OutputFolder => GetOutputFolder();
 
-    public string LogFileName => Path.Combine(OutputFolder, SimulationName + ".log");
+    public string LogFileName => GetLogFileName();
 
     public SimulationSettings()
     {
@@ -43,12 +45,19 @@ public record SimulationSettings
 
         if (IsAddRunNumber)
         {
-            var runNumberString = $"RunNumber_{RunNumber}";
+            var runNumberString = $"Run_{RunNumber:D4}";
 
             outputFolder = Path.Combine(outputFolder, runNumberString);
         }
 
         return outputFolder;
+    }
+
+    public string GetLogFileName()
+    {
+        var logFileName = Path.Combine(OutputFolder, SimulationName + ".log");
+
+        return logFileName;
     }
 
     public string GetFileNameFull(string fileName)

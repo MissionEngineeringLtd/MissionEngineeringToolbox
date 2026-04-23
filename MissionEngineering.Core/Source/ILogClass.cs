@@ -8,7 +8,7 @@ public interface ILogClass
 
     Logger Logger { get; set; }
 
-    void CreateLogger(string fileName, bool isAddLogging);
+    void CreateLogger(string fileName, bool isAddConsoleLogging, bool isAddFileLogging);
 
     void LogInformation(string message, int padding = 0, params object?[]? propertyValues);
 

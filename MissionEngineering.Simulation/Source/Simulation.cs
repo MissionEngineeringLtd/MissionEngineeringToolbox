@@ -151,7 +151,7 @@ public class Simulation : ISimulation
 
     public void CreateLogger()
     {
-        Log.CreateLogger(SimulationSettings.LogFileName, SimulationSettings.IsAddLogging);
+        Log.CreateLogger(SimulationSettings.LogFileName, SimulationSettings.IsAddConsoleLogging, SimulationSettings.IsAddFileLogging);
 
         Log.RunNumber = SimulationSettings.RunNumber;
     }

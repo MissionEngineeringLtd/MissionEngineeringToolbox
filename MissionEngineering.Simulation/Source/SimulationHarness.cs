@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Core;
+using System.Diagnostics;
 
 namespace MissionEngineering.Simulation;
 
@@ -32,6 +33,8 @@ public class SimulationHarness : ISimulationHarness
 
         var isRunParallel = numberOfRuns > 1;
 
+        Console.WriteLine($"Simulation Started : Number of Runs = {numberOfRuns}");
+
         if (isRunParallel)
         {
             RunParallel();
@@ -40,6 +43,8 @@ public class SimulationHarness : ISimulationHarness
         {
             RunSequential();
         }
+
+        Console.WriteLine($"Simulation Finished: Number of Runs = {numberOfRuns}");
     }
 
     public void RunSequential()
@@ -72,6 +77,13 @@ public class SimulationHarness : ISimulationHarness
 
     public ISimulation RunSingle(int runNumber)
     {
+        var numberOfRuns = SimulationHarnessSettings.NumberOfRuns;
+
+        if (numberOfRuns > 1)
+        {
+            Console.WriteLine($"Running Simulation: Run {runNumber}");
+        }
+
         var simulation = SimulationBuilder.CreateSimulation();
 
         var simulationSettings = SimulationSettings with { RunNumber = runNumber };

@@ -9,15 +9,19 @@ public class LogClass : ILogClass
 
     public Logger Logger { get; set; }
 
-    public void CreateLogger(string fileName, bool isAddLogging)
+    public void CreateLogger(string fileName, bool isAddConsoleLogging, bool isAddFileLogging)
     {
         var c = new LoggerConfiguration();
 
-        if (isAddLogging)
-        {
-            var outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff} {Level:u3}] {Message:lj}{NewLine}{Exception}";
+        var outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] [{Level:u3}] {Message:lj}{NewLine}{Exception}";
 
+        if (isAddConsoleLogging)
+        {
             c.WriteTo.Console(outputTemplate: outputTemplate);
+        }
+
+        if (isAddFileLogging)
+        { 
             c.WriteTo.File(fileName, outputTemplate: outputTemplate);
         }
 
