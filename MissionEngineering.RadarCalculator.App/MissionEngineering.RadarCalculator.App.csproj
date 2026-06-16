@@ -61,5 +61,8 @@
         <PackageReference Include="Microsoft.UI.Reactor.Devtools" />
         <RuntimeHostConfigurationOption Include="Reactor.DevtoolsSupport" Value="true" Trim="true" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\MissionEngineering.Radar\MissionEngineering.Radar.csproj" />
+    </ItemGroup>
 
 </Project>

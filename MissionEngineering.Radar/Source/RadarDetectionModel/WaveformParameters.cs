@@ -55,6 +55,8 @@ public record WaveformParameters
 
     public double PulseBandwidth_Hz { get; set; }
 
+    public double PulseBandwidth_MHz => PulseRepetitionFrequency_Hz / 1.0e6;
+
     public double PulseRepetitionFrequency_Hz { get; set; }
 
     public double PulseRepetitionFrequency_kHz => PulseRepetitionFrequency_Hz / 1000.0;
