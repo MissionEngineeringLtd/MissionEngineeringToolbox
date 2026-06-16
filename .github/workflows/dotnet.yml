@@ -37,9 +37,9 @@ jobs:
       uses: coverallsapp/github-action@v2.3.4   
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Math.Tests/coverage.info
-               /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Platform.Tests/coverage.info
-               /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Scanner.Tests/coverage.info
-               /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Simulation.Tests/coverage.info
-               /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Task.Tests/coverage.info
-               /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Tracker.Tests/coverage.info
+        files: D:/a/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Math.Tests/coverage.info
+               D:/a/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Platform.Tests/coverage.info
+               D:/a/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Scanner.Tests/coverage.info
+               D:/a/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Simulation.Tests/coverage.info
+               D:/a/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Task.Tests/coverage.info
+               D:/a/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Tracker.Tests/coverage.info
