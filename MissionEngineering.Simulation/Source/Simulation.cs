@@ -24,7 +24,7 @@ public class Simulation : ISimulation
 
     public List<IExecutableModel> SimulationModels { get; set; }
 
-    public List<Platform.Platform> Platforms { get; set; }
+    public PlatformManager PlatformManager { get; set; }
 
     public List<PlatformRelative> RelativePlatforms { get; set; }
 
@@ -92,10 +92,10 @@ public class Simulation : ISimulation
         trackPredictionCountActual = 0;
         trackPredictionCountMax = (int)Round(ScenarioSettings.SimulationClockSettings.TrackPredictionTimeStep / ScenarioSettings.SimulationClockSettings.TimeStep);
 
-        Platforms = [];
         RelativePlatforms = [];
         Sensors = [];
         SimulationModels = [];
+        PlatformManager = new PlatformManager();
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {
@@ -104,13 +104,14 @@ public class Simulation : ISimulation
                 PlatformSettings = platformSettings
             };
 
-            Platforms.Add(platform);
-            SimulationModels.Add(platform);
+            PlatformManager.AddPlatform(platform);
         }
 
-        for (int i = 1; i < Platforms.Count; i++)
+        SimulationModels.Add(PlatformManager);
+
+        for (int i = 1; i < PlatformManager.Platforms.Count; i++)
         {
-            var relativePlatform = new PlatformRelative(Platforms[0], Platforms[i]);
+            var relativePlatform = new PlatformRelative(PlatformManager.Platforms[0], PlatformManager.Platforms[i]);
 
             RelativePlatforms.Add(relativePlatform);
             SimulationModels.Add(relativePlatform);
@@ -118,13 +119,13 @@ public class Simulation : ISimulation
 
         foreach (var sensorSettings in ScenarioSettings.SensorSettingsList)
         {
-            var sensorPlatform = Platforms.Where(s => s.PlatformSettings.PlatformHeader.PlatformId == sensorSettings.PlatformId).First();
+            var sensorPlatform = PlatformManager.Platforms.Where(s => s.PlatformSettings.PlatformHeader.PlatformId == sensorSettings.PlatformId).First();
 
             var sensor = new Sensor.Sensor(SimulationClock)
             {
                 SensorSettings = sensorSettings,
                 SensorPlatform = sensorPlatform,
-                TargetPlatforms = Platforms
+                TargetPlatforms = PlatformManager.Platforms
             };
 
             Sensors.Add(sensor);
@@ -229,7 +230,7 @@ public class Simulation : ISimulation
     {
         var sd = DataRecorder.SimulationData;
 
-        foreach (var platform in Platforms)
+        foreach (var platform in PlatformManager.Platforms)
         {
             sd.PlatformDataAll.Add(platform.PlatformData);
 
