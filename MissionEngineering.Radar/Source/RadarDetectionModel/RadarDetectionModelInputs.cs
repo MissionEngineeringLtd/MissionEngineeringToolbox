@@ -4,9 +4,9 @@ namespace MissionEngineering.Radar;
 
 public record RadarDetectionModelInputs
 {
-    public string RadarName { get; set; }
+    public string SystemName { get; set; }
 
-    public string RadarProfile { get; set; }
+    public string SystemProfile { get; set; }
 
     public RfSystemType RfSystemType { get; set; }
 

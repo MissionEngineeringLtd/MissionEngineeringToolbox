@@ -16,8 +16,8 @@ public static class RadarDetectionModelHarnessInputExamples
 
         var inputs = new RadarDetectionModelInputs()
         {
-            RadarName = "Radar_1",
-            RadarProfile = "Profile_1",
+            SystemName = "Radar_1",
+            SystemProfile = "Profile_1",
             RfSystemType = RfSystemType.MonostaticRadar,
             TransmitPeakPower_W = 8000.0,
             TransmitGain_dB = 37.0,

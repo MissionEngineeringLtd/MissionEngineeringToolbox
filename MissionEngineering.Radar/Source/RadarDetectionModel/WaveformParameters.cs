@@ -53,9 +53,15 @@ public record WaveformParameters
         set => PulseWidth_s = value * 1.0e-6;
     }
 
+    public double PulseWidth_ns
+    {
+        get => PulseWidth_s * 1.0e9;
+        set => PulseWidth_s = value * 1.0e-9;
+    }
+
     public double PulseBandwidth_Hz { get; set; }
 
-    public double PulseBandwidth_MHz => PulseRepetitionFrequency_Hz / 1.0e6;
+    public double PulseBandwidth_MHz => PulseBandwidth_Hz / 1.0e6;
 
     public double PulseRepetitionFrequency_Hz { get; set; }
 
