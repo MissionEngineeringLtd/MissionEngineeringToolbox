@@ -7,13 +7,15 @@ using Microsoft.UI.Xaml.Controls;         // Orientation, InfoBarSeverity, etc.
 using MissionEngineering.Radar;
 using static Microsoft.UI.Reactor.Factories;
 
-public class WaveformComponent : Component
+public class WaveformComponent : Component<WaveformParameters>
 {
+    public WaveformParameters WaveformParameters { get; set; }
+
     public override Element Render()
     {
-        var waveformParameters1 = WaveformParametersExamples.Waveform_1();
+        WaveformParameters = Props;
 
-        var (waveformParameters, setWaveformParameters) = UseState(waveformParameters1);
+        var (waveformParameters, setWaveformParameters) = UseState(WaveformParameters);
 
         var (name, setName) = UseState(waveformParameters.WaveformName);
 

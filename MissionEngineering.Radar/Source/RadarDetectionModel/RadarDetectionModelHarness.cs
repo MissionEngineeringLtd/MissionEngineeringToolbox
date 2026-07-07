@@ -14,7 +14,7 @@ public class RadarDetectionModelHarness
 
     public void Run()
     {
-        RadarDetectionModelData = new List<RadarDetectionModelData>();
+       RadarDetectionModelData = new List<RadarDetectionModelData>();
 
         var range = RadarDetectionModelHarnessInputs.TargetRangeMin_m;
 

@@ -7,33 +7,24 @@ using Microsoft.UI.Xaml.Controls;         // Orientation, InfoBarSeverity, etc.
 using MissionEngineering.Radar;
 using static Microsoft.UI.Reactor.Factories;
 
-public class SystemComponent : Component
+public class SystemComponent : Component<RadarDetectionModelInputs>
 {
     public RadarDetectionModelInputs Inputs { get; set; }
 
-    public SystemComponent()
-    {
-    }
-
-    public SystemComponent(RadarDetectionModelInputs inputs)
-    {
-        Inputs = inputs;
-    }
-
     public override Element Render()
     {
-        var detectionModelHarnessInputs = RadarDetectionModelHarnessInputExamples.Example_1();
+        Inputs = Props;
 
-        var inputs1 = detectionModelHarnessInputs.RadarDetectionModelInputs;
-
-        var (inputs, setInputs) = UseState(inputs1);
+        var (inputs, setInputs) = UseState(Inputs);
 
         var (name, setName) = UseState(inputs.SystemName);
 
         var (transmitPower, setTransmitPower) = UseState(inputs.TransmitPeakPower_W);
 
         inputs.TransmitPeakPower_W = transmitPower;
-         
+
+        Inputs.TransmitPeakPower_W = transmitPower;
+
         var body = Border(
             FlexColumn(
                 Heading("System"),
