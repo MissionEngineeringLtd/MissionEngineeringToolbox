@@ -18,6 +18,7 @@
   <Project Path="MissionEngineering.Scanner/MissionEngineering.Scanner.csproj" Id="c0a8b0f1-1e5a-4396-b06e-5a8621efeed5" />
   <Project Path="MissionEngineering.Sensor/MissionEngineering.Sensor.csproj" Id="fcf3ef9c-3852-4478-aefe-f8c28cc1d882" />
   <Project Path="MissionEngineering.Simdis/MissionEngineering.Simdis.csproj" Id="072d857f-8e15-4a77-a7d3-72e00e33b0b9" />
+  <Project Path="MissionEngineering.Simulation.Commands/MissionEngineering.Simulation.Commands.csproj" Id="5fed23ef-970d-4937-9d3d-5d2eeab9e889" />
   <Project Path="MissionEngineering.Simulation.Console/MissionEngineering.Simulation.Console.csproj" Id="c8664854-2cfe-4408-9da0-71d30e8e65d3" />
   <Project Path="MissionEngineering.Simulation.Data/MissionEngineering.Simulation.Data.csproj" Id="7ec65002-9f7a-42db-9e7d-1ecc8a6ddfed" />
   <Project Path="MissionEngineering.Simulation.Messages/MissionEngineering.Simulation.Messages.csproj" Id="aa61f429-43d1-45da-9c4f-f033b4d83119" />
