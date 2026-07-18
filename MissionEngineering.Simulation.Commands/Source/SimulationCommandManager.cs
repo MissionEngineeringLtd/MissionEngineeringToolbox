@@ -15,6 +15,7 @@ public static class SimulationCommandManager
             {
                 options.AddKeyValueTypeDiscriminator<ISimulationCommand>("CommandType", new Dictionary<string, Type>(StringComparer.Ordinal)
                 {
+                    ["SimulationSettings"] = typeof(SimulationSettingsCommand),
                     ["MapOrigin"] = typeof(MapOriginCommand),
                     ["PlatformCreate"] = typeof(PlatformCreateCommand),
                 });

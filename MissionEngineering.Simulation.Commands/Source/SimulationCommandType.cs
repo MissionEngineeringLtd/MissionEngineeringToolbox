@@ -3,6 +3,7 @@
 public enum SimulationCommandType
 {
     Undefined = 0,
+    SimulationSettings,
     MapOrigin,
     PlatformCreate,
 }

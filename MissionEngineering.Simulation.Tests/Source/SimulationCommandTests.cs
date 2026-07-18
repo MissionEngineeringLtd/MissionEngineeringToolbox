@@ -34,13 +34,13 @@ public sealed class SimulationCommandTests
 
         var outputFolder = Environment.CurrentDirectory;
 
-        var outputFile = Path.Combine(outputFolder, "SimulationCommmands_Example_1.yaml");
+        var outputFile = Path.Combine(outputFolder, "SimulationCommmands_Example_2.yaml");
 
         commandsIn.WriteToYamlFile(outputFile);
 
         var inputFolder = Environment.CurrentDirectory;
 
-        var inputFile = Path.Combine(inputFolder, "SimulationCommmands_Example_1.yaml");
+        var inputFile = Path.Combine(inputFolder, "SimulationCommmands_Example_2.yaml");
 
         // Act
         var commandsOut = SimulationCommandManager.ReadCommandsFromFile(inputFile);
@@ -48,9 +48,9 @@ public sealed class SimulationCommandTests
         // Assert
         var expectedCommandType = SimulationCommandType.PlatformCreate;
 
-        var actualCommandType = commandsOut[1].CommandType;
+        var actualCommandType = commandsOut[2].CommandType;
 
         Assert.AreEqual(expectedCommandType, actualCommandType);
-        Assert.AreEqual(3, commandsOut.Count);
+        Assert.AreEqual(4, commandsOut.Count);
     }
 }

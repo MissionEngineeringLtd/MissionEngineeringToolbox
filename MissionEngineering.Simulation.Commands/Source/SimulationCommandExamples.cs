@@ -4,6 +4,15 @@ public static class SimulationCommandExamples
 {
     public static List<ISimulationCommand> Example_1()
     {
+        var c0 = new SimulationSettingsCommand()
+        {
+            CommandTime = 0.0,
+            SimulationStartDateTime = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+            SimulationStartTime_s = 10.0,
+            SimulationEndTime_s = 100.0,
+            SimulationTimeStep_s = 0.1
+        };
+        
         var c1 = new MapOriginCommand()
         {
             CommandTime = 0.0,
@@ -37,6 +46,6 @@ public static class SimulationCommandExamples
             PitchAngle_deg = 5.0
         };
 
-        return new List<ISimulationCommand> { c1, c2, c3 };
+        return new List<ISimulationCommand> { c0, c1, c2, c3 };
     }
 }
