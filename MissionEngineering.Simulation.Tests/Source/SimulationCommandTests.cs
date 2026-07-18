@@ -13,7 +13,7 @@ public sealed class SimulationCommandTests
 
         var yamlString = commands.ConvertToYamlString();
 
-        var outputFolder = @"C:\Temp\MissionEngineeringToolbox";
+        var outputFolder = Environment.CurrentDirectory;
 
         var outputFile = Path.Combine(outputFolder, "SimulationCommmands_Example_1.yaml");
 
@@ -28,14 +28,29 @@ public sealed class SimulationCommandTests
     public void ReadCommandsFromYamlFile_ExpectSuccess()
     {
         // Arrange
-        var inputFolder = @"C:\Temp\MissionEngineeringToolbox";
+        var commandsIn = SimulationCommandExamples.Example_1();
+
+        var yamlString = commandsIn.ConvertToYamlString();
+
+        var outputFolder = Environment.CurrentDirectory;
+
+        var outputFile = Path.Combine(outputFolder, "SimulationCommmands_Example_1.yaml");
+
+        commandsIn.WriteToYamlFile(outputFile);
+
+        var inputFolder = Environment.CurrentDirectory;
 
         var inputFile = Path.Combine(inputFolder, "SimulationCommmands_Example_1.yaml");
 
         // Act
-        var commands = SimulationCommandHelper.ReadCommandsFromFile(inputFile);
+        var commandsOut = SimulationCommandManager.ReadCommandsFromFile(inputFile);
 
         // Assert
-        Assert.AreEqual(2, commands.Count);
+        var expectedCommandType = SimulationCommandType.PlatformCreate;
+
+        var actualCommandType = commandsOut[1].CommandType;
+
+        Assert.AreEqual(expectedCommandType, actualCommandType);
+        Assert.AreEqual(3, commandsOut.Count);
     }
 }
