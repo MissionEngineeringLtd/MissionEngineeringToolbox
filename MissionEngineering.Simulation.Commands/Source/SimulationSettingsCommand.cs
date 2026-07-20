@@ -10,7 +10,7 @@ public class SimulationSettingsCommand : ISimulationCommand
 
     public double CommandTime { get; set; }
 
-    public DateTimeOffset SimulationStartDateTime { get; set; }
+    public string SimulationStartDateTime { get; set; }
 
     public double SimulationStartTime_s { get; set; }
 

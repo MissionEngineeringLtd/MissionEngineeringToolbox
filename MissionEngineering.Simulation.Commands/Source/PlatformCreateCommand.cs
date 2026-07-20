@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MissionEngineering.Platform;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,18 @@ public class PlatformCreateCommand : ISimulationCommand
     public int PlatformId { get; set; }
 
     public string PlatformName { get; set; }
+
+    public required string PlatformCallsign { get; set; }
+
+    public required string PlatformDescription { get; set; }
+
+    public PlatformType PlatformType { get; set; }
+
+    public PlatformAffiliationType PlatformAffiliation { get; set; }
+
+    public string PlatformIcon { get; set; }
+
+    public string PlatformColor { get; set; }
 
     public double PositionNorth_m { get; set; }
 

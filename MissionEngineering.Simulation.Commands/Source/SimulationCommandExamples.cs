@@ -1,4 +1,6 @@
-﻿namespace MissionEngineering.Simulation;
+﻿using MissionEngineering.Platform;
+
+namespace MissionEngineering.Simulation;
 
 public static class SimulationCommandExamples
 {
@@ -7,12 +9,12 @@ public static class SimulationCommandExamples
         var c0 = new SimulationSettingsCommand()
         {
             CommandTime = 0.0,
-            SimulationStartDateTime = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+            SimulationStartDateTime = "2024-11-21T21:20:30Z",
             SimulationStartTime_s = 10.0,
             SimulationEndTime_s = 100.0,
             SimulationTimeStep_s = 0.1
         };
-        
+
         var c1 = new MapOriginCommand()
         {
             CommandTime = 0.0,
@@ -24,7 +26,13 @@ public static class SimulationCommandExamples
         {
             CommandTime = 10.0,
             PlatformId = 1,
-            PlatformName = "Platform_1",
+            PlatformName = "FF_1",
+            PlatformCallsign = "FF_1",
+            PlatformDescription = "FF_1 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "F-35A",
+            PlatformColor = "Blue",
             PositionNorth_m = 1000.0,
             PositionEast_m = 500.0,
             Altitude_m = 100.0,
@@ -37,7 +45,13 @@ public static class SimulationCommandExamples
         {
             CommandTime = 10.0,
             PlatformId = 2,
-            PlatformName = "Platform_2",
+            PlatformName = "FF_2",
+            PlatformCallsign = "FF_2",
+            PlatformDescription = "FF_2 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "F-35A",
+            PlatformColor = "Blue",
             PositionNorth_m = 2000.0,
             PositionEast_m = 1000.0,
             Altitude_m = 100.0,
