@@ -1,29 +1,18 @@
 ﻿using MissionEngineering.Core;
-using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
 
 namespace MissionEngineering.Simulation;
 
-public interface ISimulation
+public interface ISimulationCommandProcessor : IExecutableModel
 {
-    IDataRecorder DataRecorder { get; set; }
-
     ISimulationClock SimulationClock { get; set; }
 
     ILLAOrigin LLAOrigin { get; set; }
 
-    SimulationSettings SimulationSettings { get; set; }
-
-    ScenarioSettings ScenarioSettings { get; set; }
-
-    ISimulationCommandProcessor SimulationCommandProcessor { get; set; }
-
     IPlatformManager PlatformManager { get; set; }
 
-    List<IExecutableModel> SimulationModels { get; set; }
-
-    ISimulation Run();
+    List<ISimulationCommand> SimulationCommands { get; set; }
 
     void Initialise(double time);
 

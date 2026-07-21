@@ -24,39 +24,39 @@ public static class SimulationCommandExamples
 
         var c2 = new PlatformCreateCommand()
         {
-            CommandTime = 10.0,
-            PlatformId = 1,
+            CommandTime = 30.0,
+            PlatformId = 5,
             PlatformName = "FF_1",
             PlatformCallsign = "FF_1",
             PlatformDescription = "FF_1 Description",
             PlatformAffiliation = PlatformAffiliationType.Friendly,
             PlatformType = PlatformType.Aircraft,
-            PlatformIcon = "F-35A",
+            PlatformIcon = "f-35a_lightning",
             PlatformColor = "Blue",
             PositionNorth_m = 1000.0,
             PositionEast_m = 500.0,
-            Altitude_m = 100.0,
-            TotalSpeed_ms = 50.0,
-            HeadingAngle_deg = 90.0,
+            Altitude_m = 3000.0,
+            TotalSpeed_ms = 250.0,
+            HeadingAngle_deg = 45,
             PitchAngle_deg = 5.0
         };
 
         var c3 = new PlatformCreateCommand()
         {
-            CommandTime = 10.0,
-            PlatformId = 2,
+            CommandTime = 40.0,
+            PlatformId = 6,
             PlatformName = "FF_2",
             PlatformCallsign = "FF_2",
             PlatformDescription = "FF_2 Description",
             PlatformAffiliation = PlatformAffiliationType.Friendly,
             PlatformType = PlatformType.Aircraft,
-            PlatformIcon = "F-35A",
+            PlatformIcon = "f-35a_lightning",
             PlatformColor = "Blue",
-            PositionNorth_m = 2000.0,
-            PositionEast_m = 1000.0,
-            Altitude_m = 100.0,
-            TotalSpeed_ms = 50.0,
-            HeadingAngle_deg = 90.0,
+            PositionNorth_m = 20000.0,
+            PositionEast_m = 40000.0,
+            Altitude_m = 5000.0,
+            TotalSpeed_ms = 450.0,
+            HeadingAngle_deg = 135.0,
             PitchAngle_deg = 5.0
         };
 

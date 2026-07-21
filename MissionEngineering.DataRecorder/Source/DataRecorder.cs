@@ -63,7 +63,7 @@ public class DataRecorder : IDataRecorder
     {
         SimulationData.PlatformDataPerPlatform = [];
 
-        var platformIds = SimulationData.ScenarioSettings.PlatformSettingsList.Select(s => s.PlatformHeader.PlatformId).Distinct();
+        var platformIds = SimulationData.PlatformDataAll.Select(s => s.PlatformHeader.PlatformId).Distinct();
 
         foreach (var platformId in platformIds)
         {
@@ -91,7 +91,7 @@ public class DataRecorder : IDataRecorder
     {
         SimulationData.PlatformStateMessagesPerPlatform = [];
 
-        var platformIds = SimulationData.ScenarioSettings.PlatformSettingsList.Select(s => s.PlatformHeader.PlatformId).Distinct();
+        var platformIds = SimulationData.PlatformDataAll.Select(s => s.PlatformHeader.PlatformId).Distinct();
 
         foreach (var platformId in platformIds)
         {

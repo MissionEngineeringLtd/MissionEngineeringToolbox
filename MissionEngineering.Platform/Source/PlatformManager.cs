@@ -2,7 +2,7 @@
 
 namespace MissionEngineering.Platform;
 
-public class PlatformManager : IExecutableModel
+public class PlatformManager : IPlatformManager
 {
     public List<Platform> Platforms { get; set; }
 

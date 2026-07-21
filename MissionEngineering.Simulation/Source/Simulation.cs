@@ -22,9 +22,11 @@ public class Simulation : ISimulation
 
     public ILLAOrigin LLAOrigin { get; set; }
 
-    public List<IExecutableModel> SimulationModels { get; set; }
+    public IPlatformManager PlatformManager { get; set; }
 
-    public PlatformManager PlatformManager { get; set; }
+    public ISimulationCommandProcessor SimulationCommandProcessor { get; set; }
+
+    public List<IExecutableModel> SimulationModels { get; set; }
 
     public List<PlatformRelative> RelativePlatforms { get; set; }
 
@@ -41,12 +43,14 @@ public class Simulation : ISimulation
     private int trackPredictionCountActual;
     private int trackPredictionCountMax;
 
-    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IDataRecorder dataRecorder, ILogClass log)
+    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, ISimulationCommandProcessor simulationCommandProcessor, IDataRecorder dataRecorder, ILogClass log)
     {
         SimulationSettings = simulationSettings;
         ScenarioSettings = scenarioSettings;
         SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
+        PlatformManager = platformManager;
+        SimulationCommandProcessor = simulationCommandProcessor;
         DataRecorder = dataRecorder;
         Log = log;
     }
@@ -95,7 +99,10 @@ public class Simulation : ISimulation
         RelativePlatforms = [];
         Sensors = [];
         SimulationModels = [];
-        PlatformManager = new PlatformManager();
+
+        SimulationCommandProcessor.SimulationCommands = SimulationCommandExamples.Example_1();
+
+        SimulationCommandProcessor.Initialise(time);
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {
@@ -180,6 +187,8 @@ public class Simulation : ISimulation
 
     public void Update(double time)
     {
+        SimulationCommandProcessor.Update(time);
+
         UpdateModels(time);
 
         UpdateTracker(time);
@@ -307,6 +316,8 @@ public class Simulation : ISimulation
     {
         Log.LogInformation("Finalise Started...");
         Log.LogInformation("");
+
+        SimulationCommandProcessor.Finalise(time);
 
         FinaliseModels(time);
 

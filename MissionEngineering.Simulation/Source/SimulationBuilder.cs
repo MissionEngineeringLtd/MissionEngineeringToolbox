@@ -2,6 +2,7 @@
 using MissionEngineering.Core;
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
+using MissionEngineering.Platform;
 using MissionEngineering.Simdis;
 
 namespace MissionEngineering.Simulation;
@@ -31,6 +32,8 @@ public static class SimulationBuilder
         var services = new ServiceCollection();
 
         services.AddScoped<ISimulation, Simulation>();
+        services.AddScoped<ISimulationCommandProcessor, SimulationCommandProcessor>();
+        services.AddScoped<IPlatformManager, PlatformManager>();
         services.AddScoped<ISimulationClock, SimulationClock>();
         services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();
         services.AddScoped<ILLAOrigin, LLAOrigin>();

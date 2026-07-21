@@ -19,7 +19,7 @@ public static class PlatformSettingsFactory
             {
                 PlatformType = "Aircraft",
                 PlatformAffiliationFHN = "F",
-                PlatformIcon = "F-35A",
+                PlatformIcon = "f-35a_lightning",
                 PlatformColor = "Blue",
                 PlatformInterpolate = "1",
                 PlatformScaleLevel = 2.5
@@ -55,7 +55,7 @@ public static class PlatformSettingsFactory
             {
                 PlatformType = "Aircraft",
                 PlatformAffiliationFHN = "F",
-                PlatformIcon = "F-35A",
+                PlatformIcon = "f-35a_lightning",
                 PlatformColor = "Green",
                 PlatformInterpolate = "1",
                 PlatformScaleLevel = 2.5
@@ -92,7 +92,7 @@ public static class PlatformSettingsFactory
             {
                 PlatformType = "Aircraft",
                 PlatformAffiliationFHN = "F",
-                PlatformIcon = "F-35A",
+                PlatformIcon = "f-35a_lightning",
                 PlatformColor = "Green",
                 PlatformInterpolate = "1",
                 PlatformScaleLevel = 2.5
