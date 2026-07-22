@@ -7,6 +7,8 @@ public class PlatformModel
 {
     public ILLAOrigin LLAOrigin { get; set; }
 
+    public IPlatformAutopilot PlatformAutopilot { get; set; }
+
     public PlatformModel(ILLAOrigin llaOrigin)
     {
         LLAOrigin = llaOrigin;
@@ -14,6 +16,8 @@ public class PlatformModel
 
     public PlatformState Update(SimulationTimeStamp timeStamp, PlatformState platformState)
     {
+        PlatformAutopilot.PlatformState = platformState;
+
         // For update, we  use the actual acceleration in the TBA frame.
         var accelerationTBA = GetAccelerationTBA();
 
@@ -39,12 +43,9 @@ public class PlatformModel
 
     public AccelerationTBA GetAccelerationTBA()
     {
-        var accelerationTBA = new AccelerationTBA
-        {
-            AccelerationAxial_ms2 = 0.0,
-            AccelerationLateral_ms2 = 0.0,
-            AccelerationVertical_ms2 = 0.0
-        };
+        PlatformAutopilot.Update();
+
+        var accelerationTBA = PlatformAutopilot.AccelerationTBA;
 
         return accelerationTBA;
     }

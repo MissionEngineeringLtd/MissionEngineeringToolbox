@@ -36,6 +36,12 @@ public class Platform : IExecutableModel
 
         PlatformModel = new PlatformModel(LLAOrigin);
 
+        var platformAutopilot = new PlatformAutopilot();
+
+        platformAutopilot.Initialise();
+
+        PlatformModel.PlatformAutopilot = platformAutopilot;
+
         var attitude = new Attitude
         {
             HeadingAngle_deg = pi.HeadingAngle_deg,
