@@ -6,14 +6,6 @@ public record PlatformStateMessage : SimulationMessage
 
     public string PlatformName { get; set; }
 
-    public bool IsPrediction { get; set; }
-
-    public double LastUpdateTime_s { get; set; }
-
-    public double PredictionTime_s { get; set; }
-
-    public double PredictionTimeDelta_s { get; set; }
-
     public double Latitude_deg { get; set; }
 
     public double Longitude_deg { get; set; }
@@ -31,6 +23,8 @@ public record PlatformStateMessage : SimulationMessage
     public double VelocityEast_ms { get; set; }
 
     public double VelocityDown_ms { get; set; }
+
+    public double TotalSpeed_ms { get; set; }
 
     public double AccelerationNorth_ms2 { get; set; }
 
@@ -59,6 +53,14 @@ public record PlatformStateMessage : SimulationMessage
     public bool IsActive { get; set; }
 
     public bool IsDestroyed { get; set; }
+
+    public double HeadingAngleDemand_deg { get; set; }
+
+    public double AltitudeDemand_m { get; set; }
+
+    public double TotalSpeedDemand_ms { get; set; }
+
+    public double PitchAngleDemand_deg { get; set; }
 
     public PlatformStateMessage()
     {

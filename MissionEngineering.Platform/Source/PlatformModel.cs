@@ -18,25 +18,14 @@ public class PlatformModel
     {
         PlatformAutopilot.PlatformState = platformState;
 
-        // For update, we  use the actual acceleration in the TBA frame.
         var accelerationTBA = GetAccelerationTBA();
 
-        var ps = PlatformFunctions.PredictPlatformState(timeStamp, platformState, LLAOrigin.PositionLLA, accelerationTBA, false);
+        var ps = PlatformFunctions.PredictPlatformState(timeStamp, platformState, LLAOrigin.PositionLLA, accelerationTBA);
 
-        return ps;
-    }
-
-    public PlatformState Predict(SimulationTimeStamp timeStamp, PlatformState platformState)
-    {
-        // For prediction, we assume zero acceleration in the TBA frame for simplicity.
-        var accelerationTBA = new AccelerationTBA
-        {
-            AccelerationAxial_ms2 = 0.0,
-            AccelerationLateral_ms2 = 0.0,
-            AccelerationVertical_ms2 = 0.0
-        };
-
-        var ps = PlatformFunctions.PredictPlatformState(timeStamp, platformState, LLAOrigin.PositionLLA, accelerationTBA, false);
+        ps.HeadingAngleDemand_deg = PlatformAutopilot.PlatformFlightpathDemand.HeadingAngleDemand_deg;
+        ps.AltitudeDemand_m = PlatformAutopilot.PlatformFlightpathDemand.AltitudeDemand_m;
+        ps.TotalSpeedDemand_ms = PlatformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms;
+        ps.PitchAngleDemand_deg = PlatformAutopilot.PitchAngleDemand_deg;
 
         return ps;
     }

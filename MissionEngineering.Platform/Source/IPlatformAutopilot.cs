@@ -6,9 +6,13 @@ namespace MissionEngineering.Platform;
 
 public interface IPlatformAutopilot
 {
-    public PlatformState PlatformState { get; set; }
+    PlatformState PlatformState { get; set; }
 
-    public AccelerationTBA AccelerationTBA { get; set; }
+    PlatformFlightpathDemand PlatformFlightpathDemand { get; set; }
+
+    AccelerationTBA AccelerationTBA { get; set; }
+
+    double PitchAngleDemand_deg { get; set; }
 
     void Initialise();
 

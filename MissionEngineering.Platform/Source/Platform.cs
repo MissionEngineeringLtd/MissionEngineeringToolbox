@@ -60,19 +60,26 @@ public class Platform : IExecutableModel
 
         var positionLLA = MappingConversions.ConvertPositionNEDToPositionLLA(positionNED, LLAOrigin.PositionLLA);
 
+        platformAutopilot.PlatformFlightpathDemand = new PlatformFlightpathDemand()
+        {
+            HeadingAngleDemand_deg = attitude.HeadingAngle_deg - 30.0,
+            AltitudeDemand_m = positionLLA.Altitude_m,
+            TotalSpeedDemand_ms = velocityNED.TotalSpeed_ms + 50.0
+        };
+
         PlatformState = new PlatformState
         {
             TimeStamp = timeStamp,
-            IsPrediction = false,
-            LastUpdateTime_s = time_s,
-            PredictionTime_s = time_s,
-            PredictionTimeDelta_s = 0.0,
             PlatformId = PlatformSettings.PlatformHeader.PlatformId,
             PlatformName = PlatformSettings.PlatformHeader.PlatformName,
             PositionLLA = positionLLA,
             PositionNED = positionNED,
             VelocityNED = velocityNED,
             Attitude = attitude,
+            HeadingAngleDemand_deg = platformAutopilot.PlatformFlightpathDemand.HeadingAngleDemand_deg,
+            AltitudeDemand_m = platformAutopilot.PlatformFlightpathDemand.AltitudeDemand_m,
+            TotalSpeedDemand_ms = platformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms,
+            PitchAngleDemand_deg = platformAutopilot.PitchAngleDemand_deg
         };
     }
 
@@ -90,15 +97,6 @@ public class Platform : IExecutableModel
         };
 
         PlatformDataList.Add(PlatformData);
-    }
-
-    public PlatformState Predict(double time_s)
-    {
-        var timeStamp = SimulationClock.GetTimeStamp(time_s);
-
-        var ps = PlatformModel.Predict(timeStamp, PlatformState);
-
-        return ps;
     }
 
     public void Finalise(double time_s)

@@ -5,7 +5,7 @@ namespace MissionEngineering.Platform;
 
 public static class PlatformFunctions
 {
-    public static PlatformState PredictPlatformState(SimulationTimeStamp timeStamp, PlatformState platformState, PositionLLA positionLLAOrigin, AccelerationTBA accelerationTBA, bool isPredict)
+    public static PlatformState PredictPlatformState(SimulationTimeStamp timeStamp, PlatformState platformState, PositionLLA positionLLAOrigin, AccelerationTBA accelerationTBA)
     {
         var deltaTime_s = timeStamp.SimulationTime_s - platformState.TimeStamp.SimulationTime_s;
 
@@ -21,17 +21,9 @@ public static class PlatformFunctions
         var attitude = FrameConversions.GetAttitudeFromVelocityVector(platformState.VelocityNED);
         var attitudeRate = GetAttitudeRate(platformState.Attitude, attitude, dt);
 
-        var lastUpdateTime_s = platformState.TimeStamp.SimulationTime_s;
-        var predictionTime_s = timeStamp.SimulationTime_s;
-        var predictionTimeDelta_s = predictionTime_s - lastUpdateTime_s;
-
         var ps = platformState with
         {
             TimeStamp = timeStamp,
-            IsPrediction = isPredict,
-            LastUpdateTime_s = platformState.TimeStamp.SimulationTime_s,
-            PredictionTime_s = predictionTime_s,
-            PredictionTimeDelta_s = predictionTimeDelta_s,
             PositionLLA = positionLLA,
             PositionNED = positionNED,
             VelocityNED = velocityNED,

@@ -11,14 +11,6 @@ public record PlatformState
 
     public string PlatformName { get; set; }
 
-    public bool IsPrediction { get; set; }
-
-    public double LastUpdateTime_s { get; set; }
-
-    public double PredictionTime_s { get; set; }
-
-    public double PredictionTimeDelta_s { get; set; }
-
     public PositionLLA PositionLLA { get; set; }
 
     public PositionNED PositionNED { get; set; }
@@ -36,4 +28,12 @@ public record PlatformState
     public bool IsActive { get; set; }
 
     public bool IsDestroyed { get; set; }
+
+    public double HeadingAngleDemand_deg { get; set; }
+
+    public double AltitudeDemand_m { get; set; }
+
+    public double TotalSpeedDemand_ms { get; set; }
+
+    public double PitchAngleDemand_deg { get; set; }
 }

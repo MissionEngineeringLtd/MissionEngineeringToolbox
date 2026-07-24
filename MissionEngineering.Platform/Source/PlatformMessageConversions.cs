@@ -22,10 +22,6 @@ public static class PlatformMessageConversions
             Header = header,
             PlatformId = platformState.PlatformId,
             PlatformName = platformState.PlatformName,
-            IsPrediction = platformState.IsPrediction,
-            LastUpdateTime_s = platformState.LastUpdateTime_s,
-            PredictionTime_s = platformState.PredictionTime_s,
-            PredictionTimeDelta_s = platformState.PredictionTimeDelta_s,
             Latitude_deg = platformState.PositionLLA.Latitude_deg,
             Longitude_deg = platformState.PositionLLA.Longitude_deg,
             Altitude_m = platformState.PositionLLA.Altitude_m,
@@ -35,6 +31,7 @@ public static class PlatformMessageConversions
             VelocityNorth_ms = platformState.VelocityNED.VelocityNorth_ms,
             VelocityEast_ms = platformState.VelocityNED.VelocityEast_ms,
             VelocityDown_ms = platformState.VelocityNED.VelocityDown_ms,
+            TotalSpeed_ms = platformState.VelocityNED.TotalSpeed_ms,
             AccelerationNorth_ms2 = platformState.AccelerationNED.AccelerationNorth_ms2,
             AccelerationEast_ms2 = platformState.AccelerationNED.AccelerationEast_ms2,
             AccelerationDown_ms2 = platformState.AccelerationNED.AccelerationDown_ms2,
@@ -49,6 +46,10 @@ public static class PlatformMessageConversions
             BankRate_deg = platformState.AttitudeRate.BankRate_degs,
             IsActive = platformState.IsActive,
             IsDestroyed = platformState.IsDestroyed,
+            HeadingAngleDemand_deg = platformState.HeadingAngleDemand_deg,
+            AltitudeDemand_m = platformState.AltitudeDemand_m,
+            TotalSpeedDemand_ms = platformState.TotalSpeedDemand_ms,
+            PitchAngleDemand_deg = platformState.PitchAngleDemand_deg
         };
 
         return platformStateMessage;

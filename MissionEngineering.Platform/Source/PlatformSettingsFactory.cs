@@ -31,7 +31,7 @@ public static class PlatformSettingsFactory
                 Altitude_m = 5000.0,
                 TotalSpeed_ms = 250.0,
                 HeadingAngle_deg = 0.0,
-                PitchAngle_deg = 0.0
+                PitchAngle_deg = 10.0
             }
         };
 
@@ -68,7 +68,7 @@ public static class PlatformSettingsFactory
                 Altitude_m = 5000.0,
                 TotalSpeed_ms = 250.0,
                 HeadingAngle_deg = 180.0,
-                PitchAngle_deg = 0.0
+                PitchAngle_deg = 20.0
             }
         };
 
@@ -105,7 +105,7 @@ public static class PlatformSettingsFactory
                 Altitude_m = 6000.0,
                 TotalSpeed_ms = 200.0,
                 HeadingAngle_deg = 135.0,
-                PitchAngle_deg = 0.0
+                PitchAngle_deg = 30.0
             }
         };
 
