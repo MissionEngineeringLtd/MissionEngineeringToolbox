@@ -1,5 +1,6 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.Math;
+using System.Runtime.InteropServices;
 
 namespace MissionEngineering.Platform;
 
@@ -11,14 +12,23 @@ public static class PlatformFunctions
 
         var dt = new DeltaTime(deltaTime_s);
 
-        var accelerationNED = FrameConversions.GetAccelerationNED(accelerationTBA, platformState.Attitude);
+        // Step 1: Set bank angle to 0 for acceleration transformation to NED: then replace with the real value in Step 2:
+        var attitude = platformState.Attitude with { BankAngle_deg = 0.0 };
+
+        var accelerationNED = FrameConversions.GetAccelerationNED(accelerationTBA, attitude);
 
         var velocityNED = platformState.VelocityNED + accelerationNED * dt;
         var positionNED = platformState.PositionNED + velocityNED * dt;
 
         var positionLLA = MappingConversions.ConvertPositionNEDToPositionLLA(positionNED, positionLLAOrigin);
 
-        var attitude = FrameConversions.GetAttitudeFromVelocityVector(platformState.VelocityNED);
+        attitude = FrameConversions.GetAttitudeFromVelocityVector(platformState.VelocityNED);
+
+        // Step 2: Set the new bank angle from the lateral acceleration for coordinated turn in Step 2:
+        var bankAngleNew_deg = SetBankAngleFromLateralAcceleration(accelerationTBA.AccelerationLateral_ms2);
+
+        attitude = attitude with { BankAngle_deg = bankAngleNew_deg };
+
         var attitudeRate = GetAttitudeRate(platformState.Attitude, attitude, dt);
 
         var ps = platformState with
@@ -34,6 +44,15 @@ public static class PlatformFunctions
         };
 
         return ps;
+    }
+
+    public static double SetBankAngleFromLateralAcceleration(double lateralAcceleration_ms2)
+    {
+        var lateralAcceleration_g = lateralAcceleration_ms2.MetersPerSecondSquaredToG();
+
+        var bankAngle_deg = MathFunctions.CalculateBankAngleDegFromLateralAcceleration(lateralAcceleration_g);
+
+        return bankAngle_deg;
     }
 
     public static AttitudeRate GetAttitudeRate(Attitude attitudePrevious, Attitude attitudeCurrent, DeltaTime deltaTime_s)

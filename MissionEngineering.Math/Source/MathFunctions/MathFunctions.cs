@@ -114,9 +114,9 @@ public static class MathFunctions
         return result;
     }
 
-    public static double CalculateBankAngleDegFromLateralAcceleration(double lateralAcceleration)
+    public static double CalculateBankAngleDegFromLateralAcceleration(double lateralAcceleration_ms2)
     {
-        var lateralAcceleration_g = lateralAcceleration.MetersPerSecondSquaredToG();
+        var lateralAcceleration_g = lateralAcceleration_ms2.MetersPerSecondSquaredToG();
 
         var loadFactor_g = Abs(lateralAcceleration_g) + 1.0;
 
@@ -127,20 +127,20 @@ public static class MathFunctions
         return bankAngle_deg;
     }
 
-    public static double CalculateLoadFactorFromBankAngleDeg(double bankAngleDeg)
+    public static double CalculateLoadFactorFromBankAngleDeg(double bankAngle_deg)
     {
-        var bankAngle = bankAngleDeg.DegreesToRadians();
+        var bankAngle_rad = bankAngle_deg.DegreesToRadians();
 
-        var loadFactor_g = 1 / Cos(bankAngle);
+        var loadFactor_g = 1 / Cos(bankAngle_rad);
 
         return loadFactor_g;
     }
 
     public static double CalculateBankAngleFromLoadFactor(double loadFactor_g)
     {
-        var bankAngle = Acos(1 / loadFactor_g);
+        var bankAngle_rad = Acos(1 / loadFactor_g);
 
-        var bankAngle_deg = bankAngle.RadiansToDegrees();
+        var bankAngle_deg = bankAngle_rad.RadiansToDegrees();
 
         return bankAngle_deg;
     }

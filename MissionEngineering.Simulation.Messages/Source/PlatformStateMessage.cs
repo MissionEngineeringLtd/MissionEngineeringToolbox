@@ -44,11 +44,11 @@ public record PlatformStateMessage : SimulationMessage
 
     public double BankAngle_deg { get; set; }
 
-    public double HeadingRate_deg { get; set; }
+    public double HeadingRate_degs { get; set; }
 
-    public double PitchRate_deg { get; set; }
+    public double PitchRate_degs { get; set; }
 
-    public double BankRate_deg { get; set; }
+    public double BankRate_degs { get; set; }
 
     public bool IsActive { get; set; }
 
