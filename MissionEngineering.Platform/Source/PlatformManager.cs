@@ -81,4 +81,11 @@ public class PlatformManager : IPlatformManager
 
         return platform;
     }
+
+    public Platform GetPlatformByName(string platformName)
+    {
+        var platform = Platforms.FirstOrDefault(p => p.PlatformSettings.PlatformHeader.PlatformName == platformName);
+
+        return platform;
+    }   
 }

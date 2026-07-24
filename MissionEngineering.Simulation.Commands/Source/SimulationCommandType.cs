@@ -6,4 +6,5 @@ public enum SimulationCommandType
     SimulationSettings,
     MapOrigin,
     PlatformCreate,
+    PlatformAutopilot
 }

@@ -62,6 +62,13 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
                     DataRecorder.SimulationData.ScenarioSettings.PlatformSettingsList.Add(p.PlatformSettings);
                     break;
 
+                case PlatformAutopilotCommand c:
+                    var platform = PlatformManager.GetPlatformByName(c.PlatformName);
+
+                    UpdatePlatformAutopilot(platform, c);
+
+                    break;
+
                 default:
                     throw new NotImplementedException($"Command type {command.CommandType} is not implemented.");
             }
@@ -120,5 +127,14 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
         };
 
         return platform;
+    }
+
+    public void UpdatePlatformAutopilot(Platform.Platform p, PlatformAutopilotCommand c)
+    {
+        var pd = p.PlatformModel.PlatformAutopilot.PlatformFlightpathDemand;
+
+        pd.HeadingAngleDemand_deg = c.HeadingAngleDemand_deg;
+        pd.AltitudeDemand_m = c.AltitudeDemand_m;
+        pd.TotalSpeedDemand_ms = c.TotalSpeedDemand_ms;
     }
 }

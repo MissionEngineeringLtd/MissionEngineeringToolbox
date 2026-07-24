@@ -1,5 +1,4 @@
-﻿using System.Net;
-using YamlDotNet.Serialization;
+﻿using YamlDotNet.Serialization;
 
 namespace MissionEngineering.Simulation;
 
@@ -18,6 +17,7 @@ public static class SimulationCommandManager
                     ["SimulationSettings"] = typeof(SimulationSettingsCommand),
                     ["MapOrigin"] = typeof(MapOriginCommand),
                     ["PlatformCreate"] = typeof(PlatformCreateCommand),
+                    ["PlatformAutopilot"] = typeof(PlatformAutopilotCommand)
                 });
             })
             .Build();

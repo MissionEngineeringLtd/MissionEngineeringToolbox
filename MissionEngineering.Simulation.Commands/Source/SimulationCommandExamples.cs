@@ -60,6 +60,33 @@ public static class SimulationCommandExamples
             PitchAngle_deg = 5.0
         };
 
-        return new List<ISimulationCommand> { c0, c1, c2, c3 };
+        var c4 = new PlatformAutopilotCommand()
+        {
+            CommandTime = 50.0,
+            PlatformName = "FF_2",
+            HeadingAngleDemand_deg = 45.0,
+            AltitudeDemand_m = 8000.0,
+            TotalSpeedDemand_ms = 310.0
+        };
+
+        var c5 = new PlatformAutopilotCommand()
+        {
+            CommandTime = 70.0,
+            PlatformName = "FF_2",
+            HeadingAngleDemand_deg = 135.0,
+            AltitudeDemand_m = 5000.0,
+            TotalSpeedDemand_ms = 250.0
+        };
+
+        var c6 = new PlatformAutopilotCommand()
+        {
+            CommandTime = 80.0,
+            PlatformName = "FF_1",
+            HeadingAngleDemand_deg = 60,
+            AltitudeDemand_m = 3000.0,
+            TotalSpeedDemand_ms = 300.0
+        };
+
+        return new List<ISimulationCommand> { c0, c1, c2, c3, c4, c5, c6 };
     }
 }

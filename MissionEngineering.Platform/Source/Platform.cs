@@ -62,9 +62,9 @@ public class Platform : IExecutableModel
 
         platformAutopilot.PlatformFlightpathDemand = new PlatformFlightpathDemand()
         {
-            HeadingAngleDemand_deg = attitude.HeadingAngle_deg - 30.0,
+            HeadingAngleDemand_deg = attitude.HeadingAngle_deg,
             AltitudeDemand_m = positionLLA.Altitude_m,
-            TotalSpeedDemand_ms = velocityNED.TotalSpeed_ms + 50.0
+            TotalSpeedDemand_ms = velocityNED.TotalSpeed_ms
         };
 
         PlatformState = new PlatformState

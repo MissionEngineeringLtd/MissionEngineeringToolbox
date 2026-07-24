@@ -15,4 +15,6 @@ public interface IPlatformManager : IExecutableModel
     void Update(double time_s);
 
     void Finalise(double time_s);
+
+    Platform GetPlatformByName(string platformName);
 }
