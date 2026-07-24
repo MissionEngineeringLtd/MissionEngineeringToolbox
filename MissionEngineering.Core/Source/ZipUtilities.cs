@@ -11,6 +11,8 @@ public static class ZipUtilities
 
         var tempFileFull = Path.Combine(tempPath, tempFile);
 
+        File.Delete(zipFileName);
+
         File.Delete(tempFileFull);
 
         ZipFile.CreateFromDirectory(folderPath, tempFileFull);

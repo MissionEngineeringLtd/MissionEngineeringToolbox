@@ -1,6 +1,4 @@
-﻿using MissionEngineering.Core;
-using MissionEngineering.Math;
-using System.Data;
+﻿using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 
@@ -13,6 +11,10 @@ public interface IPlatformAutopilot
     AccelerationTBA AccelerationTBA { get; set; }
 
     double PitchAngleDemand_deg { get; set; }
+
+    double BankAngleDemand_deg { get; set; }
+
+    double BankAngleRate_degs { get; set; }
 
     void Initialise();
 

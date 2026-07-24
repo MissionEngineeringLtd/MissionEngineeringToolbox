@@ -1,12 +1,11 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.Math;
-using System.Runtime.InteropServices;
 
 namespace MissionEngineering.Platform;
 
 public static class PlatformFunctions
 {
-    public static PlatformState PredictPlatformState(SimulationTimeStamp timeStamp, PlatformState platformState, PositionLLA positionLLAOrigin, AccelerationTBA accelerationTBA)
+    public static PlatformState PredictPlatformState(SimulationTimeStamp timeStamp, PlatformState platformState, PositionLLA positionLLAOrigin, AccelerationTBA accelerationTBA, double bankAngleRate_degs)
     {
         var deltaTime_s = timeStamp.SimulationTime_s - platformState.TimeStamp.SimulationTime_s;
 
@@ -24,8 +23,9 @@ public static class PlatformFunctions
 
         attitude = FrameConversions.GetAttitudeFromVelocityVector(platformState.VelocityNED);
 
-        // Step 2: Set the new bank angle from the lateral acceleration for coordinated turn in Step 2:
-        var bankAngleNew_deg = SetBankAngleFromLateralAcceleration(accelerationTBA.AccelerationLateral_ms2);
+        // Step 2: Set the bank angle from the bank rate:
+        var bankAngleOld_deg = platformState.Attitude.BankAngle_deg;
+        var bankAngleNew_deg = bankAngleOld_deg + bankAngleRate_degs * dt.DeltaTime_s;
 
         attitude = attitude with { BankAngle_deg = bankAngleNew_deg };
 
@@ -44,15 +44,6 @@ public static class PlatformFunctions
         };
 
         return ps;
-    }
-
-    public static double SetBankAngleFromLateralAcceleration(double lateralAcceleration_ms2)
-    {
-        var lateralAcceleration_g = lateralAcceleration_ms2.MetersPerSecondSquaredToG();
-
-        var bankAngle_deg = MathFunctions.CalculateBankAngleDegFromLateralAcceleration(lateralAcceleration_g);
-
-        return bankAngle_deg;
     }
 
     public static AttitudeRate GetAttitudeRate(Attitude attitudePrevious, Attitude attitudeCurrent, DeltaTime deltaTime_s)

@@ -36,4 +36,6 @@ public record PlatformState
     public double TotalSpeedDemand_ms { get; set; }
 
     public double PitchAngleDemand_deg { get; set; }
+
+    public double BankAngleDemand_deg { get; set; }
 }

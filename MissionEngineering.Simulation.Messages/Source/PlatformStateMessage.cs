@@ -62,6 +62,8 @@ public record PlatformStateMessage : SimulationMessage
 
     public double PitchAngleDemand_deg { get; set; }
 
+    public double BankAngleDemand_deg { get; set; }
+
     public PlatformStateMessage()
     {
         MessageType = SimulationMessageType.PlatformState;

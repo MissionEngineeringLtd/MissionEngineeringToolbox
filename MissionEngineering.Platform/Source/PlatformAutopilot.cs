@@ -21,9 +21,15 @@ public class PlatformAutopilot : IPlatformAutopilot
 
     public SetpointController PitchAngleController { get; set; }
 
+    public SetpointController BankAngleController { get; set; }
+
     public AccelerationTBA AccelerationTBA { get; set; }
 
     public double PitchAngleDemand_deg { get; set; }
+
+    public double BankAngleDemand_deg { get; set; }
+
+    public double BankAngleRate_degs { get; set; }
 
 
     public void Initialise()
@@ -41,7 +47,8 @@ public class PlatformAutopilot : IPlatformAutopilot
         {
             MinimumValue = -PlatformDynamics.LateralAccelerationMax_ms2,
             MaximumValue = PlatformDynamics.LateralAccelerationMax_ms2,
-            ControllerGain = PlatformDynamics.LateralAccelerationGain
+            ControllerGain = PlatformDynamics.LateralAccelerationGain,
+            IsAngleController = true
         };
 
         VerticalAccelerationController = new SetpointController()
@@ -56,6 +63,13 @@ public class PlatformAutopilot : IPlatformAutopilot
             MinimumValue = -PlatformDynamics.PitchAngleMax_deg,
             MaximumValue = PlatformDynamics.PitchAngleMax_deg,
             ControllerGain = PlatformDynamics.PitchAngleGain
+        };
+
+        BankAngleController = new SetpointController()
+        {
+            MinimumValue = -PlatformDynamics.BankAngleRateMax_degs,
+            MaximumValue = PlatformDynamics.BankAngleRateMax_degs,
+            ControllerGain = PlatformDynamics.BankAngleRateGain
         };
     }
 
@@ -78,6 +92,13 @@ public class PlatformAutopilot : IPlatformAutopilot
         VerticalAccelerationController.SetpointValue = PitchAngleDemand_deg;
         VerticalAccelerationController.ActualValue = PlatformState.Attitude.PitchAngle_deg;
 
+        BankAngleDemand_deg = CalculateBankAngleFromLateralAcceleration(lateralAcceleration_ms2);
+
+        BankAngleController.SetpointValue = BankAngleDemand_deg;
+        BankAngleController.ActualValue = PlatformState.Attitude.BankAngle_deg;
+
+        BankAngleRate_degs = BankAngleController.Update();
+
         var verticalAcceleration_ms2 = VerticalAccelerationController.Update();
 
         AccelerationTBA = new AccelerationTBA(axialAcceleration_ms2, lateralAcceleration_ms2, verticalAcceleration_ms2);
@@ -85,5 +106,15 @@ public class PlatformAutopilot : IPlatformAutopilot
 
     public void Finalise()
     {
+    }
+
+
+    public static double CalculateBankAngleFromLateralAcceleration(double lateralAcceleration_ms2)
+    {
+        var lateralAcceleration_g = lateralAcceleration_ms2.MetersPerSecondSquaredToG();
+
+        var bankAngle_deg = MathFunctions.CalculateBankAngleDegFromLateralAcceleration(lateralAcceleration_g);
+
+        return bankAngle_deg;
     }
 }

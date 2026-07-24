@@ -18,24 +18,19 @@ public class PlatformModel
     {
         PlatformAutopilot.PlatformState = platformState;
 
-        var accelerationTBA = GetAccelerationTBA();
+        PlatformAutopilot.Update();
 
-        var ps = PlatformFunctions.PredictPlatformState(timeStamp, platformState, LLAOrigin.PositionLLA, accelerationTBA);
+        var accelerationTBA = PlatformAutopilot.AccelerationTBA;
+        var bankAngleRate_degs = PlatformAutopilot.BankAngleRate_degs;
+
+        var ps = PlatformFunctions.PredictPlatformState(timeStamp, platformState, LLAOrigin.PositionLLA, accelerationTBA, bankAngleRate_degs);
 
         ps.HeadingAngleDemand_deg = PlatformAutopilot.PlatformFlightpathDemand.HeadingAngleDemand_deg;
         ps.AltitudeDemand_m = PlatformAutopilot.PlatformFlightpathDemand.AltitudeDemand_m;
         ps.TotalSpeedDemand_ms = PlatformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms;
         ps.PitchAngleDemand_deg = PlatformAutopilot.PitchAngleDemand_deg;
+        ps.BankAngleDemand_deg = PlatformAutopilot.BankAngleDemand_deg;
 
         return ps;
-    }
-
-    public AccelerationTBA GetAccelerationTBA()
-    {
-        PlatformAutopilot.Update();
-
-        var accelerationTBA = PlatformAutopilot.AccelerationTBA;
-
-        return accelerationTBA;
     }
 }

@@ -27,6 +27,8 @@ public record Attitude
         var pitchAngle_deg = x.PitchAngle_deg + y.PitchAngle_deg;
         var bankAngle_deg = x.BankAngle_deg + y.BankAngle_deg;
 
+        headingAngle_deg = MathFunctions.ConstrainAnglePlusMinus180(headingAngle_deg);
+
         var attitude = new Attitude(headingAngle_deg, pitchAngle_deg, bankAngle_deg);
 
         return attitude;
@@ -37,6 +39,8 @@ public record Attitude
         var headingAngle_deg = a1.HeadingAngle_deg - a2.HeadingAngle_deg;
         var pitchAngle_deg = a1.PitchAngle_deg - a2.PitchAngle_deg;
         var bankAngle_deg = a1.BankAngle_deg - a2.BankAngle_deg;
+
+        headingAngle_deg = MathFunctions.ConstrainAnglePlusMinus180(headingAngle_deg);
 
         var attitude = new Attitude(headingAngle_deg, pitchAngle_deg, bankAngle_deg);
 

@@ -49,8 +49,9 @@ public static class PlatformMessageConversions
             HeadingAngleDemand_deg = platformState.HeadingAngleDemand_deg,
             AltitudeDemand_m = platformState.AltitudeDemand_m,
             TotalSpeedDemand_ms = platformState.TotalSpeedDemand_ms,
-            PitchAngleDemand_deg = platformState.PitchAngleDemand_deg
-        };
+            PitchAngleDemand_deg = platformState.PitchAngleDemand_deg,
+            BankAngleDemand_deg = platformState.BankAngleDemand_deg
+         };
 
         return platformStateMessage;
     }

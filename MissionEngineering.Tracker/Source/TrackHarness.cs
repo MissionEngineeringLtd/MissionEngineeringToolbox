@@ -133,8 +133,8 @@ public class TrackHarness : IExecutableModel
 
         var timeStamp = SimulationClock.GetTimeStamp(time_s);
 
-        var platformStateSensor = PlatformFunctions.PredictPlatformState(timeStamp, PlatformStateSensor, LLAOrigin.PositionLLA, accelerationTBA);
-        var platformStateTarget = PlatformFunctions.PredictPlatformState(timeStamp, PlatformStateTarget, LLAOrigin.PositionLLA, accelerationTBA);
+        var platformStateSensor = PlatformStateSensor;
+        var platformStateTarget = PlatformStateTarget;
 
         var relativeTargetState = PlatformFunctions.GeneratePlatformStateRelative(platformStateSensor, platformStateTarget);
 
