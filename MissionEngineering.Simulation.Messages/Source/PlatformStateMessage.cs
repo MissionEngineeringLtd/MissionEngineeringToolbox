@@ -12,6 +12,10 @@ public record PlatformStateMessage : SimulationMessage
 
     public double Altitude_m { get; set; }
 
+    public double Altitude_ft { get; set; }
+
+    public double Altitude_FL { get; set; }
+
     public double PositionNorth_m { get; set; }
 
     public double PositionEast_m { get; set; }
@@ -25,6 +29,10 @@ public record PlatformStateMessage : SimulationMessage
     public double VelocityDown_ms { get; set; }
 
     public double TotalSpeed_ms { get; set; }
+
+    public double TotalSpeed_kph { get; set; }
+
+    public double TotalSpeed_kts { get; set; }
 
     public double AccelerationNorth_ms2 { get; set; }
 
@@ -58,7 +66,15 @@ public record PlatformStateMessage : SimulationMessage
 
     public double AltitudeDemand_m { get; set; }
 
+    public double AltitudeDemand_ft { get; set; }
+
+    public double AltitudeDemand_FL { get; set; }
+
     public double TotalSpeedDemand_ms { get; set; }
+
+    public double TotalSpeedDemand_kph { get; set; }
+
+    public double TotalSpeedDemand_kts { get; set; }
 
     public double PitchAngleDemand_deg { get; set; }
 

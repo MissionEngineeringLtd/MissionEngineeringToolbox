@@ -78,6 +78,22 @@ public static class DoubleExtensionMethods
             return result;
         }
 
+        public double FeetToFlightLevel()
+        {
+            var result = MathFunctions.RoundToStepSize(x, 100.0);
+
+            result = result / 100.0;
+
+            return result;
+        }
+
+        public double FlightLevelToFeet()
+        {
+            var result = x * 100.0;
+
+            return result;
+        }
+
         public double MetersToKilometers()
         {
             var result = x * MeterToKilometer;
@@ -102,6 +118,20 @@ public static class DoubleExtensionMethods
         public double NauticalMilesToMeters()
         {
             var result = x * NauticalMileToMeter;
+
+            return result;
+        }
+
+        public double MetersPerSecondToKilometersPerHour()
+        {
+            var result = x * MeterPerSecondToKilometerPerHour;
+
+            return result;
+        }
+
+        public double KilometersPerHourToMetersPerSecond()
+        {
+            var result = x * KilometerPerHourToMeterPerSecond;
 
             return result;
         }

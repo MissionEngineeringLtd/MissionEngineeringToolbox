@@ -1,4 +1,5 @@
-﻿using MissionEngineering.Platform;
+﻿using MissionEngineering.Math;
+using MissionEngineering.Platform;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +33,10 @@ public class PlatformCreateCommand : ISimulationCommand
     public double PositionEast_m { get; set; }
 
     public double Altitude_m { get; set; }
+
+    public double Altitude_ft { get => Altitude_m.MetersToFeet(); set => Altitude_m = value.FeetToMeters(); }
+
+    public double Altitude_FL { get => Altitude_ft.FeetToFlightLevel(); set => Altitude_ft = value.FlightLevelToFeet(); }
 
     public double TotalSpeed_ms { get; set; }
 

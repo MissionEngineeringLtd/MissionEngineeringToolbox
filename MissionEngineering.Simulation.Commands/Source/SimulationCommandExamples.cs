@@ -65,7 +65,7 @@ public static class SimulationCommandExamples
             CommandTime = 50.0,
             PlatformName = "FF_2",
             HeadingAngleDemand_deg = 45.0,
-            AltitudeDemand_m = 8000.0,
+            AltitudeDemand_FL = 250.0,
             TotalSpeedDemand_ms = 310.0
         };
 
@@ -74,7 +74,7 @@ public static class SimulationCommandExamples
             CommandTime = 70.0,
             PlatformName = "FF_2",
             HeadingAngleDemand_deg = 135.0,
-            AltitudeDemand_m = 5000.0,
+            AltitudeDemand_FL = 300,
             TotalSpeedDemand_ms = 250.0
         };
 
@@ -83,7 +83,7 @@ public static class SimulationCommandExamples
             CommandTime = 80.0,
             PlatformName = "FF_1",
             HeadingAngleDemand_deg = 60,
-            AltitudeDemand_m = 3000.0,
+            AltitudeDemand_FL = 120.0,
             TotalSpeedDemand_ms = 300.0
         };
 

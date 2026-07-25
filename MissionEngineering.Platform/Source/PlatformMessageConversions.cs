@@ -25,6 +25,8 @@ public static class PlatformMessageConversions
             Latitude_deg = platformState.PositionLLA.Latitude_deg,
             Longitude_deg = platformState.PositionLLA.Longitude_deg,
             Altitude_m = platformState.PositionLLA.Altitude_m,
+            Altitude_ft = platformState.Altitude_ft,
+            Altitude_FL = platformState.Altitude_FL,
             PositionNorth_m = platformState.PositionNED.PositionNorth_m,
             PositionEast_m = platformState.PositionNED.PositionEast_m,
             PositionDown_m = platformState.PositionNED.PositionDown_m,
@@ -32,6 +34,8 @@ public static class PlatformMessageConversions
             VelocityEast_ms = platformState.VelocityNED.VelocityEast_ms,
             VelocityDown_ms = platformState.VelocityNED.VelocityDown_ms,
             TotalSpeed_ms = platformState.VelocityNED.TotalSpeed_ms,
+            TotalSpeed_kph = platformState.TotalSpeed_kph,
+            TotalSpeed_kts = platformState.TotalSpeed_kts,
             AccelerationNorth_ms2 = platformState.AccelerationNED.AccelerationNorth_ms2,
             AccelerationEast_ms2 = platformState.AccelerationNED.AccelerationEast_ms2,
             AccelerationDown_ms2 = platformState.AccelerationNED.AccelerationDown_ms2,
@@ -48,10 +52,14 @@ public static class PlatformMessageConversions
             IsDestroyed = platformState.IsDestroyed,
             HeadingAngleDemand_deg = platformState.HeadingAngleDemand_deg,
             AltitudeDemand_m = platformState.AltitudeDemand_m,
+            AltitudeDemand_ft = platformState.AltitudeDemand_ft,
+            AltitudeDemand_FL = platformState.AltitudeDemand_FL,
             TotalSpeedDemand_ms = platformState.TotalSpeedDemand_ms,
+            TotalSpeedDemand_kph = platformState.TotalSpeedDemand_kph,
+            TotalSpeedDemand_kts = platformState.TotalSpeedDemand_kts,
             PitchAngleDemand_deg = platformState.PitchAngleDemand_deg,
             BankAngleDemand_deg = platformState.BankAngleDemand_deg
-         };
+        };
 
         return platformStateMessage;
     }
