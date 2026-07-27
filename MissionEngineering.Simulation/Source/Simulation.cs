@@ -100,9 +100,13 @@ public class Simulation : ISimulation
         Sensors = [];
         SimulationModels = [];
 
-        SimulationCommandProcessor.SimulationCommands = SimulationCommandExamples.Example_1();
+        var simulationCommands = SimulationCommandExamples.Example_1();
+
+        SimulationCommandProcessor.SimulationCommands = simulationCommands;
 
         SimulationCommandProcessor.Initialise(time);
+
+        DataRecorder.SimulationData.SimulationCommands = simulationCommands;
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {

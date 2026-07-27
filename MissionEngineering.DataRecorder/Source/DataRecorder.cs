@@ -126,6 +126,7 @@ public class DataRecorder : IDataRecorder
     {
         WriteSimulationSettingsToYaml();
         WriteScenarioSettingsToYaml();
+        WriteSimulationCommandsToYaml();
     }
 
     public void WriteCsvData()
@@ -203,6 +204,17 @@ public class DataRecorder : IDataRecorder
         Log.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.ScenarioSettings.WriteToYamlFile(fileNameFull);
+    }
+
+    public void WriteSimulationCommandsToYaml()
+    {
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationCommands.yaml";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        Log.LogInformation($"Writing File : {fileNameFull}");
+
+        SimulationData.SimulationCommands.WriteToYamlFile(fileNameFull);
     }
 
     public void WriteSimulationMessagesAllToCsv()
