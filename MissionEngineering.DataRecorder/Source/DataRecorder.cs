@@ -120,6 +120,7 @@ public class DataRecorder : IDataRecorder
     {
         WriteSimulationSettingsToJson();
         WriteScenarioSettingsToJson();
+        WriteSimulationCommandsToJson();
     }
 
     public void WriteYamlData()
@@ -182,6 +183,17 @@ public class DataRecorder : IDataRecorder
         Log.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.ScenarioSettings.WriteToJsonFile(fileNameFull);
+    }
+
+    public void WriteSimulationCommandsToJson()
+    {
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationCommands.json";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        Log.LogInformation($"Writing File : {fileNameFull}");
+
+        SimulationData.SimulationCommands.WriteToJsonFile(fileNameFull);
     }
 
     public void WriteSimulationSettingsToYaml()
