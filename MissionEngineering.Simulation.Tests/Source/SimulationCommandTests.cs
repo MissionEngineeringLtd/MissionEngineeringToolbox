@@ -51,6 +51,6 @@ public sealed class SimulationCommandTests
         var actualCommandType = commandsOut[2].CommandType;
 
         Assert.AreEqual(expectedCommandType, actualCommandType);
-        Assert.AreEqual(7, commandsOut.Count);
+        Assert.AreEqual(11, commandsOut.Count);
     }
 }
