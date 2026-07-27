@@ -1,7 +1,13 @@
 ﻿namespace MissionEngineering.Simulation.Messages;
 
-public record PlatformStateMessage : SimulationMessage
+public record PlatformStateMessage : ISimulationMessage
 {
+    public int MessageTypeId => (int)MessageType;
+
+    public SimulationMessageType MessageType { get; set; }
+
+    public SimulationMessageHeader Header { get; set; }
+
     public int PlatformId { get; set; }
 
     public string PlatformName { get; set; }
@@ -57,6 +63,10 @@ public record PlatformStateMessage : SimulationMessage
     public double PitchRate_degs { get; set; }
 
     public double BankRate_degs { get; set; }
+
+    public double RangeToGo_m { get; set; }
+
+    public double TimeToGo_s { get; set; }
 
     public bool IsActive { get; set; }
 

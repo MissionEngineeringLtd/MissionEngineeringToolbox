@@ -6,5 +6,7 @@ public enum SimulationCommandType
     SimulationSettings,
     MapOrigin,
     PlatformCreate,
-    PlatformAutopilot
+    PlatformDelete,
+    PlatformAutopilot,
+    PlatformLaunchMissile
 }

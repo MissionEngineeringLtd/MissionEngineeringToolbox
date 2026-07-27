@@ -1,7 +1,13 @@
 ﻿namespace MissionEngineering.Simulation.Messages;
 
-public record PlatformStateRelativeMessage : SimulationMessage
+public record PlatformStateRelativeMessage : ISimulationMessage
 {
+    public int MessageTypeId => (int)MessageType;
+
+    public SimulationMessageType MessageType { get; set; }
+
+    public SimulationMessageHeader Header { get; set; }
+
     public int PlatformIdOrigin { get; set; }
 
     public string PlatformNameOrigin { get; set; }

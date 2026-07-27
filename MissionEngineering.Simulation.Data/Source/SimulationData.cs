@@ -14,7 +14,7 @@ public class SimulationData
 
     public ScenarioSettings ScenarioSettings { get; set; }
 
-    public List<SimulationMessage> SimulationMessages { get; set; }
+    public List<ISimulationMessage> SimulationMessages { get; set; }
 
     public List<PlatformData> PlatformDataAll { get; set; }
 

@@ -48,6 +48,8 @@ public static class PlatformMessageConversions
             HeadingRate_degs = platformState.AttitudeRate.HeadingRate_degs,
             PitchRate_degs = platformState.AttitudeRate.PitchRate_degs,
             BankRate_degs = platformState.AttitudeRate.BankRate_degs,
+            RangeToGo_m = platformState.RangeToGo_m,
+            TimeToGo_s = platformState.TimeToGo_s,
             IsActive = platformState.IsActive,
             IsDestroyed = platformState.IsDestroyed,
             HeadingAngleDemand_deg = platformState.HeadingAngleDemand_deg,

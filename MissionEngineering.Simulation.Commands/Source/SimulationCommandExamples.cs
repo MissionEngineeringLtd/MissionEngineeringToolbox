@@ -25,7 +25,6 @@ public static class SimulationCommandExamples
         var c2 = new PlatformCreateCommand()
         {
             CommandTime = 30.0,
-            PlatformId = 5,
             PlatformName = "FF_1",
             PlatformCallsign = "FF_1",
             PlatformDescription = "FF_1 Description",
@@ -44,7 +43,6 @@ public static class SimulationCommandExamples
         var c3 = new PlatformCreateCommand()
         {
             CommandTime = 40.0,
-            PlatformId = 6,
             PlatformName = "FF_2",
             PlatformCallsign = "FF_2",
             PlatformDescription = "FF_2 Description",
@@ -87,6 +85,46 @@ public static class SimulationCommandExamples
             TotalSpeedDemand_ms = 300.0
         };
 
-        return new List<ISimulationCommand> { c0, c1, c2, c3, c4, c5, c6 };
+        var c7 = new PlatformDeleteCommand()
+        {
+            CommandTime = 150.0,
+            PlatformName = "FF_1",
+        };
+
+        var c8 = new PlatformDeleteCommand()
+        {
+            CommandTime = 160.0,
+            PlatformName = "FF_2",
+        };
+
+        var c9 = new PlatformLaunchMissileCommand()
+        {
+            CommandTime = 100.0,
+            MissileName = "AMRAAM_1",
+            LaunchPlatformName = "FF_1",
+            TargetPlatformName = "RED_1",
+            PlatformIcon = "aim-120_amraam",
+            PlatformColor = "Green"
+        };
+
+        var c10 = new PlatformCreateCommand()
+        {
+            CommandTime = 30.0,
+            PlatformName = "RED_1",
+            PlatformCallsign = "RED_1",
+            PlatformDescription = "RED_1 Description",
+            PlatformAffiliation = PlatformAffiliationType.Hostile,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "f-35a_lightning",
+            PlatformColor = "Blue",
+            PositionNorth_m = 80000.0,
+            PositionEast_m = 20000.0,
+            Altitude_m = 8000.0,
+            TotalSpeed_ms = 250.0,
+            HeadingAngle_deg = -135,
+            PitchAngle_deg = 0.0
+        };
+
+        return new List<ISimulationCommand> { c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 };
     }
 }

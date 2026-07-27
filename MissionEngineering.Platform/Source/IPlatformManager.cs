@@ -6,9 +6,11 @@ public interface IPlatformManager : IExecutableModel
 {
     List<Platform> Platforms { get; set; }
 
-    void AddPlatform(Platform platform);
+    void CreatePlatform(Platform platform);
 
     Platform CreatePlatformMissile(Platform platformOrigin, string platformType, Platform platformTarget);
+
+    void DeletePlatform(string platformName);
 
     void Initialise(double time_s);
 

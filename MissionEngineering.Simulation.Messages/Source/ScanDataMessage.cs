@@ -1,7 +1,13 @@
 ﻿namespace MissionEngineering.Simulation.Messages;
 
-public record ScanDataMessage : SimulationMessage
+public record ScanDataMessage : ISimulationMessage
 {
+    public int MessageTypeId => (int)MessageType;
+
+    public SimulationMessageType MessageType { get; set; }
+
+    public SimulationMessageHeader Header { get; set; }
+
     public int PlatformId { get; set; }
 
     public string PlatformName { get; set; }

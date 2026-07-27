@@ -1,7 +1,13 @@
 ﻿namespace MissionEngineering.Simulation.Messages;
 
-public record SensorReportMessage : SimulationMessage
+public record SensorReportMessage : ISimulationMessage
 {
+    public int MessageTypeId => (int)MessageType;
+
+    public SimulationMessageType MessageType { get; set; }
+
+    public SimulationMessageHeader Header { get; set; }
+
     public int SensorPlatformId { get; set; }
 
     public int TargetPlatformId { get; set; }

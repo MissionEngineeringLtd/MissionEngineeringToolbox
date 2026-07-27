@@ -1,4 +1,7 @@
-﻿namespace MissionEngineering.Math;
+﻿using System.Numerics;
+using System.Security.Cryptography;
+
+namespace MissionEngineering.Math;
 
 public partial class Vector
 {
@@ -10,6 +13,17 @@ public partial class Vector
         {
             result += x.Data[i] * y.Data[i];
         }
+
+        return result;
+    }
+
+    public static Vector CrossProduct(Vector x, Vector y)
+    {
+        var result = new Vector(3);
+
+        result[0] = x[1] * y[2] - x[2] * y[1];
+        result[1] = x[2] * y[0] - x[0] * y[2];
+        result[2] = x[0] * y[1] - x[1] * y[0];
 
         return result;
     }
@@ -43,6 +57,13 @@ public partial class Vector
     public double DotProduct(Vector x)
     {
         var result = DotProduct(this, x);
+
+        return result;
+    }
+
+    public Vector CrossProduct(Vector x)
+    {
+        var result = CrossProduct(this, x);
 
         return result;
     }

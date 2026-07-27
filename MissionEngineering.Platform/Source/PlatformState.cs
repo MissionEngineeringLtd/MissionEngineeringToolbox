@@ -33,6 +33,10 @@ public record PlatformState
 
     public AttitudeRate AttitudeRate { get; set; }
 
+    public double RangeToGo_m { get; set; }
+
+    public double TimeToGo_s { get; set; }
+
     public bool IsActive { get; set; }
 
     public bool IsDestroyed { get; set; }

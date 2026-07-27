@@ -17,7 +17,9 @@ public static class SimulationCommandManager
                     ["SimulationSettings"] = typeof(SimulationSettingsCommand),
                     ["MapOrigin"] = typeof(MapOriginCommand),
                     ["PlatformCreate"] = typeof(PlatformCreateCommand),
-                    ["PlatformAutopilot"] = typeof(PlatformAutopilotCommand)
+                    ["PlatformDelete"] = typeof(PlatformDeleteCommand),
+                    ["PlatformAutopilot"] = typeof(PlatformAutopilotCommand),
+                    ["PlatformLaunchMissile"] = typeof(PlatformLaunchMissileCommand),
                 });
             })
             .Build();

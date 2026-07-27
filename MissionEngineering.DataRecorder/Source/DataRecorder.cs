@@ -45,6 +45,7 @@ public class DataRecorder : IDataRecorder
         CreateOutputFolder();
 
         WriteJsonData();
+        WriteYamlData();
         WriteCsvData();
         WriteSimdisData();
     }
@@ -119,7 +120,10 @@ public class DataRecorder : IDataRecorder
     {
         WriteSimulationSettingsToJson();
         WriteScenarioSettingsToJson();
+    }
 
+    public void WriteYamlData()
+    {
         WriteSimulationSettingsToYaml();
         WriteScenarioSettingsToYaml();
     }

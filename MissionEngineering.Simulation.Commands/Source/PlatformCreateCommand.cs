@@ -12,8 +12,6 @@ public class PlatformCreateCommand : ISimulationCommand
 
     public double CommandTime { get; set; }
 
-    public int PlatformId { get; set; }
-
     public string PlatformName { get; set; }
 
     public required string PlatformCallsign { get; set; }

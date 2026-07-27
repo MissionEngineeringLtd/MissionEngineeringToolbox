@@ -21,6 +21,10 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
 
     public double LastProcessedTime { get; set; }
 
+    public int NextPlatformId { get; set; }
+
+    public int NextPlatformIdMissile { get; set; }
+
     public SimulationCommandProcessor(ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, IDataRecorder dataRecorder)
     {
         SimulationClock = simulationClock;
@@ -29,6 +33,9 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
         DataRecorder = dataRecorder;
 
         LastProcessedTime = -1.0;
+
+        NextPlatformId = 100;
+        NextPlatformIdMissile = 200;
     }
 
     public void Initialise(double time)
@@ -56,10 +63,24 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
                     break;
 
                 case PlatformCreateCommand c:
+                    NextPlatformId++;
                     var p = ConvertPlatformCommandToPlatform(c);
                     p.Initialise(time);
-                    PlatformManager.AddPlatform(p);
+                    PlatformManager.CreatePlatform(p);
                     DataRecorder.SimulationData.ScenarioSettings.PlatformSettingsList.Add(p.PlatformSettings);
+                    break;
+
+                case PlatformLaunchMissileCommand c:
+                    NextPlatformIdMissile++;
+                    var pm = ConvertPlatformLaunchMissileCommandToPlatform(c);
+                    pm.Initialise(time);
+                    pm.PlatformModel.PlatformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms = 1000.0;
+                    PlatformManager.CreatePlatform(pm);
+                    DataRecorder.SimulationData.ScenarioSettings.PlatformSettingsList.Add(pm.PlatformSettings);
+                    break;
+
+                case PlatformDeleteCommand c:
+                    PlatformManager.DeletePlatform(c.PlatformName);
                     break;
 
                 case PlatformAutopilotCommand c:
@@ -94,7 +115,7 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
         {
             PlatformHeader = new PlatformHeader()
             {
-                PlatformId = c.PlatformId,
+                PlatformId = NextPlatformId,
                 PlatformName = c.PlatformName,
                 PlatformDescription = c.PlatformDescription,
                 PlatformCallsign = c.PlatformCallsign,
@@ -124,6 +145,59 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
         var platform = new Platform.Platform(SimulationClock, LLAOrigin)
         {
             PlatformSettings = platformSettings
+        };
+
+        return platform;
+    }
+
+    public Platform.Platform ConvertPlatformLaunchMissileCommandToPlatform(PlatformLaunchMissileCommand c)
+    {
+        var platformLaunch = PlatformManager.GetPlatformByName(c.LaunchPlatformName);
+
+        var ps = platformLaunch.PlatformSettings;
+        var ph = ps.PlatformHeader;
+        var pd = ps.PlatformHeaderSimdis;
+        var pi = platformLaunch.PlatformState;
+
+        var platformTarget = PlatformManager.GetPlatformByName(c.TargetPlatformName);
+
+        var platformType = PlatformType.Missile;
+
+        var platformSettings = new PlatformSettings
+        {
+            PlatformHeader = new PlatformHeader()
+            {
+                PlatformId = NextPlatformIdMissile,
+                PlatformName = c.MissileName,
+                PlatformDescription = ph.PlatformDescription,
+                PlatformCallsign = ph.PlatformCallsign,
+                PlatformType = platformType,
+                PlatformAffiliation = ph.PlatformAffiliation
+            },
+            PlatformHeaderSimdis = new PlatformHeaderSimdis()
+            {
+                PlatformAffiliationFHN = pd.PlatformAffiliationFHN,
+                PlatformColor = c.PlatformColor,
+                PlatformIcon = c.PlatformIcon,
+                PlatformInterpolate = "1",
+                PlatformScaleLevel = 2.5,
+                PlatformType = "Aircraft"
+            },
+            PlatformStateInitial = new PlatformStateInitial()
+            {
+                PositionNorth_m = pi.PositionNED.PositionNorth_m,
+                PositionEast_m = pi.PositionNED.PositionEast_m,
+                Altitude_m = pi.PositionLLA.Altitude_m,
+                TotalSpeed_ms = pi.VelocityNED.TotalSpeed_ms,
+                HeadingAngle_deg = pi.Attitude.HeadingAngle_deg,
+                PitchAngle_deg = pi.Attitude.PitchAngle_deg
+            }
+        };
+
+        var platform = new Platform.Platform(SimulationClock, LLAOrigin)
+        {
+            PlatformSettings = platformSettings,
+            PlatformTarget = platformTarget
         };
 
         return platform;

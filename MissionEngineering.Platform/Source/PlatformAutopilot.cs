@@ -1,13 +1,19 @@
-﻿using MissionEngineering.Math;
+﻿using MathNet.Numerics.LinearAlgebra.Factorization;
+using MissionEngineering.Math;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Text;
+using System.Timers;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MissionEngineering.Platform;
 
 public class PlatformAutopilot : IPlatformAutopilot
 {
     public PlatformState PlatformState { get; set; }
+
+    public Platform PlatformTarget { get; set; }
 
     public PlatformFlightpathDemand PlatformFlightpathDemand { get; set; }
 
@@ -31,16 +37,15 @@ public class PlatformAutopilot : IPlatformAutopilot
 
     public double BankAngleRate_degs { get; set; }
 
-
     public void Initialise()
     {
         PlatformDynamics = new PlatformDynamics();
 
         AxialAccelerationController = new SetpointController()
-        { 
-            MinimumValue = -PlatformDynamics.AxialAccelerationMax_ms2, 
-            MaximumValue = PlatformDynamics.AxialAccelerationMax_ms2, 
-            ControllerGain = PlatformDynamics.AxialAccelerationGain 
+        {
+            MinimumValue = -PlatformDynamics.AxialAccelerationMax_ms2,
+            MaximumValue = PlatformDynamics.AxialAccelerationMax_ms2,
+            ControllerGain = PlatformDynamics.AxialAccelerationGain
         };
 
         LateralAccelerationController = new SetpointController()
@@ -75,6 +80,17 @@ public class PlatformAutopilot : IPlatformAutopilot
 
     public void Update()
     {
+        if (PlatformTarget is null)
+        {
+            UpdateAutopilotToDemand();
+        }
+        else
+        {
+            UpdateAutopilotPNGuidance();
+        }
+    }
+    public void UpdateAutopilotToDemand()
+    {
         AxialAccelerationController.SetpointValue = PlatformFlightpathDemand.TotalSpeedDemand_ms;
         AxialAccelerationController.ActualValue = PlatformState.VelocityNED.TotalSpeed_ms;
 
@@ -86,7 +102,7 @@ public class PlatformAutopilot : IPlatformAutopilot
 
         var axialAcceleration_ms2 = AxialAccelerationController.Update();
         var lateralAcceleration_ms2 = LateralAccelerationController.Update();
-        
+
         PitchAngleDemand_deg = PitchAngleController.Update();
 
         VerticalAccelerationController.SetpointValue = PitchAngleDemand_deg;
@@ -104,10 +120,58 @@ public class PlatformAutopilot : IPlatformAutopilot
         AccelerationTBA = new AccelerationTBA(axialAcceleration_ms2, lateralAcceleration_ms2, verticalAcceleration_ms2);
     }
 
+    public void UpdateAutopilotPNGuidance()
+    {
+        AxialAccelerationController.SetpointValue = PlatformFlightpathDemand.TotalSpeedDemand_ms;
+        AxialAccelerationController.ActualValue = PlatformState.VelocityNED.TotalSpeed_ms;
+
+        var axialAcceleration_ms2 = AxialAccelerationController.Update();
+
+        var accelerationTBA_Vector = GetAccelerationTBAVsTargetFlightpath();
+
+        var lateralAcceleration_ms2 = accelerationTBA_Vector[1];
+        var verticalAcceleration_ms2 = accelerationTBA_Vector[2];
+
+        AccelerationTBA = new AccelerationTBA(axialAcceleration_ms2, lateralAcceleration_ms2, verticalAcceleration_ms2);
+    }
+
+    public Vector GetAccelerationTBAVsTargetFlightpath()
+    {
+        var pm = PlatformState.PositionNED.ToVector();
+        var vm = PlatformState.VelocityNED.ToVector();
+
+        var pnMinimumSpeed = 10.0;
+
+        if (vm.Norm() < pnMinimumSpeed)
+        {
+            return new Vector(3);
+        }
+
+        var pt = PlatformTarget.PlatformState.PositionNED.ToVector();
+        var vt = PlatformTarget.PlatformState.VelocityNED.ToVector();
+
+        var accelerationTBA_PN = GeneratePNAcceleration(pt, vt, pm, vm);
+
+        return accelerationTBA_PN;
+    }
+
+    public Vector GeneratePNAcceleration(Vector pt, Vector vt, Vector pm, Vector vm)
+    {
+        var pr = pt - pm;
+        var vr = vt - vm;
+
+        var omega = pr.CrossProduct(vr) / pr.DotProduct(pr);
+
+        var pnConstant = 3.0;
+
+        var accelerationTBA = -pnConstant * vr.Norm() / vm.Norm() * vm.CrossProduct(omega);
+
+        return accelerationTBA;
+    }
+
     public void Finalise()
     {
     }
-
 
     public static double CalculateBankAngleFromLateralAcceleration(double lateralAcceleration_ms2)
     {

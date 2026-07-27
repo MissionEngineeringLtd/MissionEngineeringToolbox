@@ -19,6 +19,8 @@ public class Platform : IExecutableModel
 
     public List<PlatformData> PlatformDataList { get; set; }
 
+    public Platform PlatformTarget { get; set; }
+
     public Platform(ISimulationClock simulationClock, ILLAOrigin llaOrigin)
     {
         SimulationClock = simulationClock;
@@ -41,6 +43,8 @@ public class Platform : IExecutableModel
         platformAutopilot.Initialise();
 
         PlatformModel.PlatformAutopilot = platformAutopilot;
+
+        PlatformModel.PlatformAutopilot.PlatformTarget = PlatformTarget;
 
         var attitude = new Attitude
         {
@@ -79,7 +83,7 @@ public class Platform : IExecutableModel
             HeadingAngleDemand_deg = platformAutopilot.PlatformFlightpathDemand.HeadingAngleDemand_deg,
             AltitudeDemand_m = platformAutopilot.PlatformFlightpathDemand.AltitudeDemand_m,
             TotalSpeedDemand_ms = platformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms,
-            PitchAngleDemand_deg = platformAutopilot.PitchAngleDemand_deg
+            PitchAngleDemand_deg = platformAutopilot.PitchAngleDemand_deg,
         };
     }
 
@@ -88,6 +92,10 @@ public class Platform : IExecutableModel
         var timeStamp = SimulationClock.GetTimeStamp(time_s);
 
         PlatformState = PlatformModel.Update(timeStamp, PlatformState);
+
+        (PlatformState.RangeToGo_m, PlatformState.TimeToGo_s) = GenerateRangeToGo(PlatformState.PositionNED, PlatformState.VelocityNED);
+
+        CheckIfDestroyed();
 
         PlatformData = new PlatformData
         {
@@ -101,5 +109,43 @@ public class Platform : IExecutableModel
 
     public void Finalise(double time_s)
     {
+    }
+
+    public (double, double) GenerateRangeToGo(PositionNED positionNED, VelocityNED velocityNED)
+    {
+        if (PlatformTarget is null)
+        {
+            return (0.0, 0.0);
+        }
+
+        if (PlatformState.IsDestroyed)
+        {
+            return (0.0, 0.0); 
+        }
+
+        var positionNEDTarget = PlatformTarget.PlatformState.PositionNED;
+        var velocityNEDTarget = PlatformTarget.PlatformState.VelocityNED;
+
+        var relativePositionNED = positionNEDTarget - positionNED;
+        var relativeVelocityNED = velocityNEDTarget - velocityNED;
+
+        var relativePolarsNED = CoordinateConversions.CartesiansToPolars(relativePositionNED, relativeVelocityNED);
+
+        var rangeToGo = relativePolarsNED.Range_m;
+        var rangeRate = relativePolarsNED.RangeRate_ms;
+
+        var timeToGo = -rangeToGo / rangeRate;
+
+        return (rangeToGo, timeToGo);
+    }
+
+    public void CheckIfDestroyed()
+    { 
+        if (PlatformTarget is null) { return; }
+
+        if (!PlatformState.IsDestroyed && PlatformState.RangeToGo_m < 50.0)
+        { 
+            PlatformState.IsDestroyed = true;
+        }
     }
 }

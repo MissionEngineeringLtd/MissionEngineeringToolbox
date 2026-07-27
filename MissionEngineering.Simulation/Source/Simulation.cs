@@ -111,7 +111,7 @@ public class Simulation : ISimulation
                 PlatformSettings = platformSettings
             };
 
-            PlatformManager.AddPlatform(platform);
+            PlatformManager.CreatePlatform(platform);
         }
 
         SimulationModels.Add(PlatformManager);

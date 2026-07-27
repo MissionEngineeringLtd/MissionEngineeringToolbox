@@ -1,7 +1,13 @@
 ﻿namespace MissionEngineering.Simulation.Messages;
 
-public record TrackDataPredictedMessage : SimulationMessage
+public record TrackDataPredictedMessage : ISimulationMessage
 {
+    public int MessageTypeId => (int)MessageType;
+
+    public SimulationMessageType MessageType { get; set; }
+
+    public SimulationMessageHeader Header { get; set; }
+
     public int TrackId { get; set; }
 
     public double PredictionTime { get; set; }

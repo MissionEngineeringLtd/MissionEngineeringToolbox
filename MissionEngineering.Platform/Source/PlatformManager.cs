@@ -11,9 +11,19 @@ public class PlatformManager : IPlatformManager
         Platforms = new List<Platform>();
     }
 
-    public void AddPlatform(Platform platform)
+    public void CreatePlatform(Platform platform)
     {
         Platforms.Add(platform);
+    }
+
+    public void DeletePlatform(string platformName)
+    {
+        var platform = GetPlatformByName(platformName);
+
+        if (platform != null)
+        {
+            Platforms.Remove(platform);
+        }
     }
 
     public void Initialise(double time_s)
@@ -30,6 +40,8 @@ public class PlatformManager : IPlatformManager
         {
             platform.Update(time_s);
         }
+
+        Platforms.RemoveAll(s => s.PlatformState.IsDestroyed);
     }
 
     public void Finalise(double time_s)
