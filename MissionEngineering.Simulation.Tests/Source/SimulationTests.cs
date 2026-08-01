@@ -8,6 +8,12 @@ public sealed class SimulationTests
     {
         // Arrange
         var simulationSettings = SimulationSettingsFactory.SimulationSettings_Test_1_Single();
+
+        simulationSettings.IsAddConsoleLogging = false;
+        simulationSettings.IsAddFileLogging = false;
+        simulationSettings.IsWriteData = false;
+        simulationSettings.IsCreateZipFile = false;
+
         var scenarioSettings = ScenarioSettingsFactory.ScenarioSettings_Test_1();
 
         var simulationHarness = SimulationBuilder.CreateSimulationHarness();
