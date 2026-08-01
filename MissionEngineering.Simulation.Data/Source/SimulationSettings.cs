@@ -6,7 +6,7 @@ public record SimulationSettings
 
     public int RunNumber { get; set; }
 
-    public DateTime DateTime { get; set; }
+    public DateTimeOffset DateTime { get; set; }
 
     public bool IsAddConsoleLogging { get; set; }
 

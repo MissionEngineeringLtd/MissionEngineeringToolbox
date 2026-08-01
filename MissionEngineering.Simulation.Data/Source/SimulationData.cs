@@ -16,6 +16,8 @@ public class SimulationData
 
     public List<ISimulationEvent> SimulationEvents { get; set; }
 
+    public List<List<ISimulationEvent>> SimulationEventsPerEventType { get; set; }
+
     public List<ISimulationMessage> SimulationMessages { get; set; }
 
     public List<PlatformData> PlatformDataAll { get; set; }
@@ -50,10 +52,16 @@ public class SimulationData
     {
         SimulationSettings = simulationSettings;
         SimulationMessages = [];
+        SimulationEvents = [];
+        SimulationEventsPerEventType = [];
         PlatformDataAll = [];
+        PlatformDataPerPlatform = [];
         PlatformDataRelativeAll = [];
+        PlatformDataRelativePerPlatform = [];
         PlatformStateMessagesAll = [];
+        PlatformStateMessagesPerPlatform = [];
         PlatformStateRelativeMessagesAll = [];
+        PlatformStateRelativeMessagesPerPlatform = [];
         ScanDataAll = [];
         ScanDataMessagesAll = [];
         SensorReportsAll = [];

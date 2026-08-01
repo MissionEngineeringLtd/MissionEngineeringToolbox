@@ -16,9 +16,9 @@ public record TaskHeader
 
     public TaskDemandType TaskDemandType { get; set; }
 
-    public DateTime TaskCreationDate { get; set; }
+    public DateTimeOffset TaskCreationDate { get; set; }
 
-    public DateTime TaskModificationDate { get; set; }
+    public DateTimeOffset TaskModificationDate { get; set; }
 
     public int TaskModificationCount { get; set; }
 

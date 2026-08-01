@@ -17,7 +17,7 @@ public static class TrackMessageConversions
 
         var header = new SimulationMessageHeader
         {
-            WallClockDateTime = DateTime.UtcNow,
+            WallClockDateTime = DateTimeOffset.UtcNow,
             SimulationTime_s = trackDataPredicted.PredictionTime,
             SourceId = trackDataPredicted.SensorId,
             SourceName = trackDataPredicted.SensorId.ToString(),

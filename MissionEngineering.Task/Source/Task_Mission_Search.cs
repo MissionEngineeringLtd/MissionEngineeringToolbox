@@ -12,8 +12,8 @@ public class Task_Mission_Search : Task
             TaskType = TaskType.Mission_Search,
             TaskDemandType = TaskDemandType.Create,
             TaskLevel = TaskLevelType.Mission,
-            TaskCreationDate = DateTime.UtcNow,
-            TaskModificationDate = DateTime.UtcNow,
+            TaskCreationDate = DateTimeOffset.UtcNow,
+            TaskModificationDate = DateTimeOffset.UtcNow,
             TaskModificationCount = 0
         };
     }

@@ -8,7 +8,7 @@ public static class PlatformMessageConversions
     {
         var header = new SimulationMessageHeader
         {
-            WallClockDateTime = DateTime.UtcNow,
+            WallClockDateTime = DateTimeOffset.UtcNow,
             SimulationDateTime = platformState.TimeStamp.SimulationDateTime,
             SimulationTime_s = platformState.TimeStamp.SimulationTime_s,
             SourceId = platformState.PlatformId,
@@ -70,7 +70,7 @@ public static class PlatformMessageConversions
     {
         var header = new SimulationMessageHeader
         {
-            WallClockDateTime = DateTime.UtcNow,
+            WallClockDateTime = DateTimeOffset.UtcNow,
             SimulationDateTime = platformStateRelative.TimeStamp.SimulationDateTime,
             SimulationTime_s = platformStateRelative.TimeStamp.SimulationTime_s,
             SourceId = platformStateRelative.PlatformIdOrigin,

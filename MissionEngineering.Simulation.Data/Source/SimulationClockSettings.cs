@@ -2,7 +2,7 @@
 
 public record SimulationClockSettings
 {
-    public DateTime DateTimeOrigin { get; set; }
+    public DateTimeOffset DateTimeOrigin { get; set; }
 
     public double TimeStart { get; set; }
 

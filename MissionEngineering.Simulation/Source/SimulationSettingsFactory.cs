@@ -8,7 +8,7 @@ public static class SimulationSettingsFactory
         {
             SimulationName = "Simulation_1",
             RunNumber = 1,
-            DateTime = DateTime.Now,
+            DateTime = DateTimeOffset.Now,
             IsAddConsoleLogging = true,
             IsAddFileLogging = true,
             IsWriteData = true,
@@ -27,7 +27,7 @@ public static class SimulationSettingsFactory
         {
             SimulationName = "Simulation_1",
             RunNumber = 1,
-            DateTime = DateTime.Now,
+            DateTime = DateTimeOffset.Now,
             IsAddConsoleLogging = false,
             IsAddFileLogging = true,
             IsWriteData = true,

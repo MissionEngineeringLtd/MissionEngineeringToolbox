@@ -10,9 +10,9 @@ public record SimulationMessageHeader
 
     public string MessageDescription { get; set; }
 
-    public DateTime WallClockDateTime { get; set; }
+    public DateTimeOffset WallClockDateTime { get; set; }
 
-    public DateTime SimulationDateTime { get; set; }
+    public DateTimeOffset SimulationDateTime { get; set; }
 
     public double SimulationTime_s { get; set; }
 }

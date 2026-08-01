@@ -2,20 +2,20 @@
 
 public record SimulationTimeStamp
 {
-    public DateTime WallClockDateTime { get; set; }
+    public DateTimeOffset WallClockDateTime { get; set; }
 
-    public DateTime SimulationDateTime { get; set; }
+    public DateTimeOffset SimulationDateTime { get; set; }
 
     public double SimulationTime_s { get; set; }
 
     public SimulationTimeStamp()
     {
-        WallClockDateTime = DateTime.Now;
+        WallClockDateTime = DateTimeOffset.Now;
     }
 
-    public SimulationTimeStamp(DateTime simulationDateTime, double simulationTime_s)
+    public SimulationTimeStamp(DateTimeOffset simulationDateTime, double simulationTime_s)
     {
-        WallClockDateTime = DateTime.Now;
+        WallClockDateTime = DateTimeOffset.Now;
 
         SimulationDateTime = simulationDateTime;
 

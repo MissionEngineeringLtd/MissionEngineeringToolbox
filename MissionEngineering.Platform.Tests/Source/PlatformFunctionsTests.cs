@@ -10,7 +10,7 @@ namespace MissionEngineering.Platform.Tests
         public void GeneratePlatformStateRelative_WithValidStates_ExpectSuccess()
         {
             // Arrange
-            var startDateTime = new DateTime(2024, 1, 1, 12, 0, 0);
+            var startDateTime = new DateTimeOffset(2024, 1, 1, 12, 0, 0, TimeSpan.Zero);
 
             var dateTimeOrigin = new DateTimeOrigin(startDateTime);
 

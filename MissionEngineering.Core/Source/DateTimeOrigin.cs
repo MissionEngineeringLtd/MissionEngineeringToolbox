@@ -2,18 +2,18 @@
 
 public class DateTimeOrigin : IDateTimeOrigin
 {
-    public DateTime DateTimeStart { get; set; }
+    public DateTimeOffset DateTimeStart { get; set; }
 
     public DateTimeOrigin()
     {
     }
 
-    public DateTimeOrigin(DateTime dateTimeStart)
+    public DateTimeOrigin(DateTimeOffset dateTimeStart)
     {
         DateTimeStart = dateTimeStart;
     }
 
-    public DateTime GetDateTimeFromTime(double time_s)
+    public DateTimeOffset GetDateTimeFromTime(double time_s)
     {
         var dateTime = DateTimeStart.AddSeconds(time_s);
 

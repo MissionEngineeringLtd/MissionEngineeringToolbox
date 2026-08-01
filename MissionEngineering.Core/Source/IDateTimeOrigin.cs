@@ -2,7 +2,7 @@
 
 public interface IDateTimeOrigin
 {
-    public DateTime DateTimeStart { get; set; }
+    public DateTimeOffset DateTimeStart { get; set; }
 
-    public DateTime GetDateTimeFromTime(double time_s);
+    public DateTimeOffset GetDateTimeFromTime(double time_s);
 }

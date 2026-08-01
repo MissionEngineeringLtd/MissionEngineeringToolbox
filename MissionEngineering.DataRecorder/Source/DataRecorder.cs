@@ -26,6 +26,8 @@ public class DataRecorder : IDataRecorder
 
     public void Finalise(double time)
     {
+        CreateSimulationEventsPerEventType();
+
         CreatePlatformDataPerPlatform();
         CreatePlatformDataRelativePerPlatform();
 
@@ -59,6 +61,20 @@ public class DataRecorder : IDataRecorder
 
         Directory.CreateDirectory(SimulationData.SimulationSettings.OutputFolder);
     }
+
+    public void CreateSimulationEventsPerEventType()
+    {
+        SimulationData.SimulationEventsPerEventType = [];
+
+        var eventTypes = SimulationData.SimulationEvents.Select(s => s.EventType).Distinct();
+
+        foreach (var eventType in eventTypes)
+        {
+            var events = SimulationData.SimulationEvents.Where(s => s.EventType == eventType).ToList();
+
+            SimulationData.SimulationEventsPerEventType.Add(events);
+        }
+    }   
 
     public void CreatePlatformDataPerPlatform()
     {
@@ -120,14 +136,16 @@ public class DataRecorder : IDataRecorder
     {
         WriteSimulationSettingsToJson();
         WriteScenarioSettingsToJson();
-        WriteSimulationEventsToJson();
+        WriteSimulationEventsAllToJson();
+        WriteSimulationEventsPerEventTypeToJson();
     }
 
     public void WriteYamlData()
     {
         WriteSimulationSettingsToYaml();
         WriteScenarioSettingsToYaml();
-        WriteSimulationEventsToYaml();
+        WriteSimulationEventsAllToYaml();
+        WriteSimulationEventsPerEventTypeToYaml();
     }
 
     public void WriteCsvData()
@@ -185,7 +203,7 @@ public class DataRecorder : IDataRecorder
         SimulationData.ScenarioSettings.WriteToJsonFile(fileNameFull);
     }
 
-    public void WriteSimulationEventsToJson()
+    public void WriteSimulationEventsAllToJson()
     {
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents.json";
 
@@ -194,6 +212,22 @@ public class DataRecorder : IDataRecorder
         Log.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.SimulationEvents.WriteToJsonFile(fileNameFull);
+    }
+
+    public void WriteSimulationEventsPerEventTypeToJson()
+    {
+        foreach (var events in SimulationData.SimulationEventsPerEventType)
+        {
+            var eventType = events.First().EventType;
+
+            var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents_{eventType}.json";
+
+            var fileNameFull = GetFileNameFull(fileName);
+
+            Log.LogInformation($"Writing File : {fileNameFull}");
+
+            events.WriteToJsonFile(fileNameFull);
+        }
     }
 
     public void WriteSimulationSettingsToYaml()
@@ -218,7 +252,7 @@ public class DataRecorder : IDataRecorder
         SimulationData.ScenarioSettings.WriteToYamlFile(fileNameFull);
     }
 
-    public void WriteSimulationEventsToYaml()
+    public void WriteSimulationEventsAllToYaml()
     {
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents.yaml";
 
@@ -227,6 +261,22 @@ public class DataRecorder : IDataRecorder
         Log.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.SimulationEvents.WriteToYamlFile(fileNameFull);
+    }
+
+    public void WriteSimulationEventsPerEventTypeToYaml()
+    {
+        foreach (var events in SimulationData.SimulationEventsPerEventType)
+        {
+            var eventType = events.First().EventType;
+
+            var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents_{eventType}.yaml";
+
+            var fileNameFull = GetFileNameFull(fileName);
+
+            Log.LogInformation($"Writing File : {fileNameFull}");
+
+            events.WriteToYamlFile(fileNameFull);
+        }
     }
 
     public void WriteSimulationMessagesAllToCsv()
