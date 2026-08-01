@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MissionEngineering.Simulation.Commands\MissionEngineering.Simulation.Events.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Simulation.Events\MissionEngineering.Simulation.Events.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation\MissionEngineering.Simulation.csproj" />
   </ItemGroup>
 

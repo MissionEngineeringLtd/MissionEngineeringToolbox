@@ -9,8 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simdis\MissionEngineering.Simdis.csproj" />
-    <ProjectReference Include="..\MissionEngineering.Simulation.Commands\MissionEngineering.Simulation.Events.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation.Data\MissionEngineering.Simulation.Data.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Simulation.Events\MissionEngineering.Simulation.Events.csproj" />
     <ProjectReference Include="..\MissionEngineering.Tracker\MissionEngineering.Tracker.csproj" />
   </ItemGroup>
 
