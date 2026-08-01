@@ -43,7 +43,7 @@ public partial class Matrix
             {
                 for (int j = 0; j < columnLength; j++)
                 {
-                    subMatrix[i, j] = Data[rowOffset + i, columnOffset + j];
+                    subMatrix.Data[i, j] = Data[rowOffset + i, columnOffset + j];
                 }
             }
 
@@ -77,7 +77,7 @@ public partial class Matrix
             {
                 for (int j = 0; j < nColumns; j++)
                 {
-                    subMatrix[i, j] = Data[rowIndices[i], columnIndices[j]];
+                    subMatrix.Data[i, j] = Data[rowIndices[i], columnIndices[j]];
                 }
             }
 

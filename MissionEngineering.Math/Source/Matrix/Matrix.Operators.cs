@@ -10,7 +10,7 @@ public partial class Matrix
         {
             for (int j = 0; j < right.NumberOfColumns; j++)
             {
-                result[i, j] = left[i, j] + right[i, j];
+                result.Data[i, j] = left.Data[i, j] + right.Data[i, j];
             }
         }
 
@@ -25,7 +25,7 @@ public partial class Matrix
         {
             for (int j = 0; j < right.NumberOfColumns; j++)
             {
-                result[i, j] = left[i, j] - right[i, j];
+                result.Data[i, j] = left.Data[i, j] - right.Data[i, j];
             }
         }
 
@@ -40,7 +40,7 @@ public partial class Matrix
         {
             for (int j = 0; j < left.NumberOfColumns; j++)
             {
-                result[i, j] = left[i, j] * right;
+                result.Data[i, j] = left.Data[i, j] * right;
             }
         }
 
@@ -54,15 +54,19 @@ public partial class Matrix
 
     public static Matrix operator *(Matrix left, Matrix right)
     {
-        Matrix result = new Matrix(left.NumberOfRows, right.NumberOfColumns);
+        var aRows = left.NumberOfRows;
+        var aColumns = left.NumberOfColumns;
+        var bColumns = right.NumberOfColumns;
 
-        for (int i = 0; i < left.NumberOfRows; i++)
+        Matrix result = new Matrix(aRows, bColumns);
+
+        for (int i = 0; i < aRows; i++)
         {
-            for (int j = 0; j < right.NumberOfColumns; j++)
+            for (int j = 0; j < bColumns; j++)
             {
-                for (int k = 0; k < left.NumberOfColumns; k++)
+                for (int k = 0; k < aColumns; k++)
                 {
-                    result[i, j] += left[i, k] * right[k, j];
+                    result.Data[i, j] += left.Data[i, k] * right.Data[k, j];
                 }
             }
         }
@@ -78,7 +82,7 @@ public partial class Matrix
         {
             for (int j = 0; j < left.NumberOfColumns; j++)
             {
-                result[i] += left[i, j] * right[j];
+                result.Data[i] += left.Data[i, j] * right.Data[j];
             }
         }
 
@@ -93,7 +97,7 @@ public partial class Matrix
         {
             for (int j = 0; j < NumberOfColumns; j++)
             {
-                result[j, i] = this[i, j];
+                result.Data[j, i] = this.Data[i, j];
             }
         }
 

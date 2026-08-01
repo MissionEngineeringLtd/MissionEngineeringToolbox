@@ -105,7 +105,7 @@ public class Simulation : ISimulation
 
         SimulationEventProcessor.Initialise(time);
 
-        DataRecorder.SimulationData.SimulationEvents = simulationEvents;
+        DataRecorder.SimulationData.SimulationEvents = SimulationEventProcessor.SimulationEvents;
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {

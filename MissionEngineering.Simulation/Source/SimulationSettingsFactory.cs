@@ -8,10 +8,10 @@ public static class SimulationSettingsFactory
         {
             SimulationName = "Simulation_1",
             RunNumber = 1,
-            DateTime = DateTimeOffset.Now,
+            RunTimeStamp = DateTime.Now.ToString("yyyy_MM_dd HH_mm_ss"),
             IsAddConsoleLogging = true,
-            IsAddFileLogging = true,
-            IsWriteData = true,
+            IsAddFileLogging = false,
+            IsWriteData = false,
             IsAddTimeStamp = false,
             IsAddRunNumber = true,
             IsCreateZipFile = true,
@@ -27,7 +27,7 @@ public static class SimulationSettingsFactory
         {
             SimulationName = "Simulation_1",
             RunNumber = 1,
-            DateTime = DateTimeOffset.Now,
+            RunTimeStamp = DateTime.Now.ToString("yyyy_MM_dd HH_mm_ss"),
             IsAddConsoleLogging = false,
             IsAddFileLogging = true,
             IsWriteData = true,

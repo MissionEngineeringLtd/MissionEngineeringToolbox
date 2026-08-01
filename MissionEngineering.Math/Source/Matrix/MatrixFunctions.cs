@@ -12,7 +12,7 @@ public partial class Matrix
 
         for (int i = 0; i < numberOElements; i++)
         {
-            x[i, i] = 1.0;
+            x.Data[i, i] = 1.0;
         }
 
         return x;
@@ -26,7 +26,7 @@ public partial class Matrix
 
         for (int i = 0; i < numberOfElements; i++)
         {
-            diagonal[i] = this[i, i];
+            diagonal.Data[i] = Data[i, i];
         }
 
         return diagonal;

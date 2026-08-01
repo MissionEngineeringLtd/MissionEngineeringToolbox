@@ -6,7 +6,7 @@ public record SimulationSettings
 
     public int RunNumber { get; set; }
 
-    public DateTimeOffset DateTime { get; set; }
+    public string RunTimeStamp { get; set; }
 
     public bool IsAddConsoleLogging { get; set; }
 
@@ -38,7 +38,7 @@ public record SimulationSettings
 
         if (IsAddTimeStamp)
         {
-            var dateTimeString = DateTime.ToString("yyyy-MM-dd HH-mm-ss");
+            var dateTimeString = RunTimeStamp;
 
             outputFolder = Path.Combine(outputFolder, dateTimeString);
         }

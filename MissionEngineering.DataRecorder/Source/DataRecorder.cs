@@ -150,6 +150,8 @@ public class DataRecorder : IDataRecorder
 
     public void WriteCsvData()
     {
+        WriteSimulationEventsAllToCsv();
+
         WritePlatformStateAllToCsv();
         WritePlatformStatePerPlatformToCsv();
 
@@ -205,7 +207,7 @@ public class DataRecorder : IDataRecorder
 
     public void WriteSimulationEventsAllToJson()
     {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents.json";
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents_All.json";
 
         var fileNameFull = GetFileNameFull(fileName);
 
@@ -254,7 +256,7 @@ public class DataRecorder : IDataRecorder
 
     public void WriteSimulationEventsAllToYaml()
     {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents.yaml";
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents_All.yaml";
 
         var fileNameFull = GetFileNameFull(fileName);
 
@@ -277,6 +279,19 @@ public class DataRecorder : IDataRecorder
 
             events.WriteToYamlFile(fileNameFull);
         }
+    }
+
+    public void WriteSimulationEventsAllToCsv()
+    {
+        var data = SimulationData.SimulationEvents.Select(s => new { s.EventTime, s.EventType, V = s.ConvertToJsonString(false, true) });
+
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents_All.csv";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        Log.LogInformation($"Writing File : {fileNameFull}");
+
+        data.WriteToCsvFile(fileNameFull);
     }
 
     public void WriteSimulationMessagesAllToCsv()

@@ -13,6 +13,20 @@ public static class JsonUtilities
         return jsonString;
     }
 
+    public static string ConvertToJsonString<T>(this T obj, bool isWriteIndented = false, bool isRemoveQuotes = false)
+    {
+        var options = new JsonSerializerOptions { WriteIndented = isWriteIndented };
+
+        string jsonString = JsonSerializer.Serialize(obj, options);
+
+        if (isRemoveQuotes)
+        {
+            jsonString = jsonString.Replace($"\"", "");
+        }
+
+        return jsonString;
+    }
+
     public static T ConvertFromJsonString<T>(string jsonString)
     {
         T obj = JsonSerializer.Deserialize<T>(jsonString, JsonSerializerOptions);
