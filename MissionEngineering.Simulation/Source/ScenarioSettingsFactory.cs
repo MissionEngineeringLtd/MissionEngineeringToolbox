@@ -43,4 +43,34 @@ public static class ScenarioSettingsFactory
 
         return scenarioSettings;
     }
+
+    public static ScenarioSettings ScenarioSettings_FF_1()
+    {
+        var dateTimeOrigin = new DateTime(2024, 12, 24, 15, 45, 10, 123);
+
+        var simulationClockSettings = new SimulationClockSettings()
+        {
+            DateTimeOrigin = dateTimeOrigin,
+            TimeStart = 10.0,
+            TimeEnd = 200.0,
+            TimeStep = 0.01,
+            TrackPredictionTimeStep = 0.1
+        };
+
+        var llaOrigin = new PositionLLA()
+        {
+            Latitude_deg = 64.5,
+            Longitude_deg = 9.0,
+            Altitude_m = 0.0
+        };
+
+        var scenarioSettings = new ScenarioSettings()
+        {
+            ScenarioName = "Scenario_FF_1",
+            SimulationClockSettings = simulationClockSettings,
+            LLAOrigin = llaOrigin
+        };
+
+        return scenarioSettings;
+    }
 }

@@ -99,13 +99,15 @@ public class Simulation : ISimulation
         Sensors = [];
         SimulationModels = [];
 
-        var simulationEvents = SimulationEventExamples.Example_1();
+        var simulationEvents = SimulationEventExamples.FF_1();
 
         SimulationEventProcessor.SimulationEvents = simulationEvents;
 
         SimulationEventProcessor.Initialise(time);
 
         DataRecorder.SimulationData.SimulationEvents = SimulationEventProcessor.SimulationEvents;
+
+        ScenarioSettings.PlatformSettingsList = [];
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {
@@ -126,6 +128,8 @@ public class Simulation : ISimulation
             RelativePlatforms.Add(relativePlatform);
             SimulationModels.Add(relativePlatform);
         }
+
+        ScenarioSettings.SensorSettingsList = [];
 
         foreach (var sensorSettings in ScenarioSettings.SensorSettingsList)
         {

@@ -127,4 +127,169 @@ public static class SimulationEventExamples
 
         return new List<ISimulationEvent> { c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 };
     }
+
+    public static List<ISimulationEvent> FF_1()
+    {
+        var c0 = new SimulationSettingsEvent()
+        {
+            EventTime = 0.0,
+            SimulationStartDateTime = "2024-11-21T21:20:30Z",
+            SimulationStartTime_s = 10.0,
+            SimulationEndTime_s = 100.0,
+            SimulationTimeStep_s = 0.1
+        };
+
+        var c1 = new MapOriginEvent()
+        {
+            EventTime = 0.0,
+            Latitude_deg = 56.0,
+            Longitude_deg = 12.5,
+        };
+
+        var ff_1 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "FF_1",
+            PlatformCallsign = "FF_1",
+            PlatformDescription = "FF_1 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "f-35a_lightning",
+            PlatformColor = "Blue",
+            PositionNorth_m = -50000.0,
+            PositionEast_m = 17000.0,
+            Altitude_m = 12192.0,
+            TotalSpeed_ms = 250.0,
+            HeadingAngle_deg = 30,
+            PitchAngle_deg = 5.0
+        };
+
+        var lw_1 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "LW_1",
+            PlatformCallsign = "LW_1",
+            PlatformDescription = "LW_1 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "rq-1b_predator",
+            PlatformColor = "Blue",
+            PositionNorth_m = -42000.0,
+            PositionEast_m = 16000.0,
+            Altitude_m = 11582.0,
+            TotalSpeed_ms = 300.0,
+            HeadingAngle_deg = 20.0,
+            PitchAngle_deg = 0.0
+        };
+
+        var ff_2 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "FF_2",
+            PlatformCallsign = "FF_2",
+            PlatformDescription = "FF_2 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "f-35a_lightning",
+            PlatformColor = "Blue",
+            PositionNorth_m = -50000.0,
+            PositionEast_m = 23000.0,
+            Altitude_m = 12192.0,
+            TotalSpeed_ms = 250.0,
+            HeadingAngle_deg = 30.0,
+            PitchAngle_deg = 0.0
+        };
+
+        var lw_2 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "LW_2",
+            PlatformCallsign = "LW_2",
+            PlatformDescription = "LW_2 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "rq-1b_predator",
+            PlatformColor = "Blue",
+            PositionNorth_m = -42000.0,
+            PositionEast_m = 30000.0,
+            Altitude_m = 11582.0,
+            TotalSpeed_ms = 300.0,
+            HeadingAngle_deg = 30.0,
+            PitchAngle_deg = 0.0
+        };
+
+        var ff_3 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "FF_3",
+            PlatformCallsign = "FF_3",
+            PlatformDescription = "FF_3 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "f-35a_lightning",
+            PlatformColor = "Blue",
+            PositionNorth_m = -51000.0,
+            PositionEast_m = 41000.0,
+            Altitude_m = 12192.0,
+            TotalSpeed_ms = 250.0,
+            HeadingAngle_deg = 30.0,
+            PitchAngle_deg = 0.0
+        };
+
+        var lw_3 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "LW_3",
+            PlatformCallsign = "LW_3",
+            PlatformDescription = "LW_3 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "rq-1b_predator",
+            PlatformColor = "Blue",
+            PositionNorth_m = -42000.0,
+            PositionEast_m = 40000.0,
+            Altitude_m = 11582.0,
+            TotalSpeed_ms = 300.0,
+            HeadingAngle_deg = 25.0,
+            PitchAngle_deg = 0.0
+        };
+
+        var ff_4 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "FF_4",
+            PlatformCallsign = "FF_4",
+            PlatformDescription = "FF_4 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "f-35a_lightning",
+            PlatformColor = "Blue",
+            PositionNorth_m = -52000.0,
+            PositionEast_m = 45000.0,
+            Altitude_m = 12192.0,
+            TotalSpeed_ms = 250.0,
+            HeadingAngle_deg = 30.0,
+            PitchAngle_deg = 0.0
+        };
+
+        var lw_4 = new PlatformCreateEvent()
+        {
+            EventTime = 0.0,
+            PlatformName = "LW_4",
+            PlatformCallsign = "LW_4",
+            PlatformDescription = "LW_4 Description",
+            PlatformAffiliation = PlatformAffiliationType.Friendly,
+            PlatformType = PlatformType.Aircraft,
+            PlatformIcon = "rq-1b_predator",
+            PlatformColor = "Blue",
+            PositionNorth_m = -43000.0,
+            PositionEast_m = 52000.0,
+            Altitude_m = 11582.0,
+            TotalSpeed_ms = 350.0,
+            HeadingAngle_deg = 25.0,
+            PitchAngle_deg = 0.0
+        };
+
+        return new List<ISimulationEvent> { c0, c1, ff_1, lw_1, ff_2, lw_2, ff_3, lw_3, ff_4, lw_4 };
+    }
 }

@@ -14,6 +14,7 @@ public static class CsvUtilities
 
         var options = new TypeConverterOptions { Formats = ["yyyy-MM-ddTHH:mm:ss.fffZ"] };
         csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTime>(options);
+        csvWriter.Context.TypeConverterOptionsCache.AddOptions<DateTimeOffset>(options);
 
         csvWriter.WriteRecords(records);
     }

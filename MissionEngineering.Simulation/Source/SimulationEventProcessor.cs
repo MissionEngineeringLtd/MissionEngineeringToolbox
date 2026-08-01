@@ -125,8 +125,8 @@ public class SimulationEventProcessor : ISimulationEventProcessor
             PlatformHeaderSimdis = new PlatformHeaderSimdis()
             {
                 PlatformAffiliationFHN = "F",
-                PlatformColor = "GREEN",
-                PlatformIcon = "f-35a_lightning",
+                PlatformColor = c.PlatformColor,
+                PlatformIcon = c.PlatformIcon,
                 PlatformInterpolate = "1",
                 PlatformScaleLevel = 2.5,
                 PlatformType = "Aircraft"

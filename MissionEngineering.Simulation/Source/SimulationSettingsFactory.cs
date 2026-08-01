@@ -8,10 +8,10 @@ public static class SimulationSettingsFactory
         {
             SimulationName = "Simulation_1",
             RunNumber = 1,
-            RunTimeStamp = DateTime.Now.ToString("yyyy_MM_dd HH_mm_ss"),
+            RunTimeStamp = DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss"),
             IsAddConsoleLogging = true,
-            IsAddFileLogging = false,
-            IsWriteData = false,
+            IsAddFileLogging = true,
+            IsWriteData = true,
             IsAddTimeStamp = false,
             IsAddRunNumber = true,
             IsCreateZipFile = true,
@@ -32,6 +32,25 @@ public static class SimulationSettingsFactory
             IsAddFileLogging = true,
             IsWriteData = true,
             IsAddTimeStamp = true,
+            IsAddRunNumber = true,
+            IsCreateZipFile = true,
+            OutputFolderBase = @"C:\Temp\MissionEngineeringToolbox\"
+        };
+
+        return simulationSettings;
+    }
+
+    public static SimulationSettings SimulationSettings_FF_1_Single()
+    {
+        var simulationSettings = new SimulationSettings()
+        {
+            SimulationName = "Simulation_FF_1",
+            RunNumber = 1,
+            RunTimeStamp = DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss"),
+            IsAddConsoleLogging = true,
+            IsAddFileLogging = true,
+            IsWriteData = true,
+            IsAddTimeStamp = false,
             IsAddRunNumber = true,
             IsCreateZipFile = true,
             OutputFolderBase = @"C:\Temp\MissionEngineeringToolbox\"

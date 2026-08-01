@@ -58,7 +58,7 @@ public class Program
         {
             if (NumberOfRuns == 1)
             {
-                SimulationSettings = SimulationSettingsFactory.SimulationSettings_Test_1_Single();
+                SimulationSettings = SimulationSettingsFactory.SimulationSettings_FF_1_Single();
             }
             else
             {
@@ -75,7 +75,7 @@ public class Program
     {
         if (string.IsNullOrEmpty(ScenarioSettingsFileName))
         {
-            ScenarioSettings = ScenarioSettingsFactory.ScenarioSettings_Test_1();
+            ScenarioSettings = ScenarioSettingsFactory.ScenarioSettings_FF_1();
             return;
         }
 
