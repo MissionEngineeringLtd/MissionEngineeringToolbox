@@ -6,11 +6,11 @@ using System.Text;
 
 namespace MissionEngineering.Simulation;
 
-public class PlatformCreateCommand : ISimulationCommand
+public class PlatformCreateEvent : ISimulationEvent
 {
-    public SimulationCommandType CommandType { get; set; }
+    public SimulationEventType EventType { get; set; }
 
-    public double CommandTime { get; set; }
+    public double EventTime { get; set; }
 
     public string PlatformName { get; set; }
 
@@ -42,8 +42,8 @@ public class PlatformCreateCommand : ISimulationCommand
 
     public double PitchAngle_deg { get; set; }
 
-    public PlatformCreateCommand()
+    public PlatformCreateEvent()
     {
-        CommandType = SimulationCommandType.PlatformCreate;
+        EventType = SimulationEventType.PlatformCreate;
     }
 }

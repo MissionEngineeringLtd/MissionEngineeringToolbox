@@ -1,5 +1,4 @@
-﻿using MathNet.Numerics.Optimization.ObjectiveFunctions;
-using MissionEngineering.Core;
+﻿using MissionEngineering.Core;
 using MissionEngineering.DataRecorder;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
@@ -24,7 +23,7 @@ public class Simulation : ISimulation
 
     public IPlatformManager PlatformManager { get; set; }
 
-    public ISimulationCommandProcessor SimulationCommandProcessor { get; set; }
+    public ISimulationEventProcessor SimulationEventProcessor { get; set; }
 
     public List<IExecutableModel> SimulationModels { get; set; }
 
@@ -43,14 +42,14 @@ public class Simulation : ISimulation
     private int trackPredictionCountActual;
     private int trackPredictionCountMax;
 
-    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, ISimulationCommandProcessor simulationCommandProcessor, IDataRecorder dataRecorder, ILogClass log)
+    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, ISimulationEventProcessor simulationEventProcessor, IDataRecorder dataRecorder, ILogClass log)
     {
         SimulationSettings = simulationSettings;
         ScenarioSettings = scenarioSettings;
         SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
         PlatformManager = platformManager;
-        SimulationCommandProcessor = simulationCommandProcessor;
+        SimulationEventProcessor = simulationEventProcessor;
         DataRecorder = dataRecorder;
         Log = log;
     }
@@ -100,13 +99,13 @@ public class Simulation : ISimulation
         Sensors = [];
         SimulationModels = [];
 
-        var simulationCommands = SimulationCommandExamples.Example_1();
+        var simulationEvents = SimulationEventExamples.Example_1();
 
-        SimulationCommandProcessor.SimulationCommands = simulationCommands;
+        SimulationEventProcessor.SimulationEvents = simulationEvents;
 
-        SimulationCommandProcessor.Initialise(time);
+        SimulationEventProcessor.Initialise(time);
 
-        DataRecorder.SimulationData.SimulationCommands = simulationCommands;
+        DataRecorder.SimulationData.SimulationEvents = simulationEvents;
 
         foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
         {
@@ -191,7 +190,7 @@ public class Simulation : ISimulation
 
     public void Update(double time)
     {
-        SimulationCommandProcessor.Update(time);
+        SimulationEventProcessor.Update(time);
 
         UpdateModels(time);
 
@@ -321,7 +320,7 @@ public class Simulation : ISimulation
         Log.LogInformation("Finalise Started...");
         Log.LogInformation("");
 
-        SimulationCommandProcessor.Finalise(time);
+        SimulationEventProcessor.Finalise(time);
 
         FinaliseModels(time);
 

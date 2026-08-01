@@ -32,7 +32,7 @@ public static class SimulationBuilder
         var services = new ServiceCollection();
 
         services.AddScoped<ISimulation, Simulation>();
-        services.AddScoped<ISimulationCommandProcessor, SimulationCommandProcessor>();
+        services.AddScoped<ISimulationEventProcessor, SimulationEventProcessor>();
         services.AddScoped<IPlatformManager, PlatformManager>();
         services.AddScoped<ISimulationClock, SimulationClock>();
         services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();

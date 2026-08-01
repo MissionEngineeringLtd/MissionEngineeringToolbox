@@ -6,11 +6,11 @@ using System.Text;
 
 namespace MissionEngineering.Simulation;
 
-public class PlatformLaunchMissileCommand : ISimulationCommand
+public class PlatformLaunchMissileEvent : ISimulationEvent
 {
-    public SimulationCommandType CommandType { get; set; }
+    public SimulationEventType EventType { get; set; }
 
-    public double CommandTime { get; set; }
+    public double EventTime { get; set; }
 
     public string MissileName { get; set; }
 
@@ -22,8 +22,8 @@ public class PlatformLaunchMissileCommand : ISimulationCommand
 
     public string PlatformColor { get; set; }
 
-    public PlatformLaunchMissileCommand()
+    public PlatformLaunchMissileEvent()
     {
-        CommandType = SimulationCommandType.PlatformLaunchMissile;
+        EventType = SimulationEventType.PlatformLaunchMissile;
     }
 }

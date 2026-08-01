@@ -2,11 +2,11 @@
 
 namespace MissionEngineering.Simulation;
 
-public class PlatformAutopilotCommand : ISimulationCommand
+public class PlatformAutopilotEvent : ISimulationEvent
 {
-    public SimulationCommandType CommandType { get; set; }
+    public SimulationEventType EventType { get; set; }
 
-    public double CommandTime { get; set; }
+    public double EventTime { get; set; }
 
     public string PlatformName { get; set; }
 
@@ -20,8 +20,8 @@ public class PlatformAutopilotCommand : ISimulationCommand
 
     public double TotalSpeedDemand_ms { get; set; }
 
-    public PlatformAutopilotCommand()
+    public PlatformAutopilotEvent()
     {
-        CommandType = SimulationCommandType.PlatformAutopilot;
+        EventType = SimulationEventType.PlatformAutopilot;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MissionEngineering.Simulation;
 
-public enum SimulationCommandType
+public enum SimulationEventType
 {
     Undefined = 0,
     SimulationSettings,

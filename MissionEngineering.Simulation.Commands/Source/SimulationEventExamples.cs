@@ -2,29 +2,29 @@
 
 namespace MissionEngineering.Simulation;
 
-public static class SimulationCommandExamples
+public static class SimulationEventExamples
 {
-    public static List<ISimulationCommand> Example_1()
+    public static List<ISimulationEvent> Example_1()
     {
-        var c0 = new SimulationSettingsCommand()
+        var c0 = new SimulationSettingsEvent()
         {
-            CommandTime = 0.0,
+            EventTime = 0.0,
             SimulationStartDateTime = "2024-11-21T21:20:30Z",
             SimulationStartTime_s = 10.0,
             SimulationEndTime_s = 100.0,
             SimulationTimeStep_s = 0.1
         };
 
-        var c1 = new MapOriginCommand()
+        var c1 = new MapOriginEvent()
         {
-            CommandTime = 0.0,
+            EventTime = 0.0,
             Latitude_deg = 56.0,
             Longitude_deg = 12.5,
         };
 
-        var c2 = new PlatformCreateCommand()
+        var c2 = new PlatformCreateEvent()
         {
-            CommandTime = 30.0,
+            EventTime = 30.0,
             PlatformName = "FF_1",
             PlatformCallsign = "FF_1",
             PlatformDescription = "FF_1 Description",
@@ -40,9 +40,9 @@ public static class SimulationCommandExamples
             PitchAngle_deg = 5.0
         };
 
-        var c3 = new PlatformCreateCommand()
+        var c3 = new PlatformCreateEvent()
         {
-            CommandTime = 40.0,
+            EventTime = 40.0,
             PlatformName = "FF_2",
             PlatformCallsign = "FF_2",
             PlatformDescription = "FF_2 Description",
@@ -58,48 +58,48 @@ public static class SimulationCommandExamples
             PitchAngle_deg = 5.0
         };
 
-        var c4 = new PlatformAutopilotCommand()
+        var c4 = new PlatformAutopilotEvent()
         {
-            CommandTime = 50.0,
+            EventTime = 50.0,
             PlatformName = "FF_2",
             HeadingAngleDemand_deg = 45.0,
             AltitudeDemand_FL = 250.0,
             TotalSpeedDemand_ms = 310.0
         };
 
-        var c5 = new PlatformAutopilotCommand()
+        var c5 = new PlatformAutopilotEvent()
         {
-            CommandTime = 70.0,
+            EventTime = 70.0,
             PlatformName = "FF_2",
             HeadingAngleDemand_deg = 135.0,
             AltitudeDemand_FL = 300,
             TotalSpeedDemand_ms = 250.0
         };
 
-        var c6 = new PlatformAutopilotCommand()
+        var c6 = new PlatformAutopilotEvent()
         {
-            CommandTime = 80.0,
+            EventTime = 80.0,
             PlatformName = "FF_1",
             HeadingAngleDemand_deg = 60,
             AltitudeDemand_FL = 120.0,
             TotalSpeedDemand_ms = 300.0
         };
 
-        var c7 = new PlatformDeleteCommand()
+        var c7 = new PlatformDeleteEvent()
         {
-            CommandTime = 150.0,
+            EventTime = 150.0,
             PlatformName = "FF_1",
         };
 
-        var c8 = new PlatformDeleteCommand()
+        var c8 = new PlatformDeleteEvent()
         {
-            CommandTime = 160.0,
+            EventTime = 160.0,
             PlatformName = "FF_2",
         };
 
-        var c9 = new PlatformLaunchMissileCommand()
+        var c9 = new PlatformLaunchMissileEvent()
         {
-            CommandTime = 100.0,
+            EventTime = 100.0,
             MissileName = "AMRAAM_1",
             LaunchPlatformName = "FF_1",
             TargetPlatformName = "RED_1",
@@ -107,9 +107,9 @@ public static class SimulationCommandExamples
             PlatformColor = "Green"
         };
 
-        var c10 = new PlatformCreateCommand()
+        var c10 = new PlatformCreateEvent()
         {
-            CommandTime = 30.0,
+            EventTime = 30.0,
             PlatformName = "RED_1",
             PlatformCallsign = "RED_1",
             PlatformDescription = "RED_1 Description",
@@ -125,6 +125,6 @@ public static class SimulationCommandExamples
             PitchAngle_deg = 0.0
         };
 
-        return new List<ISimulationCommand> { c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 };
+        return new List<ISimulationEvent> { c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 };
     }
 }

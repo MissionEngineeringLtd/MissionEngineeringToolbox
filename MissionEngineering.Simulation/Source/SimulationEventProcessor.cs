@@ -5,7 +5,7 @@ using MissionEngineering.Platform;
 
 namespace MissionEngineering.Simulation;
 
-public class SimulationCommandProcessor : ISimulationCommandProcessor
+public class SimulationEventProcessor : ISimulationEventProcessor
 {
     public ISimulationClock SimulationClock { get; set; }
 
@@ -15,9 +15,9 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
 
     public IDataRecorder DataRecorder { get; set; }
 
-    public List<ISimulationCommand> SimulationCommands { get; set; }
+    public List<ISimulationEvent> SimulationEvents { get; set; }
 
-    public List<ISimulationCommand> SimulationCommandsForTimeStep { get; set; }
+    public List<ISimulationEvent> SimulationEventsForTimeStep { get; set; }
 
     public double LastProcessedTime { get; set; }
 
@@ -25,7 +25,7 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
 
     public int NextPlatformIdMissile { get; set; }
 
-    public SimulationCommandProcessor(ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, IDataRecorder dataRecorder)
+    public SimulationEventProcessor(ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, IDataRecorder dataRecorder)
     {
         SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
@@ -40,50 +40,50 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
 
     public void Initialise(double time)
     {
-        SimulationCommands = SimulationCommands.OrderBy(s => s.CommandTime).ToList();
+        SimulationEvents = SimulationEvents.OrderBy(s => s.EventTime).ToList();
     }
 
     public void Update(double time)
     {
-        GetSimulationCommandsForTimeStep(time);
+        GetSimulationEventsForTimeStep(time);
 
-        ProcessCommands(time);
+        ProcessEvents(time);
     }
 
-    public void ProcessCommands(double time)
+    public void ProcessEvents(double time)
     {
-        foreach (var command in SimulationCommandsForTimeStep)
+        foreach (var Event in SimulationEventsForTimeStep)
         {
-            switch (command)
+            switch (Event)
             {
-                case SimulationSettingsCommand:
+                case SimulationSettingsEvent:
                     break;
 
-                case MapOriginCommand:
+                case MapOriginEvent:
                     break;
 
-                case PlatformCreateCommand c:
+                case PlatformCreateEvent c:
                     NextPlatformId++;
-                    var p = ConvertPlatformCommandToPlatform(c);
+                    var p = ConvertPlatformEventToPlatform(c);
                     p.Initialise(time);
                     PlatformManager.CreatePlatform(p);
                     DataRecorder.SimulationData.ScenarioSettings.PlatformSettingsList.Add(p.PlatformSettings);
                     break;
 
-                case PlatformLaunchMissileCommand c:
+                case PlatformLaunchMissileEvent c:
                     NextPlatformIdMissile++;
-                    var pm = ConvertPlatformLaunchMissileCommandToPlatform(c);
+                    var pm = ConvertPlatformLaunchMissileEventToPlatform(c);
                     pm.Initialise(time);
                     pm.PlatformModel.PlatformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms = 1000.0;
                     PlatformManager.CreatePlatform(pm);
                     DataRecorder.SimulationData.ScenarioSettings.PlatformSettingsList.Add(pm.PlatformSettings);
                     break;
 
-                case PlatformDeleteCommand c:
+                case PlatformDeleteEvent c:
                     PlatformManager.DeletePlatform(c.PlatformName);
                     break;
 
-                case PlatformAutopilotCommand c:
+                case PlatformAutopilotEvent c:
                     var platform = PlatformManager.GetPlatformByName(c.PlatformName);
 
                     UpdatePlatformAutopilot(platform, c);
@@ -91,7 +91,7 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
                     break;
 
                 default:
-                    throw new NotImplementedException($"Command type {command.CommandType} is not implemented.");
+                    throw new NotImplementedException($"Event type {Event.EventType} is not implemented.");
             }
         }
     }
@@ -100,16 +100,16 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
     {
     }
 
-    public void GetSimulationCommandsForTimeStep(double time)
+    public void GetSimulationEventsForTimeStep(double time)
     {
-        SimulationCommandsForTimeStep = SimulationCommands
-            .Where(c => c.CommandTime > LastProcessedTime && c.CommandTime <= time)
+        SimulationEventsForTimeStep = SimulationEvents
+            .Where(c => c.EventTime > LastProcessedTime && c.EventTime <= time)
             .ToList();
 
         LastProcessedTime = time;
     }
 
-    public Platform.Platform ConvertPlatformCommandToPlatform(PlatformCreateCommand c)
+    public Platform.Platform ConvertPlatformEventToPlatform(PlatformCreateEvent c)
     {
         var platformSettings = new PlatformSettings
         {
@@ -150,7 +150,7 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
         return platform;
     }
 
-    public Platform.Platform ConvertPlatformLaunchMissileCommandToPlatform(PlatformLaunchMissileCommand c)
+    public Platform.Platform ConvertPlatformLaunchMissileEventToPlatform(PlatformLaunchMissileEvent c)
     {
         var platformLaunch = PlatformManager.GetPlatformByName(c.LaunchPlatformName);
 
@@ -203,7 +203,7 @@ public class SimulationCommandProcessor : ISimulationCommandProcessor
         return platform;
     }
 
-    public void UpdatePlatformAutopilot(Platform.Platform p, PlatformAutopilotCommand c)
+    public void UpdatePlatformAutopilot(Platform.Platform p, PlatformAutopilotEvent c)
     {
         var pd = p.PlatformModel.PlatformAutopilot.PlatformFlightpathDemand;
 

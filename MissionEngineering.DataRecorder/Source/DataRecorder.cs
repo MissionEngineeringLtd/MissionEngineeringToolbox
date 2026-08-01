@@ -120,14 +120,14 @@ public class DataRecorder : IDataRecorder
     {
         WriteSimulationSettingsToJson();
         WriteScenarioSettingsToJson();
-        WriteSimulationCommandsToJson();
+        WriteSimulationEventsToJson();
     }
 
     public void WriteYamlData()
     {
         WriteSimulationSettingsToYaml();
         WriteScenarioSettingsToYaml();
-        WriteSimulationCommandsToYaml();
+        WriteSimulationEventsToYaml();
     }
 
     public void WriteCsvData()
@@ -185,15 +185,15 @@ public class DataRecorder : IDataRecorder
         SimulationData.ScenarioSettings.WriteToJsonFile(fileNameFull);
     }
 
-    public void WriteSimulationCommandsToJson()
+    public void WriteSimulationEventsToJson()
     {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationCommands.json";
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents.json";
 
         var fileNameFull = GetFileNameFull(fileName);
 
         Log.LogInformation($"Writing File : {fileNameFull}");
 
-        SimulationData.SimulationCommands.WriteToJsonFile(fileNameFull);
+        SimulationData.SimulationEvents.WriteToJsonFile(fileNameFull);
     }
 
     public void WriteSimulationSettingsToYaml()
@@ -218,15 +218,15 @@ public class DataRecorder : IDataRecorder
         SimulationData.ScenarioSettings.WriteToYamlFile(fileNameFull);
     }
 
-    public void WriteSimulationCommandsToYaml()
+    public void WriteSimulationEventsToYaml()
     {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationCommands.yaml";
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationEvents.yaml";
 
         var fileNameFull = GetFileNameFull(fileName);
 
         Log.LogInformation($"Writing File : {fileNameFull}");
 
-        SimulationData.SimulationCommands.WriteToYamlFile(fileNameFull);
+        SimulationData.SimulationEvents.WriteToYamlFile(fileNameFull);
     }
 
     public void WriteSimulationMessagesAllToCsv()

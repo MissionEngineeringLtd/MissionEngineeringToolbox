@@ -3,54 +3,54 @@
 namespace MissionEngineering.Simulation;
 
 [TestClass]
-public sealed class SimulationCommandTests
+public sealed class SimulationEventTests
 {
     [TestMethod]
-    public void WriteCommandsToYamlFile_ExpectSuccess()
+    public void WriteEventsToYamlFile_ExpectSuccess()
     {
         // Arrange
-        var commands = SimulationCommandExamples.Example_1();
+        var events = SimulationEventExamples.Example_1();
 
-        var yamlString = commands.ConvertToYamlString();
+        var yamlString = events.ConvertToYamlString();
 
         var outputFolder = Environment.CurrentDirectory;
 
-        var outputFile = Path.Combine(outputFolder, "SimulationCommmands_Example_1.yaml");
+        var outputFile = Path.Combine(outputFolder, "SimulationEvents_Example_1.yaml");
 
         // Act
-        commands.WriteToYamlFile(outputFile);
+        events.WriteToYamlFile(outputFile);
 
         // Assert
         Assert.IsFalse(string.IsNullOrEmpty(yamlString));
     }
 
     [TestMethod]
-    public void ReadCommandsFromYamlFile_ExpectSuccess()
+    public void ReadEventsFromYamlFile_ExpectSuccess()
     {
         // Arrange
-        var commandsIn = SimulationCommandExamples.Example_1();
+        var eventsIn = SimulationEventExamples.Example_1();
 
-        var yamlString = commandsIn.ConvertToYamlString();
+        var yamlString = eventsIn.ConvertToYamlString();
 
         var outputFolder = Environment.CurrentDirectory;
 
-        var outputFile = Path.Combine(outputFolder, "SimulationCommmands_Example_2.yaml");
+        var outputFile = Path.Combine(outputFolder, "SimulationEvents_Example_2.yaml");
 
-        commandsIn.WriteToYamlFile(outputFile);
+        eventsIn.WriteToYamlFile(outputFile);
 
         var inputFolder = Environment.CurrentDirectory;
 
-        var inputFile = Path.Combine(inputFolder, "SimulationCommmands_Example_2.yaml");
+        var inputFile = Path.Combine(inputFolder, "SimulationEvents_Example_2.yaml");
 
         // Act
-        var commandsOut = SimulationCommandManager.ReadCommandsFromFile(inputFile);
+        var eventsOut = SimulationEventManager.ReadEventsFromFile(inputFile);
 
         // Assert
-        var expectedCommandType = SimulationCommandType.PlatformCreate;
+        var expectedEventType = SimulationEventType.PlatformCreate;
 
-        var actualCommandType = commandsOut[2].CommandType;
+        var actualEventType = eventsOut[2].EventType;
 
-        Assert.AreEqual(expectedCommandType, actualCommandType);
-        Assert.AreEqual(11, commandsOut.Count);
+        Assert.AreEqual(expectedEventType, actualEventType);
+        Assert.AreEqual(11, eventsOut.Count);
     }
 }

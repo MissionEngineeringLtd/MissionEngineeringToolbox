@@ -4,7 +4,7 @@ using MissionEngineering.Platform;
 
 namespace MissionEngineering.Simulation;
 
-public interface ISimulationCommandProcessor : IExecutableModel
+public interface ISimulationEventProcessor : IExecutableModel
 {
     ISimulationClock SimulationClock { get; set; }
 
@@ -12,7 +12,7 @@ public interface ISimulationCommandProcessor : IExecutableModel
 
     IPlatformManager PlatformManager { get; set; }
 
-    List<ISimulationCommand> SimulationCommands { get; set; }
+    List<ISimulationEvent> SimulationEvents { get; set; }
 
     void Initialise(double time);
 

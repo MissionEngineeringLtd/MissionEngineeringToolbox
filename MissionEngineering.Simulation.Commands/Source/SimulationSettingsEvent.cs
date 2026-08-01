@@ -4,11 +4,11 @@ using System.Text;
 
 namespace MissionEngineering.Simulation;
 
-public class SimulationSettingsCommand : ISimulationCommand
+public class SimulationSettingsEvent : ISimulationEvent
 {
-    public SimulationCommandType CommandType { get; set; }
+    public SimulationEventType EventType { get; set; }
 
-    public double CommandTime { get; set; }
+    public double EventTime { get; set; }
 
     public string SimulationStartDateTime { get; set; }
 
@@ -18,8 +18,8 @@ public class SimulationSettingsCommand : ISimulationCommand
 
     public double SimulationTimeStep_s { get; set; }
 
-    public SimulationSettingsCommand()
+    public SimulationSettingsEvent()
     {
-        CommandType = SimulationCommandType.SimulationSettings;
+        EventType = SimulationEventType.SimulationSettings;
     }
 }

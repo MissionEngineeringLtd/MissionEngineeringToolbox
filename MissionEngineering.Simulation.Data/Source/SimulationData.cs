@@ -14,7 +14,7 @@ public class SimulationData
 
     public ScenarioSettings ScenarioSettings { get; set; }
 
-    public List<ISimulationCommand> SimulationCommands { get; set; }
+    public List<ISimulationEvent> SimulationEvents { get; set; }
 
     public List<ISimulationMessage> SimulationMessages { get; set; }
 
