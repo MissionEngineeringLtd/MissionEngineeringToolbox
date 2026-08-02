@@ -16,17 +16,20 @@ public sealed class SimulationTests
 
         var scenarioSettings = ScenarioSettingsFactory.ScenarioSettings_Test_1();
 
+        var simulationEvents = SimulationEventFactory.FF_1();
+
         var simulationHarness = SimulationBuilder.CreateSimulationHarness();
 
         simulationHarness.SimulationSettings = simulationSettings;
         simulationHarness.ScenarioSettings = scenarioSettings;
+        simulationHarness.SimulationEvents = simulationEvents;
         simulationHarness.SimulationHarnessSettings.NumberOfRuns = 1;
 
         // Act
         simulationHarness.Run();
 
         // Assert
-        var expectedNumberOfModels = 4;
+        var expectedNumberOfModels = 1;
 
         Assert.HasCount(expectedNumberOfModels, simulationHarness.Simulation.SimulationModels);
     }
