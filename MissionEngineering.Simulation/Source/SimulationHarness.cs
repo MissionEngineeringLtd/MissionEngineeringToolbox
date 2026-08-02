@@ -4,9 +4,9 @@ public class SimulationHarness : ISimulationHarness
 {
     public SimulationHarnessSettings SimulationHarnessSettings { get; set; }
 
-    public SimulationSettings SimulationSettings { get; set; }
+    public SimulationRunSettings SimulationRunSettings { get; set; }
 
-    public ScenarioSettings ScenarioSettings { get; set; }
+    public SimulationSettings SimulationSettings { get; set; }
 
     public List<ISimulationEvent> SimulationEvents { get; set; }
 
@@ -18,10 +18,10 @@ public class SimulationHarness : ISimulationHarness
     {
     }
 
-    public SimulationHarness(SimulationHarnessSettings simulationHarnessSettings, ScenarioSettings scenarioSettings)
+    public SimulationHarness(SimulationHarnessSettings simulationHarnessSettings, SimulationSettings simulationSettings)
     {
         SimulationHarnessSettings = simulationHarnessSettings;
-        ScenarioSettings = scenarioSettings;
+        SimulationSettings = simulationSettings;
     }
 
     public void Run()
@@ -85,13 +85,14 @@ public class SimulationHarness : ISimulationHarness
 
         var simulation = SimulationBuilder.CreateSimulation();
 
-        var simulationSettings = SimulationSettings with { RunNumber = runNumber };
+        var simulationRunSettings = SimulationRunSettings with { RunNumber = runNumber };
 
-        simulation.SimulationSettings = simulationSettings;
-        simulation.ScenarioSettings = ScenarioSettings;
+        simulation.SimulationRunSettings = simulationRunSettings;
+        simulation.SimulationSettings = SimulationSettings;
         simulation.SimulationEvents = SimulationEvents;
 
-        simulation.DataRecorder.SimulationData.SimulationSettings = simulationSettings;
+        simulation.DataRecorder.SimulationData.SimulationRunSettings = simulationRunSettings;
+        simulation.DataRecorder.SimulationData.SimulationSettings = SimulationSettings;
 
         simulation.Run();
 

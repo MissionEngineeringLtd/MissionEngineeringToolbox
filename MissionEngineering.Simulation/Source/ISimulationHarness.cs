@@ -4,9 +4,9 @@ public interface ISimulationHarness
 {
     SimulationHarnessSettings SimulationHarnessSettings { get; set; }
 
-    SimulationSettings SimulationSettings { get; set; }
+    SimulationRunSettings SimulationRunSettings { get; set; }
 
-    ScenarioSettings ScenarioSettings { get; set; }
+    SimulationSettings SimulationSettings { get; set; }
 
     List<ISimulationEvent> SimulationEvents { get; set; }
 

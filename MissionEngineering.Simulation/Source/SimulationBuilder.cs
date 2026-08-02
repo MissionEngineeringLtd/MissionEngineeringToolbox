@@ -37,9 +37,9 @@ public static class SimulationBuilder
         services.AddScoped<ISimulationClock, SimulationClock>();
         services.AddScoped<IDateTimeOrigin, DateTimeOrigin>();
         services.AddScoped<ILLAOrigin, LLAOrigin>();
-        services.AddScoped<ScenarioSettings, ScenarioSettings>();
-        services.AddScoped<IDataRecorder, DataRecorder.DataRecorder>();
         services.AddScoped<SimulationSettings, SimulationSettings>();
+        services.AddScoped<IDataRecorder, DataRecorder.DataRecorder>();
+        services.AddScoped<SimulationRunSettings, SimulationRunSettings>();
         services.AddScoped<SimulationData, SimulationData>();
         services.AddScoped<ISimdisExporter, SimdisExporter>();
         services.AddScoped<ILogClass, LogClass>();

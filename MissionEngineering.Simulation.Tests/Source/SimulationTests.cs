@@ -7,21 +7,21 @@ public sealed class SimulationTests
     public void Run_WithValidData_ExpectSuccess()
     {
         // Arrange
-        var simulationSettings = SimulationSettingsFactory.SimulationSettings_Single("Simulation_1", "");
+        var simulationRunSettings = SimulationRunSettingsFactory.SingleRun("Simulation_1", "");
 
-        simulationSettings.IsAddConsoleLogging = false;
-        simulationSettings.IsAddFileLogging = false;
-        simulationSettings.IsWriteData = false;
-        simulationSettings.IsCreateZipFile = false;
+        simulationRunSettings.IsAddConsoleLogging = false;
+        simulationRunSettings.IsAddFileLogging = false;
+        simulationRunSettings.IsWriteData = false;
+        simulationRunSettings.IsCreateZipFile = false;
 
-        var scenarioSettings = ScenarioSettingsFactory.ScenarioSettings_Test_1();
+        var simulationSettings = SimulationSettingsFactory.SimulationSettings_Test_1();
 
         var simulationEvents = SimulationEventFactory.FF_1();
 
         var simulationHarness = SimulationBuilder.CreateSimulationHarness();
 
+        simulationHarness.SimulationRunSettings = simulationRunSettings;
         simulationHarness.SimulationSettings = simulationSettings;
-        simulationHarness.ScenarioSettings = scenarioSettings;
         simulationHarness.SimulationEvents = simulationEvents;
         simulationHarness.SimulationHarnessSettings.NumberOfRuns = 1;
 

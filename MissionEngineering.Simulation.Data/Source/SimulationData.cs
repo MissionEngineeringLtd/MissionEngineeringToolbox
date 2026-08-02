@@ -8,11 +8,11 @@ namespace MissionEngineering.Simulation;
 
 public class SimulationData
 {
-    public SimulationSettings SimulationSettings { get; set; }
+    public SimulationRunSettings SimulationRunSettings { get; set; }
 
     public SimulationClockSettings SimulationClockSettings { get; set; }
 
-    public ScenarioSettings ScenarioSettings { get; set; }
+    public SimulationSettings SimulationSettings { get; set; }
 
     public List<ISimulationEvent> SimulationEvents { get; set; }
 
@@ -50,9 +50,9 @@ public class SimulationData
 
     public List<TrackDataPredictedMessage> TrackDataPredictedMessagesAll { get; set; }
 
-    public SimulationData(SimulationSettings simulationSettings)
+    public SimulationData(SimulationRunSettings simulationRunSettings)
     {
-        SimulationSettings = simulationSettings;
+        SimulationRunSettings = simulationRunSettings;
         SimulationMessages = [];
         SimulationEvents = [];
         SimulationEventsPerEventType = [];

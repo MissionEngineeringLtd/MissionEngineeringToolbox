@@ -1,36 +1,45 @@
-﻿namespace MissionEngineering.Simulation;
+﻿using MissionEngineering.Math;
+using MissionEngineering.Platform;
+using MissionEngineering.Sensor;
+
+namespace MissionEngineering.Simulation;
 
 public static class SimulationSettingsFactory
 {
-    public static SimulationSettings SimulationSettings_Single(string simulationName, string outputFolderBase)
+    public static SimulationSettings SimulationSettings_Test_1()
     {
+        var dateTimeOrigin = new DateTime(2024, 12, 24, 15, 45, 10, 123);
+
         var simulationSettings = new SimulationSettings()
         {
-            SimulationName = simulationName,
-            RunNumber = 1,
-            RunTimeStamp = DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss"),
-            IsAddConsoleLogging = true,
-            IsAddFileLogging = true,
-            IsWriteData = true,
-            IsAddTimeStamp = false,
-            IsAddRunNumber = true,
-            IsCreateZipFile = true,
-            OutputFolderBase = outputFolderBase,
+            SimulationName = "Simulation_Test_1",
+            DateTimeOrigin = dateTimeOrigin.ToString("yyyy-MM-dd HH:mm:ss.fff"),
+            TimeStart_s = 10.0,
+            TimeEnd_s = 200.0,
+            TimeStep_s = 0.01,
+            TrackPredictionTimeStep_s = 0.1,
+            Latitude_deg = 55.1,
+            Longitude_deg = 12.0
         };
 
         return simulationSettings;
     }
 
-    public static SimulationSettings SimulationSettings_Multiple(string simulationName, string outputFolderBase)
+    public static SimulationSettings SimulationSettings_FF_1()
     {
-        var simulationSettings = SimulationSettings_Single(simulationName, outputFolderBase);
+        var dateTimeOrigin = new DateTime(2024, 12, 24, 15, 45, 10, 123);
 
-        simulationSettings.IsAddConsoleLogging = false;
-        simulationSettings.IsAddFileLogging = true;
-        simulationSettings.IsWriteData = true;
-        simulationSettings.IsAddTimeStamp = true;
-        simulationSettings.IsAddRunNumber = true;
-        simulationSettings.IsCreateZipFile = true;
+        var simulationSettings = new SimulationSettings()
+        {
+            SimulationName = "Simulation_FF_1",
+            DateTimeOrigin = dateTimeOrigin.ToString("yyyy-MM-dd HH:mm:ss.fff"),
+            TimeStart_s = 10.0,
+            TimeEnd_s = 200.0,
+            TimeStep_s = 0.01,
+            TrackPredictionTimeStep_s = 0.1,
+            Latitude_deg = 64.5,
+            Longitude_deg = 9.0
+        };
 
         return simulationSettings;
     }

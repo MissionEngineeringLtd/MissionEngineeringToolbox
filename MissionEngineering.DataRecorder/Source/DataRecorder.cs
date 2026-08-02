@@ -39,7 +39,7 @@ public class DataRecorder : IDataRecorder
 
     public void WriteData()
     {
-        if (!SimulationData.SimulationSettings.IsWriteData)
+        if (!SimulationData.SimulationRunSettings.IsWriteData)
         {
             return;
         }
@@ -54,12 +54,12 @@ public class DataRecorder : IDataRecorder
 
     public void CreateOutputFolder()
     {
-        if (Directory.Exists(SimulationData.SimulationSettings.OutputFolder))
+        if (Directory.Exists(SimulationData.SimulationRunSettings.OutputFolder))
         {
             return;
         }
 
-        Directory.CreateDirectory(SimulationData.SimulationSettings.OutputFolder);
+        Directory.CreateDirectory(SimulationData.SimulationRunSettings.OutputFolder);
     }
 
     public void CreateSimulationEventsPerEventType()
@@ -134,16 +134,16 @@ public class DataRecorder : IDataRecorder
 
     public void WriteJsonData()
     {
+        WriteSimulationRunSettingsToJson();
         WriteSimulationSettingsToJson();
-        WriteScenarioSettingsToJson();
         WriteSimulationEventsAllToJson();
         WriteSimulationEventsPerEventTypeToJson();
     }
 
     public void WriteYamlData()
     {
+        WriteSimulationRunSettingsToYaml();
         WriteSimulationSettingsToYaml();
-        WriteScenarioSettingsToYaml();
         WriteSimulationEventsAllToYaml();
         WriteSimulationEventsPerEventTypeToYaml();
     }
@@ -183,6 +183,17 @@ public class DataRecorder : IDataRecorder
         SimdisExporter.WriteSimdisData();
     }
 
+    public void WriteSimulationRunSettingsToJson()
+    {
+        var fileName = $"{SimulationData.SimulationRunSettings.SimulationName}_SimulationRunSettings.json";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        Log.LogInformation($"Writing File : {fileNameFull}");
+
+        SimulationData.SimulationRunSettings.WriteToJsonFile(fileNameFull);
+    }
+
     public void WriteSimulationSettingsToJson()
     {
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationSettings.json";
@@ -192,17 +203,6 @@ public class DataRecorder : IDataRecorder
         Log.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.SimulationSettings.WriteToJsonFile(fileNameFull);
-    }
-
-    public void WriteScenarioSettingsToJson()
-    {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_ScenarioSettings.json";
-
-        var fileNameFull = GetFileNameFull(fileName);
-
-        Log.LogInformation($"Writing File : {fileNameFull}");
-
-        SimulationData.ScenarioSettings.WriteToJsonFile(fileNameFull);
     }
 
     public void WriteSimulationEventsAllToJson()
@@ -232,26 +232,26 @@ public class DataRecorder : IDataRecorder
         }
     }
 
+    public void WriteSimulationRunSettingsToYaml()
+    {
+        var fileName = $"{SimulationData.SimulationRunSettings.SimulationName}_SimulationRunSettings.yaml";
+
+        var fileNameFull = GetFileNameFull(fileName);
+
+        Log.LogInformation($"Writing File : {fileNameFull}");
+
+        SimulationData.SimulationRunSettings.WriteToYamlFile(fileNameFull);
+    }
+
     public void WriteSimulationSettingsToYaml()
     {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationSettings.yaml";
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}SimulationSettings.yaml";
 
         var fileNameFull = GetFileNameFull(fileName);
 
         Log.LogInformation($"Writing File : {fileNameFull}");
 
         SimulationData.SimulationSettings.WriteToYamlFile(fileNameFull);
-    }
-
-    public void WriteScenarioSettingsToYaml()
-    {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_ScenarioSettings.yaml";
-
-        var fileNameFull = GetFileNameFull(fileName);
-
-        Log.LogInformation($"Writing File : {fileNameFull}");
-
-        SimulationData.ScenarioSettings.WriteToYamlFile(fileNameFull);
     }
 
     public void WriteSimulationEventsAllToYaml()
@@ -519,7 +519,7 @@ public class DataRecorder : IDataRecorder
 
     public string GetFileNameFull(string fileName)
     {
-        var fileNameFull = SimulationData.SimulationSettings.GetFileNameFull(fileName);
+        var fileNameFull = SimulationData.SimulationRunSettings.GetFileNameFull(fileName);
 
         return fileNameFull;
     }

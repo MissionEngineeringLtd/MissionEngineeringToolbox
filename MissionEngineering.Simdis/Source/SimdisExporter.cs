@@ -33,14 +33,14 @@ public class SimdisExporter : ISimdisExporter
 
     public void WriteSimdisData()
     {
-        if (!SimulationData.SimulationSettings.IsWriteData)
+        if (!SimulationData.SimulationRunSettings.IsWriteData)
         {
             return;
         }
 
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}.asi";
+        var fileName = $"{SimulationData.SimulationRunSettings.SimulationName}.asi";
 
-        var fileNameFull = SimulationData.SimulationSettings.GetFileNameFull(fileName);
+        var fileNameFull = SimulationData.SimulationRunSettings.GetFileNameFull(fileName);
 
         Log.LogInformation($"Writing File : {fileNameFull}");
 
@@ -51,7 +51,7 @@ public class SimdisExporter : ISimdisExporter
 
     public void CreateSimdisHeader()
     {
-        var llaOrigin = new PositionLLA(SimulationData.ScenarioSettings.Latitude_deg, SimulationData.ScenarioSettings.Longitude_deg, 0.0);
+        var llaOrigin = new PositionLLA(SimulationData.SimulationSettings.Latitude_deg, SimulationData.SimulationSettings.Longitude_deg, 0.0);
 
         AddLine("Version          24");
         AddLine("""Classification   "Unclassified" 0x8000FF00""");
@@ -68,9 +68,7 @@ public class SimdisExporter : ISimdisExporter
     {
         var index = 0;
 
-        List<PlatformSettings> platformSettingsList = [];
-
-        foreach (var platformSettings in platformSettingsList)
+        foreach (var platformSettings in SimulationData.PlatformSettingsList)
         {
             var platformId = platformSettings.PlatformHeader.PlatformId;
 

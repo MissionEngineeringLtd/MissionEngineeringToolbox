@@ -13,9 +13,9 @@ public class Simulation : ISimulation
 {
     public ILogClass Log { get; set; }
 
-    public SimulationSettings SimulationSettings { get; set; }
+    public SimulationRunSettings SimulationRunSettings { get; set; }
 
-    public ScenarioSettings ScenarioSettings { get; set; }
+    public SimulationSettings SimulationSettings { get; set; }
 
     public List<ISimulationEvent> SimulationEvents { get; set; }
 
@@ -44,10 +44,10 @@ public class Simulation : ISimulation
     private int trackPredictionCountActual;
     private int trackPredictionCountMax;
 
-    public Simulation(SimulationSettings simulationSettings, ScenarioSettings scenarioSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, ISimulationEventProcessor simulationEventProcessor, IDataRecorder dataRecorder, ILogClass log)
+    public Simulation(SimulationRunSettings simulationRunSettings, SimulationSettings simulationSettings, ISimulationClock simulationClock, ILLAOrigin llaOrigin, IPlatformManager platformManager, ISimulationEventProcessor simulationEventProcessor, IDataRecorder dataRecorder, ILogClass log)
     {
+        SimulationRunSettings = simulationRunSettings;
         SimulationSettings = simulationSettings;
-        ScenarioSettings = scenarioSettings;
         SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
         PlatformManager = platformManager;
@@ -59,16 +59,16 @@ public class Simulation : ISimulation
     public ISimulation Run()
     {
         Log.LogInformation("***");
-        Log.LogInformation($"Run Number {SimulationSettings.RunNumber} Started...");
+        Log.LogInformation($"Run Number {SimulationRunSettings.RunNumber} Started...");
         Log.LogInformation("");
 
         var clockSettings = new SimulationClockSettings()
         { 
-            DateTimeOrigin = ScenarioSettings.DateTimeOrigin, 
-            TimeStart_s = ScenarioSettings.TimeStart_s, 
-            TimeEnd_s = ScenarioSettings.TimeEnd_s, 
-            TimeStep_s = ScenarioSettings.TimeStep_s, 
-            TrackPredictionTimeStep_s = ScenarioSettings.TrackPredictionTimeStep_s 
+            DateTimeOrigin = SimulationSettings.DateTimeOrigin, 
+            TimeStart_s = SimulationSettings.TimeStart_s, 
+            TimeEnd_s = SimulationSettings.TimeEnd_s, 
+            TimeStep_s = SimulationSettings.TimeStep_s, 
+            TrackPredictionTimeStep_s = SimulationSettings.TrackPredictionTimeStep_s 
         };
 
         var time = clockSettings.TimeStart_s;
@@ -79,7 +79,7 @@ public class Simulation : ISimulation
 
         Finalise(time);
 
-        Log.LogInformation($"Run Number {SimulationSettings.RunNumber} Finished.");
+        Log.LogInformation($"Run Number {SimulationRunSettings.RunNumber} Finished.");
         Log.LogInformation("***");
         Log.LogInformation("");
 
@@ -95,15 +95,15 @@ public class Simulation : ISimulation
         Log.LogInformation("Initialise Started...");
         Log.LogInformation("");
 
-        SimulationClock.DateTimeOrigin.DateTimeStart = DateTime.Parse(ScenarioSettings.DateTimeOrigin);
+        SimulationClock.DateTimeOrigin.DateTimeStart = DateTime.Parse(SimulationSettings.DateTimeOrigin);
 
-        LLAOrigin.PositionLLA.Latitude_deg = ScenarioSettings.Latitude_deg;
-        LLAOrigin.PositionLLA.Longitude_deg = ScenarioSettings.Longitude_deg;
+        LLAOrigin.PositionLLA.Latitude_deg = SimulationSettings.Latitude_deg;
+        LLAOrigin.PositionLLA.Longitude_deg = SimulationSettings.Longitude_deg;
 
-        DataRecorder.SimulationData.ScenarioSettings = ScenarioSettings;
+        DataRecorder.SimulationData.SimulationSettings = SimulationSettings;
 
         trackPredictionCountActual = 0;
-        trackPredictionCountMax = (int)Round(ScenarioSettings.TrackPredictionTimeStep_s / ScenarioSettings.TimeStep_s);
+        trackPredictionCountMax = (int)Round(SimulationSettings.TrackPredictionTimeStep_s / SimulationSettings.TimeStep_s);
 
         RelativePlatforms = [];
         Sensors = [];
@@ -148,13 +148,13 @@ public class Simulation : ISimulation
 
         DataRecorder.Initialise(time);
 
+        var simulationRunSettingsString = SimulationRunSettings.ConvertToJsonString();
         var simulationSettingsString = SimulationSettings.ConvertToJsonString();
-        var scenarioSettingsString = ScenarioSettings.ConvertToJsonString();
 
-        nextDisplayTime = ScenarioSettings.TimeStart_s;
+        nextDisplayTime = SimulationSettings.TimeStart_s;
 
+        Log.LogInformation($"Simulation Run Settings {Environment.NewLine} {simulationRunSettingsString}");
         Log.LogInformation($"Simulation Settings {Environment.NewLine} {simulationSettingsString}");
-        Log.LogInformation($"Scenario Settings {Environment.NewLine} {scenarioSettingsString}");
 
         Log.LogInformation("Initialise Finished.");
         Log.LogInformation("");
@@ -162,9 +162,9 @@ public class Simulation : ISimulation
 
     public void CreateLogger()
     {
-        Log.CreateLogger(SimulationSettings.LogFileName, SimulationSettings.IsAddConsoleLogging, SimulationSettings.IsAddFileLogging);
+        Log.CreateLogger(SimulationRunSettings.LogFileName, SimulationRunSettings.IsAddConsoleLogging, SimulationRunSettings.IsAddFileLogging);
 
-        Log.RunNumber = SimulationSettings.RunNumber;
+        Log.RunNumber = SimulationRunSettings.RunNumber;
     }
 
     public void RunSimulation(double time)
@@ -172,13 +172,13 @@ public class Simulation : ISimulation
         Log.LogInformation("Run Started...");
         Log.LogInformation("");
 
-        while (time <= ScenarioSettings.TimeEnd_s)
+        while (time <= SimulationSettings.TimeEnd_s)
         {
             ShowProgress(time);
 
             Update(time);
 
-            time += ScenarioSettings.TimeStep_s;
+            time += SimulationSettings.TimeStep_s;
         }
 
         Log.LogInformation("");
@@ -340,7 +340,7 @@ public class Simulation : ISimulation
             Log.LogInformation($"Time = {nextDisplayTime:000}s");
 
             displayCount++;
-            nextDisplayTime = ScenarioSettings.TimeStart_s + displayCount * 5.0;
+            nextDisplayTime = SimulationSettings.TimeStart_s + displayCount * 5.0;
         }
     }
 
@@ -370,19 +370,19 @@ public class Simulation : ISimulation
 
     public void CreateZipFile(bool isWriteToLog, bool isWriteData)
     {
-        if (!DataRecorder.SimulationData.SimulationSettings.IsWriteData)
+        if (!DataRecorder.SimulationData.SimulationRunSettings.IsWriteData)
         {
             return;
         }
 
-        if (!DataRecorder.SimulationData.SimulationSettings.IsCreateZipFile)
+        if (!DataRecorder.SimulationData.SimulationRunSettings.IsCreateZipFile)
         {
             return;
         }
 
-        var zipFileName = $"{DataRecorder.SimulationData.SimulationSettings.SimulationName}.zip";
+        var zipFileName = $"{DataRecorder.SimulationData.SimulationRunSettings.SimulationName}.zip";
 
-        var zipFileNameFull = DataRecorder.SimulationData.SimulationSettings.GetFileNameFull(zipFileName);
+        var zipFileNameFull = DataRecorder.SimulationData.SimulationRunSettings.GetFileNameFull(zipFileName);
 
         if (isWriteToLog)
         {
@@ -393,7 +393,7 @@ public class Simulation : ISimulation
         {
             Log.CloseLog();
 
-            ZipUtilities.ZipDirectory(DataRecorder.SimulationData.SimulationSettings.OutputFolder, zipFileNameFull);
+            ZipUtilities.ZipDirectory(DataRecorder.SimulationData.SimulationRunSettings.OutputFolder, zipFileNameFull);
         }
     }
 }
