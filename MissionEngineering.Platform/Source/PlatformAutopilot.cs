@@ -1,11 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra.Factorization;
-using MissionEngineering.Math;
-using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Timers;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using MissionEngineering.Math;
 
 namespace MissionEngineering.Platform;
 
@@ -89,6 +82,7 @@ public class PlatformAutopilot : IPlatformAutopilot
             UpdateAutopilotPNGuidance();
         }
     }
+
     public void UpdateAutopilotToDemand()
     {
         AxialAccelerationController.SetpointValue = PlatformFlightpathDemand.TotalSpeedDemand_ms;

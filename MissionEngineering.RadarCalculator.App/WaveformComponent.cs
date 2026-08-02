@@ -1,9 +1,5 @@
-using System;
 using Microsoft.UI.Reactor;
 using Microsoft.UI.Reactor.Core;         // BackdropKind
-using Microsoft.UI.Reactor.Layout;        // FlexDirection, FlexJustify, FlexAlign
-using Microsoft.UI.Xaml;                  // Thickness, HorizontalAlignment, VerticalAlignment
-using Microsoft.UI.Xaml.Controls;         // Orientation, InfoBarSeverity, etc.
 using MissionEngineering.Radar;
 using static Microsoft.UI.Reactor.Factories;
 
@@ -42,7 +38,8 @@ public class WaveformComponent : Component<WaveformParameters>
                 TextBox(waveformParameters.BurstTime_s.ToString(), null, placeholderText: "Empty", "Burst Time (s)"),
                 TextBox(waveformParameters.BurstTime_ms.ToString(), null, placeholderText: "Empty", "Burst Time (ms)"),
                 TextBox(waveformParameters.RangeResolution_m.ToString(), null, placeholderText: "Empty", "Range Resolution (m)")
-            ) with { RowGap = 16 }
+            ) with
+            { RowGap = 16 }
         ).Padding(24).Flex(grow: 1, basis: 0);
 
         return FlexColumn(body)

@@ -1,8 +1,4 @@
-﻿using MissionEngineering.Math;
-using MissionEngineering.Platform;
-using MissionEngineering.Sensor;
-
-namespace MissionEngineering.Simulation;
+﻿namespace MissionEngineering.Simulation;
 
 public static class SimulationSettingsFactory
 {

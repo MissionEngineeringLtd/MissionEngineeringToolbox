@@ -1,4 +1,3 @@
-using MathNet.Numerics;
 using Microsoft.UI.Reactor;
 using Microsoft.UI.Reactor.Core;         // BackdropKind
 using MissionEngineering.Radar;
@@ -11,7 +10,7 @@ public class Shell : Component
     public Shell()
     {
         InitialiseHarness();
-    }   
+    }
 
     public void InitialiseHarness()
     {
@@ -29,6 +28,7 @@ public class Shell : Component
 
         Harness = harness;
     }
+
     public override Element Render()
     {
         var titleBar = TitleBar("Radar Calculator");

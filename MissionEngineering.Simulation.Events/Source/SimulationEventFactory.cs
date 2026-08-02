@@ -113,7 +113,7 @@ public static class SimulationEventFactory
     }
 
     public static List<ISimulationEvent> FF_1()
-    { 
+    {
         var ff_1 = new PlatformCreateEvent()
         {
             EventTime = 0.0,

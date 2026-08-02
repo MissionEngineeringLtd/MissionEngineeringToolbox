@@ -1,10 +1,4 @@
-﻿using MissionEngineering.Math;
-using MissionEngineering.Platform;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MissionEngineering.Simulation;
+﻿namespace MissionEngineering.Simulation;
 
 public class PlatformLaunchMissileEvent : ISimulationEvent
 {
@@ -16,7 +10,7 @@ public class PlatformLaunchMissileEvent : ISimulationEvent
 
     public string LaunchPlatformName { get; set; }
 
-    public string TargetPlatformName { get; set; }  
+    public string TargetPlatformName { get; set; }
 
     public string PlatformIcon { get; set; }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MissionEngineering.Math;
+﻿namespace MissionEngineering.Math;
 
 public class SetpointController
 {

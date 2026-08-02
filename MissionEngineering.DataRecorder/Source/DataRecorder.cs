@@ -74,7 +74,7 @@ public class DataRecorder : IDataRecorder
 
             SimulationData.SimulationEventsPerEventType.Add(events);
         }
-    }   
+    }
 
     public void CreatePlatformDataPerPlatform()
     {

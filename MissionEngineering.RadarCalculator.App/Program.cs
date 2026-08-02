@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Reactor;
-using Microsoft.UI.Reactor.Core;
 using System;
 
 namespace MissionEngineering.RadarCalculator;

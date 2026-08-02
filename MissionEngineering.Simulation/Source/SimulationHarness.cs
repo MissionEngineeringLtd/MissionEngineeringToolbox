@@ -53,7 +53,7 @@ public class SimulationHarness : ISimulationHarness
             var runNumber = i + 1;
 
             var simulation = RunSingle(runNumber);
-        
+
             SimulationList.Add(simulation);
         }
     }

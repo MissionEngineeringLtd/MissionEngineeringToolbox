@@ -1,10 +1,4 @@
-﻿using MissionEngineering.Math;
-using MissionEngineering.Platform;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MissionEngineering.Simulation;
+﻿namespace MissionEngineering.Simulation;
 
 public class PlatformDeleteEvent : ISimulationEvent
 {

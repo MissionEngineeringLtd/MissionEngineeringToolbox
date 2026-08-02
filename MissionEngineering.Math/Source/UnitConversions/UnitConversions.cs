@@ -26,6 +26,7 @@ public static class UnitConversions
 
     // Speed
     public const double MeterPerSecondToKilometerPerHour = 3600.0 / 1000.0;
+
     public const double KilometerPerHourToMeterPerSecond = 1.0 / MeterPerSecondToKilometerPerHour;
 
     public const double MeterPerSecondToKnot = 3600.0 / NauticalMileToMeter;

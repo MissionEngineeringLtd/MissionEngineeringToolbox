@@ -120,7 +120,7 @@ public class Platform : IExecutableModel
 
         if (PlatformState.IsDestroyed)
         {
-            return (0.0, 0.0); 
+            return (0.0, 0.0);
         }
 
         var positionNEDTarget = PlatformTarget.PlatformState.PositionNED;
@@ -140,11 +140,11 @@ public class Platform : IExecutableModel
     }
 
     public void CheckIfDestroyed()
-    { 
+    {
         if (PlatformTarget is null) { return; }
 
         if (!PlatformState.IsDestroyed && PlatformState.RangeToGo_m < 50.0)
-        { 
+        {
             PlatformState.IsDestroyed = true;
         }
     }

@@ -6,7 +6,7 @@ public interface IPlatformAutopilot
 {
     PlatformState PlatformState { get; set; }
 
-    Platform PlatformTarget { get; set; } 
+    Platform PlatformTarget { get; set; }
 
     PlatformFlightpathDemand PlatformFlightpathDemand { get; set; }
 

@@ -1,7 +1,4 @@
-﻿using System.Numerics;
-using System.Security.Cryptography;
-
-namespace MissionEngineering.Math;
+﻿namespace MissionEngineering.Math;
 
 public partial class Vector
 {

@@ -2,7 +2,6 @@
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
 using MissionEngineering.Simulation;
-using System.Net;
 using System.Text;
 
 namespace MissionEngineering.Simdis;

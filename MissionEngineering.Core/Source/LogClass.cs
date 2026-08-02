@@ -21,7 +21,7 @@ public class LogClass : ILogClass
         }
 
         if (isAddFileLogging)
-        { 
+        {
             c.WriteTo.File(fileName, outputTemplate: outputTemplate);
         }
 

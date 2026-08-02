@@ -1,6 +1,4 @@
-﻿using MissionEngineering.Core;
-
-namespace MissionEngineering.Platform;
+﻿namespace MissionEngineering.Platform;
 
 public class PlatformManager : IPlatformManager
 {
@@ -99,5 +97,5 @@ public class PlatformManager : IPlatformManager
         var platform = Platforms.FirstOrDefault(p => p.PlatformSettings.PlatformHeader.PlatformName == platformName);
 
         return platform;
-    }   
+    }
 }

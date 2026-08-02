@@ -1,16 +1,8 @@
 using Microsoft.UI.Reactor;
-using Microsoft.UI.Reactor.Charting;
 using Microsoft.UI.Reactor.Charting.Accessibility;
-using Microsoft.UI.Reactor.Charting.D3;
 using Microsoft.UI.Reactor.Core;
-using Microsoft.UI.Text;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using MissionEngineering.Radar;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using static Microsoft.UI.Reactor.Charting.Charts;
 using static Microsoft.UI.Reactor.Factories;
 
@@ -53,7 +45,8 @@ public class ChartComponent : Component<RadarDetectionModelHarness>
                 Heading("Signal To Noise Ratio"),
                 Button(updateCommand),
                 lineChart
-            ) with { RowGap = 16 }
+            ) with
+            { RowGap = 16 }
         ).Padding(0).Flex(grow: 1, basis: 0);
 
         return FlexColumn(body)

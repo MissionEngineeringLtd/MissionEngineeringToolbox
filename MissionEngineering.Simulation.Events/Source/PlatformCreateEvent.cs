@@ -1,8 +1,5 @@
 ﻿using MissionEngineering.Math;
 using MissionEngineering.Platform;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MissionEngineering.Simulation;
 
@@ -14,9 +11,9 @@ public class PlatformCreateEvent : ISimulationEvent
 
     public string PlatformName { get; set; }
 
-    public required string PlatformCallsign { get; set; }
+    public string PlatformCallsign { get; set; }
 
-    public required string PlatformDescription { get; set; }
+    public string PlatformDescription { get; set; }
 
     public PlatformType PlatformType { get; set; }
 
