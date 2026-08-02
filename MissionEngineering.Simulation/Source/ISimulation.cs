@@ -17,6 +17,8 @@ public interface ISimulation
 
     ScenarioSettings ScenarioSettings { get; set; }
 
+    List<ISimulationEvent> SimulationEvents { get; set; }
+
     ISimulationEventProcessor SimulationEventProcessor { get; set; }
 
     IPlatformManager PlatformManager { get; set; }

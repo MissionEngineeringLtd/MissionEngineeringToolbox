@@ -1,7 +1,4 @@
-﻿using MissionEngineering.Core;
-using System.Diagnostics;
-
-namespace MissionEngineering.Simulation;
+﻿namespace MissionEngineering.Simulation;
 
 public class SimulationHarness : ISimulationHarness
 {
@@ -10,6 +7,8 @@ public class SimulationHarness : ISimulationHarness
     public SimulationSettings SimulationSettings { get; set; }
 
     public ScenarioSettings ScenarioSettings { get; set; }
+
+    public List<ISimulationEvent> SimulationEvents { get; set; }
 
     public ISimulation Simulation { get; set; }
 
@@ -90,6 +89,7 @@ public class SimulationHarness : ISimulationHarness
 
         simulation.SimulationSettings = simulationSettings;
         simulation.ScenarioSettings = ScenarioSettings;
+        simulation.SimulationEvents = SimulationEvents;
 
         simulation.DataRecorder.SimulationData.SimulationSettings = simulationSettings;
 

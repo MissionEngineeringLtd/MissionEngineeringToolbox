@@ -2,7 +2,7 @@
 
 namespace MissionEngineering.Simulation;
 
-public static class SimulationEventExamples
+public static class SimulationEventFactory
 {
     public static List<ISimulationEvent> Example_1()
     {

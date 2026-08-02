@@ -9,7 +9,7 @@ public sealed class SimulationEventTests
     public void WriteEventsToYamlFile_ExpectSuccess()
     {
         // Arrange
-        var events = SimulationEventExamples.Example_1();
+        var events = SimulationEventFactory.Example_1();
 
         var yamlString = events.ConvertToYamlString();
 
@@ -28,7 +28,7 @@ public sealed class SimulationEventTests
     public void ReadEventsFromYamlFile_ExpectSuccess()
     {
         // Arrange
-        var eventsIn = SimulationEventExamples.Example_1();
+        var eventsIn = SimulationEventFactory.Example_1();
 
         var yamlString = eventsIn.ConvertToYamlString();
 

@@ -17,6 +17,8 @@ public class Simulation : ISimulation
 
     public ScenarioSettings ScenarioSettings { get; set; }
 
+    public List<ISimulationEvent> SimulationEvents { get; set; }
+
     public ISimulationClock SimulationClock { get; set; }
 
     public ILLAOrigin LLAOrigin { get; set; }
@@ -99,9 +101,7 @@ public class Simulation : ISimulation
         Sensors = [];
         SimulationModels = [];
 
-        var simulationEvents = SimulationEventExamples.FF_1();
-
-        SimulationEventProcessor.SimulationEvents = simulationEvents;
+        SimulationEventProcessor.SimulationEvents = SimulationEvents;
 
         SimulationEventProcessor.Initialise(time);
 

@@ -8,6 +8,8 @@ public interface ISimulationHarness
 
     ScenarioSettings ScenarioSettings { get; set; }
 
+    List<ISimulationEvent> SimulationEvents { get; set; }
+
     ISimulation Simulation { get; set; }
 
     void Run();
