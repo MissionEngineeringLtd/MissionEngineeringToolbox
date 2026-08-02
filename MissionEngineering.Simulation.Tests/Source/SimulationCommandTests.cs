@@ -48,7 +48,7 @@ public sealed class SimulationEventTests
         // Assert
         var expectedEventType = SimulationEventType.PlatformCreate;
 
-        var actualEventType = eventsOut[2].EventType;
+        var actualEventType = eventsOut[0].EventType;
 
         Assert.AreEqual(expectedEventType, actualEventType);
         Assert.AreEqual(11, eventsOut.Count);

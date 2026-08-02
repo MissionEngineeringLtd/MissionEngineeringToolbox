@@ -8,8 +8,6 @@ namespace MissionEngineering.Simulation;
 
 public class SimulationSampleDataManager
 {
-    public SimulationSettings SimulationSettings { get; set; }
-
     public ScenarioSettings ScenarioSettings { get; set; }
 
     public List<ISimulationEvent> SimulationEvents { get; set; }
@@ -18,7 +16,7 @@ public class SimulationSampleDataManager
 
     public void WriteSampleData()
     {
-        var simulationName = SimulationSettings.SimulationName;
+        var simulationName = ScenarioSettings.SimulationName;
 
         var sampleFolder = Path.Combine(SamplesFolder, simulationName);
 
@@ -28,12 +26,6 @@ public class SimulationSampleDataManager
         {
             Directory.CreateDirectory(sampleFolder);
         }
-
-        var simulationSettingsFile = Path.Combine(sampleFolder, $"{simulationName}_SimulationSettings.yaml");
-
-        Console.WriteLine("        Writing: " + simulationSettingsFile);
-
-        SimulationSettings.WriteToYamlFile(simulationSettingsFile);
 
         var scenarioSettingsFile = Path.Combine(sampleFolder, $"{simulationName}_ScenarioSettings.yaml");
 

@@ -10,6 +10,8 @@ public class Program
 {
     private static string InputFolder { get; set; }
 
+    private static string SimulationName { get; set; }
+
     private static string OutputFolder { get; set; }
 
     private static int NumberOfRuns { get; set; }
@@ -35,20 +37,22 @@ public class Program
     /// <summary>
     /// Simulation Console Runner.
     /// </summary>
-    /// <param name="inputFolder">Input Folder</param>
-    /// <param name="outputFolder">Output Folder</param>
+    /// <param name="inputFolder">Input Top Level Folder</param>
+    /// <param name="simulationName">Simulation Name</param>
+    /// <param name="outputFolder">Output Top Level Folder</param>
     /// <param name="numberOfRuns">Number Of Runs</param>
-    /// <param name="isGenerateSampleFiles">Switch to generate sample files</param>
-    /// <param name="samplesFolder">Samples Folder</param>
-    public static void Main(string inputFolder, string outputFolder, int numberOfRuns = 1, bool isGenerateSampleFiles = false, string samplesFolder = null)
+    /// <param name="isGenerateSampleFiles">Is generate sample files</param>
+    /// <param name="samplesFolder">Samples Top Level Folder</param>
+    public static void Main(string inputFolder, string simulationName, string outputFolder, int numberOfRuns = 1, bool isGenerateSampleFiles = false, string samplesFolder = null)
     {
         InputFolder = inputFolder;
+        SimulationName = simulationName;
         OutputFolder = outputFolder;
         NumberOfRuns = numberOfRuns;
         IsGenerateSampleFiles = isGenerateSampleFiles;
         SamplesFolder = samplesFolder;
 
-        if (IsGenerateSampleFiles )
+        if (IsGenerateSampleFiles)
         {
             GenerateSampleFiles();
             return;
@@ -72,7 +76,6 @@ public class Program
         var simulationSampleDataManager = new SimulationSampleDataManager()
         {
             SamplesFolder = SamplesFolder,
-            SimulationSettings = SimulationSettingsFactory.SimulationSettings_FF_1_Single(),
             ScenarioSettings = ScenarioSettingsFactory.ScenarioSettings_FF_1(),
             SimulationEvents = SimulationEventFactory.FF_1(),
         };
@@ -85,6 +88,8 @@ public class Program
 
     private static void Run()
     {
+        GenerateInputFileNames();
+
         GenerateSimulationSettings();
         GenerateScenarioSettings();
         GenerateSimulationEvents();
@@ -99,23 +104,25 @@ public class Program
         SimulationHarness.Run();
     }
 
+    private static void GenerateInputFileNames()
+    {
+        var simulationName = SimulationName;
+
+        SimulationSettingsFileName = GenerateFullFileName(InputFolder, SimulationName, "SimulationSettings.yaml");
+        ScenarioSettingsFileName = GenerateFullFileName(InputFolder, SimulationName, "ScenarioSettings.yaml");
+        SimulationEventsFileName = GenerateFullFileName(InputFolder, SimulationName, "SimulationEvents_All.yaml");
+    }
+
     private static void GenerateSimulationSettings()
     {
-        if (string.IsNullOrEmpty(SimulationSettingsFileName))
+        if (NumberOfRuns == 1)
         {
-            if (NumberOfRuns == 1)
-            {
-                SimulationSettings = SimulationSettingsFactory.SimulationSettings_FF_1_Single();
-            }
-            else
-            {
-                SimulationSettings = SimulationSettingsFactory.SimulationSettings_Test_1_Multiple();
-            }
-
-            return;
+            SimulationSettings = SimulationSettingsFactory.SimulationSettings_Single(SimulationName, OutputFolder);
         }
-
-        SimulationSettings = JsonUtilities.ReadFromJsonFile<SimulationSettings>(SimulationSettingsFileName);
+        else
+        {
+            SimulationSettings = SimulationSettingsFactory.SimulationSettings_Multiple(SimulationName, OutputFolder);
+        }
     }
 
     private static void GenerateScenarioSettings()
@@ -126,7 +133,7 @@ public class Program
             return;
         }
 
-        ScenarioSettings = JsonUtilities.ReadFromJsonFile<ScenarioSettings>(ScenarioSettingsFileName);
+        ScenarioSettings = YamlUtilities.ReadFromYamlFile<ScenarioSettings>(ScenarioSettingsFileName);
     }
 
     private static void GenerateSimulationEvents()
@@ -137,6 +144,17 @@ public class Program
             return;
         }
 
-        SimulationEvents = JsonUtilities.ReadFromJsonFile<List<ISimulationEvent>>(SimulationEventsFileName);
+        SimulationEvents = SimulationEventManager.ReadEventsFromFile(SimulationEventsFileName);
+    }
+
+    private static string GenerateFullFileName(string topLevelFolder, string simulationName, string fileNamePart)
+    {
+        var fileName = $"{simulationName}_{fileNamePart}";
+
+        var fileNameFull = Path.Combine(topLevelFolder, simulationName);
+
+        fileNameFull = Path.Combine(fileNameFull, fileName);
+
+        return fileNameFull;
     }
 }

@@ -62,9 +62,16 @@ public class Simulation : ISimulation
         Log.LogInformation($"Run Number {SimulationSettings.RunNumber} Started...");
         Log.LogInformation("");
 
-        var clockSettings = ScenarioSettings.SimulationClockSettings;
+        var clockSettings = new SimulationClockSettings()
+        { 
+            DateTimeOrigin = ScenarioSettings.DateTimeOrigin, 
+            TimeStart_s = ScenarioSettings.TimeStart_s, 
+            TimeEnd_s = ScenarioSettings.TimeEnd_s, 
+            TimeStep_s = ScenarioSettings.TimeStep_s, 
+            TrackPredictionTimeStep_s = ScenarioSettings.TrackPredictionTimeStep_s 
+        };
 
-        var time = clockSettings.TimeStart;
+        var time = clockSettings.TimeStart_s;
 
         Initialise(time);
 
@@ -88,14 +95,15 @@ public class Simulation : ISimulation
         Log.LogInformation("Initialise Started...");
         Log.LogInformation("");
 
-        SimulationClock.DateTimeOrigin.DateTimeStart = ScenarioSettings.SimulationClockSettings.DateTimeOrigin;
+        SimulationClock.DateTimeOrigin.DateTimeStart = DateTime.Parse(ScenarioSettings.DateTimeOrigin);
 
-        LLAOrigin.PositionLLA = ScenarioSettings.LLAOrigin;
+        LLAOrigin.PositionLLA.Latitude_deg = ScenarioSettings.Latitude_deg;
+        LLAOrigin.PositionLLA.Longitude_deg = ScenarioSettings.Longitude_deg;
 
         DataRecorder.SimulationData.ScenarioSettings = ScenarioSettings;
 
         trackPredictionCountActual = 0;
-        trackPredictionCountMax = (int)Round(ScenarioSettings.SimulationClockSettings.TrackPredictionTimeStep / ScenarioSettings.SimulationClockSettings.TimeStep);
+        trackPredictionCountMax = (int)Round(ScenarioSettings.TrackPredictionTimeStep_s / ScenarioSettings.TimeStep_s);
 
         RelativePlatforms = [];
         Sensors = [];
@@ -107,18 +115,6 @@ public class Simulation : ISimulation
 
         DataRecorder.SimulationData.SimulationEvents = SimulationEventProcessor.SimulationEvents;
 
-        ScenarioSettings.PlatformSettingsList = [];
-
-        foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
-        {
-            var platform = new Platform.Platform(SimulationClock, LLAOrigin)
-            {
-                PlatformSettings = platformSettings
-            };
-
-            PlatformManager.CreatePlatform(platform);
-        }
-
         SimulationModels.Add(PlatformManager);
 
         for (int i = 1; i < PlatformManager.Platforms.Count; i++)
@@ -129,9 +125,9 @@ public class Simulation : ISimulation
             SimulationModels.Add(relativePlatform);
         }
 
-        ScenarioSettings.SensorSettingsList = [];
+        List<SensorSettings> sensorSettingsList = [];
 
-        foreach (var sensorSettings in ScenarioSettings.SensorSettingsList)
+        foreach (var sensorSettings in sensorSettingsList)
         {
             var sensorPlatform = PlatformManager.Platforms.Where(s => s.PlatformSettings.PlatformHeader.PlatformId == sensorSettings.PlatformId).First();
 
@@ -155,7 +151,7 @@ public class Simulation : ISimulation
         var simulationSettingsString = SimulationSettings.ConvertToJsonString();
         var scenarioSettingsString = ScenarioSettings.ConvertToJsonString();
 
-        nextDisplayTime = ScenarioSettings.SimulationClockSettings.TimeStart;
+        nextDisplayTime = ScenarioSettings.TimeStart_s;
 
         Log.LogInformation($"Simulation Settings {Environment.NewLine} {simulationSettingsString}");
         Log.LogInformation($"Scenario Settings {Environment.NewLine} {scenarioSettingsString}");
@@ -173,18 +169,16 @@ public class Simulation : ISimulation
 
     public void RunSimulation(double time)
     {
-        var clockSettings = ScenarioSettings.SimulationClockSettings;
-
         Log.LogInformation("Run Started...");
         Log.LogInformation("");
 
-        while (time <= clockSettings.TimeEnd)
+        while (time <= ScenarioSettings.TimeEnd_s)
         {
             ShowProgress(time);
 
             Update(time);
 
-            time += clockSettings.TimeStep;
+            time += ScenarioSettings.TimeStep_s;
         }
 
         Log.LogInformation("");
@@ -346,7 +340,7 @@ public class Simulation : ISimulation
             Log.LogInformation($"Time = {nextDisplayTime:000}s");
 
             displayCount++;
-            nextDisplayTime = ScenarioSettings.SimulationClockSettings.TimeStart + displayCount * 5.0;
+            nextDisplayTime = ScenarioSettings.TimeStart_s + displayCount * 5.0;
         }
     }
 

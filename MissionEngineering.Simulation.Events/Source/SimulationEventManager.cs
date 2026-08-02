@@ -14,8 +14,6 @@ public static class SimulationEventManager
             {
                 options.AddKeyValueTypeDiscriminator<ISimulationEvent>("EventType", new Dictionary<string, Type>(StringComparer.Ordinal)
                 {
-                    ["SimulationSettings"] = typeof(SimulationSettingsEvent),
-                    ["MapOrigin"] = typeof(MapOriginEvent),
                     ["PlatformCreate"] = typeof(PlatformCreateEvent),
                     ["PlatformDelete"] = typeof(PlatformDeleteEvent),
                     ["PlatformAutopilot"] = typeof(PlatformAutopilotEvent),

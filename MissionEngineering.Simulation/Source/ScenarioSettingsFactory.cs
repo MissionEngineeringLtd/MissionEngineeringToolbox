@@ -10,35 +10,16 @@ public static class ScenarioSettingsFactory
     {
         var dateTimeOrigin = new DateTime(2024, 12, 24, 15, 45, 10, 123);
 
-        var simulationClockSettings = new SimulationClockSettings()
-        {
-            DateTimeOrigin = dateTimeOrigin,
-            TimeStart = 10.0,
-            TimeEnd = 200.0,
-            TimeStep = 0.01,
-            TrackPredictionTimeStep = 0.1
-        };
-
-        var llaOrigin = new PositionLLA()
-        {
-            Latitude_deg = 55.1,
-            Longitude_deg = 12.0,
-            Altitude_m = 0.0
-        };
-
-        var ps1 = PlatformSettingsFactory.PlatformSettings_Aircraft_Friendly_1();
-        var ps2 = PlatformSettingsFactory.PlatformSettings_Aircraft_Friendly_2();
-        var ps3 = PlatformSettingsFactory.PlatformSettings_Aircraft_Friendly_3();
-
-        var s1 = SensorSettingsFactory.SensorSettings_Radar_1();
-
         var scenarioSettings = new ScenarioSettings()
         {
-            ScenarioName = "Scenario_Test_1",
-            SimulationClockSettings = simulationClockSettings,
-            LLAOrigin = llaOrigin,
-            PlatformSettingsList = [ps1, ps2, ps3],
-            SensorSettingsList = [s1]
+            SimulationName = "Scenario_Test_1",
+            DateTimeOrigin = dateTimeOrigin.ToString("yyyy-MM-dd HH:mm:ss.fff"),
+            TimeStart_s = 10.0,
+            TimeEnd_s = 200.0,
+            TimeStep_s = 0.01,
+            TrackPredictionTimeStep_s = 0.1,
+            Latitude_deg = 55.1,
+            Longitude_deg = 12.0
         };
 
         return scenarioSettings;
@@ -48,27 +29,16 @@ public static class ScenarioSettingsFactory
     {
         var dateTimeOrigin = new DateTime(2024, 12, 24, 15, 45, 10, 123);
 
-        var simulationClockSettings = new SimulationClockSettings()
-        {
-            DateTimeOrigin = dateTimeOrigin,
-            TimeStart = 10.0,
-            TimeEnd = 200.0,
-            TimeStep = 0.01,
-            TrackPredictionTimeStep = 0.1
-        };
-
-        var llaOrigin = new PositionLLA()
-        {
-            Latitude_deg = 64.5,
-            Longitude_deg = 9.0,
-            Altitude_m = 0.0
-        };
-
         var scenarioSettings = new ScenarioSettings()
         {
-            ScenarioName = "Scenario_FF_1",
-            SimulationClockSettings = simulationClockSettings,
-            LLAOrigin = llaOrigin
+            SimulationName = "Simulation_FF_1",
+            DateTimeOrigin = dateTimeOrigin.ToString("yyyy-MM-dd HH:mm:ss.fff"),
+            TimeStart_s = 10.0,
+            TimeEnd_s = 200.0,
+            TimeStep_s = 0.01,
+            TrackPredictionTimeStep_s = 0.1,
+            Latitude_deg = 64.5,
+            Longitude_deg = 9.0
         };
 
         return scenarioSettings;

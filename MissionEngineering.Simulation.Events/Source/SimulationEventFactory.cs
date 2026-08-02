@@ -6,22 +6,6 @@ public static class SimulationEventFactory
 {
     public static List<ISimulationEvent> Example_1()
     {
-        var c0 = new SimulationSettingsEvent()
-        {
-            EventTime = 0.0,
-            SimulationStartDateTime = "2024-11-21T21:20:30Z",
-            SimulationStartTime_s = 10.0,
-            SimulationEndTime_s = 100.0,
-            SimulationTimeStep_s = 0.1
-        };
-
-        var c1 = new MapOriginEvent()
-        {
-            EventTime = 0.0,
-            Latitude_deg = 56.0,
-            Longitude_deg = 12.5,
-        };
-
         var c2 = new PlatformCreateEvent()
         {
             EventTime = 30.0,
@@ -125,27 +109,11 @@ public static class SimulationEventFactory
             PitchAngle_deg = 0.0
         };
 
-        return new List<ISimulationEvent> { c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 };
+        return new List<ISimulationEvent> { c2, c3, c4, c5, c6, c7, c8, c9, c10 };
     }
 
     public static List<ISimulationEvent> FF_1()
-    {
-        var c0 = new SimulationSettingsEvent()
-        {
-            EventTime = 0.0,
-            SimulationStartDateTime = "2024-11-21T21:20:30Z",
-            SimulationStartTime_s = 10.0,
-            SimulationEndTime_s = 100.0,
-            SimulationTimeStep_s = 0.1
-        };
-
-        var c1 = new MapOriginEvent()
-        {
-            EventTime = 0.0,
-            Latitude_deg = 56.0,
-            Longitude_deg = 12.5,
-        };
-
+    { 
         var ff_1 = new PlatformCreateEvent()
         {
             EventTime = 0.0,
@@ -290,6 +258,6 @@ public static class SimulationEventFactory
             PitchAngle_deg = 0.0
         };
 
-        return new List<ISimulationEvent> { c0, c1, ff_1, lw_1, ff_2, lw_2, ff_3, lw_3, ff_4, lw_4 };
+        return new List<ISimulationEvent> { ff_1, lw_1, ff_2, lw_2, ff_3, lw_3, ff_4, lw_4 };
     }
 }

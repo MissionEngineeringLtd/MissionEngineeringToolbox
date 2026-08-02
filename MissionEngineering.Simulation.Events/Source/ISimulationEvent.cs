@@ -2,8 +2,6 @@
 
 namespace MissionEngineering.Simulation;
 
-[JsonDerivedType(typeof(SimulationSettingsEvent))]
-[JsonDerivedType(typeof(MapOriginEvent))]
 [JsonDerivedType(typeof(PlatformCreateEvent))]
 [JsonDerivedType(typeof(PlatformDeleteEvent))]
 [JsonDerivedType(typeof(PlatformAutopilotEvent))]

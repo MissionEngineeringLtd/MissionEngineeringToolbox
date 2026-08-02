@@ -2,11 +2,11 @@
 
 public static class SimulationSettingsFactory
 {
-    public static SimulationSettings SimulationSettings_Test_1_Single()
+    public static SimulationSettings SimulationSettings_Single(string simulationName, string outputFolderBase)
     {
         var simulationSettings = new SimulationSettings()
         {
-            SimulationName = "Simulation_1",
+            SimulationName = simulationName,
             RunNumber = 1,
             RunTimeStamp = DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss"),
             IsAddConsoleLogging = true,
@@ -15,46 +15,22 @@ public static class SimulationSettingsFactory
             IsAddTimeStamp = false,
             IsAddRunNumber = true,
             IsCreateZipFile = true,
-            OutputFolderBase = @"C:\Temp\MissionEngineeringToolbox\"
+            OutputFolderBase = outputFolderBase,
         };
 
         return simulationSettings;
     }
 
-    public static SimulationSettings SimulationSettings_Test_1_Multiple()
+    public static SimulationSettings SimulationSettings_Multiple(string simulationName, string outputFolderBase)
     {
-        var simulationSettings = new SimulationSettings()
-        {
-            SimulationName = "Simulation_1",
-            RunNumber = 1,
-            RunTimeStamp = DateTime.Now.ToString("yyyy_MM_dd HH_mm_ss"),
-            IsAddConsoleLogging = false,
-            IsAddFileLogging = true,
-            IsWriteData = true,
-            IsAddTimeStamp = true,
-            IsAddRunNumber = true,
-            IsCreateZipFile = true,
-            OutputFolderBase = @"C:\Temp\MissionEngineeringToolbox\"
-        };
+        var simulationSettings = SimulationSettings_Single(simulationName, outputFolderBase);
 
-        return simulationSettings;
-    }
-
-    public static SimulationSettings SimulationSettings_FF_1_Single()
-    {
-        var simulationSettings = new SimulationSettings()
-        {
-            SimulationName = "Simulation_FF_1",
-            RunNumber = 1,
-            RunTimeStamp = DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss"),
-            IsAddConsoleLogging = true,
-            IsAddFileLogging = true,
-            IsWriteData = true,
-            IsAddTimeStamp = false,
-            IsAddRunNumber = true,
-            IsCreateZipFile = true,
-            OutputFolderBase = @"C:\Temp\MissionEngineeringToolbox\"
-        };
+        simulationSettings.IsAddConsoleLogging = false;
+        simulationSettings.IsAddFileLogging = true;
+        simulationSettings.IsWriteData = true;
+        simulationSettings.IsAddTimeStamp = true;
+        simulationSettings.IsAddRunNumber = true;
+        simulationSettings.IsCreateZipFile = true;
 
         return simulationSettings;
     }

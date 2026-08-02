@@ -2,13 +2,13 @@
 
 public record SimulationClockSettings
 {
-    public DateTimeOffset DateTimeOrigin { get; set; }
+    public string DateTimeOrigin { get; set; }
 
-    public double TimeStart { get; set; }
+    public double TimeStart_s { get; set; }
 
-    public double TimeEnd { get; set; }
+    public double TimeEnd_s { get; set; }
 
-    public double TimeStep { get; set; }
+    public double TimeStep_s { get; set; }
 
-    public double TrackPredictionTimeStep { get; set; }
+    public double TrackPredictionTimeStep_s { get; set; }
 }

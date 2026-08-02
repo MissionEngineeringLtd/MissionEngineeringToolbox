@@ -56,18 +56,12 @@ public class SimulationEventProcessor : ISimulationEventProcessor
         {
             switch (Event)
             {
-                case SimulationSettingsEvent:
-                    break;
-
-                case MapOriginEvent:
-                    break;
-
                 case PlatformCreateEvent c:
                     NextPlatformId++;
                     var p = ConvertPlatformEventToPlatform(c);
                     p.Initialise(time);
                     PlatformManager.CreatePlatform(p);
-                    DataRecorder.SimulationData.ScenarioSettings.PlatformSettingsList.Add(p.PlatformSettings);
+                    DataRecorder.SimulationData.PlatformSettingsList.Add(p.PlatformSettings);
                     break;
 
                 case PlatformLaunchMissileEvent c:
@@ -76,7 +70,7 @@ public class SimulationEventProcessor : ISimulationEventProcessor
                     pm.Initialise(time);
                     pm.PlatformModel.PlatformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms = 1000.0;
                     PlatformManager.CreatePlatform(pm);
-                    DataRecorder.SimulationData.ScenarioSettings.PlatformSettingsList.Add(pm.PlatformSettings);
+                    DataRecorder.SimulationData.PlatformSettingsList.Add(pm.PlatformSettings);
                     break;
 
                 case PlatformDeleteEvent c:

@@ -1,18 +1,20 @@
-﻿using MissionEngineering.Math;
-using MissionEngineering.Platform;
-using MissionEngineering.Sensor;
+﻿namespace MissionEngineering.Simulation;
 
-namespace MissionEngineering.Simulation;
-
-public record ScenarioSettings
+public class ScenarioSettings
 {
-    public string ScenarioName { get; set; }
+    public string SimulationName { get; set; }
 
-    public PositionLLA LLAOrigin { get; set; }
+    public string DateTimeOrigin { get; set; }
 
-    public SimulationClockSettings SimulationClockSettings { get; set; }
+    public double TimeStart_s { get; set; }
 
-    public List<PlatformSettings> PlatformSettingsList { get; set; }
+    public double TimeEnd_s { get; set; }
 
-    public List<SensorSettings> SensorSettingsList { get; set; }
+    public double TimeStep_s { get; set; }
+
+    public double TrackPredictionTimeStep_s { get; set; }
+
+    public double Latitude_deg { get; set; }
+
+    public double Longitude_deg { get; set; }
 }

@@ -20,6 +20,8 @@ public class SimulationData
 
     public List<ISimulationMessage> SimulationMessages { get; set; }
 
+    public List<PlatformSettings> PlatformSettingsList { get; set; }
+
     public List<PlatformData> PlatformDataAll { get; set; }
 
     public List<List<PlatformData>> PlatformDataPerPlatform { get; set; }
@@ -54,6 +56,7 @@ public class SimulationData
         SimulationMessages = [];
         SimulationEvents = [];
         SimulationEventsPerEventType = [];
+        PlatformSettingsList = [];
         PlatformDataAll = [];
         PlatformDataPerPlatform = [];
         PlatformDataRelativeAll = [];

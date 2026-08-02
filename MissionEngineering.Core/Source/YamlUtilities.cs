@@ -18,7 +18,7 @@ public static class YamlUtilities
     public static T ConvertFromYamlString<T>(string yamlString)
     {
         var deserializer = new DeserializerBuilder()
-            .WithNamingConvention(PascalCaseNamingConvention.Instance)
+            .IgnoreUnmatchedProperties()
             .Build();
 
         var obj = deserializer.Deserialize<T>(yamlString);

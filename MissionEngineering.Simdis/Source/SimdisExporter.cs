@@ -1,6 +1,8 @@
 ﻿using MissionEngineering.Core;
+using MissionEngineering.Math;
 using MissionEngineering.Platform;
 using MissionEngineering.Simulation;
+using System.Net;
 using System.Text;
 
 namespace MissionEngineering.Simdis;
@@ -49,7 +51,7 @@ public class SimdisExporter : ISimdisExporter
 
     public void CreateSimdisHeader()
     {
-        var llaOrigin = SimulationData.ScenarioSettings.LLAOrigin;
+        var llaOrigin = new PositionLLA(SimulationData.ScenarioSettings.Latitude_deg, SimulationData.ScenarioSettings.Longitude_deg, 0.0);
 
         AddLine("Version          24");
         AddLine("""Classification   "Unclassified" 0x8000FF00""");
@@ -66,7 +68,9 @@ public class SimdisExporter : ISimdisExporter
     {
         var index = 0;
 
-        foreach (var platformSettings in SimulationData.ScenarioSettings.PlatformSettingsList)
+        List<PlatformSettings> platformSettingsList = [];
+
+        foreach (var platformSettings in platformSettingsList)
         {
             var platformId = platformSettings.PlatformHeader.PlatformId;
 
