@@ -12,6 +12,8 @@ public class SimulationSettings
 
     public double TimeStep_s { get; set; }
 
+    public double PlatformDataRecordTimeStep_s { get; set; }
+
     public double TrackPredictionTimeStep_s { get; set; }
 
     public double Latitude_deg { get; set; }

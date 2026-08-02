@@ -17,6 +17,7 @@ public static class SimulationSettingsFactory
             TimeStart_s = 10.0,
             TimeEnd_s = 200.0,
             TimeStep_s = 0.01,
+            PlatformDataRecordTimeStep_s = 0.1,
             TrackPredictionTimeStep_s = 0.1,
             Latitude_deg = 55.1,
             Longitude_deg = 12.0
@@ -36,6 +37,7 @@ public static class SimulationSettingsFactory
             TimeStart_s = 10.0,
             TimeEnd_s = 200.0,
             TimeStep_s = 0.01,
+            PlatformDataRecordTimeStep_s = 0.1,
             TrackPredictionTimeStep_s = 0.1,
             Latitude_deg = 64.5,
             Longitude_deg = 9.0

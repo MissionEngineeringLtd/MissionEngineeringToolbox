@@ -41,6 +41,9 @@ public class Simulation : ISimulation
 
     private int displayCount;
 
+    private int platformDataRecordCountActual;
+    private int platformDataRecordCountMax;
+
     private int trackPredictionCountActual;
     private int trackPredictionCountMax;
 
@@ -101,6 +104,9 @@ public class Simulation : ISimulation
         LLAOrigin.PositionLLA.Longitude_deg = SimulationSettings.Longitude_deg;
 
         DataRecorder.SimulationData.SimulationSettings = SimulationSettings;
+
+        platformDataRecordCountActual = 0;
+        platformDataRecordCountMax = (int)Round(SimulationSettings.PlatformDataRecordTimeStep_s / SimulationSettings.TimeStep_s);
 
         trackPredictionCountActual = 0;
         trackPredictionCountMax = (int)Round(SimulationSettings.TrackPredictionTimeStep_s / SimulationSettings.TimeStep_s);
@@ -214,6 +220,20 @@ public class Simulation : ISimulation
         }
     }
 
+    public bool IsRecordPlatformData()
+    {
+        var isRecordPlatformData = platformDataRecordCountActual == 0;
+
+        platformDataRecordCountActual++;
+
+        if (platformDataRecordCountActual == platformDataRecordCountMax)
+        {
+            platformDataRecordCountActual = 0;
+        }
+
+        return isRecordPlatformData;
+    }
+
     public bool IsUpdatePredictedTracks()
     {
         var IsUpdatePredictedTracks = trackPredictionCountActual == 0;
@@ -238,6 +258,11 @@ public class Simulation : ISimulation
 
     public void RecordPlatformData()
     {
+        if (!IsRecordPlatformData())
+        {
+            return;
+        }
+
         var sd = DataRecorder.SimulationData;
 
         foreach (var platform in PlatformManager.Platforms)
