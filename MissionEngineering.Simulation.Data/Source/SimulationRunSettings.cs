@@ -20,6 +20,10 @@ public record SimulationRunSettings
 
     public bool IsCreateZipFile { get; set; }
 
+    public string InputFolderBase { get; set; }
+
+    public string InputFolder => Path.Combine(InputFolderBase, SimulationName);
+
     public string OutputFolderBase { get; set; }
 
     public string OutputFolder => GetOutputFolder();

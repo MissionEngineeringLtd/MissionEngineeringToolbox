@@ -63,18 +63,10 @@ public class Simulation : ISimulation
     {
         Log.LogInformation("***");
         Log.LogInformation($"Run Number {SimulationRunSettings.RunNumber} Started...");
+        Log.LogInformation("***");
         Log.LogInformation("");
 
-        var clockSettings = new SimulationClockSettings()
-        { 
-            DateTimeOrigin = SimulationSettings.DateTimeOrigin, 
-            TimeStart_s = SimulationSettings.TimeStart_s, 
-            TimeEnd_s = SimulationSettings.TimeEnd_s, 
-            TimeStep_s = SimulationSettings.TimeStep_s, 
-            TrackPredictionTimeStep_s = SimulationSettings.TrackPredictionTimeStep_s 
-        };
-
-        var time = clockSettings.TimeStart_s;
+        var time = SimulationSettings.TimeStart_s;
 
         Initialise(time);
 
@@ -82,6 +74,7 @@ public class Simulation : ISimulation
 
         Finalise(time);
 
+        Log.LogInformation("***");
         Log.LogInformation($"Run Number {SimulationRunSettings.RunNumber} Finished.");
         Log.LogInformation("***");
         Log.LogInformation("");
@@ -154,13 +147,13 @@ public class Simulation : ISimulation
 
         DataRecorder.Initialise(time);
 
-        var simulationRunSettingsString = SimulationRunSettings.ConvertToJsonString();
-        var simulationSettingsString = SimulationSettings.ConvertToJsonString();
+        var simulationRunSettingsString = SimulationRunSettings.ConvertToYamlString();
+        var simulationSettingsString = SimulationSettings.ConvertToYamlString();
 
         nextDisplayTime = SimulationSettings.TimeStart_s;
 
-        Log.LogInformation($"Simulation Run Settings {Environment.NewLine} {simulationRunSettingsString}");
-        Log.LogInformation($"Simulation Settings {Environment.NewLine} {simulationSettingsString}");
+        Log.LogInformation($"Simulation Run Settings:{Environment.NewLine}{simulationRunSettingsString}");
+        Log.LogInformation($"Simulation Settings:{Environment.NewLine}{simulationSettingsString}");
 
         Log.LogInformation("Initialise Finished.");
         Log.LogInformation("");
@@ -168,6 +161,8 @@ public class Simulation : ISimulation
 
     public void CreateLogger()
     {
+        File.Delete(SimulationRunSettings.LogFileName);
+
         Log.CreateLogger(SimulationRunSettings.LogFileName, SimulationRunSettings.IsAddConsoleLogging, SimulationRunSettings.IsAddFileLogging);
 
         Log.RunNumber = SimulationRunSettings.RunNumber;

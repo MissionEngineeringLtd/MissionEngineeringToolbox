@@ -2,10 +2,11 @@
 
 public static class SimulationRunSettingsFactory
 {
-    public static SimulationRunSettings SingleRun(string simulationName, string outputFolderBase)
+    public static SimulationRunSettings SingleRun(string inputFolderBase, string simulationName, string outputFolderBase)
     {
         var simulationSettings = new SimulationRunSettings()
         {
+            InputFolderBase = inputFolderBase,
             SimulationName = simulationName,
             RunNumber = 1,
             RunTimeStamp = DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss"),
@@ -21,9 +22,9 @@ public static class SimulationRunSettingsFactory
         return simulationSettings;
     }
 
-    public static SimulationRunSettings MultipleRuns(string simulationName, string outputFolderBase)
+    public static SimulationRunSettings MultipleRuns(string inputFolderBase, string simulationName, string outputFolderBase)
     {
-        var simulationSettings = SingleRun(simulationName, outputFolderBase);
+        var simulationSettings = SingleRun(inputFolderBase, simulationName, outputFolderBase);
 
         simulationSettings.IsAddConsoleLogging = false;
         simulationSettings.IsAddFileLogging = true;

@@ -7,7 +7,7 @@ public sealed class SimulationTests
     public void Run_WithValidData_ExpectSuccess()
     {
         // Arrange
-        var simulationRunSettings = SimulationRunSettingsFactory.SingleRun("Simulation_1", "");
+        var simulationRunSettings = SimulationRunSettingsFactory.SingleRun("", "Simulation_1", "");
 
         simulationRunSettings.IsAddConsoleLogging = false;
         simulationRunSettings.IsAddFileLogging = false;

@@ -245,7 +245,7 @@ public class DataRecorder : IDataRecorder
 
     public void WriteSimulationSettingsToYaml()
     {
-        var fileName = $"{SimulationData.SimulationSettings.SimulationName}SimulationSettings.yaml";
+        var fileName = $"{SimulationData.SimulationSettings.SimulationName}_SimulationSettings.yaml";
 
         var fileNameFull = GetFileNameFull(fileName);
 

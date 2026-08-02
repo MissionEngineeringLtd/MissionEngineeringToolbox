@@ -117,11 +117,11 @@ public class Program
     {
         if (NumberOfRuns == 1)
         {
-            SimulationRunSettings = SimulationRunSettingsFactory.SingleRun(SimulationName, OutputFolder);
+            SimulationRunSettings = SimulationRunSettingsFactory.SingleRun(InputFolder, SimulationName, OutputFolder);
         }
         else
         {
-            SimulationRunSettings = SimulationRunSettingsFactory.MultipleRuns(SimulationName, OutputFolder);
+            SimulationRunSettings = SimulationRunSettingsFactory.MultipleRuns(InputFolder, SimulationName, OutputFolder);
         }
     }
 
