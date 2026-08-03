@@ -6,6 +6,7 @@ namespace MissionEngineering.Simulation;
 [JsonDerivedType(typeof(PlatformDeleteEvent))]
 [JsonDerivedType(typeof(PlatformAutopilotEvent))]
 [JsonDerivedType(typeof(PlatformLaunchMissileEvent))]
+[JsonDerivedType(typeof(ZoneCreateEvent))]
 public interface ISimulationEvent
 {
     public SimulationEventType EventType { get; set; }

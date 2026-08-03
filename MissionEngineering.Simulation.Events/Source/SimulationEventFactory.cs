@@ -258,6 +258,17 @@ public static class SimulationEventFactory
             PitchAngle_deg = 0.0
         };
 
-        return new List<ISimulationEvent> { ff_1, lw_1, ff_2, lw_2, ff_3, lw_3, ff_4, lw_4 };
+        var z1 = new ZoneCreateEvent()
+        {
+            EventTime = 0.0,
+            ZoneName = "Zone_1",
+            ZoneColor = "YELLOW",
+            ZonePointsLatitude_DMS = [60.584, 69.475, 65.362, 59.083],
+            ZonePointsLongitude_DMS = [02.094, 015.005, 025.323, 09.137],
+            ZoneHeightMin_ft = 0.0,
+            ZoneHeightMax_ft = 66000.0,
+        };
+
+        return new List<ISimulationEvent> { ff_1, lw_1, ff_2, lw_2, ff_3, lw_3, ff_4, lw_4, z1 };
     }
 }

@@ -1,4 +1,5 @@
-﻿using MissionEngineering.Core;
+﻿using MathNet.Numerics.LinearAlgebra.Factorization;
+using MissionEngineering.Core;
 using MissionEngineering.Math;
 using MissionEngineering.Platform;
 using MissionEngineering.Simulation;
@@ -14,6 +15,12 @@ public class SimdisExporter : ISimdisExporter
 
     private StringBuilder SimdisData { get; set; }
 
+    private bool IsCreateZonesGOGFile { get; set; }
+
+    private string ZonesGOGFile { get; set; }
+
+    private string ZonesGOGFileFull { get; set; }
+
     public SimdisExporter(SimulationData simulationData, ILogClass log)
     {
         SimulationData = simulationData;
@@ -25,7 +32,11 @@ public class SimdisExporter : ISimdisExporter
 
     public void GenerateSimdisData()
     {
+        CreateZonesGOGFile();
+
         CreateSimdisHeader();
+
+        CreateSimdisGOGFileReference();
 
         CreatePlatforms();
     }
@@ -58,8 +69,20 @@ public class SimdisExporter : ISimdisExporter
         AddLine("""VerticalDatum    "WGS84" """);
         AddLine("""CoordSystem      "LLA" """);
         AddLine($"RefLLA           {llaOrigin.Latitude_deg} {llaOrigin.Longitude_deg} {llaOrigin.Altitude_m}");
-        AddLine("""ReferenceTimeECI "0.0" """);
+        AddLine($"ReferenceYear    {SimulationData.SimulationSettings.DateTimeOrigin.Substring(0, 4)}");
+        //AddLine("""ReferenceTimeECI "0.0" """);
         AddLine("DegreeAngles     1");
+        AddLine("");
+    }
+
+    public void CreateSimdisGOGFileReference()
+    {
+        if (!IsCreateZonesGOGFile)
+        {
+            return;
+        }
+
+        AddLine(@$"GOGFile ""{ZonesGOGFile}""");
         AddLine("");
     }
 
@@ -123,6 +146,49 @@ public class SimdisExporter : ISimdisExporter
         }
 
         AddLine("");
+    }
+
+    public void CreateZonesGOGFile()
+    {
+        IsCreateZonesGOGFile = SimulationData.SimulationZones.Count > 0;
+
+        if (!IsCreateZonesGOGFile)
+        {
+            return;
+        }
+
+        var fileName = $"{SimulationData.SimulationRunSettings.SimulationName}.gog";
+
+        var fileNameFull = SimulationData.SimulationRunSettings.GetFileNameFull(fileName);
+
+        ZonesGOGFile = fileName;
+        ZonesGOGFileFull = fileNameFull;
+
+        Log.LogInformation($"Writing File : {fileNameFull}");
+        
+        var text = @"
+start
+annotation  : OCA Area of Interest: FL 660
+LL 59.141667 9.236111 66000.000000
+starttime ""2025-01-01T00:00:00Z""
+endtime   ""2025-01-01T00:10:00Z""
+end
+
+start
+line
+linewidth 5
+linecolor YELLOW
+LL 60.977778 2.161111 66000.000000
+LL 69.797222 15.013889 66000.000000
+LL 65.605556 25.541667 66000.000000
+LL 59.141667 9.236111 66000.000000
+LL 60.977778 2.161111 66000.000000
+starttime ""2025-01-01T00:00:00Z""
+endtime   ""2025-01-01T00:10:00Z""
+end";
+
+    File.WriteAllText(fileNameFull, text.ToString());
+
     }
 
     public void AddLine(string line)

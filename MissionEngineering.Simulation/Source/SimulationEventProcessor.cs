@@ -56,31 +56,45 @@ public class SimulationEventProcessor : ISimulationEventProcessor
         {
             switch (Event)
             {
-                case PlatformCreateEvent c:
+                case PlatformCreateEvent e:
                     NextPlatformId++;
-                    var p = ConvertPlatformEventToPlatform(c);
+                    var p = ConvertPlatformEventToPlatform(e);
                     p.Initialise(time);
                     PlatformManager.CreatePlatform(p);
                     DataRecorder.SimulationData.PlatformSettingsList.Add(p.PlatformSettings);
                     break;
 
-                case PlatformLaunchMissileEvent c:
+                case PlatformLaunchMissileEvent e:
                     NextPlatformIdMissile++;
-                    var pm = ConvertPlatformLaunchMissileEventToPlatform(c);
+                    var pm = ConvertPlatformLaunchMissileEventToPlatform(e);
                     pm.Initialise(time);
                     pm.PlatformModel.PlatformAutopilot.PlatformFlightpathDemand.TotalSpeedDemand_ms = 1000.0;
                     PlatformManager.CreatePlatform(pm);
                     DataRecorder.SimulationData.PlatformSettingsList.Add(pm.PlatformSettings);
                     break;
 
-                case PlatformDeleteEvent c:
-                    PlatformManager.DeletePlatform(c.PlatformName);
+                case PlatformDeleteEvent e:
+                    PlatformManager.DeletePlatform(e.PlatformName);
                     break;
 
-                case PlatformAutopilotEvent c:
-                    var platform = PlatformManager.GetPlatformByName(c.PlatformName);
+                case PlatformAutopilotEvent e:
+                    var platform = PlatformManager.GetPlatformByName(e.PlatformName);
+                    UpdatePlatformAutopilot(platform, e);
+                    break;
 
-                    UpdatePlatformAutopilot(platform, c);
+                case ZoneCreateEvent e:
+                    
+                    var zone = new SimulationZone
+                    {
+                        ZoneName = e.ZoneName,
+                        ZoneColor = e.ZoneColor,    
+                        ZonePointsLatitude_DMS = e.ZonePointsLatitude_DMS,
+                        ZonePointsLongitude_DMS = e.ZonePointsLongitude_DMS,
+                        ZoneHeightMin_ft = e.ZoneHeightMin_ft,
+                        ZoneHeightMax_ft = e.ZoneHeightMax_ft
+                    };
+
+                    DataRecorder.SimulationData.SimulationZones.Add(zone);
 
                     break;
 

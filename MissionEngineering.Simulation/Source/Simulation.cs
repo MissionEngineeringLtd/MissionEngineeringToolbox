@@ -161,7 +161,15 @@ public class Simulation : ISimulation
 
     public void CreateLogger()
     {
-        File.Delete(SimulationRunSettings.LogFileName);
+        if (!SimulationRunSettings.IsAddFileLogging)
+        { 
+            return;
+        }
+
+        if (File.Exists(SimulationRunSettings.LogFileName))
+        {
+            File.Delete(SimulationRunSettings.LogFileName);
+        }
 
         Log.CreateLogger(SimulationRunSettings.LogFileName, SimulationRunSettings.IsAddConsoleLogging, SimulationRunSettings.IsAddFileLogging);
 

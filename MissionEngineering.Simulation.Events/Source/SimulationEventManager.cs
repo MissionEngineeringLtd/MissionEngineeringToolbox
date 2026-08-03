@@ -18,6 +18,8 @@ public static class SimulationEventManager
                     ["PlatformDelete"] = typeof(PlatformDeleteEvent),
                     ["PlatformAutopilot"] = typeof(PlatformAutopilotEvent),
                     ["PlatformLaunchMissile"] = typeof(PlatformLaunchMissileEvent),
+                    ["ZoneCreate"] = typeof(ZoneCreateEvent),
+                    ["ZoneDelete"] = typeof(ZoneDeleteEvent)
                 });
             })
             .Build();

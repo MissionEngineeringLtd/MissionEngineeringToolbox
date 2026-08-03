@@ -16,6 +16,8 @@ public class SimulationData
 
     public List<ISimulationEvent> SimulationEvents { get; set; }
 
+    public List<SimulationZone> SimulationZones { get; set; }
+
     public List<List<ISimulationEvent>> SimulationEventsPerEventType { get; set; }
 
     public List<ISimulationMessage> SimulationMessages { get; set; }
@@ -55,6 +57,7 @@ public class SimulationData
         SimulationRunSettings = simulationRunSettings;
         SimulationMessages = [];
         SimulationEvents = [];
+        SimulationZones = [];
         SimulationEventsPerEventType = [];
         PlatformSettingsList = [];
         PlatformDataAll = [];

@@ -6,5 +6,7 @@ public enum SimulationEventType
     PlatformCreate,
     PlatformDelete,
     PlatformAutopilot,
-    PlatformLaunchMissile
+    PlatformLaunchMissile,
+    ZoneCreate,
+    ZoneDelete,
 }
