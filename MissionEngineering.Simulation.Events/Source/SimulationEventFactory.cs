@@ -258,10 +258,10 @@ public static class SimulationEventFactory
             PitchAngle_deg = 0.0
         };
 
-        var z1 = new ZoneCreateEvent()
+        var OCA1 = new ZoneCreateEvent()
         {
             EventTime = 0.0,
-            ZoneName = "Zone_1",
+            ZoneName = "OCA Area of Interest",
             ZoneColor = "YELLOW",
             ZonePointsLatitude_DMS = [60.584, 69.475, 65.362, 59.083],
             ZonePointsLongitude_DMS = [02.094, 015.005, 025.323, 09.137],
@@ -269,6 +269,50 @@ public static class SimulationEventFactory
             ZoneHeightMax_ft = 66000.0,
         };
 
-        return new List<ISimulationEvent> { ff_1, lw_1, ff_2, lw_2, ff_3, lw_3, ff_4, lw_4, z1 };
+        var ROA1 = new ZoneCreateEvent()
+        {
+            EventTime = 0.0,
+            ZoneName = "ROA1 RED FOAR 1",
+            ZoneColor = "RED",
+            ZonePointsLatitude_DMS = [66.147, 67.288, 66.500, 65.375],
+            ZonePointsLongitude_DMS = [07.522, 10.410, 12.385, 09.472],
+            ZoneHeightMin_ft = 0.0,
+            ZoneHeightMax_ft = 66000.0,
+        };
+
+        var ROA2 = new ZoneCreateEvent()
+        {
+            EventTime = 0.0,
+            ZoneName = "ROA2 RED FOAR 2",
+            ZoneColor = "RED",
+            ZonePointsLatitude_DMS = [65.312, 66.429, 66.009, 64.494],
+            ZonePointsLongitude_DMS = [09.486, 12.398, 14.279, 11.382],
+            ZoneHeightMin_ft = 0.0,
+            ZoneHeightMax_ft = 66000.0,
+        };
+
+        var ROA3 = new ZoneCreateEvent()
+        {
+            EventTime = 0.0,
+            ZoneName = "ROA3 RED FOAR 3",
+            ZoneColor = "RED",
+            ZonePointsLatitude_DMS = [64.459, 65.556, 65.136, 64.045],
+            ZonePointsLongitude_DMS = [11.440, 14.317, 16.164, 13.279],
+            ZoneHeightMin_ft = 0.0,
+            ZoneHeightMax_ft = 66000.0,
+        };
+
+        var ROA4 = new ZoneCreateEvent()
+        {
+            EventTime = 0.0,
+            ZoneName = "ROA4 RED FOAR 4",
+            ZoneColor = "RED",
+            ZonePointsLatitude_DMS = [64.122, 65.200, 64.374, 63.304],
+            ZonePointsLongitude_DMS = [14.006, 16.471, 18.285, 15.383],
+            ZoneHeightMin_ft = 0.0,
+            ZoneHeightMax_ft = 66000.0,
+        };
+
+        return new List<ISimulationEvent> { ff_1, lw_1, ff_2, lw_2, ff_3, lw_3, ff_4, lw_4, OCA1, ROA1, ROA2, ROA3, ROA4 };
     }
 }

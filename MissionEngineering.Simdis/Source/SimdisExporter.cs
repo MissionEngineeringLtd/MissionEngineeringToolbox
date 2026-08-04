@@ -15,11 +15,11 @@ public class SimdisExporter : ISimdisExporter
 
     private StringBuilder SimdisData { get; set; }
 
-    private bool IsCreateZonesGOGFile { get; set; }
+    private bool IsCreateSimdisGOGFile { get; set; }
 
-    private string ZonesGOGFile { get; set; }
+    private string SimdisGOGFile { get; set; }
 
-    private string ZonesGOGFileFull { get; set; }
+    private SimdisGOGExporter SimdisGOGExporter { get; set; }
 
     public SimdisExporter(SimulationData simulationData, ILogClass log)
     {
@@ -32,7 +32,7 @@ public class SimdisExporter : ISimdisExporter
 
     public void GenerateSimdisData()
     {
-        CreateZonesGOGFile();
+        CreateSimdisGOGFile();
 
         CreateSimdisHeader();
 
@@ -77,12 +77,12 @@ public class SimdisExporter : ISimdisExporter
 
     public void CreateSimdisGOGFileReference()
     {
-        if (!IsCreateZonesGOGFile)
+        if (!IsCreateSimdisGOGFile)
         {
             return;
         }
 
-        AddLine(@$"GOGFile ""{ZonesGOGFile}""");
+        AddLine(@$"GOGFile ""{SimdisGOGFile}""");
         AddLine("");
     }
 
@@ -148,47 +148,20 @@ public class SimdisExporter : ISimdisExporter
         AddLine("");
     }
 
-    public void CreateZonesGOGFile()
+    public void CreateSimdisGOGFile()
     {
-        IsCreateZonesGOGFile = SimulationData.SimulationZones.Count > 0;
+        IsCreateSimdisGOGFile = SimulationData.SimulationZones.Count > 0;
 
-        if (!IsCreateZonesGOGFile)
+        if (!IsCreateSimdisGOGFile)
         {
             return;
         }
 
-        var fileName = $"{SimulationData.SimulationRunSettings.SimulationName}.gog";
+        SimdisGOGExporter = new SimdisGOGExporter(SimulationData, Log);
 
-        var fileNameFull = SimulationData.SimulationRunSettings.GetFileNameFull(fileName);
+        SimdisGOGExporter.ExportSimdisGOGData();
 
-        ZonesGOGFile = fileName;
-        ZonesGOGFileFull = fileNameFull;
-
-        Log.LogInformation($"Writing File : {fileNameFull}");
-        
-        var text = @"
-start
-annotation  : OCA Area of Interest: FL 660
-LL 59.141667 9.236111 66000.000000
-starttime ""2025-01-01T00:00:00Z""
-endtime   ""2025-01-01T00:10:00Z""
-end
-
-start
-line
-linewidth 5
-linecolor YELLOW
-LL 60.977778 2.161111 66000.000000
-LL 69.797222 15.013889 66000.000000
-LL 65.605556 25.541667 66000.000000
-LL 59.141667 9.236111 66000.000000
-LL 60.977778 2.161111 66000.000000
-starttime ""2025-01-01T00:00:00Z""
-endtime   ""2025-01-01T00:10:00Z""
-end";
-
-    File.WriteAllText(fileNameFull, text.ToString());
-
+        SimdisGOGFile = SimdisGOGExporter.SimdisGOGFile;
     }
 
     public void AddLine(string line)

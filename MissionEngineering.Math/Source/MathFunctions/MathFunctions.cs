@@ -158,4 +158,36 @@ public static class MathFunctions
 
         return Round(value / stepSize) * stepSize;
     }
+
+    public static double DMSToDegrees(double dms)
+    {
+        var dd = Floor(dms);
+
+        var ms = dms - dd;
+
+        var mm = Floor(ms * 100.0);
+
+        var ss = (ms * 10000.0) - mm * 100.0;
+
+        var deg = dd + (mm / 60.0) + (ss / 3600.0);
+        
+        return deg;
+    }
+
+    public static double DegreesToDMS(double deg)
+    {
+        var dd = Floor(deg);
+
+        var rr = deg - dd;
+
+        var tt = rr * 60.0;
+
+        var mm = Floor(tt);
+
+        var ss = Round((tt - mm) * 60.0);
+
+        var dms = dd + mm / 100.0 + ss / 10000.0;
+
+        return dms;
+    }
 }

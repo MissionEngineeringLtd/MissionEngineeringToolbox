@@ -282,5 +282,19 @@ public static class DoubleExtensionMethods
 
             return result;
         }
+
+        public double DMSToDegrees()
+        {
+            var result = MathFunctions.DMSToDegrees(x);
+
+            return result;
+        }
+
+        public double DegreesToDMS()
+        {
+            var result = MathFunctions.DegreesToDMS(x);
+
+            return result;
+        }
     }
 }
