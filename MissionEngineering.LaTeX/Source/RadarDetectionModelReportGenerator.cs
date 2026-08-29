@@ -44,6 +44,7 @@ public class RadarDetectionModelReportGenerator
         ReportData = new Dictionary<string, string>();
 
         ReportData["XXX_1"] = InputDataTableFileName;
+        ReportData["XXX_2"] = RadarDetectionModelHarnessOutputFileName;
     }
 
     public void GenerateReportInputDataTable()

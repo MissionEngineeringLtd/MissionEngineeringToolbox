@@ -157,11 +157,14 @@ public class Program
         LogUtilities.LogInformation($"       {reportFileNameFull}");
         LogUtilities.LogInformation($"       {inputDataTableFileNameFull}");
 
+        var outputFileName = Path.GetFileName(OutputFileNameFull);
+
         var reportGenerator = new RadarDetectionModelReportGenerator()
         {
             OutputFolder = OutputFolder,
             ReportFileNameFull = reportFileNameFull,
             RadarDetectionModelHarnessInputFileName = InputFileName,
+            RadarDetectionModelHarnessOutputFileName = outputFileName,
             RadarDetectionModelHarness = Harness,
             InputDataTableFileName = inputDataTableFileName,
             InputDataTableFileNameFull = inputDataTableFileNameFull

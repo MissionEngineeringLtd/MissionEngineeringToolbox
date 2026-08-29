@@ -1,24 +1,42 @@
 \documentclass{article}
+\usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{colortbl}
 \usepackage{longtable}
+\usepackage{pdflscape}
+
+\title{Radar Detection Model Report}
+\author{Mission Engineering}
 
 \begin{document}
 
-\section*{CSV to LaTeX Table Example}
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\section{Inputs}
+
+\subsection{Detection Model Inputs}
 
 \pgfplotstableset{
 begin table=\begin{longtable},
 end table=\end{longtable},
 }
 
-\section*{CSV to LaTeX Table Example}
-
 \pgfplotstabletypeset[
 col sep=comma,
-every head row/.style={before row=\toprule, after row=\midrule},
+every head row/.style={before row=\caption{Detection Model Inputs Table}\\
+\toprule, after row=\midrule},
 every last row/.style={after row=\bottomrule},
 columns={Category,Name,Units,Value},
 columns/Category/.style={string type=l},
@@ -26,5 +44,26 @@ columns/Name/.style={string type=l, column type=l},
 columns/Units/.style={string type=c},
 columns/Value/.style={string type=n, column type=r},
 ]{XXX_1}
+
+\section{Results}
+
+\subsection{Signal To Noise (dB) vs Range (km)}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+		xmin=0,
+		ymin=0,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Target Range (km),
+        ylabel=Signal To Noise Ratio (dB),
+]
+\addplot table [x=TargetRange_km, y=SignalToNoiseRatio_dB, col sep=comma] {XXX_2};
+\end{axis}
+\end{tikzpicture}
 
 \end{document}
