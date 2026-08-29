@@ -4,6 +4,7 @@
   </Folder>
   <Project Path="MissionEngineering.Core/MissionEngineering.Core.csproj" Id="34c1eab6-f58d-4a0d-97d3-68bf87e01aaa" />
   <Project Path="MissionEngineering.DataRecorder/MissionEngineering.DataRecorder.csproj" Id="7e4dc448-99c1-4f0d-8df7-6bdd15f5de14" />
+  <Project Path="MissionEngineering.LaTeX/MissionEngineering.LaTeX.csproj" Id="02eaa7e8-5e09-40f2-87d8-081f2a5f6ad1" />
   <Project Path="MissionEngineering.Math.Tests/MissionEngineering.Math.Tests.csproj" Id="c0b19818-3259-4e4d-b7aa-8230d17f4d3c" />
   <Project Path="MissionEngineering.Math/MissionEngineering.Math.csproj" />
   <Project Path="MissionEngineering.Platform.Tests/MissionEngineering.Platform.Tests.csproj" Id="da05b0c3-c24c-4d7f-ad9c-500ef0ac2ef9" />
@@ -18,9 +19,9 @@
   <Project Path="MissionEngineering.Scanner/MissionEngineering.Scanner.csproj" Id="c0a8b0f1-1e5a-4396-b06e-5a8621efeed5" />
   <Project Path="MissionEngineering.Sensor/MissionEngineering.Sensor.csproj" Id="fcf3ef9c-3852-4478-aefe-f8c28cc1d882" />
   <Project Path="MissionEngineering.Simdis/MissionEngineering.Simdis.csproj" Id="072d857f-8e15-4a77-a7d3-72e00e33b0b9" />
-  <Project Path="MissionEngineering.Simulation.Events/MissionEngineering.Simulation.Events.csproj" Id="5fed23ef-970d-4937-9d3d-5d2eeab9e889" />
   <Project Path="MissionEngineering.Simulation.Console/MissionEngineering.Simulation.Console.csproj" Id="c8664854-2cfe-4408-9da0-71d30e8e65d3" />
   <Project Path="MissionEngineering.Simulation.Data/MissionEngineering.Simulation.Data.csproj" Id="7ec65002-9f7a-42db-9e7d-1ecc8a6ddfed" />
+  <Project Path="MissionEngineering.Simulation.Events/MissionEngineering.Simulation.Events.csproj" Id="5fed23ef-970d-4937-9d3d-5d2eeab9e889" />
   <Project Path="MissionEngineering.Simulation.Messages/MissionEngineering.Simulation.Messages.csproj" Id="aa61f429-43d1-45da-9c4f-f033b4d83119" />
   <Project Path="MissionEngineering.Simulation.Tests/MissionEngineering.Simulation.Tests.csproj" Id="b1fe2daf-1e24-4d81-83cb-9d541d6e0750" />
   <Project Path="MissionEngineering.Simulation/MissionEngineering.Simulation.csproj" Id="a3bb62a5-98d3-4012-9b55-0ed5cec29c4f" />

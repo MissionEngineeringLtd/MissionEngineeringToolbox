@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Core;
+using MissionEngineering.LaTeX;
 
 namespace MissionEngineering.Radar;
 
@@ -6,7 +7,11 @@ public class Program
 {
     public static string InputFileName { get; set; }
 
-    public static string OutputFileName { get; set; }
+    public static string InputFileNameYaml { get; set; }
+
+    public static string OutputFolder { get; set; }
+
+    public static string OutputFileNameFull { get; set; }
 
     public static bool IsCreateExampleFiles { get; set; }
 
@@ -23,7 +28,7 @@ public class Program
     public static void Main(string inputFileName, string outputFileName, bool isCreateExampleFiles = false)
     {
         InputFileName = inputFileName;
-        OutputFileName = outputFileName;
+        OutputFileNameFull = outputFileName;
         IsCreateExampleFiles = isCreateExampleFiles;
 
         CreateLogger();
@@ -46,6 +51,8 @@ public class Program
 
         WriteOutputFile();
 
+        WriteReportFile();
+
         LogUtilities.LogInformation($"Finished.");
     }
 
@@ -62,7 +69,7 @@ public class Program
         LogUtilities.LogInformation($"");
         LogUtilities.LogInformation($"   Settings");
         LogUtilities.LogInformation($"      InputFileName        = {InputFileName}");
-        LogUtilities.LogInformation($"      OutputFileName       = {OutputFileName}");
+        LogUtilities.LogInformation($"      OutputFileName       = {OutputFileNameFull}");
         LogUtilities.LogInformation($"      IsCreateExampleFiles = {IsCreateExampleFiles}");
         LogUtilities.LogInformation($"   End Of Settings.");
         LogUtilities.LogInformation($"");
@@ -74,7 +81,13 @@ public class Program
 
         Inputs = RadarDetectionModelHarnessInputExamples.Example_1();
 
+        InputFileNameYaml = InputFileName.Replace(".json", ".yaml");
+
+        LogUtilities.LogInformation($"       {InputFileName}");
+        LogUtilities.LogInformation($"       {InputFileNameYaml}");
+
         Inputs.WriteToJsonFile(InputFileName);
+        Inputs.WriteToYamlFile(InputFileNameYaml);
 
         LogUtilities.LogInformation($"   Finished.");
         LogUtilities.LogInformation($"");
@@ -119,9 +132,42 @@ public class Program
 
     private static void WriteOutputFile()
     {
-        LogUtilities.LogInformation($"   Writing Output File...");
+        LogUtilities.LogInformation($"   Writing Output Files...");
 
-        Harness.RadarDetectionModelData.WriteToCsvFile(OutputFileName);
+        LogUtilities.LogInformation($"       {OutputFileNameFull}");
+
+        Harness.RadarDetectionModelData.WriteToCsvFile(OutputFileNameFull);
+
+        LogUtilities.LogInformation($"   Finished.");
+        LogUtilities.LogInformation($"");
+    }
+
+    private static void WriteReportFile()
+    {
+        LogUtilities.LogInformation($"   Writing Report Files...");
+
+        var reportFileNameFull = OutputFileNameFull.Replace(".csv", "_Report.tex");
+
+        var inputDataTableFileNameFull = OutputFileNameFull.Replace(".csv", "_InputDataTable.csv");
+
+        var inputDataTableFileName = Path.GetFileName(inputDataTableFileNameFull);
+
+        OutputFolder = Path.GetDirectoryName(OutputFileNameFull);
+
+        LogUtilities.LogInformation($"       {reportFileNameFull}");
+        LogUtilities.LogInformation($"       {inputDataTableFileNameFull}");
+
+        var reportGenerator = new RadarDetectionModelReportGenerator()
+        {
+            OutputFolder = OutputFolder,
+            ReportFileNameFull = reportFileNameFull,
+            RadarDetectionModelHarnessInputFileName = InputFileName,
+            RadarDetectionModelHarness = Harness,
+            InputDataTableFileName = inputDataTableFileName,
+            InputDataTableFileNameFull = inputDataTableFileNameFull
+        };
+
+        reportGenerator.GenerateReport();
 
         LogUtilities.LogInformation($"   Finished.");
         LogUtilities.LogInformation($"");

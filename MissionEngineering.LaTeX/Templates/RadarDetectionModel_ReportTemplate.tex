@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{longtable}
+
+\begin{document}
+
+\section*{CSV to LaTeX Table Example}
+
+\pgfplotstableset{
+begin table=\begin{longtable},
+end table=\end{longtable},
+}
+
+\section*{CSV to LaTeX Table Example}
+
+\pgfplotstabletypeset[
+col sep=comma,
+every head row/.style={before row=\toprule, after row=\midrule},
+every last row/.style={after row=\bottomrule},
+columns={Category,Name,Units,Value},
+columns/Category/.style={string type=l},
+columns/Name/.style={string type=l, column type=l},
+columns/Units/.style={string type=c},
+columns/Value/.style={string type=n, column type=r},
+]{XXX_1}
+
+\end{document}
