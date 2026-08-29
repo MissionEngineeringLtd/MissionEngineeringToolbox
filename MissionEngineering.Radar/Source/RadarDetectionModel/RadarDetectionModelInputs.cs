@@ -12,7 +12,11 @@ public record RadarDetectionModelInputs
 
     public double TransmitPeakPower_W { get; set; }
 
-    public double TransmitPeakPower_dB => TransmitPeakPower_W.PowerToDecibels();
+    public double TransmitPeakPower_mW => TransmitPeakPower_W * 1000.0;
+
+    public double TransmitPeakPower_dBW => TransmitPeakPower_W.PowerToDecibels();
+
+    public double TransmitPeakPower_dBmW => TransmitPeakPower_mW.PowerToDecibels();
 
     public double TransmitGain { get; set; }
 
@@ -24,7 +28,11 @@ public record RadarDetectionModelInputs
 
     public double EIRP_W => TransmitPeakPower_W * TransmitGain;
 
-    public double EIRP_dB => EIRP_W.PowerToDecibels();
+    public double EIRP_mW => EIRP_W * 1000.0;
+
+    public double EIRP_dBW => EIRP_W.PowerToDecibels();
+
+    public double EIRP_dBmW => EIRP_mW.PowerToDecibels();
 
     public double ReceiveGain { get; set; }
 
@@ -57,6 +65,8 @@ public record RadarDetectionModelInputs
     public double TargetRange_m { get; set; }
 
     public double TargetRange_km => TargetRange_m / 1000.0;
+
+    public double TargetRange_NM => TargetRange_m.MetersToNauticalMiles();
 
     public double TargetRangeRate_ms { get; set; }
 

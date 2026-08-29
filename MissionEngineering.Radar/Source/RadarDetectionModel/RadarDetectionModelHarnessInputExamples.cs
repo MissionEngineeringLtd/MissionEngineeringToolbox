@@ -7,9 +7,9 @@ public static class RadarDetectionModelHarnessInputExamples
         var w = new WaveformParameters()
         {
             WaveformName = "Waveform_1",
-            RfFrequency_Hz = 9.0e9,
-            PulseWidth_s = 1.0e-6,
-            PulseBandwidth_Hz = 5.0e6,
+            RfFrequency_Hz = 9.376e9,
+            PulseWidth_s = 1.07e-6,
+            PulseBandwidth_Hz = 5.1e6,
             PulseRepetitionFrequency_Hz = 150000.0,
             NumberOfPulses = 1024
         };
@@ -19,9 +19,9 @@ public static class RadarDetectionModelHarnessInputExamples
             SystemName = "Radar_1",
             SystemProfile = "Profile_1",
             RfSystemType = RfSystemType.MonostaticRadar,
-            TransmitPeakPower_W = 8000.0,
-            TransmitGain_dB = 37.0,
-            ReceiveGain_dB = 35.0,
+            TransmitPeakPower_W = 8350.0,
+            TransmitGain_dB = 37.02,
+            ReceiveGain_dB = 35.01,
             ReceiverNoiseFigure_dB = 3.0,
             SystemLosses_dB = 5.0,
             WaveformParameters = w,

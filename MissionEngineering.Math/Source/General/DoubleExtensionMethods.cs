@@ -296,5 +296,23 @@ public static class DoubleExtensionMethods
 
             return result;
         }
+
+        public string ToEngineeringFormat(int numberOfDecimalPlaces = 3)
+        {
+            double exponent = Log10(Abs(x));
+
+            double engExponent = Floor(exponent / 3) * 3;
+
+            string format = "0." + new string('#', numberOfDecimalPlaces);
+
+            var result = (x * Pow(10, -(int)engExponent)).ToString(format);
+
+            if (engExponent != 0)
+            {
+                result += "e" + engExponent;
+            }
+
+            return result;
+        }
     }
 }

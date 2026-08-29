@@ -143,4 +143,19 @@ public class DoubleExtensionMethodsTests
         var below = -190.0;
         Assert.AreEqual(170.0, below.ConstrainAnglePlusMinus180(), Tolerance);
     }
+
+    [TestMethod]
+    [DataRow(1234567.89, "1.23456789e6")]
+    [DataRow(0, "0")]
+    [DataRow(-1, "-1")]
+    [DataRow(1.234567e5, "123.4567e3")]
+    public void ToEngineeringFormat_ReturnsCorrectResult(double value, string expectedResult)
+    {
+        var numberOfDecimalPlaces = 8;
+
+        // Act:
+        var actualResult = value.ToEngineeringFormat(numberOfDecimalPlaces);
+
+        Assert.AreEqual(expectedResult, actualResult);
+    }
 }

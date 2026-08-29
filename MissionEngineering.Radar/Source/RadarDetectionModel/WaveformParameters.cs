@@ -1,4 +1,5 @@
-﻿using static MissionEngineering.Math.PhysicalConstants;
+﻿using MissionEngineering.Math;
+using static MissionEngineering.Math.PhysicalConstants;
 using static MissionEngineering.Radar.RadarFunctions;
 
 namespace MissionEngineering.Radar;
@@ -91,11 +92,25 @@ public record WaveformParameters
 
     public double PulseCompressionRatio => PulseWidth_s * PulseBandwidth_Hz;
 
+    public double PulseCompressionRatio_dB => PulseCompressionRatio.PowerToDecibels();
+
     public double MaximumUnambiguousRange_m => CalculateMaximumUnambiguousRange(PulseRepetitionFrequency_Hz);
+
+    public double MaximumUnambiguousRange_km => MaximumUnambiguousRange_m / 1000.0;
+
+    public double MaximumUnambiguousRange_NM => MaximumUnambiguousRange_m.MetersToNauticalMiles();
+
+    public double MaximumUnambiguousDoppler_Hz => PulseRepetitionFrequency_Hz;
+
+    public double MaximumUnambiguousDoppler_kHz => MaximumUnambiguousDoppler_Hz / 1000.0;
 
     public double MaximumUnambiguousRangeRate_ms => CalculateMaximumUnambiguousRangeRate(RfFrequency_Hz, PulseRepetitionFrequency_Hz);
 
     public double RangeResolution_m => CompressedPulseWidth_m;
+
+    public double DopplerResolution_Hz => PulseRepetitionFrequency_Hz / NumberOfPulses;
+
+    public double DopplerResolution_kHz => DopplerResolution_Hz / 1000.0;
 
     public double VelocityResolution_ms => MaximumUnambiguousRangeRate_ms / NumberOfPulses;
 }
