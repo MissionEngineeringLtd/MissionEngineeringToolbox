@@ -4,7 +4,7 @@ using static System.Math;
 
 namespace MissionEngineering.Math;
 
-public static class DoubleExtensionMethods
+public static class DoubleExtensions
 {
     extension(double x)
     {

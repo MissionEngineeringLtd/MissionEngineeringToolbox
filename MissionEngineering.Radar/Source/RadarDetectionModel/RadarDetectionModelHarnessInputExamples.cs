@@ -8,10 +8,10 @@ public static class RadarDetectionModelHarnessInputExamples
         {
             WaveformName = "Waveform_1",
             RfFrequency_Hz = 9.376e9,
-            PulseWidth_s = 1.07e-6,
+            PulseWidth_s = 10.07e-6,
             PulseBandwidth_Hz = 5.1e6,
-            PulseRepetitionFrequency_Hz = 150000.0,
-            NumberOfPulses = 1024
+            PulseRepetitionFrequency_Hz = 15000.0,
+            NumberOfPulses = 128
         };
 
         var inputs = new RadarDetectionModelInputs()

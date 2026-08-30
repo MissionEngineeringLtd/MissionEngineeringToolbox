@@ -12,6 +12,10 @@ public record RadarDetectionModelInputs
 
     public double TransmitPeakPower_W { get; set; }
 
+    public double TransmitPeakPower_kW => TransmitPeakPower_W / 1000.0;
+
+    public double TransmitPeakPower_MW => TransmitPeakPower_W / 1.0e6;
+
     public double TransmitPeakPower_mW => TransmitPeakPower_W * 1000.0;
 
     public double TransmitPeakPower_dBW => TransmitPeakPower_W.PowerToDecibels();

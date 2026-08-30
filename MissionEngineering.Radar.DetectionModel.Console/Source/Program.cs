@@ -1,5 +1,6 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.LaTeX;
+using System.Security.Principal;
 
 namespace MissionEngineering.Radar;
 
@@ -147,6 +148,7 @@ public class Program
         LogUtilities.LogInformation($"   Writing Report Files...");
 
         var reportFileNameFull = OutputFileNameFull.Replace(".csv", "_Report.tex");
+        var reportFileNameFullPdf = OutputFileNameFull.Replace(".csv", "_Report.pdf");
 
         var inputDataTableFileNameFull = OutputFileNameFull.Replace(".csv", "_InputDataTable.csv");
 
@@ -154,8 +156,9 @@ public class Program
 
         OutputFolder = Path.GetDirectoryName(OutputFileNameFull);
 
-        LogUtilities.LogInformation($"       {reportFileNameFull}");
         LogUtilities.LogInformation($"       {inputDataTableFileNameFull}");
+        LogUtilities.LogInformation($"       {reportFileNameFull}");
+        LogUtilities.LogInformation($"       {reportFileNameFullPdf}");
 
         var outputFileName = Path.GetFileName(OutputFileNameFull);
 
@@ -167,7 +170,7 @@ public class Program
             RadarDetectionModelHarnessOutputFileName = outputFileName,
             RadarDetectionModelHarness = Harness,
             InputDataTableFileName = inputDataTableFileName,
-            InputDataTableFileNameFull = inputDataTableFileNameFull
+            InputDataTableFileNameFull = inputDataTableFileNameFull,
         };
 
         reportGenerator.GenerateReport();

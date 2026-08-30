@@ -11,8 +11,6 @@ public static class LaTexUtilities
 
         var pdfFile = texFile.Replace(".tex", ".pdf");
 
-        LogUtilities.LogInformation($"Writing    Pdf  file : {pdfFile}", padding);
-
         Process process = new Process();
 
         process.StartInfo.FileName = "pdflatex.exe";

@@ -48,6 +48,12 @@ public record WaveformParameters
 
     public double PulseWidth_s { get; set; }
 
+    public double PulseWidth_ms
+    {
+        get => PulseWidth_s * 1.0e3;
+        set => PulseWidth_s = value * 1.0e-3;
+    }
+
     public double PulseWidth_us
     {
         get => PulseWidth_s * 1.0e6;
@@ -61,6 +67,8 @@ public record WaveformParameters
     }
 
     public double PulseBandwidth_Hz { get; set; }
+
+    public double PulseBandwidth_kHz => PulseBandwidth_Hz / 1.0e3;
 
     public double PulseBandwidth_MHz => PulseBandwidth_Hz / 1.0e6;
 
@@ -76,11 +84,15 @@ public record WaveformParameters
 
     public double PulseRepetitionInterval_ms => PulseRepetitionInterval_s * 1000.0;
 
+    public double PulseRepetitionInterval_us => PulseRepetitionInterval_s * 1.0e6;
+
     public int NumberOfPulses { get; set; }
 
     public double BurstTime_s => PulseRepetitionInterval_s * NumberOfPulses;
 
     public double BurstTime_ms => BurstTime_s * 1000.0;
+
+    public double BurstTime_us => BurstTime_s * 1.0e6;
 
     public double DutyRatio => PulseWidth_s * PulseRepetitionFrequency_Hz;
 
@@ -106,6 +118,10 @@ public record WaveformParameters
 
     public double MaximumUnambiguousRangeRate_ms => CalculateMaximumUnambiguousRangeRate(RfFrequency_Hz, PulseRepetitionFrequency_Hz);
 
+    public double MaximumUnambiguousRangeRate_kph => MaximumUnambiguousRangeRate_ms.MetersPerSecondToKilometersPerHour();
+
+    public double MaximumUnambiguousRangeRate_kts => MaximumUnambiguousRangeRate_ms.MetersPerSecondToKnots();
+
     public double RangeResolution_m => CompressedPulseWidth_m;
 
     public double DopplerResolution_Hz => PulseRepetitionFrequency_Hz / NumberOfPulses;
@@ -113,4 +129,8 @@ public record WaveformParameters
     public double DopplerResolution_kHz => DopplerResolution_Hz / 1000.0;
 
     public double VelocityResolution_ms => MaximumUnambiguousRangeRate_ms / NumberOfPulses;
+
+    public double VelocityResolution_kph => VelocityResolution_ms.MetersPerSecondToKilometersPerHour();
+
+    public double VelocityResolution_kts => VelocityResolution_ms.MetersPerSecondToKnots();
 }
