@@ -26,8 +26,8 @@ public class SystemComponent : Component<RadarDetectionModelInputs>
                 Heading("System"),
                 TextBox(inputs.SystemName, setName, placeholderText: "Empty", "System Name"),
                 TextBox(inputs.TransmitPeakPower_W.ToString(), (string value) => setTransmitPower(double.Parse(value)), placeholderText: "10.0", "Transmit Power (W)"),
-                TextBox(inputs.TransmitPeakPower_dB.ToString(), null, placeholderText: "1.0", "Transmit Power (dBW)").IsReadOnly(true),
-                TextBox(inputs.EIRP_dB.ToString(), null, placeholderText: "1.0", "EIRP (dBW)").IsReadOnly(true)
+                TextBox(inputs.TransmitPeakPower_dBW.ToString(), null, placeholderText: "1.0", "Transmit Power (dBW)").IsReadOnly(true),
+                TextBox(inputs.EIRP_dBW.ToString(), null, placeholderText: "1.0", "EIRP (dBW)").IsReadOnly(true)
             ) with
             { RowGap = 16 }
         ).Padding(24).Flex(grow: 1, basis: 0);
