@@ -314,5 +314,12 @@ public static class DoubleExtensions
 
             return result;
         }
+
+        public string ToFixedFormat(int numberOfDecimalPlaces = 3)
+        {
+            string format = "0." + new string('#', numberOfDecimalPlaces);
+
+            return x.ToString(format);
+        }
     }
 }

@@ -7,7 +7,7 @@
 \usepackage{longtable}
 \usepackage{pdflscape}
 
-\title{Radar Detection Model Report}
+\title{RF System Performance Report}
 \author{}
 \date{}
 
@@ -19,10 +19,10 @@
   \begin{center}
     \begin{tabular}{l|c}
       \hline
-      Author & XXX_Author\\
-      Date & XXX_Date \\
-      Model & XXX_ModelName\\
-      Version & XXX_ModelVersion\\
+      Created By    & XXX_CreatedBy\\
+      Created Date  & XXX_CreatedDate\\
+      Model Name    & XXX_ModelName\\
+      Model Version & XXX_ModelVersion\\
       \hline
     \end{tabular}
   \end{center}
@@ -62,13 +62,56 @@ columns/Value/.style={string type=n, column type=r},
 
 \section{Results}
 
-\subsection{Signal To Noise (dB) vs Range (km)}
+\subsection{Power Levels (dBW) vs Range (km)}
 
 \begin{tikzpicture}
 \begin{axis}[
         width=15cm,
 		xmin=0,
-		ymin=0,
+		ymin=XXX_PowerLevelMin_dBW,
+		ymax=XXX_PowerLevelMax_dBW,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Target Range (km),
+        ylabel=Power (dBW),
+]
+\addplot table [x=TargetRange_km, y=SignalPower_dBW, col sep=comma] {XXX_OutputDataFileName};
+\addplot table [x=TargetRange_km, y=NoisePower_dBW , col sep=comma] {XXX_OutputDataFileName};
+\end{axis}
+\end{tikzpicture}
+
+\subsection{Power Levels (dBmW) vs Range (km)}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+		xmin=0,
+		ymin=XXX_PowerLevelMin_dBmW,
+		ymax=XXX_PowerLevelMax_dBmW,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Target Range (km),
+        ylabel=Power (dBmW),
+]
+\addplot table [x=TargetRange_km, y=SignalPower_dBmW, col sep=comma] {XXX_OutputDataFileName};
+\addplot table [x=TargetRange_km, y=NoisePower_dBmW , col sep=comma] {XXX_OutputDataFileName};
+\end{axis}
+\end{tikzpicture}
+
+\subsection{Signal To Noise Ratio (dB) vs Range (km)}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+		xmin=0,
+		ymin=XXX_SignalToNoiseRatioMin_dB,
+		ymax=XXX_SignalToNoiseRatioMax_dB,
         grid=both,
         minor tick num =10,
         minor tick style={draw=none},
@@ -78,6 +121,68 @@ columns/Value/.style={string type=n, column type=r},
         ylabel=Signal To Noise Ratio (dB),
 ]
 \addplot table [x=TargetRange_km, y=SignalToNoiseRatio_dB, col sep=comma] {XXX_OutputDataFileName};
+\end{axis}
+\end{tikzpicture}
+
+\subsection{Power Levels (dBW) vs Range (NM)}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+		xmin=0,
+		ymin=XXX_PowerLevelMin_dBW,
+		ymax=XXX_PowerLevelMax_dBW,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Target Range (NM),
+        ylabel=Power (dBW),
+]
+\addplot table [x=TargetRange_NM, y=SignalPower_dBW, col sep=comma] {XXX_OutputDataFileName};
+\addplot table [x=TargetRange_NM, y=NoisePower_dBW , col sep=comma] {XXX_OutputDataFileName};
+\end{axis}
+\end{tikzpicture}
+
+\subsection{Power Levels (dBmW) vs Range (NM)}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+		xmin=0,
+		ymin=XXX_PowerLevelMin_dBmW,
+		ymax=XXX_PowerLevelMax_dBmW,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Target Range (NM),
+        ylabel=Power (dBmW),
+]
+\addplot table [x=TargetRange_NM, y=SignalPower_dBmW, col sep=comma] {XXX_OutputDataFileName};
+\addplot table [x=TargetRange_NM, y=NoisePower_dBmW , col sep=comma] {XXX_OutputDataFileName};
+\end{axis}
+\end{tikzpicture}
+
+\subsection{Signal To Noise Ratio (dB) vs Range (NM)}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+		xmin=0,
+		ymin=XXX_SignalToNoiseRatioMin_dB,
+		ymax=XXX_SignalToNoiseRatioMax_dB,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Target Range (NM),
+        ylabel=Signal To Noise Ratio (dB),
+]
+\addplot table [x=TargetRange_NM, y=SignalToNoiseRatio_dB, col sep=comma] {XXX_OutputDataFileName};
 \end{axis}
 \end{tikzpicture}
 

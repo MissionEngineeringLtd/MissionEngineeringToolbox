@@ -11,7 +11,7 @@ public static class RadarDetectionModelHarnessInputExamples
             PulseWidth_s = 10.07e-6,
             PulseBandwidth_Hz = 5.1e6,
             PulseRepetitionFrequency_Hz = 15000.0,
-            NumberOfPulses = 128
+            NumberOfPulses = 64
         };
 
         var inputs = new RadarDetectionModelInputs()
@@ -19,21 +19,21 @@ public static class RadarDetectionModelHarnessInputExamples
             SystemName = "Radar_1",
             SystemProfile = "Profile_1",
             RfSystemType = RfSystemType.MonostaticRadar,
-            TransmitPeakPower_W = 8350.0,
-            TransmitGain_dB = 37.02,
-            ReceiveGain_dB = 35.01,
+            TransmitPeakPower_W = 2800.0,
+            TransmitGain_dB = 34.02,
+            ReceiveGain_dB = 32.01,
             ReceiverNoiseFigure_dB = 3.0,
-            SystemLosses_dB = 5.0,
+            SystemLosses_dB = 8.0,
             WaveformParameters = w,
-            TargetRadarCrossSection_m2 = 10.0
+            TargetRadarCrossSection_m2 = 5.0
         };
 
         var harnessInputs = new RadarDetectionModelHarnessInputs()
         {
             RadarDetectionModelInputs = inputs,
-            TargetRangeMin_m = 100,
+            TargetRangeMin_m = 2000,
             TargetRangeMax_m = 200000.0,
-            TargetRangeStep_m = 100
+            TargetRangeStep_m = 500
         };
 
         return harnessInputs;

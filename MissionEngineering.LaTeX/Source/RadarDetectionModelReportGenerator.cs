@@ -52,10 +52,16 @@ public class RadarDetectionModelReportGenerator
 
         ReportData["XXX_InputsTableFileName"] = InputDataTableFileName;
         ReportData["XXX_OutputDataFileName"] = RadarDetectionModelHarnessOutputFileName;
-        ReportData["XXX_Author"] = currentUser;
-        ReportData["XXX_Date"] = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
+        ReportData["XXX_CreatedBy"] = currentUser;
+        ReportData["XXX_CreatedDate"] = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
         ReportData["XXX_ModelName"] = modelName;
         ReportData["XXX_ModelVersion"] = modelVersion;
+        ReportData["XXX_PowerLevelMin_dBW"] = "-150.0";
+        ReportData["XXX_PowerLevelMax_dBW"] = "-40.0";
+        ReportData["XXX_PowerLevelMin_dBmW"] = "-120.0";
+        ReportData["XXX_PowerLevelMax_dBmW"] = "-10.0";
+        ReportData["XXX_SignalToNoiseRatioMin_dB"] = "-20.0";
+        ReportData["XXX_SignalToNoiseRatioMax_dB"] = "40.0";
     }
 
     public void GenerateReportInputDataTable()
@@ -67,8 +73,8 @@ public class RadarDetectionModelReportGenerator
         InputDataTable =
         [
             new InputDataTableRow("System", "", "", ""),
-            new InputDataTableRow("", i.SystemName.Replace("_", " "), "", ""),
-            new InputDataTableRow("", i.SystemProfile.Replace("_", " "), "", ""),
+            new InputDataTableRow("", i.SystemName.ConvertToDisplayString(), "", ""),
+            new InputDataTableRow("", i.SystemProfile.ConvertToDisplayString(), "", ""),
             new InputDataTableRow("", i.RfSystemType.ToString(), "", ""),
             new InputDataTableRow("Transmitter", "", "", ""),
             new InputDataTableRow("", "RF Frequency", "Hz", w.RfFrequency_Hz.ToEngineeringFormat()),
@@ -101,8 +107,8 @@ public class RadarDetectionModelReportGenerator
             new InputDataTableRow("", "Pulse Repetition Interval", "s", w.PulseRepetitionInterval_s.ToEngineeringFormat()),
             new InputDataTableRow("", "", "ms", w.PulseRepetitionInterval_ms.ToEngineeringFormat()),
             new InputDataTableRow("", "", "us", w.PulseRepetitionInterval_us.ToEngineeringFormat()),
-            new InputDataTableRow("", "Duty Ratio", "-", w.DutyRatio.ToString("0.###")),
-            new InputDataTableRow("", "", @"\%", w.DutyRatioPercent.ToString("0.###")),
+            new InputDataTableRow("", "Duty Ratio", "-", w.DutyRatio.ToFixedFormat(3)),
+            new InputDataTableRow("", "", @"\%", w.DutyRatioPercent.ToFixedFormat(3)),
             new InputDataTableRow("", "Pulse Width (Uncompressed)", "m", w.UncompressedPulseWidth_m.ToEngineeringFormat()),
             new InputDataTableRow("", "Pulse Width (Compressed)", "m", w.CompressedPulseWidth_m.ToEngineeringFormat()),
             new InputDataTableRow("", "Pulse Compression Ratio", "-", w.PulseCompressionRatio.ToEngineeringFormat()),
@@ -134,11 +140,11 @@ public class RadarDetectionModelReportGenerator
             new InputDataTableRow("", "Radar Cross Section", "m2", i.TargetRadarCrossSection_m2.ToEngineeringFormat()),
             new InputDataTableRow("", "", "dBsm", i.TargetRadarCrossSection_dBsm.ToEngineeringFormat()),
             new InputDataTableRow("Environment", "", "", ""),
-            new InputDataTableRow("", "Atmospheric Loss (1 way)", "dB/km", i.AtmosphericLoss_dB_per_km.ToString("0.###")),
+            new InputDataTableRow("", "Atmospheric Loss (1 way)", "dB/km", i.AtmosphericLoss_dB_per_km.ToFixedFormat(3)),
             new InputDataTableRow("Harness", "", "", ""),
-            new InputDataTableRow("", "Range Start", "m", h.TargetRangeMin_m.ToEngineeringFormat()),
-            new InputDataTableRow("", "Range End", "m", h.TargetRangeMax_m.ToEngineeringFormat()),
-            new InputDataTableRow("", "Range Step", "m", h.TargetRangeStep_m.ToEngineeringFormat()),
+            new InputDataTableRow("", "Range Start", "km", h.TargetRangeMin_km.ToFixedFormat(3)),
+            new InputDataTableRow("", "Range End", "km", h.TargetRangeMax_km.ToFixedFormat(3)),
+            new InputDataTableRow("", "Range Step", "km", h.TargetRangeStep_km.ToFixedFormat(3)),
         ];
 
         InputDataTable.WriteToCsvFile(InputDataTableFileNameFull);
