@@ -102,7 +102,7 @@ public partial class Vector
 
         for (int i = 0; i < Data.Length; i++)
         {
-            var deltaX = Abs(x.Data[i] - Data[i]);
+            var deltaX = System.Math.Abs(x.Data[i] - Data[i]);
 
             if (deltaX > tolerance)
             {

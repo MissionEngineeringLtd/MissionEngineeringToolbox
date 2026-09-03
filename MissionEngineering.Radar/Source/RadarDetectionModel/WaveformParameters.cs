@@ -30,8 +30,8 @@ public record WaveformParameters
 
     public double RfWavelength_m
     {
-        get => SpeedOfLight / RfFrequency_Hz;
-        set => RfFrequency_Hz = SpeedOfLight / value;
+        get => RfFrequency_Hz.FrequencyToWavelength();
+        set => RfFrequency_Hz = value.WavelengthToFrequency();
     }
 
     public double RfWavelength_cm

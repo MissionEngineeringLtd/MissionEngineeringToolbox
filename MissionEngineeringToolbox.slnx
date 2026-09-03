@@ -2,6 +2,8 @@
   <Folder Name="/Solution Items/">
     <File Path="Directory.Packages.props" />
   </Folder>
+  <Project Path="MissionEngineering.Antenna.Tests/MissionEngineering.Antenna.Tests.csproj" Id="00624ef7-8139-4887-959d-7118ad48b997" />
+  <Project Path="MissionEngineering.Antenna/MissionEngineering.Antenna.csproj" Id="ddae7d95-6ca4-45a4-bade-58c2a2962e40" />
   <Project Path="MissionEngineering.Core/MissionEngineering.Core.csproj" Id="34c1eab6-f58d-4a0d-97d3-68bf87e01aaa" />
   <Project Path="MissionEngineering.DataRecorder/MissionEngineering.DataRecorder.csproj" Id="7e4dc448-99c1-4f0d-8df7-6bdd15f5de14" />
   <Project Path="MissionEngineering.LaTeX/MissionEngineering.LaTeX.csproj" Id="02eaa7e8-5e09-40f2-87d8-081f2a5f6ad1" />
