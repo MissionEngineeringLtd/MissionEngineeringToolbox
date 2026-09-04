@@ -24,32 +24,7 @@ public partial class Vector
         Data = data;
     }
 
-    public Vector(PositionNED positionNED, VelocityNED velocityNED)
-    {
-        Data = new double[6];
 
-        Data[0] = positionNED.PositionNorth_m;
-        Data[1] = positionNED.PositionEast_m;
-        Data[2] = positionNED.PositionDown_m;
-        Data[3] = velocityNED.VelocityNorth_ms;
-        Data[4] = velocityNED.VelocityEast_ms;
-        Data[5] = velocityNED.VelocityDown_ms;
-    }
-
-    public Vector(PositionNED positionNED, VelocityNED velocityNED, AccelerationNED accelerationNED)
-    {
-        Data = new double[9];
-
-        Data[0] = positionNED.PositionNorth_m;
-        Data[1] = positionNED.PositionEast_m;
-        Data[2] = positionNED.PositionDown_m;
-        Data[3] = velocityNED.VelocityNorth_ms;
-        Data[4] = velocityNED.VelocityEast_ms;
-        Data[5] = velocityNED.VelocityDown_ms;
-        Data[6] = accelerationNED.AccelerationNorth_ms2;
-        Data[7] = accelerationNED.AccelerationEast_ms2;
-        Data[8] = accelerationNED.AccelerationDown_ms2;
-    }
 
     public double this[int index]
     {

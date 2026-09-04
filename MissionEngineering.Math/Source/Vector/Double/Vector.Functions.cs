@@ -28,46 +28,6 @@ public partial class Vector
         return result;
     }
 
-    public double Norm()
-    {
-        double sum = DotProduct(this, this);
-
-        return System.Math.Sqrt(sum);
-    }
-
-    public Vector Sqrt()
-    {
-        var result = new Vector(NumberOfElements);
-
-        for (int i = 0; i < NumberOfElements; i++)
-        {
-            result[i] = System.Math.Sqrt(Data[i]);
-        }
-
-        return result;
-    }
-
-    public Vector UnitVector()
-    {
-        var result = this / Norm();
-
-        return result;
-    }
-
-    public double DotProduct(Vector x)
-    {
-        var result = DotProduct(this, x);
-
-        return result;
-    }
-
-    public Vector CrossProduct(Vector x)
-    {
-        var result = CrossProduct(this, x);
-
-        return result;
-    }
-
     public static double AngleBetweenVectors_rad(Vector x, Vector y)
     {
         var xUnit = x.UnitVector();
@@ -85,20 +45,6 @@ public partial class Vector
         var angle_rad = AngleBetweenVectors_rad(x, y);
 
         var angle_deg = angle_rad.RadiansToDegrees();
-
-        return angle_deg;
-    }
-
-    public double AngleBetweenVectors_rad(Vector x)
-    {
-        var angle_rad = AngleBetweenVectors_rad(this, x);
-
-        return angle_rad;
-    }
-
-    public double AngleBetweenVectors_deg(Vector x)
-    {
-        var angle_deg = AngleBetweenVectors_deg(this, x);
 
         return angle_deg;
     }
@@ -152,17 +98,5 @@ public partial class Vector
         y += 1.0e-10;
 
         return y;
-    }
-
-    public Vector Abs()
-    {
-        var result = new Vector(NumberOfElements);
-
-        for (int i = 0; i < NumberOfElements; i++)
-        {
-            result[i] = System.Math.Abs(Data[i]);
-        }
-
-        return result;
     }
 }

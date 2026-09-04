@@ -71,4 +71,18 @@ public class VectorTests
 
         Assert.Throws<IndexOutOfRangeException>(() => vector[new Index(2)]);
     }
+
+    [TestMethod]
+    [DataRow(new double[] { 1, 2, 3, 6, 7, 9, 11, 2 })]
+    public void FFT(double[] xData)
+    {
+        // Arrange:
+        var x = new Vector(xData);
+
+        // Act:
+        var y = x.FFT();
+
+        // Assert:
+        Assert.AreEqual(x.NumberOfElements, y.NumberOfElements);
+    }
 }

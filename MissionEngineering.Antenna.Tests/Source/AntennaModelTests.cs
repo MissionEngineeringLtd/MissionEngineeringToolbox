@@ -14,7 +14,7 @@
                 AntennaModelSettings = antennaModelSettings
             };
 
-            var expectedNumberOfAzimuthAngles = 361;
+            var expectedNumberOfAzimuthAngles = 1801;
 
             // Arrange:
             antennaModel.GenerateAntenna();

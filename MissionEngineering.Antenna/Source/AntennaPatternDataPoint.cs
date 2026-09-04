@@ -19,4 +19,8 @@ public record AntennaPatternDataPoint
     public double AntennaDirectivity_dB { get; set; }
 
     public double AntennaGain_dB { get; set; }
+
+    public double AntennaDirectivityNormalised_dB { get; set; }
+
+    public double AntennaGainNormalised_dB { get; set; }
 }
