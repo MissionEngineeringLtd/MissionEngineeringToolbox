@@ -14,6 +14,7 @@ public static class AntennaModelSettingsExamples
             RfFrequency_Hz = 10.0e9,
             AntennaWidth_m = 1.0,
             AntennaElementSpacing_wavelengths = 1.3,
+            ElementName = "Isotropic",
             AntennaLosses_dB = 3.0,
             AzimuthAngleMin_deg = -90.0,
             AzimuthAngleMax_deg = 90.0,

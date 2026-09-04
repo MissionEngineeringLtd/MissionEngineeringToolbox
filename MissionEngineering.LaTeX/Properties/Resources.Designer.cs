@@ -61,7 +61,64 @@ namespace MissionEngineering.LaTeX.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to \documentclass{article}
+        ///\usepackage{pgfplots}
+        ///\usepackage{pgfplotstable}
+        ///\usepackage{booktabs}
+        ///\usepackage{array}
+        ///\usepackage{colortbl}
+        ///\usepackage{longtable}
+        ///\usepackage{pdflscape}
+        ///
+        ///\title{Antenna Model Report}
+        ///\author{}
+        ///\date{}
+        ///
+        ///\begin{document}
+        ///
+        ///\maketitle
+        ///
+        ///\begin{table}[h!]
+        ///  \begin{center}
+        ///    \begin{tabular}{l|c}
+        ///      \hline
+        ///      Created By    &amp; XXX_CreatedBy\\
+        ///      Created Date  &amp; XXX_CreatedDate\\
+        ///      Model Name    &amp; XXX_ModelName\\
+        ///      Model Version &amp; XXX_ModelVersion [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AntennaModel_ReportTemplate {
+            get {
+                return ResourceManager.GetString("AntennaModel_ReportTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \documentclass{article}
+        ///\usepackage{pgfplots}
+        ///\usepackage{pgfplotstable}
+        ///\usepackage{booktabs}
+        ///\usepackage{array}
+        ///\usepackage{colortbl}
+        ///\usepackage{longtable}
+        ///\usepackage{pdflscape}
+        ///
+        ///\title{RF System Performance Report}
+        ///\author{}
+        ///\date{}
+        ///
+        ///\begin{document}
+        ///
+        ///\maketitle
+        ///
+        ///\begin{table}[h!]
+        ///  \begin{center}
+        ///    \begin{tabular}{l|c}
+        ///      \hline
+        ///      Created By    &amp; XXX_CreatedBy\\
+        ///      Created Date  &amp; XXX_CreatedDate\\
+        ///      Model Name    &amp; XXX_ModelName\\
+        ///      Model Version &amp; XXX_Mode [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string RadarDetectionModel_ReportTemplate {
             get {

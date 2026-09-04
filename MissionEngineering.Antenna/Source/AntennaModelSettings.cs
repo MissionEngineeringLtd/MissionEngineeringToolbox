@@ -41,9 +41,25 @@ public class AntennaModelSettings
         set => RfWavelength_m = value / 100.0;
     }
 
+    public double RfWavelength_mm
+    {
+        get => RfWavelength_m * 1000.0;
+        set => RfWavelength_m = value / 1000.0;
+    }
+
     public double AntennaWidth_m { get; set; }
 
+    public double AntennaWidth_ft => AntennaWidth_m.MetersToFeet();
+
+    public double AntennaWidth_cm => AntennaWidth_m * 100.0;
+
+    public double AntennaWidth_mm => AntennaWidth_m * 1000.0;
+
     public double AntennaElementSpacing_m { get; set; }
+
+    public double AntennaElementSpacing_cm => AntennaElementSpacing_m * 100.0;
+
+    public double AntennaElementSpacing_mm => AntennaElementSpacing_m * 1000.0;
 
     public double AntennaElementSpacing_wavelengths
     {
@@ -52,6 +68,8 @@ public class AntennaModelSettings
     }
 
     public int NumberOfAntennaElements => (int)(AntennaWidth_m / AntennaElementSpacing_m);
+
+    public string ElementName { get; set; } = "Undefined";
 
     public double AntennaLosses { get; set; }
 

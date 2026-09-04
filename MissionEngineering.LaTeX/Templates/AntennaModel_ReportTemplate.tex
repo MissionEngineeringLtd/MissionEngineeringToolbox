@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage{pdflscape}
+
+\title{Antenna Model Report}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{l|c}
+      \hline
+      Created By    & XXX_CreatedBy\\
+      Created Date  & XXX_CreatedDate\\
+      Model Name    & XXX_ModelName\\
+      Model Version & XXX_ModelVersion\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\section{Inputs}
+
+\subsection{Antenna Model Inputs}
+
+\pgfplotstableset{
+begin table=\begin{longtable},
+end table=\end{longtable},
+}
+
+\pgfplotstabletypeset[
+col sep=comma,
+every head row/.style={before row=\toprule, after row=\midrule},
+every last row/.style={after row=\bottomrule\\
+\caption{Antenna Model Inputs Table}\\
+},
+columns={Category,Name,Units,Value},
+columns/Category/.style={string type=l},
+columns/Name/.style={string type=l, column type=l},
+columns/Units/.style={string type=c},
+columns/Value/.style={string type=n, column type=r},
+]{XXX_InputsTableFileName}
+
+\section{Results}
+
+\subsection{Directivity (dB) vs Azimuth Angle (deg)}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+        xmin=XXX_AzimuthAngleMin_deg,
+        xmax=XXX_AzimuthAngleMax_deg,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Azimuth Angle (deg),
+        ylabel=Directivity (dB),
+]
+\addplot table [x=AzimuthAngle_deg, y=AntennaDirectivity_dB, col sep=comma] {XXX_OutputDataFileName};
+\end{axis}
+\end{tikzpicture}
+
+\subsection{Directivity (dB) vs Azimuth Angle (deg) - Normalised}
+
+\begin{tikzpicture}
+\begin{axis}[
+        width=15cm,
+        xmin=XXX_AzimuthAngleMin_deg,
+        xmax=XXX_AzimuthAngleMax_deg,
+        ymin=XXX_DirectivityNormalisedMin_dB,
+		ymax=XXX_DirectivityNormalisedMax_dB,
+        grid=both,
+        minor tick num =10,
+        minor tick style={draw=none},
+        minor grid style={thin,color=black!20},
+        major grid style={thin,color=black!20},
+        xlabel=Azimuth Angle (deg),
+        ylabel=Directivity Normalised (dB),
+]
+\addplot table [x=AzimuthAngle_deg, y=AntennaDirectivityNormalised_dB, col sep=comma] {XXX_OutputDataFileName};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
