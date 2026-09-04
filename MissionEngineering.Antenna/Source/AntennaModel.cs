@@ -7,6 +7,8 @@ namespace MissionEngineering.Antenna;
 
 public class AntennaModel
 {
+    public bool IsWriteData { get; set; }
+    
     public AntennaModelSettings AntennaModelSettings { get; set; }
 
     public Vector AzimuthAngles_deg {  get; set; }
@@ -194,7 +196,18 @@ public class AntennaModel
 
     public void WriteAntennaPattern()
     {
+        if (!IsWriteData) 
+        {
+            return;
+        }
+
         var folderPath = @"C:\Temp\MissionEngineeringToolbox\AntennaModel";
+
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
         var filePath = AntennaModelSettings.AntennaName + ".csv";
 
         var filePathFull = Path.Combine(folderPath, filePath);
