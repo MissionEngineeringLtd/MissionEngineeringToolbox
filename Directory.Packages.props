@@ -12,6 +12,7 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
     <PackageVersion Include="MSTest" Version="4.1.0" />
+    <PackageVersion Include="ScottPlot.WinUI" Version="5.1.59" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageVersion Include="System.CommandLine.DragonFruit" Version="0.4.0-alpha.25306.1" />

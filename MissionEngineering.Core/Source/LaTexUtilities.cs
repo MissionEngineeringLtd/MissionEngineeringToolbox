@@ -15,7 +15,7 @@ public static class LaTexUtilities
 
         process.StartInfo.FileName = "pdflatex.exe";
         process.StartInfo.WorkingDirectory = path;
-        process.StartInfo.Arguments = fileNameTex;
+        process.StartInfo.Arguments = fileNameTex + " -quiet";
 
         process.Start();
 
