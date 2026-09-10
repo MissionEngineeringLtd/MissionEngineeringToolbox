@@ -1,7 +1,6 @@
 ﻿using MissionEngineering.Antenna;
 using MissionEngineering.Core;
 using MissionEngineering.Math;
-using MissionEngineering.Radar;
 using System.Reflection;
 
 namespace MissionEngineering.LaTeX;

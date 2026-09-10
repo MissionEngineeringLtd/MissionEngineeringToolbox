@@ -20,15 +20,18 @@ public class AntennaModelHarness
     {
         var ahs = AntennaModelHarnessSettings;
 
+        var fileNameBase = ahs.InputFileName.Replace(".yaml", "");
+        fileNameBase = fileNameBase.Replace("_AntennaModelSettings", "");
+
         ahs.InputFolder = Path.GetDirectoryName(ahs.InputFileName);
         ahs.OutputFolder = ahs.InputFolder;
-        ahs.LogFileName = ahs.InputFileName.Replace(".yaml", ".log");
-        ahs.OutputFileNameCsv = ahs.InputFileName.Replace(".yaml", ".csv");
-        ahs.OutputFileNameAprf = ahs.InputFileName.Replace(".yaml", ".aprf");
-        ahs.OutputFileNameApbf = ahs.InputFileName.Replace(".yaml", ".apbf");
-        ahs.ReportFileNameTex = ahs.InputFileName.Replace(".yaml", "_Report.tex");
-        ahs.ReportFileNamePdf = ahs.InputFileName.Replace(".yaml", "_Report.pdf");
-        ahs.InputDataTableFileCsv = ahs.OutputFileNameCsv.Replace(".csv", "_InputDataTable.csv");
+        ahs.LogFileName = fileNameBase + "_AntennaModel.log";
+        ahs.OutputFileNameCsv = fileNameBase + "_AntennaPattern.csv";
+        ahs.OutputFileNameAprf = fileNameBase + "_AntennaPattern.aprf";
+        ahs.OutputFileNameApbf = fileNameBase + "_AntennaPattern.apbf";
+        ahs.ReportFileNameTex = fileNameBase + "_AntennaModel_Report.tex";
+        ahs.ReportFileNamePdf = fileNameBase + "_AntennaModel_Report.pdf";
+        ahs.InputDataTableFileCsv = fileNameBase + "_AntennaModelSettingsTable.csv";
 
         DisplaySettings();
 
@@ -102,7 +105,8 @@ public class AntennaModelHarness
         AntennaModel = new AntennaModel()
         {
             OutputFolder = ahs.OutputFolder,
-            AntennaModelSettings = AntennaModelSettings
+            AntennaModelSettings = AntennaModelSettings,
+            AntennaModelHarnessSettings = AntennaModelHarnessSettings
         };
 
         AntennaModel.GenerateAntenna();
@@ -114,6 +118,11 @@ public class AntennaModelHarness
     private void WriteOutputFiles()
     {
         var ahs = AntennaModelHarnessSettings;
+
+        if (!Directory.Exists(ahs.OutputFolder))
+        {
+            Directory.CreateDirectory(ahs.OutputFolder);
+        }
 
         LogUtilities.LogInformation($"   Writing Output Files...");
 

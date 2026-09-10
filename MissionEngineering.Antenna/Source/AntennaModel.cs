@@ -9,6 +9,8 @@ public class AntennaModel
 {
     public string OutputFolder { get; set; }
 
+    public AntennaModelHarnessSettings AntennaModelHarnessSettings { get; set; }
+
     public AntennaModelSettings AntennaModelSettings { get; set; }
 
     public AntennaArrayPattern AntennaArrayPattern { get; set; }
@@ -226,48 +228,22 @@ public class AntennaModel
 
     public void WriteAntennaPatternDataCsv()
     {
-        if (!Directory.Exists(OutputFolder))
-        {
-            Directory.CreateDirectory(OutputFolder);
-        }
+        var filePathFull = AntennaModelHarnessSettings.OutputFileNameCsv;
 
-        var filePath = AntennaModelSettings.AntennaName + ".csv";
-
-        var filePathFull = Path.Combine(OutputFolder, filePath);
-
-        WriteAntennaPatternDataPointsToCsv(filePathFull);
+        AntennaPatternDataPoints.WriteToCsvFile(filePathFull);
     }
 
     public void WriteAntennaPatternAprf()
     {
-        if (!Directory.Exists(OutputFolder))
-        {
-            Directory.CreateDirectory(OutputFolder);
-        }
-
-        var filePath = AntennaModelSettings.AntennaName + ".aprf";
-
-        var filePathFull = Path.Combine(OutputFolder, filePath);
+        var filePathFull = AntennaModelHarnessSettings.OutputFileNameAprf;
 
         AntennaPatternHelper.SaveAntennaPatternAprf(filePathFull, AntennaPattern);
     }
 
     public void WriteAntennaPatternApbf()
     {
-        if (!Directory.Exists(OutputFolder))
-        {
-            Directory.CreateDirectory(OutputFolder);
-        }
-
-        var filePath = AntennaModelSettings.AntennaName + ".apbf";
-
-        var filePathFull = Path.Combine(OutputFolder, filePath);
+        var filePathFull = AntennaModelHarnessSettings.OutputFileNameApbf;
 
         AntennaPatternHelper.SaveAntennaPatternApbf(filePathFull, AntennaPattern, AntennaModelSettings);
-    }
-
-    public void WriteAntennaPatternDataPointsToCsv(string filePath)
-    {
-        AntennaPatternDataPoints.WriteToCsvFile(filePath);
     }
 }

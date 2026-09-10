@@ -40,7 +40,6 @@ public class AntennaModelHarnessSettings
         LogUtilities.LogInformation($"      OutputFileAprf             = {OutputFileNameAprf}");
         LogUtilities.LogInformation($"      OutputFileApbf             = {OutputFileNameApbf}");
         LogUtilities.LogInformation($"      InputDataTableFileCsv      = {InputDataTableFileCsv}");
-        LogUtilities.LogInformation($"      InputDataTableName         = {InputDataTableName}");
         LogUtilities.LogInformation($"      ReportFileTex              = {ReportFileNameTex}");
         LogUtilities.LogInformation($"      ReportFilePdf              = {ReportFileNamePdf}");
         LogUtilities.LogInformation($"   End.");

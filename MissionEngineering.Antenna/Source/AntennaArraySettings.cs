@@ -1,5 +1,4 @@
-﻿using MissionEngineering.Core;
-using MissionEngineering.Math;
+﻿using MissionEngineering.Math;
 
 namespace MissionEngineering.Antenna;
 

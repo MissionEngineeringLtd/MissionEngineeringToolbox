@@ -57,10 +57,10 @@ public class Program
 
         LogUtilities.LogInformation($"   Writing Report Files...");
 
-        var reportFileName = ahs.OutputFileNameCsv.Replace(".csv", "_Report.tex");
-        var reportFileNamePdf = ahs.OutputFileNameCsv.Replace(".csv", "_Report.pdf");
+        var reportFileName = ahs.ReportFileNameTex;
+        var reportFileNamePdf = ahs.ReportFileNamePdf;
 
-        var inputDataTableFileNameFull = ahs.OutputFileNameCsv.Replace(".csv", "_InputDataTable.csv");
+        var inputDataTableFileNameFull = ahs.InputDataTableFileCsv;
 
         var inputDataTableFileName = Path.GetFileName(inputDataTableFileNameFull);
 
