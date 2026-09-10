@@ -20,7 +20,7 @@
             antennaModel.GenerateAntenna();
 
             // Assert:
-            Assert.AreEqual(expectedNumberOfAzimuthAngles, antennaModel.NumberOfAzimuthAngles);
+            Assert.AreEqual(expectedNumberOfAzimuthAngles, antennaModel.AntennaPattern.NumberOfAzimuthAngles);
         }
     }
 }

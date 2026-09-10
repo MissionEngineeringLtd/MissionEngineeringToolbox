@@ -7,63 +7,58 @@ namespace MissionEngineering.Antenna;
 
 public class AntennaModel
 {
-    public bool IsWriteData { get; set; }
-    
+    public string OutputFolder { get; set; }
+
     public AntennaModelSettings AntennaModelSettings { get; set; }
 
-    public Vector AzimuthAngles_deg {  get; set; }
+    public AntennaArrayPattern AntennaArrayPattern { get; set; }
 
-    public int NumberOfAntennaElements => AntennaModelSettings.NumberOfAntennaElements;
-
-    public int NumberOfAzimuthAngles => AzimuthAngles_deg.NumberOfElements;
-
-    public VectorComplex AntennaWeights { get; set; }
-
-    public VectorComplex ArrayFactor { get; set; }
-
-    public VectorComplex ElementFactor { get; set; }
-
-    public VectorComplex AntennaFactor { get; set; }
-
-    public Vector AntennaDirectivity { get; set; }
-
-    public Vector AntennaGain { get; set; }
-
-    public Vector ArrayFactor_dB { get; set; }
-
-    public Vector ElementFactor_dB { get; set; }
-
-    public Vector AntennaDirectivity_dB { get; set; }
-
-    public Vector AntennaGain_dB { get; set; }
-
-    public Vector AntennaDirectivityNormalised_dB { get; set; }
-
-    public Vector AntennaGainNormalised_dB { get; set; }
+    public AntennaPattern AntennaPattern { get; set; }
 
     public List<AntennaPatternDataPoint> AntennaPatternDataPoints { get; set; }
+
+    public AntennaModel()
+    {
+        AntennaArrayPattern = new AntennaArrayPattern   ();
+        AntennaPattern = new AntennaPattern();
+    }
 
     public void GenerateAntenna()
     {
         GenerateAzimuthAngles();
-        GenerateAntennaWeights();
+
+        GenerateArrayPattern();
+
         GenerateAntennaPattern();
     }
 
-    public void GenerateAntennaWeights()
+    public void GenerateArrayPattern()
     {
-        var a = AntennaModelSettings;
+        var am = AntennaModelSettings;
+        var aa = AntennaArrayPattern;
 
-        AntennaWeights = VectorComplex.Ones(a.NumberOfAntennaElements);
-    }
+        aa.NumberOfAntennaElements = am.NumberOfAntennaElements;
 
-    public void GenerateAntennaPattern()
-    {
+        GenerateAntennaWeights();
+
         GenerateArrayFactor();
 
         GenerateElementFactor();
 
         GenerateAntennaFactor();
+
+        GenerateArrayPatternData_dB();
+    }
+
+    public void GenerateAntennaPattern()
+    {
+        var am = AntennaModelSettings;
+        var aa = AntennaArrayPattern;
+        var ap = AntennaPattern;
+
+        ap.AntennaPatternName = am.AntennaName;
+
+        ap.AzimuthAngles_deg = aa.AzimuthAngles_deg;
 
         GenerateAntennaPatternDirectivity();
 
@@ -72,32 +67,42 @@ public class AntennaModel
         GenerateAntennaPatternData_dB();
 
         GenerateAntennaPatternDataPoints();
-
-        WriteAntennaPattern();
     }
 
     public void GenerateAzimuthAngles()
     {
-        var s = AntennaModelSettings;
+        var am = AntennaModelSettings;
+        var aa = AntennaArrayPattern;
 
-        AzimuthAngles_deg = Vector.LinearlySpacedVector(s.AzimuthAngleMin_deg, s.AzimuthAngleMax_deg, s.AzimuthAngleStep_deg);
+        aa.AzimuthAngles_deg = Vector.LinearlySpacedVector(am.AzimuthAngleMin_deg, am.AzimuthAngleMax_deg, am.AzimuthAngleStep_deg);
+    }
+
+    public void GenerateAntennaWeights()
+    {
+        var am = AntennaModelSettings;
+        var aa = AntennaArrayPattern;
+
+        aa.AntennaWeights = VectorComplex.Ones(am.NumberOfAntennaElements);
     }
 
     public void GenerateArrayFactor()
     {
-        ArrayFactor = new VectorComplex(NumberOfAzimuthAngles);
+        var am = AntennaModelSettings;
+        var aa = AntennaArrayPattern;
 
-        for (int i = 0; i < NumberOfAzimuthAngles; i++)
+        aa.ArrayFactor = new VectorComplex(aa.NumberOfAzimuthAngles);
+
+        for (int i = 0; i < aa.NumberOfAzimuthAngles; i++)
         {
-            var azimuthAngle_deg = AzimuthAngles_deg[i];
+            var azimuthAngle_deg = aa.AzimuthAngles_deg[i];
 
-            var phaseShiftPerElement = ComputePhaseShiftPerElement(azimuthAngle_deg, AntennaModelSettings.AntennaElementSpacing_m, AntennaModelSettings.RfWavelength_m);
+            var phaseShiftPerElement = ComputePhaseShiftPerElement(azimuthAngle_deg, am.AntennaElementSpacing_m, am.RfWavelength_m);
 
             var phaseShifts = ComputePhaseShifts(phaseShiftPerElement);
 
             var arrayFactor = ComputeArrayFactor(phaseShifts);
 
-            ArrayFactor[i] = arrayFactor;
+            aa.ArrayFactor[i] = arrayFactor;
         };
     }
 
@@ -112,21 +117,25 @@ public class AntennaModel
 
     public VectorComplex ComputePhaseShifts(double phaseShiftPerElement)
     {
+        var aa = AntennaArrayPattern;
+
         var start = 0.0;
         var step = phaseShiftPerElement;
 
-        var phaseShifts = VectorComplex.LinearlySpacedVector(start, step, NumberOfAntennaElements);
+        var phaseShifts = VectorComplex.LinearlySpacedVector(start, step, aa.NumberOfAntennaElements);
     
         return phaseShifts;
     }
 
     public Complex ComputeArrayFactor(VectorComplex phaseShifts)
     {
-        var arrayFactor = new VectorComplex(NumberOfAntennaElements);
+        var aa = AntennaArrayPattern;
 
-        for (int i = 0; i < NumberOfAntennaElements; i++)
+        var arrayFactor = new VectorComplex(aa.NumberOfAntennaElements);
+
+        for (int i = 0; i < aa.NumberOfAntennaElements; i++)
         {
-            arrayFactor[i] = AntennaWeights[i] * Complex.Exp(-1.0 * Complex.ImaginaryOne * phaseShifts[i]);
+            arrayFactor[i] = aa.AntennaWeights[i] * Complex.Exp(-1.0 * Complex.ImaginaryOne * phaseShifts[i]);
         }
 
         var arrayFactorSum = arrayFactor.Sum();
@@ -136,83 +145,125 @@ public class AntennaModel
 
     public void GenerateElementFactor()
     {
-        ElementFactor = VectorComplex.Ones(NumberOfAzimuthAngles);
+        var aa = AntennaArrayPattern;
+
+        aa.ElementFactor = VectorComplex.Ones(aa.NumberOfAzimuthAngles);
     }
 
     public void GenerateAntennaFactor()
     {
-        AntennaFactor = ArrayFactor * ElementFactor;
+        var aa = AntennaArrayPattern;
+
+        aa.AntennaFactor = aa.ArrayFactor * aa.ElementFactor;
+    }
+
+    public void GenerateArrayPatternData_dB()
+    {
+        var aa = AntennaArrayPattern;
+
+        aa.ArrayFactor_dB = aa.ArrayFactor.Magnitude().PowerToDecibels();
+        aa.ElementFactor_dB = aa.ElementFactor.Magnitude().PowerToDecibels();
     }
 
     public void GenerateAntennaPatternDirectivity()
     {
-        AntennaDirectivity = AntennaFactor.Magnitude();
+        var aa = AntennaArrayPattern;
+        var ap = AntennaPattern;
 
-        AntennaDirectivity = AntennaDirectivity * AntennaDirectivity;
+        ap.AntennaDirectivity = aa.AntennaFactor.Magnitude();
 
-        AntennaDirectivity = AntennaDirectivity / NumberOfAntennaElements;
+        ap.AntennaDirectivity = ap.AntennaDirectivity * ap.AntennaDirectivity;
+
+        ap.AntennaDirectivity = ap.AntennaDirectivity / aa.NumberOfAntennaElements;
     }
 
     public void GenerateAntennaPatternGain()
     {
-        AntennaGain = AntennaDirectivity * (1.0 / AntennaModelSettings.AntennaLosses);
+        var ap = AntennaPattern;
+
+        ap.AntennaGain = ap.AntennaDirectivity * (1.0 / AntennaModelSettings.AntennaLosses);
     }
 
     public void GenerateAntennaPatternData_dB()
     {
-        ArrayFactor_dB = ArrayFactor.Magnitude().PowerToDecibels();
-        ElementFactor_dB = ElementFactor.Magnitude().PowerToDecibels();
-        AntennaDirectivity_dB = AntennaDirectivity.PowerToDecibels();
-        AntennaGain_dB = AntennaGain.PowerToDecibels();
+        var aa = AntennaArrayPattern;
+        var ap = AntennaPattern;
+    
+        ap.AntennaDirectivity_dB = ap.AntennaDirectivity.PowerToDecibels();
+        ap.AntennaGain_dB = ap.AntennaGain.PowerToDecibels();
 
-        AntennaDirectivityNormalised_dB = AntennaDirectivity_dB - AntennaDirectivity_dB.Max();
-        AntennaGainNormalised_dB = AntennaGain_dB - AntennaGain_dB.Max();
+        ap.AntennaDirectivityNormalised_dB = ap.AntennaDirectivity_dB - ap.AntennaDirectivity_dB.Max();
+        ap.AntennaGainNormalised_dB = ap.AntennaGain_dB - ap.AntennaGain_dB.Max();
     }
 
     public void GenerateAntennaPatternDataPoints()
     {
+        var aa = AntennaArrayPattern;
+        var ap = AntennaPattern;
+
         AntennaPatternDataPoints = [];
 
-        for (int i = 0; i < NumberOfAzimuthAngles; i++)
+        for (int i = 0; i < aa.NumberOfAzimuthAngles; i++)
         {
             var antennaPatternDataPoint = new AntennaPatternDataPoint
             {
-                AzimuthAngle_deg = AzimuthAngles_deg[i],
-                ArrayFactor = ArrayFactor[i].Magnitude,
-                ElementFactor = ElementFactor[i].Magnitude,
-                AntennaDirectivity = AntennaDirectivity[i],
-                AntennaGain = AntennaGain[i],
-                ArrayFactor_dB = ArrayFactor_dB[i],
-                ElementFactor_dB = ElementFactor_dB[i],
-                AntennaDirectivity_dB = AntennaDirectivity_dB[i],
-                AntennaGain_dB = AntennaGain_dB[i],
-                AntennaDirectivityNormalised_dB = AntennaDirectivityNormalised_dB[i],
-                AntennaGainNormalised_dB = AntennaGainNormalised_dB[i]
+                AzimuthAngle_deg = aa.AzimuthAngles_deg[i],
+                ArrayFactor = aa.ArrayFactor[i].Magnitude,
+                ElementFactor = aa.ElementFactor[i].Magnitude,
+                AntennaDirectivity = ap.AntennaDirectivity[i],
+                AntennaGain = ap.AntennaGain[i],
+                ArrayFactor_dB = aa.ArrayFactor_dB[i],
+                ElementFactor_dB = aa.ElementFactor_dB[i],
+                AntennaDirectivity_dB = ap.AntennaDirectivity_dB[i],
+                AntennaGain_dB = ap.AntennaGain_dB[i],
+                AntennaDirectivityNormalised_dB = ap.AntennaDirectivityNormalised_dB[i],
+                AntennaGainNormalised_dB = ap.AntennaGainNormalised_dB[i]
             };
 
             AntennaPatternDataPoints.Add(antennaPatternDataPoint);
         }
     }
 
-    public void WriteAntennaPattern()
+    public void WriteAntennaPatternDataCsv()
     {
-        if (!IsWriteData) 
+        if (!Directory.Exists(OutputFolder))
         {
-            return;
-        }
-
-        var folderPath = @"C:\Temp\MissionEngineeringToolbox\AntennaModel";
-
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
+            Directory.CreateDirectory(OutputFolder);
         }
 
         var filePath = AntennaModelSettings.AntennaName + ".csv";
 
-        var filePathFull = Path.Combine(folderPath, filePath);
+        var filePathFull = Path.Combine(OutputFolder, filePath);
 
         WriteAntennaPatternDataPointsToCsv(filePathFull);
+    }
+
+    public void WriteAntennaPatternAprf()
+    {
+        if (!Directory.Exists(OutputFolder))
+        {
+            Directory.CreateDirectory(OutputFolder);
+        }
+
+        var filePath = AntennaModelSettings.AntennaName + ".aprf";
+
+        var filePathFull = Path.Combine(OutputFolder, filePath);
+
+        AntennaPatternHelper.SaveAntennaPatternAprf(filePathFull, AntennaPattern);
+    }
+
+    public void WriteAntennaPatternApbf()
+    {
+        if (!Directory.Exists(OutputFolder))
+        {
+            Directory.CreateDirectory(OutputFolder);
+        }
+
+        var filePath = AntennaModelSettings.AntennaName + ".apbf";
+
+        var filePathFull = Path.Combine(OutputFolder, filePath);
+
+        AntennaPatternHelper.SaveAntennaPatternApbf(filePathFull, AntennaPattern, AntennaModelSettings);
     }
 
     public void WriteAntennaPatternDataPointsToCsv(string filePath)

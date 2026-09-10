@@ -321,5 +321,14 @@ public static class DoubleExtensions
 
             return x.ToString(format);
         }
+
+        public string ToDisplayFormat(int numberOfDecimalPlaces = 3, bool isAddSign = false)
+        {
+            string sign = (isAddSign && x > 0.0) ? "+" : "";
+
+            string format = $"{sign}0." + new string('0', numberOfDecimalPlaces);
+
+            return x.ToString(format);
+        }
     }
 }

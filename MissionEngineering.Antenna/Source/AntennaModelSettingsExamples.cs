@@ -13,12 +13,12 @@ public static class AntennaModelSettingsExamples
             AntennaName = "Example_1",
             RfFrequency_Hz = 10.0e9,
             AntennaWidth_m = 1.0,
-            AntennaElementSpacing_wavelengths = 1.3,
+            AntennaElementSpacing_wavelengths = 0.5,
             ElementName = "Isotropic",
             AntennaLosses_dB = 3.0,
             AzimuthAngleMin_deg = -90.0,
             AzimuthAngleMax_deg = 90.0,
-            AzimuthAngleStep_deg = 0.1
+            AzimuthAngleStep_deg = 0.5
         };
 
         return settings;

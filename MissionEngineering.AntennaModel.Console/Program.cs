@@ -8,51 +8,36 @@ namespace MissionEngineering.Radar;
 
 public class Program
 {
-    public static string InputFileName { get; set; }
+    public static AntennaModelHarnessSettings AntennaModelHarnessSettings { get; set; }
 
-    public static string InputFileNameYaml { get; set; }
+    public static AntennaModelHarness AntennaModelHarness { get; set; }
 
-    public static string OutputFolder { get; set; }
-
-    public static string OutputFileNameFull { get; set; }
-
-    public static bool IsCreateExampleFiles { get; set; }
-
-    public static AntennaModelSettings Settings { get; set; }
-
-    public static AntennaModel AntennaModel { get; set; }
+    public static AntennaModelSettings AntennaModelSettings { get; set; }
 
     /// <summary>
     ///
     /// </summary>
-    /// <param name="inputFileName">Input file name. Full path. Default extension is .json</param>
-    /// <param name="isCreateExampleFiles">If true, creates a new example input file showing the required format.</param>
-    public static void Main(string inputFileName, bool isCreateExampleFiles = false)
+    /// <param name="inputFileName">Input file name.</param>
+    /// <param name="isCreateExampleFile">If true, creates a new example input file showing the required file format.</param>
+    public static void Main(string inputFileName, bool isCreateExampleFile = false)
     {
-        InputFileName = inputFileName;
-        OutputFileNameFull = inputFileName.Replace(".json", ".csv");
+        var logFileName = inputFileName.Replace(".yaml", ".log");
 
-        IsCreateExampleFiles = isCreateExampleFiles;
+        AntennaModelHarnessSettings = new AntennaModelHarnessSettings()
+        {
+            InputFileName = inputFileName,
+            IsCreateExampleFile = isCreateExampleFile,
+            LogFileName = logFileName
+        };
 
         CreateLogger();
 
-        DisplaySettings();
-
-        if (IsCreateExampleFiles)
+        AntennaModelHarness = new AntennaModelHarness()
         {
-            WriteInputFile();
-        }
+            AntennaModelHarnessSettings = AntennaModelHarnessSettings 
+        };
 
-        ReadInputFile();
-
-        if (Settings is null)
-        {
-            return;
-        }
-
-        Run();
-
-        WriteOutputFile();
+        AntennaModelHarness.Run();
 
         WriteReportFile();
 
@@ -61,122 +46,39 @@ public class Program
 
     private static void CreateLogger()
     {
-        var logFileName = @"C:\Temp\MissionEngineeringToolbox\AntennaModel\AntennaModel.log";
+        var ahs = AntennaModelHarnessSettings;
 
-        LogUtilities.CreateLogger(logFileName);
-    }
-
-    private static void DisplaySettings()
-    {
-        LogUtilities.LogInformation("AntennaModel");
-        LogUtilities.LogInformation($"");
-        LogUtilities.LogInformation($"   Settings");
-        LogUtilities.LogInformation($"      InputFileName        = {InputFileName}");
-        LogUtilities.LogInformation($"      OutputFileName       = {OutputFileNameFull}");
-        LogUtilities.LogInformation($"      IsCreateExampleFiles = {IsCreateExampleFiles}");
-        LogUtilities.LogInformation($"   End Of Settings.");
-        LogUtilities.LogInformation($"");
-    }
-
-    private static void WriteInputFile()
-    {
-        LogUtilities.LogInformation($"   Writing Input File...");
-
-        Settings = AntennaModelSettingsExamples.Example_1();
-
-        InputFileNameYaml = InputFileName.Replace(".json", ".yaml");
-
-        LogUtilities.LogInformation($"       {InputFileName}");
-        LogUtilities.LogInformation($"       {InputFileNameYaml}");
-
-        Settings.WriteToJsonFile(InputFileName);
-        Settings.WriteToYamlFile(InputFileNameYaml);
-
-        LogUtilities.LogInformation($"   Finished.");
-        LogUtilities.LogInformation($"");
-    }
-
-    private static void ReadInputFile()
-    {
-        LogUtilities.LogInformation($"   Reading Input File...");
-
-        if (string.IsNullOrEmpty(InputFileName))
-        {
-            LogUtilities.LogError($"      Input file name must not be empty.");
-            return;
-        }
-
-        if (!File.Exists(InputFileName))
-        {
-            LogUtilities.LogError($"      Input file does not exist: {InputFileName}");
-            return;
-        }
-
-        Settings = JsonUtilities.ReadFromJsonFile<AntennaModelSettings>(InputFileName);
-
-        LogUtilities.LogInformation($"   Finished.");
-        LogUtilities.LogInformation($"");
-    }
-
-    private static void Run()
-    {
-        LogUtilities.LogInformation($"   Running...");
-
-        AntennaModel = new AntennaModel()
-        {
-            AntennaModelSettings = Settings
-        };
-
-        AntennaModel.IsWriteData = true;
-
-        AntennaModel.GenerateAntenna();
-
-        LogUtilities.LogInformation($"   Finished.");
-        LogUtilities.LogInformation($"");
-    }
-
-    private static void WriteOutputFile()
-    {
-        LogUtilities.LogInformation($"   Writing Output Files...");
-
-        LogUtilities.LogInformation($"       {OutputFileNameFull}");
-
-        AntennaModel.IsWriteData = true;
-
-        AntennaModel.WriteAntennaPattern();
-
-        LogUtilities.LogInformation($"   Finished.");
-        LogUtilities.LogInformation($"");
+        LogUtilities.CreateLogger(ahs.LogFileName);
     }
 
     private static void WriteReportFile()
     {
+        var ahs = AntennaModelHarnessSettings;
+
         LogUtilities.LogInformation($"   Writing Report Files...");
 
-        var reportFileNameFull = OutputFileNameFull.Replace(".csv", "_Report.tex");
-        var reportFileNameFullPdf = OutputFileNameFull.Replace(".csv", "_Report.pdf");
+        var reportFileName = ahs.OutputFileNameCsv.Replace(".csv", "_Report.tex");
+        var reportFileNamePdf = ahs.OutputFileNameCsv.Replace(".csv", "_Report.pdf");
 
-        var inputDataTableFileNameFull = OutputFileNameFull.Replace(".csv", "_InputDataTable.csv");
+        var inputDataTableFileNameFull = ahs.OutputFileNameCsv.Replace(".csv", "_InputDataTable.csv");
 
         var inputDataTableFileName = Path.GetFileName(inputDataTableFileNameFull);
 
-        OutputFolder = Path.GetDirectoryName(OutputFileNameFull);
-
         LogUtilities.LogInformation($"       {inputDataTableFileNameFull}");
-        LogUtilities.LogInformation($"       {reportFileNameFull}");
-        LogUtilities.LogInformation($"       {reportFileNameFullPdf}");
+        LogUtilities.LogInformation($"       {reportFileName}");
+        LogUtilities.LogInformation($"       {reportFileNamePdf}");
 
-        var outputFileName = Path.GetFileName(OutputFileNameFull);
+        var outputFileName = Path.GetFileName(ahs.OutputFileNameCsv);
 
         var reportGenerator = new AntennaModelReportGenerator()
         {
-            OutputFolder = OutputFolder,
-            ReportFileNameFull = reportFileNameFull,
-            AntennaModelInputFileName = InputFileName,
+            OutputFolder = ahs.OutputFolder,
+            ReportFileNameFull = reportFileName,
+            AntennaModelInputFileName = ahs.InputFileName,
             AntennaModelOutputFileName = outputFileName,
-            AntennaModel = AntennaModel,
+            AntennaModel = AntennaModelHarness.AntennaModel,
             InputDataTableFileName = inputDataTableFileName,
-            InputDataTableFileNameFull = inputDataTableFileNameFull,
+            InputDataTableFileNameFull = inputDataTableFileNameFull
         };
 
         reportGenerator.GenerateReport();
